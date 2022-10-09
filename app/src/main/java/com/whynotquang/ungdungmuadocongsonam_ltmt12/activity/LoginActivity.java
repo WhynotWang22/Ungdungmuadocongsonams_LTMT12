@@ -1,8 +1,10 @@
-package com.whynotquang.ungdungmuadocongsonam_ltmt12;
+package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 
 public class LoginActivity extends AppCompatActivity {
 
