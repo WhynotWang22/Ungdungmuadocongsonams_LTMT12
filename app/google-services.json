@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "972980807609",
+    "project_id": "quanaoserver",
+    "storage_bucket": "quanaoserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972980807609:android:2628a0a3c8d9d0d9057868",
+        "android_client_info": {
+          "package_name": "com.whynotquang.ungdungmuadocongsonam_ltmt12"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972980807609-bpag90tkn4lh64i4gqfrqbb54j3ftke9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.whynotquang.ungdungmuadocongsonam_ltmt12",
+            "certificate_hash": "9dc75e28842fde308792f0bee4d7fb6219200462"
+          }
+        },
+        {
+          "client_id": "972980807609-inugivngeqlcmu6653bdesfid9a7ofph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWZ-ULklKQSLorB1eJzqJei-Hwy-aDEDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972980807609-inugivngeqlcmu6653bdesfid9a7ofph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
