@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/bottomSheetcontainer"
+    android:background="@drawable/bottom_sheet_bg"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You are lost :("
+        android:fontFamily="@font/interbold"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I think you turned the wrong way."
+        android:fontFamily="@font/interbold"
+        android:layout_marginTop="20dp"
+         android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:layout_gravity="center"
+        android:background="@drawable/bg_ed_pass"
+        android:layout_marginTop="50dp"
+        android:id="@+id/btn_gohome"
+        android:layout_width="900px"
+        android:layout_height="wrap_content"
+        android:text="Let’s Go Home"
+        android:textColor="#121212"
+        android:fontFamily="@font/interbold"/>
+</LinearLayout>
