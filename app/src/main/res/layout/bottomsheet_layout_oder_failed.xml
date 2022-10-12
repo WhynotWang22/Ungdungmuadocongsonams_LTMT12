@@ -53,7 +53,7 @@
         android:text="Back to Checkout"
         android:fontFamily="@font/interbold"
         android:layout_marginTop="20dp"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:textColor="#FFFFFF"
         android:layout_gravity="center"
         />
