@@ -32,8 +32,9 @@
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/imageSlider"
-            android:layout_width="330dp"
-            android:layout_height="380dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="80dp"
             app:iss_auto_cycle="true"
