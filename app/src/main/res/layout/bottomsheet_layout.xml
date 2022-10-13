@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You are lost :("
+        android:text="Có lỗi gì đó :("
         android:fontFamily="@font/interbold"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I think you turned the wrong way."
+        android:text="Bạn nên thử lại."
         android:fontFamily="@font/interbold"
         android:layout_marginTop="20dp"
          android:textSize="14sp"
@@ -34,7 +34,7 @@
         android:id="@+id/btn_gohome"
         android:layout_width="900px"
         android:layout_height="wrap_content"
-        android:text="Let’s Go Home"
+        android:text="Về Trang Chủ"
         android:textColor="#121212"
         android:fontFamily="@font/interbold"/>
 </LinearLayout>

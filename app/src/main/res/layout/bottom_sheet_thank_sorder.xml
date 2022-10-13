@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thank you, for the order"
+        android:text="Cảm ơn bạn vì đã tin tuỏng"
         android:fontFamily="@font/interbold"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your order has been approved. You will "
+        android:text="Bạn đã mua hàng thành công"
         android:fontFamily="@font/interbold"
         android:layout_marginTop="20dp"
         android:textSize="14sp"
@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="receive a confirmation email shortly."
+        android:text="Đơn hàng của bạn sẽ được giao đến sớm"
         android:fontFamily="@font/interbold"
         android:layout_marginTop="5dp"
         android:textSize="14sp"
@@ -44,13 +44,13 @@
         android:id="@+id/btn_gohome"
         android:layout_width="900px"
         android:layout_height="wrap_content"
-        android:text="Continue Shopping"
+        android:text="Tiếp tục mua sắm"
         android:textColor="#121212"
         android:fontFamily="@font/interbold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Track Order"
+        android:text="Mua hàng khác"
         android:fontFamily="@font/interbold"
         android:layout_marginTop="20dp"
         android:textSize="14sp"
