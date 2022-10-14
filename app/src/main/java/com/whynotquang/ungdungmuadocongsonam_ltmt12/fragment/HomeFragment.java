@@ -2,6 +2,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,9 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -26,50 +25,73 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.BannerAdapter;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HomeFragment extends Fragment {
-    private ImageSlider imageSlider;
-    private FirebaseFirestore database = FirebaseFirestore.getInstance();
-    private RecyclerView recyclerView_Home;
+
+    SliderView img_slide;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerView_Home = view.findViewById(R.id.recyclerview_home);
 
-        imageSlider = view.findViewById(R.id.imageSlider);
-        ///
-        ArrayList<SlideModel> slideModels = new ArrayList<>();
+        img_slide = view.findViewById(R.id.img_slidebanner);
 
-        database.collection("Images").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
-                                slideModels.add(new SlideModel(queryDocumentSnapshot.getString("url"),ScaleTypes.FIT));
-                                imageSlider.setImageList(slideModels, ScaleTypes.FIT);
-                            }
-                        }
-                        else {
-                            Toast.makeText(getContext(), "Cant load images", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Cant load images", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+        SliderPhoto();
 
         return view;
+    }
+
+    private void SliderPhoto() {
+        List<Banner> bannerList = new ArrayList<>();
+        BannerAdapter bannerAdapter = new BannerAdapter(bannerList,getContext());
+        img_slide.setSliderAdapter(bannerAdapter);
+        img_slide.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        img_slide.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        img_slide.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        img_slide.setIndicatorSelectedColor(Color.BLACK);
+        img_slide.setIndicatorUnselectedColor(Color.GRAY);
+        img_slide.setScrollTimeInSec(3); //set scroll delay in seconds :
+        img_slide.startAutoCycle();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.10.52:3000/api/banners/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<Banner>> call = apiService.getBanner();
+        call.enqueue(new Callback<List<Banner>>() {
+            @Override
+            public void onResponse(Call<List<Banner>> call, Response<List<Banner>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    bannerList.addAll(response.body());
+                    bannerAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getContext(), "Không lấy được dữ liệu banner", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Banner>> call, Throwable t) {
+
+            }
+        });
     }
 }

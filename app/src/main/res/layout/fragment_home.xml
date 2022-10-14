@@ -1,70 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
-        android:paddingTop="10px"
         android:layout_width="match_parent"
-        android:layout_height="750px">
-        <TextView
+        android:layout_height="wrap_content">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MOF"
-            android:layout_marginTop="60px"
-            android:id="@+id/txt_tenthuonghieu"
-            android:textSize="90px"
-            android:textColor="#121212"
-            android:fontFamily="@font/playfairdisplay_bold"
-            android:textAlignment="center"
-            />
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="wrap_content"
+            android:id="@+id/layout1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/playfairdisplay_bold"
+                android:text="MOF"
+                android:textSize="24dp" />
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:searchIcon="@drawable/btnsearch"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="32dp"/>
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_imgslide"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/search_view"
-            android:layout_marginLeft="840px"
-            android:paddingTop="60px"
-            />
-
-        <com.denzcoskun.imageslider.ImageSlider
-            android:id="@+id/imageSlider"
-            android:layout_width="330dp"
-            android:layout_height="380dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="80dp"
-            app:iss_auto_cycle="true"
-            app:iss_corner_radius="20"
-            app:iss_delay="1000"
-            app:iss_period="1000" />
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_marginTop="750px"
-        android:background="@color/white"
-        android:layout_marginLeft="17dp"
-        android:orientation="vertical"
-        android:layout_width="370dp"
-        android:layout_height="match_parent">
-
+            android:layout_below="@id/layout1"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="20dp">
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/img_slidebanner"
+                android:layout_width="match_parent"
+                android:layout_height="192dp"
+                android:layout_centerHorizontal="true"
+                tools:ignore="MissingClass"
+                />
+        </androidx.cardview.widget.CardView>
         <TextView
+            android:id="@+id/tv_danhmuc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Shop by Category"
-            android:textColor="#121212"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/interbold"
+            android:text="Danh mục"
+            android:textColor="@color/mauchu"
+            android:layout_marginLeft="32dp"
+            android:layout_below="@+id/cardview_imgslide"
+            android:textSize="18dp" />
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_view_danhmuc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerview_home">
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
-</FrameLayout>
+            android:layout_height="169dp"
+            android:layout_below="@+id/tv_danhmuc"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/tv_duocdexuat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:fontFamily="@font/interbold"
+            android:text="Được đề xuất cho bạn"
+            android:textColor="@color/mauchu"
+            android:layout_marginLeft="32dp"
+            android:layout_below="@+id/rc_view_danhmuc"
+            android:textSize="18dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_view_duocdexuat"
+            android:layout_width="match_parent"
+            android:layout_height="242dp"
+            android:layout_below="@+id/tv_duocdexuat"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/tv_aopolo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:fontFamily="@font/interbold"
+            android:text="Áo Polo"
+            android:textColor="@color/mauchu"
+            android:layout_marginLeft="32dp"
+            android:layout_below="@+id/rc_view_duocdexuat"
+            android:textSize="18dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_view_aopolo"
+            android:layout_width="match_parent"
+            android:layout_height="242dp"
+            android:layout_below="@+id/tv_aopolo"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"/>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
