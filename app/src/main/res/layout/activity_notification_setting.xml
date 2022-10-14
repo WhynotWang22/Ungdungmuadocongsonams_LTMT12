@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.NotificationSettingActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_NotificationSetting"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+
+            android:id="@+id/im_btnNotificationSetting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/btnback" />
+
+        <TextView
+            android:id="@+id/tv_NotuficationSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/interbold"
+            android:text="Cài đặt thông báo"
+            android:textColor="@color/mauchu"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+<!--    1-->
+
+    <LinearLayout
+        android:id="@+id/ll_Apps_Notification"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/rl_NotificationSetting"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <RelativeLayout
+            android:id="@+id/rl_Apps_Notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="32dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/interbold"
+                android:text="Thông báo ứng dụng"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_Apps_Notification2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:showText="true"
+                    android:thumb="@drawable/thumb"
+                    app:track="@drawable/track">
+                </androidx.appcompat.widget.SwitchCompat>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="300"
+            android:src="@drawable/line" />
+    </LinearLayout>
+<!--    2-->
+    <LinearLayout
+        android:id="@+id/ll_Recommended_Product"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/ll_Apps_Notification"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <RelativeLayout
+            android:id="@+id/rl_Recommended_Product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="32dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/interbold"
+                android:text="Sản phẩm được đề xuất"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp" />
+            <LinearLayout
+                android:id="@+id/ll_Recommended_Product2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:showText="true"
+                    android:thumb="@drawable/thumb"
+                    app:track="@drawable/track">
+                </androidx.appcompat.widget.SwitchCompat>
+            </LinearLayout>
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="300"
+            android:src="@drawable/line" />
+
+    </LinearLayout>
+<!--    3-->
+    <LinearLayout
+        android:id="@+id/ll_Newsletter_MOF"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_below="@+id/ll_Recommended_Product"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <RelativeLayout
+            android:id="@+id/rl_Newsletter_MOF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="32dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/interbold"
+                android:text="Bản tin MOF"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_Newsletter_MOF2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:showText="true"
+                    android:thumb="@drawable/thumb"
+                    app:track="@drawable/track">
+                </androidx.appcompat.widget.SwitchCompat>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="300"
+            android:src="@drawable/line" />
+    </LinearLayout>
+</RelativeLayout>

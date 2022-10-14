@@ -26,11 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
             android:fontFamily="@font/interbold"
-            android:text="Setting"
+            android:text="Cài Đặt"
             android:textColor="@color/mauchu"
-            android:textSize="18dp" />
+            android:textSize="16dp" />
 
     </RelativeLayout>
 
