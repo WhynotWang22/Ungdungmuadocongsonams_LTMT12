@@ -72,7 +72,7 @@
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:showText="true"
+                    app:showText="false"
                     android:thumb="@drawable/thumb"
                     app:track="@drawable/track">
                 </androidx.appcompat.widget.SwitchCompat>
@@ -125,7 +125,7 @@
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:showText="true"
+                    app:showText="false"
                     android:thumb="@drawable/thumb"
                     app:track="@drawable/track">
                 </androidx.appcompat.widget.SwitchCompat>
@@ -178,7 +178,7 @@
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:showText="true"
+                    app:showText="false"
                     android:thumb="@drawable/thumb"
                     app:track="@drawable/track">
                 </androidx.appcompat.widget.SwitchCompat>
