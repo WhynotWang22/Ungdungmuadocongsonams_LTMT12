@@ -8,14 +8,18 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.BannerAdapter;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.Home_Adapter1;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.HomeDanhMuc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,19 +34,31 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     SliderView img_slide;
-
+    //
+    RecyclerView rc_view_danhmuc;
+    LinearLayoutManager linearLayoutManager;
+    Home_Adapter1 home_adapter1;
+    ArrayList<HomeDanhMuc> mHomedanhmuc;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         img_slide = view.findViewById(R.id.img_slidebanner);
-
+        ///
+        rc_view_danhmuc = view.findViewById(R.id.rc_view_danhmuc);
+        rc_view_danhmuc.setHasFixedSize(true);
+        mHomedanhmuc = new ArrayList<>();
+        home_adapter1 = new Home_Adapter1(getContext(),mHomedanhmuc);
+        rc_view_danhmuc.setAdapter(home_adapter1);
+        rc_view_danhmuc.setLayoutManager(new LinearLayoutManager(getContext()));
         SliderPhoto();
-
+        CreateList();
         return view;
     }
+    private void CreateList(){
+     mHomedanhmuc.add(new HomeDanhMuc("aaaaaa",R.drawable.aopolo));
 
+    }
     private void SliderPhoto() {
         List<Banner> bannerList = new ArrayList<>();
         BannerAdapter bannerAdapter = new BannerAdapter(bannerList,getContext());
@@ -77,4 +93,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+
 }

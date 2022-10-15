@@ -61,7 +61,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_danhmuc"
             android:layout_width="match_parent"
-            android:layout_height="169dp"
+            android:layout_height="230dp"
             android:layout_below="@+id/tv_danhmuc"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
