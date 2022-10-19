@@ -1,10 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_404_screen"
     tools:context=".activity.Screen_404_Activity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="261dp"
+        android:layout_marginTop="480dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_mo">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:fontFamily="@font/interbold"
+            android:text="Bạn bị lạc :("
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:layout_marginTop="32dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+
+            android:text="Tôi nghĩ rằng bạn đã quay sai đường."
+
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:id="@+id/btn_login"
+            android:text="Quay về trang chủ"
+            android:background="@drawable/bg_ed_pass"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="53dp"
+
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:fontFamily="@font/interbold"
+            android:layout_alignParentBottom="true"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
