@@ -14,8 +14,8 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import java.util.List;
 
 public class BannerAdapter extends SliderViewAdapter<BannerAdapter.Holder> {
-    List<Banner> bannerList;
-    Context context;
+    final List<Banner> bannerList;
+    final Context context;
 
     public BannerAdapter(List<Banner> bannerList, Context context) {
         this.bannerList = bannerList;
@@ -41,7 +41,7 @@ public class BannerAdapter extends SliderViewAdapter<BannerAdapter.Holder> {
 
 
     public class Holder extends SliderViewAdapter.ViewHolder{
-        ImageView imageView;
+        final ImageView imageView;
         public Holder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.img_banner);
