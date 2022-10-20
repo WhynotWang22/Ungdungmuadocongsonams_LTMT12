@@ -159,7 +159,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginRight="12dp"
-                    android:background="@drawable/custom_radio_button"
+
                     android:button="@android:color/transparent"
                     android:padding="5dp" />
 

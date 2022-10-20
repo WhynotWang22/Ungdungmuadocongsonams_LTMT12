@@ -1,6 +1,7 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface ApiService {
 
     @GET("getall")
     Call<List<Product>> getProduct();
+
+    @GET("getall")
+    Call<List<Category>> getCategory();
 }
