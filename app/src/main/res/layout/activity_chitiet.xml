@@ -98,6 +98,7 @@
                             android:src="@drawable/star" />
 
                         <TextView
+                            android:id="@+id/tv_so_luot_review"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="12dp"
@@ -144,7 +145,7 @@
                 android:textSize="14dp" />
 
             <RadioGroup
-                android:id="@+id/radioGroup"
+                android:id="@+id/radioGroup_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvmau"
@@ -159,7 +160,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginRight="12dp"
-
+                    android:background="@drawable/bg_color_black"
                     android:button="@android:color/transparent"
                     android:padding="5dp" />
 
@@ -182,7 +183,7 @@
                 android:id="@+id/tv_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/radioGroup"
+                android:layout_below="@+id/radioGroup_color"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginRight="32dp"

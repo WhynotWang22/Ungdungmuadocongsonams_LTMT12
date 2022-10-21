@@ -2,6 +2,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment {
         rc_view_danhmuc.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.42:3000/api/cate/")
+                .baseUrl("http://192.168.10.52:3000/api/categorys/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -85,11 +86,6 @@ public class HomeFragment extends Fragment {
 
     private void getListProduct() {
         productList = new ArrayList<>();
-        productList.add(new Product("aaa","aaa",123,"aaa","aaa","aaa","aaa",1,"https://bucket.nhanh.vn/store/662/ps/20220926/SM0267__7__thumb.jpg"));
-        productList.add(new Product("aaa","aaa",123,"aaa","aaa","aaa","aaa",1,"https://bucket.nhanh.vn/store/662/ps/20220926/SM0267__7__thumb.jpg"));
-        productList.add(new Product("aaa","aaa",123,"aaa","aaa","aaa","aaa",1,"https://bucket.nhanh.vn/store/662/ps/20220926/SM0267__7__thumb.jpg"));
-        productList.add(new Product("aaa","aaa",123,"aaa","aaa","aaa","aaa",1,"https://bucket.nhanh.vn/store/662/ps/20220926/SM0267__7__thumb.jpg"));
-        productList.add(new Product("aaa","aaa",123,"aaa","aaa","aaa","aaa",1,"https://bucket.nhanh.vn/store/662/ps/20220926/SM0267__7__thumb.jpg"));
 
         ProductAdapter productAdapter = new ProductAdapter(getContext(), productList);
         rc_view_duocdexuat.setAdapter(productAdapter);
@@ -97,7 +93,7 @@ public class HomeFragment extends Fragment {
         rc_view_duocdexuat.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.177:3000/api/pro/")
+                .baseUrl("http://192.168.10.52:3000/api/products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -105,7 +101,7 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                if (response.body() != null){
+                if (response.body()!= null){
                     productList.addAll(response.body());
                     productAdapter.notifyDataSetChanged();
                 }
@@ -130,7 +126,7 @@ public class HomeFragment extends Fragment {
         img_slide.setScrollTimeInSec(3); //set scroll delay in seconds :
         img_slide.startAutoCycle();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.42:3000/api/banners/")
+                .baseUrl("http://192.168.10.52:3000/api/banners/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

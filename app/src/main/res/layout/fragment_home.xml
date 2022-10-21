@@ -61,16 +61,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_danhmuc"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="236dp"
             android:layout_below="@+id/tv_danhmuc"
             android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginRight="32dp" />
         <TextView
             android:id="@+id/tv_duocdexuat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
             android:fontFamily="@font/interbold"
             android:text="Được đề xuất cho bạn"
             android:textColor="@color/mauchu"

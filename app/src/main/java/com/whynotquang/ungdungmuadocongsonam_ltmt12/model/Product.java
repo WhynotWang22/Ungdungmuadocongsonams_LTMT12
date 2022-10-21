@@ -26,6 +26,10 @@ public class Product {
         this.img = img;
     }
 
+    public Product(String _id) {
+        this._id = _id;
+    }
+
     public String get_id() {
         return _id;
     }
