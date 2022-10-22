@@ -12,23 +12,25 @@
         android:background="@drawable/background_slash_screen"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="470dp"
-            android:layout_marginLeft="20dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="470dp"
             android:fontFamily="@font/playfairdisplay_bold"
             android:text="MOF"
             android:textColor="#FFFFFF"
-            android:textSize="100px" />
+            android:textSize="24dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chào Mừng tới MOF, bắt đầu mua sắm!"
             android:fontFamily="@font/interbold"
             android:textColor="#FFFFFF"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="14dp"
             android:layout_gravity="center"
             />
         <Button
@@ -38,6 +40,7 @@
             android:layout_height="150px"
             android:id="@+id/btn_login_slahs"
             android:text="Đăng Nhập"
+            android:textSize="16dp"
             android:background="@drawable/bg_button"
             android:textColor="@color/white"
             android:fontFamily="@font/interbold"
@@ -46,9 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng Ký"
-            android:textSize="60px"
+            android:textSize="18dp"
             android:id="@+id/txt_signup_slash"
-            android:layout_marginLeft="50px"
+            android:layout_marginLeft="20px"
             android:layout_marginTop="30px"
             android:fontFamily="@font/interbold"
             android:textColor="#FFFFFF"
