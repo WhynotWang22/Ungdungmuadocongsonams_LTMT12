@@ -1,14 +1,13 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
@@ -45,7 +44,7 @@ public class ChitietActivity extends AppCompatActivity {
     }
     public void getDataProduct() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/products/")
+                .baseUrl("http://192.168.1.2:3000/api/products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

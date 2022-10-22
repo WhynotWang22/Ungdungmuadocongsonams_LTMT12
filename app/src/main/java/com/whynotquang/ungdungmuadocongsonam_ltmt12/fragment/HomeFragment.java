@@ -2,7 +2,6 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,7 @@ public class HomeFragment extends Fragment {
         rc_view_danhmuc.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/categorys/")
+                .baseUrl("http://192.168.1.2:3000/api/cate/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -86,14 +85,13 @@ public class HomeFragment extends Fragment {
 
     private void getListProduct() {
         productList = new ArrayList<>();
-
         ProductAdapter productAdapter = new ProductAdapter(getContext(), productList);
         rc_view_duocdexuat.setAdapter(productAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         rc_view_duocdexuat.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/products/")
+                .baseUrl("http://192.168.1.2:3000/api/products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -101,7 +99,7 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                if (response.body()!= null){
+                if (response.body() != null){
                     productList.addAll(response.body());
                     productAdapter.notifyDataSetChanged();
                 }
@@ -109,7 +107,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(getContext(), "Loi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Loi load ", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -126,7 +124,7 @@ public class HomeFragment extends Fragment {
         img_slide.setScrollTimeInSec(3); //set scroll delay in seconds :
         img_slide.startAutoCycle();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/banners/")
+                .baseUrl("http://192.168.1.2:3000/api/banners/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
