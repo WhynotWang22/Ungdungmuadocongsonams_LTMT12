@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
         rc_view_danhmuc.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:3000/api/cate/")
+                .baseUrl("http://192.168.10.52:3000/api/categorys/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(getContext(), "Loi load category", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Không lấy được dữ liệu danh mục", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
         rc_view_duocdexuat.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:3000/api/products/")
+                .baseUrl("http://192.168.10.52:3000/api/products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(getContext(), "Loi load ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Không lấy được dữ liệu sản phẩm ", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
         img_slide.setScrollTimeInSec(3); //set scroll delay in seconds :
         img_slide.startAutoCycle();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:3000/api/banners/")
+                .baseUrl("http://192.168.10.52:3000/api/banners/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

@@ -2,15 +2,87 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
+    EditText ed_email,ed_pass;
+    Button button_login;
+    String token = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ed_email = findViewById(R.id.ed_email_login);
+        ed_pass = findViewById(R.id.ed_password_login);
+        button_login = findViewById(R.id.btn_login);
+
+        button_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = ed_email.getText().toString().trim();
+                String password = ed_pass.getText().toString().trim();
+                if (email.isEmpty() || password.isEmpty())
+                {
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                postData(email,password);
+            }
+        });
     }
+
+    private void postData(String email, String password) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.10.52:3000/api/auth/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<User> call = apiService.postLogin(email,password);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()){
+                    User userApi = response.body();
+                    token = userApi.getToken();
+                    if (token !=null){
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        SharedPreferences sp= getSharedPreferences("Login", MODE_PRIVATE);
+                        SharedPreferences.Editor Ed= sp.edit();
+                        Ed.putString("email",userApi.getEmail() );
+                        Ed.putString("id",userApi.get_id());
+                        Ed.putString("token",userApi.getToken());
+                        Ed.commit();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Lỗi api login", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

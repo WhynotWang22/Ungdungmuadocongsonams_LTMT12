@@ -41,12 +41,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
         Product product = productList.get(position);
         holder.tv_title_product.setText(product.getTitle());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.tv_price_product.setText("Giá:" +decimalFormat.format(product.getPrice())+ "Đ");
-        RequestOptions options = new RequestOptions()
-                .centerCrop()
-                .placeholder(R.drawable.full)
-                .error(R.drawable.full);
-        Glide.with(context).load(product.getImg().get(0)).apply(options).into(holder.img_product);
+        holder.tv_price_product.setText(decimalFormat.format(product.getPrice())+ "đ");
+        Glide.with(context).load(product.getImg()).into(holder.img_product);
         holder.tv_title_product.setMaxLines(1);
         holder.tv_title_product.setEllipsize(TextUtils.TruncateAt.END);
 
@@ -54,7 +50,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChitietActivity.class);
-                intent.putExtra("id",productList.get(position).getId());
+                intent.putExtra("id",productList.get(position).get_id());
                 context.startActivity(intent);
             }
         });
