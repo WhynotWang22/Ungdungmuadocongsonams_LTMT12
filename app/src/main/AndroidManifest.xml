@@ -12,45 +12,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ungdungmuadocongsonam_LTMT12"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".Sign_Activity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".activity.ChitietActivity"
-            android:exported="true">
-
+            android:exported="true" >
         </activity>
         <activity
             android:name=".activity.SettingActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.NotificationSettingActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ThanksOrder_Activity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activity.OrderFailed_Activity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.Screen_404_Activity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.CardActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activity.ReviewActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activity.ChangeNumberActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activity.ChangePasswordActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +65,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
