@@ -49,10 +49,14 @@ public class Sign_Activity extends AppCompatActivity {
         btnDangki = (Button) findViewById(R.id.btn_dangki);
         tv_dangnhap = findViewById(R.id.tv_dangnhapchuyenmanhinh);
         chuyenmanhinh();
-
+        dangky();
         SharedPreferences sp = Sign_Activity.this.getApplicationContext().getSharedPreferences("Signup",MODE_PRIVATE);
         String qqqq = sp.getString("token","");
 
+
+    }
+
+    private void dangky() {
         btnDangki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,8 +76,15 @@ public class Sign_Activity extends AppCompatActivity {
     }
 
     private void chuyenmanhinh() {
-        Intent intent = new Intent(Sign_Activity.this,LoginActivity.class);
-        startActivity(intent);
+        tv_dangnhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Sign_Activity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
 
