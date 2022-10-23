@@ -1,7 +1,6 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
 import retrofit2.Call;
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText ed_email,ed_pass;
     Button button_login;
     String token = null;
+    TextView tvDangkychuyenamn;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         ed_email = findViewById(R.id.ed_email_login);
         ed_pass = findViewById(R.id.ed_password_login);
         button_login = findViewById(R.id.btn_login);
+        tvDangkychuyenamn = (TextView) findViewById(R.id.tv_dangkychuyenamn);
+        chuyenamnhinh();
 
         SharedPreferences sp = LoginActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         String aaa = sp.getString("token","");
@@ -55,9 +60,19 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void chuyenamnhinh() {
+        tvDangkychuyenamn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,Sign_Activity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void postData(String email, String password) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/auth/")
+                .baseUrl("http://192.168.1.2:3000/api/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

@@ -14,11 +14,16 @@
         android:theme="@style/Theme.Ungdungmuadocongsonam_LTMT12"
         android:usesCleartextTraffic="true" >
         <activity
-            android:name=".Sign_Activity"
-            android:exported="false" >
+            android:name=".activity.Sign_Activity"
+            android:exported="true" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.ChitietActivity"
@@ -57,11 +62,7 @@
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

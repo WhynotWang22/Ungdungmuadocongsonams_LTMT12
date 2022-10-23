@@ -8,7 +8,6 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -33,6 +32,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("login")
     Call<User> postLogin(@Field("email") String email,@Field("password") String password);
+
+    ///register
+    @POST("register")
+    @FormUrlEncoded
+    Call<User> postRegister(@Field("email") String email,
+                            @Field("full_name") String full_name,
+                            @Field("phone_number") String phone_number,
+                            @Field("password") String password);
+
 
     //get profile
     @GET("profile")
