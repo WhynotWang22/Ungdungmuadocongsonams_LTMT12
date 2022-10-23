@@ -27,8 +27,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chào Mừng tới MOF, bắt đầu mua sắm!"
-            android:fontFamily="@font/interbold"
+            android:text="Chào mừng tới MOF, bắt đầu mua sắm!"
+            android:fontFamily="@font/intermedium"
             android:textColor="#FFFFFF"
             android:layout_marginLeft="14dp"
             android:layout_gravity="center"
@@ -39,8 +39,9 @@
             android:layout_marginTop="20dp"
             android:layout_height="150px"
             android:id="@+id/btn_login_slahs"
-            android:text="Đăng Nhập"
+            android:text="Đăng nhập"
             android:textSize="16dp"
+            android:textAllCaps="false"
             android:background="@drawable/bg_button"
             android:textColor="@color/white"
             android:fontFamily="@font/interbold"
@@ -48,12 +49,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đăng Ký"
-            android:textSize="18dp"
+            android:text="Đăng ký"
+            android:textSize="16dp"
             android:id="@+id/txt_signup_slash"
             android:layout_marginLeft="20px"
             android:layout_marginTop="30px"
-            android:fontFamily="@font/interbold"
+            android:fontFamily="@font/intermedium"
             android:textColor="#FFFFFF"
             android:layout_gravity="center"/>
     </LinearLayout>

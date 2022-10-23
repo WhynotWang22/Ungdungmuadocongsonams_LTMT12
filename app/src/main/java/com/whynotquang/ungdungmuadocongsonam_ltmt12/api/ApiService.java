@@ -37,4 +37,7 @@ public interface ApiService {
     //get profile
     @GET("profile")
     Call<User> getProfile(@Header("Authorization") String authtoken);
+    //logout
+    @POST("logout")
+    Call<User> postLogout(@Header("Authorization") String authtoken);
 }

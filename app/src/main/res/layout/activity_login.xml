@@ -44,6 +44,8 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="64dp"
             android:layout_marginRight="32dp"
+            android:textSize="14dp"
+            android:drawablePadding="12dp"
             android:background="@drawable/bg_ed_pass"
             android:drawableStart="@drawable/address1"
             android:hint="Emai Address" />
@@ -52,12 +54,14 @@
             android:id="@+id/ed_password_login"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:drawablePadding="12dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="12dp"
             android:layout_marginRight="32dp"
             android:background="@drawable/bg_ed_pass"
             android:drawableStart="@drawable/email"
             android:fontFamily="@font/intermedium"
+            android:textSize="14dp"
             android:hint="Password" />
 
         <TextView

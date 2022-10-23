@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         ed_email = findViewById(R.id.ed_email_login);
         ed_pass = findViewById(R.id.ed_password_login);
         button_login = findViewById(R.id.btn_login);
+
+        SharedPreferences sp = LoginActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
+        String aaa = sp.getString("token","");
+        Log.d("aaa","token logout: "+aaa);
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
