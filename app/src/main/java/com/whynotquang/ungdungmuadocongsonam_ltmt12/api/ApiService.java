@@ -52,6 +52,13 @@ public interface ApiService {
             @Header("Authorization") String authtoken
     );
 
+    ///change pass after send link to your email
+    @FormUrlEncoded
+    @POST("forgot-password")
+    Call<User> postSendEmail(
+            @Field("email") String email,
+            @Header("Authorization")String authtoken);
+
     //get profile
     @GET("profile")
     Call<User> getProfile(@Header("Authorization") String authtoken);
