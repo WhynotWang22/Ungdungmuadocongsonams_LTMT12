@@ -23,7 +23,7 @@ public class Product {
     private String category;
     @SerializedName("sizes")
     @Expose
-    private List<String> sizes = null;
+    private String sizes;
     @SerializedName("color")
     @Expose
     private String color;
@@ -32,7 +32,7 @@ public class Product {
     private Integer stock;
     @SerializedName("img")
     @Expose
-    private List<String> img = null;
+    private String img;
     @SerializedName("createdAt")
     @Expose
     private String createdAt;
@@ -83,11 +83,11 @@ public class Product {
         this.category = category;
     }
 
-    public List<String> getSizes() {
+    public String getSizes() {
         return sizes;
     }
 
-    public void setSizes(List<String> sizes) {
+    public void setSizes(String sizes) {
         this.sizes = sizes;
     }
 
@@ -107,11 +107,11 @@ public class Product {
         this.stock = stock;
     }
 
-    public List<String> getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(List<String> img) {
+    public void setImg(String img) {
         this.img = img;
     }
 

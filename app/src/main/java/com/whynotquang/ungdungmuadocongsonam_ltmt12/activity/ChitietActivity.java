@@ -44,7 +44,7 @@ public class ChitietActivity extends AppCompatActivity {
     }
     public void getDataProduct() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/products/")
+                .baseUrl("http://192.168.1.174:3000/api/products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

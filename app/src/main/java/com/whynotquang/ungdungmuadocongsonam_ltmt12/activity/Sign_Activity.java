@@ -84,9 +84,13 @@ public class Sign_Activity extends AppCompatActivity {
             }
         });
 
+    ProgressBar progressBar;
 
     }
 
+        progressBar = (ProgressBar)findViewById(R.id.spin_kit_sign_up);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
 
     private void postData(String  full_name, String phone_number, String email, String password){
         Retrofit retrofit = new Retrofit.Builder()

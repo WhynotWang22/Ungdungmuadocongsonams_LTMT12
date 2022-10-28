@@ -3,6 +3,7 @@
     android:layout_width="64dp"
     android:layout_height="90dp"
     android:orientation="vertical"
+    android:id="@+id/cardview_productcatgory"
     android:layout_marginTop="15dp"
     android:layout_marginRight="18dp">
 
@@ -24,7 +25,7 @@
         android:fontFamily="@font/interbold"
         android:text="Áo Polo"
         android:textColor="@color/mauchu"
-        android:textSize="14dp" />
+        android:textSize="11dp" />
 
 
 </RelativeLayout>

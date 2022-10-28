@@ -30,6 +30,10 @@ public interface ApiService {
     @GET("getall")
     Call<List<Category>> getCategory();
 
+    //get category theo items
+    @GET("getall/{id}")
+    Call<List<Product>> getAllproductbycategory(@Path("id") String id);
+
     //login
     @FormUrlEncoded
     @POST("login")

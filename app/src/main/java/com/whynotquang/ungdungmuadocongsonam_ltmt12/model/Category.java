@@ -1,25 +1,28 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Category {
-    public String _id;
-    public String title;
-    public String CateImg;
+    @SerializedName("_id")
+    @Expose
+    private String id;
+    @SerializedName("title")
+    @Expose
+    private String title;
+    @SerializedName("CateImg")
+    @Expose
+    private String cateImg;
+    @SerializedName("__v")
+    @Expose
+    private Integer v;
 
-    public Category() {
+    public String getId() {
+        return id;
     }
 
-    public Category(String _id, String title, String cateImg) {
-        this._id = _id;
-        this.title = title;
-        CateImg = cateImg;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -31,10 +34,18 @@ public class Category {
     }
 
     public String getCateImg() {
-        return CateImg;
+        return cateImg;
     }
 
     public void setCateImg(String cateImg) {
-        CateImg = cateImg;
+        this.cateImg = cateImg;
+    }
+
+    public Integer getV() {
+        return v;
+    }
+
+    public void setV(Integer v) {
+        this.v = v;
     }
 }
