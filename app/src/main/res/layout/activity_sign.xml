@@ -23,14 +23,14 @@
         android:text="Bắt đầu nào"
         android:textColor="@color/mauchu"
         android:textSize="22dp"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="64dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="32dp"
         android:fontFamily="@font/intermedium"
         android:text="Tạo tài khoản mới"
-        android:textColor="@color/mauchu"
+        android:textColor="@color/mauchu2"
         android:textSize="14dp"
         android:layout_marginTop="11dp"/>
 
@@ -45,7 +45,11 @@
         android:drawablePadding="12dp"
         android:background="@drawable/bg_ed_pass"
         android:drawableStart="@drawable/iconuser"
-        android:hint="Họ Tên" />
+        android:hint="Họ Tên"
+        android:inputType="textCapSentences"
+        android:maxLines="1"
+        android:lines="1"
+        />
 
 
     <EditText
@@ -53,81 +57,77 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="32dp"
         android:textSize="14dp"
+        android:inputType="textEmailAddress"
         android:drawablePadding="12dp"
         android:background="@drawable/bg_ed_pass"
         android:drawableStart="@drawable/address1"
-        android:hint="Emai Address" />
+        android:hint="Email"
+        android:maxLines="1"
+        android:lines="1"/>
 
     <EditText
         android:id="@+id/edtSdt"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="32dp"
         android:textSize="14dp"
+        android:inputType="phone"
         android:drawablePadding="12dp"
         android:background="@drawable/bg_ed_pass"
         android:drawableStart="@drawable/phone"
-        android:hint="Phone" />
+        android:hint="Điện thoại"
+        android:maxLines="1"
+        android:lines="1"/>
 
 
   <com.google.android.material.textfield.TextInputLayout
       android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="32dp"
+      android:layout_marginRight="32dp"
       app:passwordToggleEnabled="true"
-      android:layout_height="wrap_content">
+      app:hintEnabled="false"
+      android:layout_marginTop="12dp">
     <EditText
         android:id="@+id/edtMatkhau"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="32dp"
         android:textSize="14dp"
         android:drawablePadding="12dp"
         android:background="@drawable/bg_ed_pass"
         android:drawableStart="@drawable/email"
-        android:hint="Mật Khẩu" />
+        android:hint="Mật Khẩu"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:lines="1"/>
   </com.google.android.material.textfield.TextInputLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/ed_diachi"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:orientation="horizontal">
-      <androidx.appcompat.widget.AppCompatCheckBox
-          android:id="@+id/chkLuuMatKhau"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="32dp"
-          android:layout_marginLeft="32dp"
-          android:layout_marginTop="16dp"
-          android:text=" Đồng ý với"
-          android:textColor="@color/black"
-          android:textSize="14dp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
-          android:fontFamily="@font/interbold"
-          android:text=" điều khoản dịch vụ và bảo mật"
-          android:textColor="@color/mauchu"
-          android:textSize="14dp" />
-    </LinearLayout>
-
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="32dp"
+        android:textSize="14dp"
+        android:drawablePadding="12dp"
+        android:background="@drawable/bg_ed_pass"
+        android:drawableStart="@drawable/address"
+        android:hint="Địa chỉ"
+        android:inputType="textPostalAddress"
+        android:maxLines="1"
+        android:lines="1"/>
     <Button
         android:id="@+id/btn_dangki"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="54dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="62dp"
         android:background="@drawable/bg_button"
         android:fontFamily="@font/interbold"
         android:text="Đăng kí"
@@ -136,21 +136,21 @@
         android:textSize="16dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-70dp"
-        android:textAlignment="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="85dp"
+        android:layout_marginLeft="85dp"
+        android:layout_gravity="center">
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="80dp"
           android:fontFamily="@font/intermedium"
           android:text="Bạn đã có tài khoản?"
           android:textColor="@color/mauchu"
           android:textSize="14dp"
-          android:textAlignment="center"
-          android:layout_marginTop="30dp"/>
+          android:textAlignment="center" />
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -159,8 +159,16 @@
           android:text="Đăng nhập"
           android:id="@+id/tv_dangnhapchuyenmanhinh"
           android:textColor="@color/mauchu"
-          android:textSize="14dp"
-          android:layout_marginTop="30dp"/>
+          android:textSize="14dp" />
     </LinearLayout>
   </LinearLayout>
+  <com.github.ybq.android.spinkit.SpinKitView
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:id="@+id/spin_kit_sign_up"
+      style="@style/SpinKitView.Large.Circle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      app:SpinKit_Color="@color/color_progressbar"
+      android:layout_centerInParent="true" />
 </RelativeLayout>

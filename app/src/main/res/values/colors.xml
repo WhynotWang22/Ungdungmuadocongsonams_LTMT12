@@ -10,5 +10,7 @@
     <color name="mauxam">#C4C4C4</color>
     <color name="mauchu">#121212</color>
     <color name="mauchu2">#C4C4C4</color>
+    <color name="bg_xam">#F1F1F1</color>
+    <color name="color_progressbar">#121212</color>
 
 </resources>
