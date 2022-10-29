@@ -34,6 +34,11 @@ public interface ApiService {
     @GET("getall/{id}")
     Call<List<Product>> getAllproductbycategory(@Path("id") String id);
 
+    //get ao polo
+    @GET("getall/634d16bfb1d500646457f11d")
+    Call<List<Product>> getAoPolo();
+
+
     //login
     @FormUrlEncoded
     @POST("login")

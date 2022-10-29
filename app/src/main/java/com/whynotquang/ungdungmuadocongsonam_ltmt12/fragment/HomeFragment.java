@@ -37,9 +37,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     SliderView img_slide;
-    RecyclerView rc_view_duocdexuat,rc_view_danhmuc;
+    RecyclerView rc_view_duocdexuat,rc_view_danhmuc,rc_view_aopolo;
     //
     List<Product> productList;
+    List<Product> productListAopolo;
     List<Category> categoryList;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,10 +49,41 @@ public class HomeFragment extends Fragment {
         img_slide = view.findViewById(R.id.img_slidebanner);
         rc_view_duocdexuat = view.findViewById(R.id.rc_view_duocdexuat);
         rc_view_danhmuc = view.findViewById(R.id.rc_view_danhmuc);
+        rc_view_aopolo = view.findViewById(R.id.rc_view_aopolo);
         SliderPhoto();
         getListProduct();
         getListCategory();
+        getListAoPolo();
         return view;
+    }
+
+    private void getListAoPolo() {
+        productListAopolo = new ArrayList<>();
+        ProductAdapter productAdapter = new ProductAdapter(getContext(),productListAopolo);
+        rc_view_aopolo.setAdapter(productAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+        rc_view_aopolo.setLayoutManager(linearLayoutManager);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.1.174:3000/api/categorys/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<Product>> call = apiService.getAoPolo();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.body() !=null){
+                    productListAopolo.addAll(response.body());
+                    productAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getListCategory() {
