@@ -72,4 +72,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
             cardview_productbycategory = itemView.findViewById(R.id.cardview_productcatgory);
         }
     }
+
+
 }
