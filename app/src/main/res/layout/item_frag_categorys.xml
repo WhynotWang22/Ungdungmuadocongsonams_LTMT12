@@ -7,10 +7,9 @@
     android:id="@+id/cardview_frag_categorys"
     android:layout_marginTop="25dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="128dp"
-        >
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="128dp">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,14 +21,14 @@
             android:id="@+id/tv_title_category_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_category"
+            android:layout_marginTop="50dp"
             android:layout_gravity="center"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/interbold"
             android:text="Áo Polo"
             android:textColor="@color/white"
             android:textSize="18dp" />
-    </com.google.android.material.card.MaterialCardView>
+  </RelativeLayout>
 
 
 </LinearLayout>
