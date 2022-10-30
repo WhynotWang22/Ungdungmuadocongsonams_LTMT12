@@ -16,20 +16,7 @@
         <activity
             android:name=".activity.Sign_Activity"
             android:exported="true" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.FotgotPassChangeActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.SendemailActivity"
-            android:exported="true">
+
         </activity>
         <activity
             android:name=".activity.ChitietActivity"
@@ -61,15 +48,15 @@
             android:exported="false" />
         <activity
             android:name=".activity.ChangePasswordActivity"
-            android:exported="true" >
-        </activity>
-        <activity
-            android:name=".activity.ProductCategoryActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.SplashActivity"
             android:exported="true" >
@@ -78,10 +65,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

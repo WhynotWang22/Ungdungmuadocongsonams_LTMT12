@@ -50,7 +50,9 @@ public interface ApiService {
     Call<User> postRegister(@Field("email") String email,
                             @Field("full_name") String full_name,
                             @Field("phone_number") String phone_number,
-                            @Field("password") String password);
+                            @Field("password") String password,
+                            @Field("address") String diachi
+                            );
 
     ////changePassword
     @FormUrlEncoded

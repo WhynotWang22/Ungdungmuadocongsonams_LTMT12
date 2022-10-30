@@ -5,14 +5,14 @@ public class User {
     public String email;
     public String password;
     public String full_name;
-    public String phone_number;
+    public int phone_number;
     public String address;
     public String token;
 
     public User() {
     }
 
-    public User(String _id, String email, String password, String full_name, String phone_number, String address, String token) {
+    public User(String _id, String email, String password, String full_name, int phone_number, String address, String token) {
         this._id = _id;
         this.email = email;
         this.password = password;
@@ -54,11 +54,11 @@ public class User {
         this.full_name = full_name;
     }
 
-    public String getPhone_number() {
+    public int getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(String phone_number) {
+    public void setPhone_number(int phone_number) {
         this.phone_number = phone_number;
     }
 
