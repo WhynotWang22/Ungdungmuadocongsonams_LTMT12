@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -42,8 +45,11 @@ public class HomeFragment extends Fragment {
     List<Product> productList;
     List<Product> productListAopolo;
     List<Category> categoryList;
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         img_slide = view.findViewById(R.id.img_slidebanner);
@@ -55,6 +61,7 @@ public class HomeFragment extends Fragment {
         getListCategory();
         getListAoPolo();
         return view;
+
     }
 
     private void getListAoPolo() {
