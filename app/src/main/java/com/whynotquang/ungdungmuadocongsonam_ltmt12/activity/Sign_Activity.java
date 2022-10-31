@@ -126,7 +126,7 @@ public class Sign_Activity extends AppCompatActivity {
 
     private void postData(String full_name, String phone_number, String email, String password, String diachi) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/auth/")
+                .baseUrl("https://mofshop.shop/api/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiSignup = retrofit.create(ApiService.class);

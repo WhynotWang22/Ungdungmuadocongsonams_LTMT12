@@ -24,7 +24,6 @@ public class SplashActivity extends AppCompatActivity {
                 SharedPreferences sp = SplashActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
                 String token = sp.getString("token","");
                 Log.d("aaa","token 1: "+token);
-
                 if (token.isEmpty()){
                     Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(intent);
@@ -33,6 +32,6 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             }
-        },2000);
+        },1000);
     }
 }

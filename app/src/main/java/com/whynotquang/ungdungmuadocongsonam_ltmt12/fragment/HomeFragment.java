@@ -51,6 +51,8 @@ public class HomeFragment extends Fragment {
         SliderPhoto();
         getListProduct();
         getListCategory();
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.bg_xam));
+
         return view;
     }
 
@@ -62,7 +64,7 @@ public class HomeFragment extends Fragment {
         rc_view_danhmuc.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:3000/api/categorys/")
+                .baseUrl("https://mofshop.shop/api/categorys/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -91,7 +93,7 @@ public class HomeFragment extends Fragment {
         rc_view_duocdexuat.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:3000/api/products/")
+                .baseUrl("https://mofshop.shop/api/products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -124,7 +126,7 @@ public class HomeFragment extends Fragment {
         img_slide.setScrollTimeInSec(3); //set scroll delay in seconds :
         img_slide.startAutoCycle();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.2:3000/api/banners/")
+                .baseUrl("https://mofshop.shop/api/banners/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

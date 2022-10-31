@@ -45,7 +45,6 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="41dp"
                 android:fontFamily="@font/interbold"
-                android:text="Nguyen Van A"
                 android:textColor="@color/mauchu"
                 android:textSize="18dp" />
 
@@ -56,7 +55,6 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/intermedium"
-                android:text="admin@gmail.com"
                 android:textColor="@color/mauchu2"
                 android:textSize="14dp" />
         </LinearLayout>

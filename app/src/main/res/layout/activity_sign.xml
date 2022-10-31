@@ -157,6 +157,7 @@
           android:fontFamily="@font/interbold"
           android:textAlignment="center"
           android:text="Đăng nhập"
+          android:layout_marginLeft="2dp"
           android:id="@+id/tv_dangnhapchuyenmanhinh"
           android:textColor="@color/mauchu"
           android:textSize="14dp" />

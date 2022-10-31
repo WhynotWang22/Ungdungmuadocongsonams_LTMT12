@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void postData(String email, String password) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.10.52:3000/api/auth/")
+                .baseUrl("https://mofshop.shop/api/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

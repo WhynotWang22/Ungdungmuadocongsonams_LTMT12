@@ -10,9 +10,10 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:paddingBottom="104dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,7 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/interbold"
-                        android:text="Adidas Terrex Graphic Tee"
+                        android:text=""
                         android:textColor="@color/mauchu"
                         android:textSize="18dp" />
 
@@ -127,7 +128,7 @@
                 android:layout_marginTop="18dp"
                 android:layout_marginRight="32dp"
                 android:fontFamily="@font/interbold"
-                android:text="500.000d"
+                android:text=""
                 android:textColor="@color/mauchu"
                 android:textSize="18dp" />
 
@@ -191,85 +192,44 @@
                 android:text="Size"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup_size"
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_below="@+id/tv_size"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="15dp"
                 android:layout_marginRight="32dp"
-                android:checkedButton="@id/size_s"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/size_s"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/radio_size_select"
-                    android:button="@android:color/transparent"
-                    android:fontFamily="@font/intermedium"
-                    android:paddingLeft="11dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="11dp"
-                    android:paddingBottom="5dp"
-                    android:text="S"
-                    android:textColor="@color/white"
-                    android:textSize="14dp" />
-
-                <RadioButton
-                    android:id="@+id/size_m"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/radio_size_select"
-                    android:button="@android:color/transparent"
-                    android:fontFamily="@font/intermedium"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="11dp"
-                    android:paddingBottom="5dp"
-                    android:text="M"
-                    android:textColor="@color/white"
-                    android:textSize="14dp" />
-
-                <RadioButton
-                    android:id="@+id/size_l"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/radio_size_select"
-                    android:button="@android:color/transparent"
-                    android:fontFamily="@font/intermedium"
-                    android:paddingLeft="11dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="11dp"
-                    android:paddingBottom="5dp"
-                    android:text="L"
-                    android:textColor="@color/white"
-                    android:textSize="14dp" />
-
-                <RadioButton
-                    android:id="@+id/size_xl"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/radio_size_select"
-                    android:button="@android:color/transparent"
-                    android:fontFamily="@font/intermedium"
-                    android:paddingLeft="11dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="11dp"
-                    android:paddingBottom="5dp"
-                    android:text="XL"
-                    android:textColor="@color/white"
-                    android:textSize="14dp" />
-            </RadioGroup>
+                android:id="@+id/rc_view_size"
+                android:layout_marginTop="11dp"/>
+            <TextView
+                android:id="@+id/tv_chitiet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rc_view_size"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/intermedium"
+                android:text="Chi tiết sản phẩm"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp" />
+            <TextView
+                android:id="@+id/tv_chitietsanpham"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_chitiet"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/intermedium"
+                android:text=""
+                android:textColor="@color/mauchu2"
+                android:textSize="12dp"
+                android:paddingBottom="50dp"/>
         </RelativeLayout>
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -292,4 +252,18 @@
             android:textColor="@color/white"
             android:textSize="16dp" />
     </LinearLayout>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit_chitietsp"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/color_progressbar"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/scrollView2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

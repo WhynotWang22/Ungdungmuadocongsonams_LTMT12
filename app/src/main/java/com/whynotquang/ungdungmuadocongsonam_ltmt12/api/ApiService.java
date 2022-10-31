@@ -3,6 +3,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
 import java.util.List;
@@ -50,4 +51,14 @@ public interface ApiService {
     //logout
     @POST("logout")
     Call<User> postLogout(@Header("Authorization") String authtoken);
+    //add cart
+    @FormUrlEncoded
+    @POST("add")
+    Call<Products> postCart(@Header("Authorization") String authtoken,
+                            @Field("productId") String productId,
+                            @Field("color") String color,
+                            @Field("size") String size,
+                            @Field("quantity") int quantity,
+                            @Field("amount") int amount
+    );
 }
