@@ -1,36 +1,48 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.FromoFragment;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.TransactionFragment;
+import com.bumptech.glide.Glide;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
 
-public class NotificationAdapter extends FragmentStateAdapter {
+import java.util.List;
 
-    public NotificationAdapter(@NonNull FragmentActivity fragmentActivity) {
-        super(fragmentActivity);
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder> {
+    Context context;
+    List<Notification> list;
+
+    public NotificationAdapter(Context context, List<Notification> list) {
+        this.context = context;
+        this.list = list;
     }
 
     @NonNull
     @Override
-    public Fragment createFragment(int position) {
-        switch (position){
-            case 0:
-                return new TransactionFragment();
-            case 1:
-                return new FromoFragment();
-            default:
-                return new TransactionFragment();
+    public NotificationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_notification,parent,false);
+        return new NotificationHolder(view);
+    }
 
-        }
+    @Override
+    public void onBindViewHolder(@NonNull NotificationHolder holder, int position) {
+        Notification notification = list.get(position);
+        holder.tv_id_noti.setText("ID: "+notification.get_id());
+        holder.tv_title_noti.setText(notification.getTitle());
+        holder.tv_desc_noti.setText(notification.getDesc());
+        holder.tv_time_noti.setText(notification.getTime());
+        Glide.with(context).load(notification.getImages()).into(holder.imageView);
 
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return list.size();
     }
 }

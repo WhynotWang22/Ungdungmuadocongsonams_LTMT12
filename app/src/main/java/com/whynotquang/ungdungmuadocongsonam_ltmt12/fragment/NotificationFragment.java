@@ -1,63 +1,49 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.NotificationAdapter;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NotificationFragment extends Fragment {
-
-    TabLayout mTableLayout;
-    ViewPager2 mViewPager2;
-
-
-    public NotificationFragment() {
-
-    }
-
-
+    RecyclerView recyclerView;
+    List<Notification> notificationList;
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);
+        recyclerView = view.findViewById(R.id.rc_view_noti);
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mTableLayout = view.findViewById(R.id.tab_layout);
-        mViewPager2 = view.findViewById(R.id.pager);
-        NotificationAdapter notificationAdapter = new NotificationAdapter(getActivity());
-        mViewPager2.setAdapter(notificationAdapter);
-        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(mTableLayout, mViewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-                    case 0:
-                        tab.setText("Transaction");
-                        break;
+        notificationList = new ArrayList<>();
+        notificationList.add(new Notification("1","aaa","aaa","https://bucket.nhanh.vn/store/662/ps/20221024/AH0332__22_.jpg","11:22"));
+        notificationList.add(new Notification("2","aaa","aaa","https://bucket.nhanh.vn/store/662/ps/20221020/BL0314__7_.jpg","11:22"));
+        notificationList.add(new Notification("3","aaa","aaa","https://bucket.nhanh.vn/store/662/ps/20221024/AH0332__22_.jpg","11:22"));
+        notificationList.add(new Notification("4","aaa","aaa","https://bucket.nhanh.vn/store/662/ps/20221020/BL0314__7_.jpg","11:22"));
+        notificationList.add(new Notification("5","aaa","aaa","https://bucket.nhanh.vn/store/662/ps/20221024/AH0332__22_.jpg","11:22"));
 
-                    case 1:
-                        tab.setText("Fromo");
-                        break;
-                }
-
-            }
-        });
-        tabLayoutMediator.attach();
+        NotificationAdapter adapter = new NotificationAdapter(getActivity(),notificationList);
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
+        return view;
     }
 }

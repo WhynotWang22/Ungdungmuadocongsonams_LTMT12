@@ -52,6 +52,7 @@ public class AccountFragment extends Fragment {
         btn_setting = view.findViewById(R.id.btn_setting);
         btn_privacy_setting = view.findViewById(R.id.btn_privacy_setting);
         btn_logout = view.findViewById(R.id.btn_logout);
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
