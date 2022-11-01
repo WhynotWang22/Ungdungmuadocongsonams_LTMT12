@@ -109,7 +109,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_aopolo"
             android:layout_width="match_parent"
-            android:layout_height="242dp"
+            android:layout_height="342dp"
             android:layout_below="@+id/tv_aopolo"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"/>

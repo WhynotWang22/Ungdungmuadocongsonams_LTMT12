@@ -6,107 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".fragment.CategoryFragment"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/white">
+     <RelativeLayout
+         android:id="@+id/rl_frag_category"
+         android:layout_width="match_parent"
+         android:layout_height="56dp"
+         android:background="@color/white"
+         tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/im_frag_category"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:src="@drawable/btnback" />
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_frag_category"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loại"
-            android:fontFamily="@font/interbold"
-            android:textColor="@color/mauchu"
-            android:textSize="16dp"
             android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:id="@+id/category_hoodie"
-        android:layout_marginTop="17dp">
-        <ImageView
-            android:id="@+id/img_hoodie"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:src="@drawable/hoodies"
-            android:scaleType="centerCrop"/>
-        <TextView
-            android:id="@+id/tv_hoodie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hoodie"
-            android:textColor="@color/white"
-            android:textSize="18dp"
             android:fontFamily="@font/interbold"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:id="@+id/category_jacket"
-        android:layout_marginTop="12dp">
-        <ImageView
-            android:id="@+id/img_jacket"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:src="@drawable/jacket"
-            android:scaleType="centerCrop"/>
-        <TextView
-            android:id="@+id/tv_jacket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jacket"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:fontFamily="@font/interbold"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:id="@+id/category_shirts"
-        android:layout_marginTop="12dp">
-        <ImageView
-            android:id="@+id/img_shirts"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:src="@drawable/shirts"
-            android:scaleType="centerCrop"/>
-        <TextView
-            android:id="@+id/tv_shirts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Shirts"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:fontFamily="@font/interbold"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:id="@+id/category_t_shirts"
-        android:layout_marginTop="12dp">
-        <ImageView
-            android:id="@+id/img_t_shirts"
-            android:layout_width="match_parent"
-            android:layout_height="128dp"
-            android:src="@drawable/tshirt"
-            android:scaleType="centerCrop"/>
-        <TextView
-            android:id="@+id/tv_t_shirts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="T-Shirts"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            android:fontFamily="@font/interbold"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"/>
-    </RelativeLayout>
+            android:text="Thể Loại"
+            android:textColor="@color/mauchu"
+            android:textSize="16dp" />
+
+     </RelativeLayout>
+     <androidx.recyclerview.widget.RecyclerView
+         android:layout_width="match_parent"
+         android:layout_height="550dp"
+         android:id="@+id/rc_fg_category"/>
 </LinearLayout>
