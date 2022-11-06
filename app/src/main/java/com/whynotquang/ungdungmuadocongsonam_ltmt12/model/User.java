@@ -7,18 +7,20 @@ public class User {
     public String full_name;
     public int phone_number;
     public String address;
+    public String avatar;
     public String token;
 
     public User() {
     }
 
-    public User(String _id, String email, String password, String full_name, int phone_number, String address, String token) {
+    public User(String _id, String email, String password, String full_name, int phone_number, String address, String avatar, String token) {
         this._id = _id;
         this.email = email;
         this.password = password;
         this.full_name = full_name;
         this.phone_number = phone_number;
         this.address = address;
+        this.avatar = avatar;
         this.token = token;
     }
 
@@ -68,6 +70,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getToken() {

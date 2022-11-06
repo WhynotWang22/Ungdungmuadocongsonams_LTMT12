@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.CartFragment">
 
     <RelativeLayout
-        android:id="@+id/rl_my_cart"
+        android:id="@+id/relativeLayout_my_cart"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
         tools:ignore="MissingConstraints">
-
-        <ImageView
-            android:id="@+id/im_my_cart"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
-            android:src="@drawable/btnback" />
 
         <TextView
             android:id="@+id/tv_my_cart"
@@ -30,42 +22,132 @@
             android:textColor="@color/mauchu"
             android:textSize="16dp" />
 
-
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_My_Cart"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_view_gio_hang"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/rl_my_cart"
-        android:layout_marginTop="3dp"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="135dp"
-            android:layout_height="135dp"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="140dp"
-            android:src="@drawable/empty_cart_icon" />
-
+        android:layout_height="406dp"
+        android:layout_below="@+id/relativeLayout_my_cart"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/liner_mgg">
+        <EditText
+            android:layout_width="201dp"
+            android:layout_height="56dp"
+            android:hint="Nhập mã phiếu giảm giá"
+            android:fontFamily="@font/intermedium"
+            android:textColorHint="@color/mauxam"
+            android:textSize="14dp"
+            android:background="@drawable/bg_ed_mgg"/>
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="56dp"
+            android:text="Áp dụng"
+            android:fontFamily="@font/interbold"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textAllCaps="false"
+            android:background="@drawable/bg_btn_mgg"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout_cart_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/liner_mgg"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="27dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="119dp"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/intermedium"
-            android:text="Giỏ của bạn trống trơn"
-            android:textColor="@color/mauchu"
-            android:textSize="16dp" />
-
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/intermedium"
-            android:text="Không có gì để hiển thị ở đây.Hãy đi mua sắm một số sản phẩm đáng yêu từ chúng tôi."
+            android:text="Mặt hàng (3 mặt hàng)"
+            android:textSize="14dp"
             android:textColor="@color/mauchu2"
-            android:textSize="14dp" />
-    </LinearLayout>
-</FrameLayout>
+            android:fontFamily="@font/intermedium"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0đ"
+            android:textSize="14dp"
+            android:textColor="@color/mauchu"
+            android:fontFamily="@font/intermedium"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout_cart_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout_cart_1"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="12dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phí vận chuyển"
+            android:textSize="14dp"
+            android:textColor="@color/mauchu2"
+            android:fontFamily="@font/intermedium"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0đ"
+            android:textSize="14dp"
+            android:textColor="@color/mauchu"
+            android:fontFamily="@font/intermedium"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout_cart_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout_cart_2"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="12dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tổng"
+            android:textSize="14dp"
+            android:textColor="@color/mauchu"
+            android:fontFamily="@font/interbold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0đ"
+            android:textSize="14dp"
+            android:textColor="@color/mauchu"
+            android:fontFamily="@font/interbold"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/relativeLayout_cart_3"
+        android:text="Thanh toán"
+        android:textSize="16dp"
+        android:fontFamily="@font/interbold"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_button"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="122dp"/>
+</RelativeLayout>
+</RelativeLayout>

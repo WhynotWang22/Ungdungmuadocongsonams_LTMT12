@@ -4,16 +4,22 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ResponseUser;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -60,5 +66,33 @@ public interface ApiService {
                             @Field("size") String size,
                             @Field("quantity") int quantity,
                             @Field("amount") int amount
+    );
+    //update sdt
+    @FormUrlEncoded
+    @PUT("edit-phone-number")
+    Call<User> putPhoneNumber(@Header("Authorization") String authtoken,
+                            @Field("phone_number") String phone_number
+    );
+    //update profile
+    @Multipart
+    @PUT("edits")
+    Call<User> putEditProfile(@Header("Authorization") String authtoken,
+                              @Part("full_name") RequestBody full_name,
+                              @Part("email") RequestBody email,
+                              @Part("phone_number") RequestBody phone_number,
+                              @Part("address") RequestBody diachi,
+                              @Part MultipartBody.Part avatar
+    );
+
+
+
+
+    ////changePassword
+    @FormUrlEncoded
+    @PUT("change-password")
+    Call<ResponseUser> updateExcute(
+            @Field("oldPassword")String oldPassword,
+            @Field("newPassword") String newPassword,
+            @Header("Authorization") String authtoken
     );
 }

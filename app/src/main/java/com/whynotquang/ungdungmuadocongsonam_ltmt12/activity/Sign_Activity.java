@@ -68,7 +68,7 @@ public class Sign_Activity extends AppCompatActivity {
                 String phone_number = edtSdt.getText().toString().trim();
                 String email = edtEmail.getText().toString().trim();
                 String password = edtMatkhau.getText().toString().trim();
-                String diachi = edtMatkhau.getText().toString().trim();
+                String diachi = ed_diachi.getText().toString().trim();
 
                 if (email.isEmpty() || password.isEmpty() || full_name.isEmpty() || diachi.isEmpty() || phone_number.isEmpty()) {
                     Toast.makeText(Sign_Activity.this, "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
@@ -140,6 +140,8 @@ public class Sign_Activity extends AppCompatActivity {
                     edtEmail.setText("");
                     edtMatkhau.setText("");
                     edtEmail.setText("");
+                    edtSdt.setText("");
+                    ed_diachi.setText("");
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(Sign_Activity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Sign_Activity.this, LoginActivity.class);

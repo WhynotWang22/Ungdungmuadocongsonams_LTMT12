@@ -37,36 +37,36 @@ public class CategoryFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_category, container, false);
         rc_fg_category = view.findViewById(R.id.rc_fg_category);
-        getListCategorys();
+//        getListCategorys();
         return  view;
     }
 
-    private void getListCategorys() {
-        categoryList = new ArrayList<>();
-        Category_Frag_Adapter category_frag_adapter = new Category_Frag_Adapter(categoryList,getContext());
-        rc_fg_category.setAdapter(category_frag_adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
-        rc_fg_category.setLayoutManager(linearLayoutManager);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.174:3000/api/categorys/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Category>> call = apiService.getCategory();
-        call.enqueue(new Callback<List<Category>>() {
-            @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                if (response.body() != null){
-                    categoryList.addAll(response.body());
-                    category_frag_adapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
-                Toast.makeText(getContext(), "Không lấy được dữ liệu danh mục", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void getListCategorys() {
+//        categoryList = new ArrayList<>();
+//        Category_Frag_Adapter category_frag_adapter = new Category_Frag_Adapter(categoryList,getContext());
+//        rc_fg_category.setAdapter(category_frag_adapter);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
+//        rc_fg_category.setLayoutManager(linearLayoutManager);
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://192.168.1.174:3000/api/categorys/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        ApiService apiService = retrofit.create(ApiService.class);
+//        Call<List<Category>> call = apiService.getCategory();
+//        call.enqueue(new Callback<List<Category>>() {
+//            @Override
+//            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+//                if (response.body() != null){
+//                    categoryList.addAll(response.body());
+//                    category_frag_adapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Category>> call, Throwable t) {
+//                Toast.makeText(getContext(), "Không lấy được dữ liệu danh mục", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 }

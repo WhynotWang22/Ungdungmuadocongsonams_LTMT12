@@ -34,37 +34,37 @@ public class ProductCategoryActivity extends AppCompatActivity {
         rc_productcategory = findViewById(R.id.rc_productcategory);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        getProductCategory();
+//        getProductCategory();
     }
 
-    private void getProductCategory() {
-        productList = new ArrayList<>();
-        ProductCategoryAdapter productCategoryAdapter = new ProductCategoryAdapter(productList,getApplicationContext());
-        rc_productcategory.setAdapter(productCategoryAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
-        rc_productcategory.setLayoutManager(gridLayoutManager);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.174:3000/api/categorys/" )
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Product>> call = apiService.getAllproductbycategory(id);
-        call.enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-
-                if (response.body() != null){
-                    productList.addAll(response.body());
-                }
-                productCategoryAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(ProductCategoryActivity.this, "loi click iem", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
+//    private void getProductCategory() {
+//        productList = new ArrayList<>();
+//        ProductCategoryAdapter productCategoryAdapter = new ProductCategoryAdapter(productList,getApplicationContext());
+//        rc_productcategory.setAdapter(productCategoryAdapter);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+//        rc_productcategory.setLayoutManager(gridLayoutManager);
+//
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://192.168.1.174:3000/api/categorys/" )
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        ApiService apiService = retrofit.create(ApiService.class);
+//        Call<List<Product>> call = apiService.getAllproductbycategory(id);
+//        call.enqueue(new Callback<List<Product>>() {
+//            @Override
+//            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+//
+//                if (response.body() != null){
+//                    productList.addAll(response.body());
+//                }
+//                productCategoryAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Product>> call, Throwable t) {
+//                Toast.makeText(ProductCategoryActivity.this, "loi click iem", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
 }

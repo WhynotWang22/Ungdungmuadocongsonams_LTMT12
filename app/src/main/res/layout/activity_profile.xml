@@ -8,7 +8,7 @@
     tools:context=".activity.ChangePasswordActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout_number"
+        android:id="@+id/relativeLayout_profile"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
@@ -29,67 +29,111 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/interbold"
-            android:text="Đổi số điện thoại"
+            android:text="Trang cá nhân"
             android:textColor="@color/mauchu"
             android:textSize="16dp" />
 
     </RelativeLayout>
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_below="@id/relativeLayout_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="2dp" />
+
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="855dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginTop="33dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout_number"
         app:layout_constraintVertical_bias="0.5"
-        android:layout_below="@+id/relativeLayout_number">
+        android:layout_below="@+id/profile_image">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="32dp"
             android:fontFamily="@font/interbold"
-            android:text="Số điện thoại mới"
+            android:text="Họ tên"
             android:textColor="@color/mauchu"
-            android:textSize="14dp"
-            android:layout_marginTop="14dp"/>
+            android:textSize="14dp" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/ed_sdt_moi"
-            android:hint="0123456789"
+            android:id="@+id/ed_hoten_profile"
             android:background="@drawable/bg_ed_pass"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginTop="6dp"
-            android:inputType="phone"/>
+            android:inputType="textPersonName"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="32dp"
             android:fontFamily="@font/interbold"
-            android:text="Nhập lại số điện thoại mới"
+            android:text="Email"
             android:textColor="@color/mauchu"
             android:textSize="14dp"
-            android:layout_marginTop="14dp"/>
+            android:layout_marginTop="10dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/ed_nhap_lai_sdt"
-            android:hint="0123456789"
+            android:id="@+id/ed_email_profile"
             android:background="@drawable/bg_ed_pass"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginTop="6dp"
-            android:inputType="phone"/>
+            android:inputType="textEmailAddress"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:fontFamily="@font/interbold"
+            android:text="Số điện thoại"
+            android:textColor="@color/mauchu"
+            android:textSize="14dp"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:id="@+id/ed_phone_number_profile"
+            android:background="@drawable/bg_ed_pass"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="6dp"
+            android:inputType="phone"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="32dp"
+            android:fontFamily="@font/interbold"
+            android:text="Địa chỉ"
+            android:textColor="@color/mauchu"
+            android:textSize="14dp"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:id="@+id/ed_diachi_profile"
+            android:background="@drawable/bg_ed_pass"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="6dp"
+            android:inputType="textPostalAddress"/>
     </LinearLayout>
     <Button
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:id="@+id/btn_change_sdt"
-        android:text="Đổi số điện thoại"
+        android:id="@+id/btn_change_profile"
+        android:text="Thay đổi"
         android:background="@drawable/bg_button"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
@@ -100,7 +144,7 @@
         android:layout_marginBottom="62dp" />
     <com.github.ybq.android.spinkit.SpinKitView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/spin_kit_change_phone_number"
+        android:id="@+id/spin_kit_change_profile"
         style="@style/SpinKitView.Large.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
