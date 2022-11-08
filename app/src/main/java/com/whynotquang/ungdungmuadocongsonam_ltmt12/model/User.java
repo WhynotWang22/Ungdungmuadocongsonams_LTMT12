@@ -1,80 +1,108 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class User {
-    public String _id;
-    public String email;
-    public String password;
-    public String full_name;
-    public int phone_number;
-    public String address;
-    public String token;
+    @SerializedName("user")
+    @Expose
+    private User user;
+    @SerializedName("token")
+    @Expose
+    private String token;
+    @SerializedName("_id")
+    @Expose
+    private String id;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("password")
+    @Expose
+    private String password;
+    @SerializedName("full_name")
+    @Expose
+    private String fullName;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("phone_number")
+    @Expose
+    private Integer phoneNumber;
+    @SerializedName("role")
+    @Expose
+    private String role;
+    @SerializedName("avatar")
+    @Expose
+    private String avatar;
+    @SerializedName("tokens")
+    @Expose
+    private List<Object> tokens = null;
+    @SerializedName("createdAt")
+    @Expose
+    private String createdAt;
+    @SerializedName("updatedAt")
+    @Expose
+    private String updatedAt;
+    @SerializedName("__v")
+    @Expose
+    private Integer v;
 
-    public User() {
-    }
-
-    public User(String _id, String email, String password, String full_name, int phone_number, String address, String token) {
-        this._id = _id;
-        this.email = email;
-        this.password = password;
-        this.full_name = full_name;
-        this.phone_number = phone_number;
-        this.address = address;
-        this.token = token;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFull_name() {
-        return full_name;
-    }
-
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
-    }
-
-    public int getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(int phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public User getUser() {
+        return user;
     }
 
     public String getToken() {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public String getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Integer getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public List<Object> getTokens() {
+        return tokens;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public Integer getV() {
+        return v;
     }
 }
+

@@ -6,9 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.LoginActivity;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.SplashActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
@@ -69,7 +68,7 @@ public class AccountFragment extends Fragment {
 
     private void logOut() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
+                .baseUrl( AppConstain.BASE_URL + "auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -101,7 +100,7 @@ public class AccountFragment extends Fragment {
 
     private void getData(String token) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
+                .baseUrl(AppConstain.BASE_URL + "auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -111,15 +110,15 @@ public class AccountFragment extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body()!=null) {
                     tv_email.setText(response.body().getEmail());
-                    tv_name.setText(response.body().getFull_name());
+                    tv_name.setText(response.body().getFullName());
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Intent intent = new Intent(getContext(),LoginActivity.class);
-                startActivity(intent);
-                getActivity().finishAffinity();
+//                Intent intent = new Intent(getContext(),LoginActivity.class);
+//                startActivity(intent);
+//                getActivity().finishAffinity();
                 Toast.makeText(getContext(), "Không lấy được dữ liệu user", Toast.LENGTH_SHORT).show();
             }
         });

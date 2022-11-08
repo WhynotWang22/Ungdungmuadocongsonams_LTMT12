@@ -64,7 +64,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 //                    return;
 //                }
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.1.2:3000/api/auth/")
+                        .baseUrl("https://mofshop.shop/api/auth/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);

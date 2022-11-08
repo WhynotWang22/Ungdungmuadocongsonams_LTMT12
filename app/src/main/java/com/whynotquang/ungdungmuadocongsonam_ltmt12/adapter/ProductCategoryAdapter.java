@@ -48,7 +48,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
           @Override
           public void onClick(View view) {
               Intent intent = new Intent(context, ChitietActivity.class);
-              intent.putExtra("id",product.getId());
+              intent.putExtra("id",product.get_id());
               intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
               context.startActivity(intent);
           }

@@ -1,19 +1,17 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CategoryAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.Category_Frag_Adapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
@@ -49,7 +47,7 @@ public class CategoryFragment extends Fragment {
         rc_fg_category.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.174:3000/api/categorys/")
+                .baseUrl(AppConstain.BASE_URL + "categorys/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

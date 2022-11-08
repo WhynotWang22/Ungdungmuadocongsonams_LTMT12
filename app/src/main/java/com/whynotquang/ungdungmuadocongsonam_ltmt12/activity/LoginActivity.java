@@ -1,6 +1,5 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -36,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
     Button button_login;
     String token = null;
     TextView tvDangkychuyenamn;
-
     ProgressBar progressBar;
 
     @Override
@@ -101,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void postData(String email, String password) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
+                .baseUrl( AppConstain.BASE_URL + "auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -111,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     User userApi = response.body();
-                    token = userApi.getToken();
+                    token = String.valueOf(userApi.getTokens());
                     if (token !=null){
                         progressBar.setVisibility(View.GONE);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -120,9 +119,9 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         SharedPreferences sp= getSharedPreferences("Login", MODE_PRIVATE);
                         SharedPreferences.Editor Ed= sp.edit();
-                        Ed.putString("email",userApi.getEmail() );
-                        Ed.putString("id",userApi.get_id());
-                        Ed.putString("token",userApi.getToken());
+                        Ed.putString("email",userApi.getEmail());
+                        Ed.putString("id",userApi.getId());
+                        Ed.putString("token", String.valueOf(userApi.getToken()));
                         Ed.commit();
                     }
                 }else {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_cart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.CartFragment">
-
     <RelativeLayout
         android:id="@+id/rl_my_cart"
         android:layout_width="match_parent"
@@ -29,43 +29,137 @@
             android:text="Giỏ hàng của tôi"
             android:textColor="@color/mauchu"
             android:textSize="16dp" />
-
-
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_My_Cart"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/rl_my_cart"
-        android:layout_marginTop="3dp"
-        android:orientation="vertical">
+        android:layout_height="350dp"
+        android:layout_marginTop="45dp">
 
-        <ImageView
-            android:layout_width="135dp"
-            android:layout_height="135dp"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="140dp"
-            android:src="@drawable/empty_cart_icon" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_My_Cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_my_cart"
+                android:layout_marginTop="3dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iconNoCart"
+                    android:layout_width="135dp"
+                    android:layout_height="135dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="140dp"
+                    android:src="@drawable/empty_cart_icon" />
+
+                <TextView
+                    android:id="@+id/titleNoCart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/intermedium"
+                    android:text="Giỏ của bạn trống trơn"
+                    android:textColor="@color/mauchu"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_cart"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="420dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="119dp"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/intermedium"
-            android:text="Giỏ của bạn trống trơn"
-            android:textColor="@color/mauchu"
-            android:textSize="16dp" />
+            android:layout_marginLeft="32dp"
+            android:fontFamily="@font/interbold"
+            android:text="Tiền Sản Phẩm"
+            android:textColor="#C4C4C4" />
 
         <TextView
-            android:layout_width="300dp"
+            android:id="@+id/tv_total_product_cart"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/intermedium"
-            android:text="Không có gì để hiển thị ở đây.Hãy đi mua sắm một số sản phẩm đáng yêu từ chúng tôi."
-            android:textColor="@color/mauchu2"
-            android:textSize="14dp" />
+            android:layout_gravity="right"
+            android:layout_marginTop="-20dp"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/interbold"
+            android:text="1.400.000đ"
+            android:textColor="@color/mauchu" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:fontFamily="@font/interbold"
+                android:text="Phí Ship"
+                android:textColor="#C4C4C4" />
+
+            <TextView
+                android:id="@+id/tv_price_delivery_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="-20dp"
+                android:layout_marginRight="30dp"
+                android:fontFamily="@font/interbold"
+                android:text="15.000đ"
+                android:textColor="@color/mauchu" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:fontFamily="@font/interbold"
+                    android:text="Tổng Tiền"
+                    android:textColor="@color/mauchu" />
+
+                <TextView
+                    android:id="@+id/tv_total_cart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="-20dp"
+                    android:layout_marginRight="30dp"
+                    android:fontFamily="@font/interbold"
+                    android:text="1.415.000đ"
+                    android:textColor="@color/mauchu" />
+                <Button
+                    android:id="@+id/btn_checkout_cart"
+                    android:layout_width="311dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_button"
+                    android:text="Thanh Toán"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

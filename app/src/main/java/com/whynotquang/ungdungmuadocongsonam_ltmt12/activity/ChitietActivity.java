@@ -18,14 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
-import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
+import com.orhanobut.hawk.Hawk;
 import com.smarteist.autoimageslider.SliderView;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ImageSliderAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.SizeAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
@@ -78,7 +78,13 @@ public class ChitietActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        ///
+        Hawk.init(this).build();
+        Hawk.put("id", id);
+
         getDataProduct();
+        Log.d("eeeee","eeeeee" + id);
+
 
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
@@ -106,7 +112,7 @@ public class ChitietActivity extends AppCompatActivity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/cart/")
+                .baseUrl(AppConstain.BASE_URL + "cart/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -190,4 +196,6 @@ public class ChitietActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

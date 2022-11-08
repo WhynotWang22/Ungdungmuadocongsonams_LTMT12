@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ProductCategoryAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -32,6 +33,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_category);
         rc_productcategory = findViewById(R.id.rc_productcategory);
+
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         getProductCategory();
@@ -45,15 +47,15 @@ public class ProductCategoryActivity extends AppCompatActivity {
         rc_productcategory.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.174:3000/api/categorys/" )
+                .baseUrl(AppConstain.BASE_URL + "categorys/" )
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<Product>> call = apiService.getAllproductbycategory(id);
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-
                 if (response.body() != null){
                     productList.addAll(response.body());
                 }

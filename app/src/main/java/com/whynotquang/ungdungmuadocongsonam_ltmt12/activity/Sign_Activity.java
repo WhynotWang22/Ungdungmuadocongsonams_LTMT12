@@ -1,8 +1,6 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatCheckBox;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
@@ -68,7 +65,7 @@ public class Sign_Activity extends AppCompatActivity {
                 String phone_number = edtSdt.getText().toString().trim();
                 String email = edtEmail.getText().toString().trim();
                 String password = edtMatkhau.getText().toString().trim();
-                String diachi = edtMatkhau.getText().toString().trim();
+                String diachi = ed_diachi.getText().toString().trim();
 
                 if (email.isEmpty() || password.isEmpty() || full_name.isEmpty() || diachi.isEmpty() || phone_number.isEmpty()) {
                     Toast.makeText(Sign_Activity.this, "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
@@ -126,7 +123,7 @@ public class Sign_Activity extends AppCompatActivity {
 
     private void postData(String full_name, String phone_number, String email, String password, String diachi) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
+                .baseUrl( "https://mofshop.shop/api/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiSignup = retrofit.create(ApiService.class);
@@ -140,6 +137,7 @@ public class Sign_Activity extends AppCompatActivity {
                     edtEmail.setText("");
                     edtMatkhau.setText("");
                     edtEmail.setText("");
+                    ed_diachi.setText("");
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(Sign_Activity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Sign_Activity.this, LoginActivity.class);

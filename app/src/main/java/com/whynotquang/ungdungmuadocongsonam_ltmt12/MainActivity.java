@@ -1,24 +1,12 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.AccountFragment;
@@ -29,7 +17,6 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.NotificationFragmen
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
-
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})

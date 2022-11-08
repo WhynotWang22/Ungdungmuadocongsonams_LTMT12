@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.BannerAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CategoryAdapter;
@@ -64,7 +65,7 @@ public class HomeFragment extends Fragment {
         rc_view_danhmuc.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/categorys/")
+                .baseUrl(AppConstain.BASE_URL + "categorys/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -93,7 +94,7 @@ public class HomeFragment extends Fragment {
         rc_view_duocdexuat.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/products/")
+                .baseUrl(AppConstain.BASE_URL + "products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -126,7 +127,7 @@ public class HomeFragment extends Fragment {
         img_slide.setScrollTimeInSec(3); //set scroll delay in seconds :
         img_slide.startAutoCycle();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/banners/")
+                .baseUrl(AppConstain.BASE_URL + "banners/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

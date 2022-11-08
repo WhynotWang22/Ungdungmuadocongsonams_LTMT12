@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ChitietActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
@@ -23,6 +22,7 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
      Context context;
      List<Product> productList;
+
 
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;

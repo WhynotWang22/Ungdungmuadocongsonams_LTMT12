@@ -3,7 +3,9 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ResponseUser;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -29,6 +32,22 @@ public interface ApiService {
     @GET("getall")
     Call<List<Category>> getCategory();
 
+    //get category theo items
+    @GET("getall/{id}")
+    Call<List<Product>> getAllproductbycategory(@Path("id") String id);
+
+    //get ao polo
+    @GET("getall/634d16bfb1d500646457f11d")
+    Call<List<Product>> getAoPolo();
+
+    ////changePassword
+    @FormUrlEncoded
+    @PUT("change-password")
+    Call<ResponseUser> updateExcute(
+            @Field("oldPassword")String oldPassword,
+            @Field("newPassword") String newPassword,
+            @Header("Authorization") String authtoken
+    );
     //login
     @FormUrlEncoded
     @POST("login")
@@ -44,6 +63,12 @@ public interface ApiService {
                             @Field("address") String diachi
                             );
 
+    ///change pass after send link to your email
+    @FormUrlEncoded
+    @POST("forgot-password")
+    Call<User> postSendEmail(
+            @Field("email") String email,
+            @Header("Authorization")String authtoken);
 
     //get profile
     @GET("profile")
@@ -51,6 +76,7 @@ public interface ApiService {
     //logout
     @POST("logout")
     Call<User> postLogout(@Header("Authorization") String authtoken);
+
     //add cart
     @FormUrlEncoded
     @POST("add")
@@ -61,4 +87,23 @@ public interface ApiService {
                             @Field("quantity") int quantity,
                             @Field("amount") int amount
     );
+
+    ///get list cart
+    @GET("list")
+    Call<ProductAddCart> getlistCart(@Header("Authorization")
+                                       String authtoken);
+
+
+
+    ///delete item cart
+    @FormUrlEncoded
+    @POST("delete")
+    Call<List<Products>> deletelistCart
+    (@Field("id") String id);
+
+
+    ////tang so luong item cart
+    @POST("add")
+    Call<Products> PostItemCart(String productId);
+
 }
