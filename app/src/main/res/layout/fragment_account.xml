@@ -22,28 +22,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="36dp"
+        android:id="@+id/liner_profile">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avt"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="31dp"
-            android:src="@drawable/avt" />
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="32dp">
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="41dp"
                 android:fontFamily="@font/interbold"
                 android:textColor="@color/mauchu"
                 android:textSize="18dp" />

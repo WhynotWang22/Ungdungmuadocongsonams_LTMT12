@@ -36,55 +36,55 @@ public class SendemailActivity extends AppCompatActivity {
 
         edSendEmail = (EditText) findViewById(R.id.ed_send_email);
         btnSendEmail = (Button) findViewById(R.id.btn_send_email);
-        sendemail();
+//        sendemail();
     }
 
-    private void sendemail() {
-        btnSendEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sp = SendemailActivity.this.getApplicationContext().getSharedPreferences("Sendemail", MODE_PRIVATE);
-                token = sp.getString("token","");
-                String  sendEmail= edSendEmail.getText().toString();
-
-                if (sendEmail.isEmpty()){
-                    edSendEmail.setError("Không được để trống");
-                    edSendEmail.requestFocus();
-                    return;
-                }
-
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.1.101:3000/api/auth/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                ApiService apiService = retrofit.create(ApiService.class);
-                Call<User> call = apiService.postSendEmail( sendEmail,token);
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        if (response.isSuccessful()){
-                            User userAPi = response.body();
-//                           token = String.valueOf(userAPi.getUser().token);
-                            if (token !=null){
-                                SharedPreferences sp= getSharedPreferences("change-password", MODE_PRIVATE);
-                                SharedPreferences.Editor Ed= sp.edit();
-                                Ed.putString("token",token);
-                                Ed.putString("email",sendEmail);
-                                Ed.commit();
-                                Intent intent = new Intent(SendemailActivity.this, FotgotPassChangeActivity.class);
-                                startActivity(intent);
-                                finishAffinity();
-                                Toast.makeText(SendemailActivity.this, "thành công", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Toast.makeText(SendemailActivity.this, "That bai", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-            }
+//    private void sendemail() {
+//        btnSendEmail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                SharedPreferences sp = SendemailActivity.this.getApplicationContext().getSharedPreferences("Sendemail", MODE_PRIVATE);
+//                token = sp.getString("token","");
+//                String  sendEmail= edSendEmail.getText().toString();
+//
+//                if (sendEmail.isEmpty()){
+//                    edSendEmail.setError("Không được để trống");
+//                    edSendEmail.requestFocus();
+//                    return;
+//                }
+//
+//                Retrofit retrofit = new Retrofit.Builder()
+//                        .baseUrl("http://192.168.1.101:3000/api/auth/")
+//                        .addConverterFactory(GsonConverterFactory.create())
+//                        .build();
+//                ApiService apiService = retrofit.create(ApiService.class);
+//                Call<User> call = apiService.postSendEmail( sendEmail,token);
+//                call.enqueue(new Callback<User>() {
+//                    @Override
+//                    public void onResponse(Call<User> call, Response<User> response) {
+//                        if (response.isSuccessful()){
+//                            User userAPi = response.body();
+////                           token = String.valueOf(userAPi.getUser().token);
+//                            if (token !=null){
+//                                SharedPreferences sp= getSharedPreferences("change-password", MODE_PRIVATE);
+//                                SharedPreferences.Editor Ed= sp.edit();
+//                                Ed.putString("token",token);
+//                                Ed.putString("email",sendEmail);
+//                                Ed.commit();
+//                                Intent intent = new Intent(SendemailActivity.this, FotgotPassChangeActivity.class);
+//                                startActivity(intent);
+//                                finishAffinity();
+//                                Toast.makeText(SendemailActivity.this, "thành công", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<User> call, Throwable t) {
+//                        Toast.makeText(SendemailActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
+//            }
     }

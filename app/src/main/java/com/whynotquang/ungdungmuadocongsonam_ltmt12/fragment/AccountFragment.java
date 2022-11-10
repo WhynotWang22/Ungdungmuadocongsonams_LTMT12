@@ -6,20 +6,25 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
+import com.bumptech.glide.Glide;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.LoginActivity;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ProfileActivity;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.SplashActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
@@ -34,8 +39,10 @@ public class AccountFragment extends Fragment {
     TextView tv_name, tv_email;
     RelativeLayout btn_my_order, btn_diachi, btn_phuongthucthanhtoan, btn_setting, btn_privacy_setting;
     Button btn_logout;
+    ImageView avt;
     String token;
     SharedPreferences sp;
+    LinearLayout liner_profile;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -45,13 +52,23 @@ public class AccountFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);
+        avt = view.findViewById(R.id.avt);
         btn_my_order = view.findViewById(R.id.btn_my_order);
         btn_diachi = view.findViewById(R.id.btn_diachi);
         btn_phuongthucthanhtoan = view.findViewById(R.id.btn_phuongthucthanhtoan);
         btn_setting = view.findViewById(R.id.btn_setting);
         btn_privacy_setting = view.findViewById(R.id.btn_privacy_setting);
         btn_logout = view.findViewById(R.id.btn_logout);
+        liner_profile = view.findViewById(R.id.liner_profile);
+
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+        liner_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ProfileActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
 
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +85,7 @@ public class AccountFragment extends Fragment {
 
     private void logOut() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl( AppConstain.BASE_URL + "auth/")
+                .baseUrl("https://mofshop.shop/api/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -100,7 +117,7 @@ public class AccountFragment extends Fragment {
 
     private void getData(String token) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "auth/")
+                .baseUrl("https://mofshop.shop/api/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -110,15 +127,16 @@ public class AccountFragment extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body()!=null) {
                     tv_email.setText(response.body().getEmail());
-                    tv_name.setText(response.body().getFullName());
+                    tv_name.setText(response.body().getFull_name());
+                    Glide.with(getContext()).load(response.body().getAvatar()).into(avt);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-//                Intent intent = new Intent(getContext(),LoginActivity.class);
-//                startActivity(intent);
-//                getActivity().finishAffinity();
+                Intent intent = new Intent(getContext(),LoginActivity.class);
+                startActivity(intent);
+                getActivity().finishAffinity();
                 Toast.makeText(getContext(), "Không lấy được dữ liệu user", Toast.LENGTH_SHORT).show();
             }
         });
