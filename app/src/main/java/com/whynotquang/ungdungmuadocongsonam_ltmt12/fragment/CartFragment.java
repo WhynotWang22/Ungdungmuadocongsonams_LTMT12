@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.CheckOutActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CartAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
@@ -64,7 +65,6 @@ public class CartFragment extends Fragment {
         titleNoCart = (TextView) view.findViewById(R.id.titleNoCart);
         ///
         tv_total_product_cart = (TextView) view.findViewById(R.id.tv_total_product_cart);
-        tvPriceDeliveryCart = (TextView) view.findViewById(R.id.tv_price_delivery_cart);
         tvTotalCart = (TextView) view.findViewById(R.id.tv_total_cart);
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout_cart);
         layoutCart = (LinearLayout) view.findViewById(R.id.layout_cart);
@@ -105,8 +105,6 @@ public class CartFragment extends Fragment {
                     productList.addAll(response.body().getProducts());
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
                     tv_total_product_cart.setText(decimalFormat.format(response.body().getTotal()) + "đ");
-                    giatien = response.body().getTotal();
-                    giatien += 15000;
                     tvTotalCart.setText(decimalFormat.format(giatien) + "đ");
                     Log.d("eee", "eee" + giatien);
                     iconNoCart.setVisibility(View.GONE);
@@ -129,52 +127,9 @@ public class CartFragment extends Fragment {
     }
 
     private void PostCartCheckout() {
-        List<ProductAddCart> productAddCartList;
-        productAddCartList = new ArrayList<>();
-        SharedPreferences sp = getContext().getSharedPreferences("Login", MODE_PRIVATE);
-        String token = sp.getString("token", "");
-        Retrofit retrofit1 = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "cart/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService1 = retrofit1.create(ApiService.class);
-        Call<ProductAddCart> call1 = apiService1.getlistCart(token);
-        call1.enqueue(new Callback<ProductAddCart>() {
-            @Override
-            public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
-                if (response.body() != null) {
-                    productAddCartList.add(response.body());
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(AppConstain.BASE_URL + "order/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    ApiService apiService = retrofit.create(ApiService.class);
-                    Call<List<ProductAddCart>> call2 = apiService.PostCartAddOrder(token, productAddCartList.get(0).get_id());
-                    call2.enqueue(new Callback<List<ProductAddCart>>() {
-                        @Override
-                        public void onResponse(Call<List<ProductAddCart>> call, Response<List<ProductAddCart>> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getContext(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<ProductAddCart>> call, Throwable t) {
-                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductAddCart> call, Throwable t) {
-                Toast.makeText(getContext(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
+    Intent i = new Intent(getActivity(), CheckOutActivity.class);
+    i.putExtra("key",tv_total_product_cart.getText().toString());
+    startActivity(i);
 
     }
 
