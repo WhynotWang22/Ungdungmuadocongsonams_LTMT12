@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
-import com.orhanobut.hawk.Hawk;
 import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
@@ -78,10 +77,6 @@ public class ChitietActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        ///
-        Hawk.init(this).build();
-        Hawk.put("id", id);
-
         getDataProduct();
         Log.d("eeeee","eeeeee" + id);
 
@@ -154,7 +149,7 @@ public class ChitietActivity extends AppCompatActivity {
 
     public void getDataProduct() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/products/")
+                .baseUrl(AppConstain.BASE_URL + "products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

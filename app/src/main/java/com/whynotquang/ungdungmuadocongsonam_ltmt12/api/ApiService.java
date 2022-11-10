@@ -11,6 +11,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -22,6 +23,7 @@ import retrofit2.http.Path;
 public interface ApiService {
     @GET("getall")
     Call<List<Banner>> getBanner();
+
     @GET("getall")
     Call<List<Product>> getProduct();
 
@@ -44,14 +46,15 @@ public interface ApiService {
     @FormUrlEncoded
     @PUT("change-password")
     Call<ResponseUser> updateExcute(
-            @Field("oldPassword")String oldPassword,
+            @Field("oldPassword") String oldPassword,
             @Field("newPassword") String newPassword,
             @Header("Authorization") String authtoken
     );
+
     //login
     @FormUrlEncoded
     @POST("login")
-    Call<User> postLogin(@Field("email") String email,@Field("password") String password);
+    Call<User> postLogin(@Field("email") String email, @Field("password") String password);
 
     ///register
     @POST("register")
@@ -61,18 +64,19 @@ public interface ApiService {
                             @Field("phone_number") String phone_number,
                             @Field("password") String password,
                             @Field("address") String diachi
-                            );
+    );
 
     ///change pass after send link to your email
     @FormUrlEncoded
     @POST("forgot-password")
     Call<User> postSendEmail(
             @Field("email") String email,
-            @Header("Authorization")String authtoken);
+            @Header("Authorization") String authtoken);
 
     //get profile
     @GET("profile")
     Call<User> getProfile(@Header("Authorization") String authtoken);
+
     //logout
     @POST("logout")
     Call<User> postLogout(@Header("Authorization") String authtoken);
@@ -91,19 +95,28 @@ public interface ApiService {
     ///get list cart
     @GET("list")
     Call<ProductAddCart> getlistCart(@Header("Authorization")
-                                       String authtoken);
-
+                                             String authtoken);
 
 
     ///delete item cart
-    @FormUrlEncoded
-    @POST("delete")
-    Call<List<Products>> deletelistCart
-    (@Field("id") String id);
+    @DELETE("delete/{itemId}")
+    Call<List<Products>> deletelistCart(@Header("Authorization") String authtoken,
+                                        @Path("itemId") String itemId);
 
 
     ////tang so luong item cart
-    @POST("add")
-    Call<Products> PostItemCart(String productId);
+    @FormUrlEncoded
+    @PUT("update/{itemId}")
+    Call<List<Products>> PostUpdateItemCart(@Header("Authorization") String authtoken,
+                                            @Path("itemId") String itemId,
+                                            @Field("quantity") int quantity
+    );
+
+    ///add order
+    @POST("createCashOrder/{cartId}")
+    Call<List<ProductAddCart>> PostCartAddOrder(@Header("Authorization") String authtoken,
+                                                @Path("cartId") String cartId
+    );
+
 
 }

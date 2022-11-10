@@ -50,7 +50,6 @@ public class ProductCategoryActivity extends AppCompatActivity {
                 .baseUrl(AppConstain.BASE_URL + "categorys/" )
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         ApiService apiService = retrofit.create(ApiService.class);
         Call<List<Product>> call = apiService.getAllproductbycategory(id);
         call.enqueue(new Callback<List<Product>>() {

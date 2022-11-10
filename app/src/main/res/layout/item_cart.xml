@@ -60,12 +60,6 @@
                         android:text="Adidas eeeeeeeeee"
                         android:textColor="@color/mauchu"
                         android:textSize="14dp" />
-                    <TextView
-                        android:text="aaaaa"
-                        android:id="@+id/tv_id_test"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,7 +139,6 @@
                                 android:layout_width="20dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:background="@color/white"
                                 android:textColor="@color/black"
                                 android:focusable="false"
                                 android:fontFamily="@font/interbold"

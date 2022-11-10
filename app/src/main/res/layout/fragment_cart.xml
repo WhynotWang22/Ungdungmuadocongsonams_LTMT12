@@ -157,7 +157,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/bg_button"
-                    android:text="Thanh Toán"
+                    android:text="Đặt Hàng"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>

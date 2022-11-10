@@ -58,5 +58,4 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    implementation 'com.orhanobut:hawk:2.0.1'
 }

@@ -1,7 +1,8 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.CallBack_Update_Delete;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CartAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -39,14 +39,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class CartFragment extends Fragment {
-    private static CallBack_Update_Delete callBackUpdateDelete;
     double giatien = 0;
     String id;
     RecyclerView rc_cart;
     private CartAdapter cartAdapter;
-    private Bundle bundle;
     List<Products> productList;
-    List<Products> productDeleteCart;
     private ImageView iconNoCart;
     private TextView titleNoCart;
     private TextView tv_total_product_cart;
@@ -73,20 +70,20 @@ public class CartFragment extends Fragment {
         layoutCart = (LinearLayout) view.findViewById(R.id.layout_cart);
         Intent intent = getActivity().getIntent();
         id = intent.getStringExtra("id");
-
-
-//        id = Hawk.get("id");
-
         getdataCart();
-        callback();
+        btnCheckoutCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PostCartCheckout();
+            }
+        });
         return view;
     }
 
 
     private void getdataCart() {
-        SharedPreferences sp = getContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        SharedPreferences sp = getContext().getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
-//        Log.d("eeee", token);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "cart/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -99,7 +96,7 @@ public class CartFragment extends Fragment {
                 if (response.body() != null) {
                     ///set recyclerview
                     productList = new ArrayList<>();
-                    CartAdapter cartAdapter = new CartAdapter(productList, getContext(), callBackUpdateDelete);
+                    CartAdapter cartAdapter = new CartAdapter(productList, getContext());
                     rc_cart.setAdapter(cartAdapter);
                     cartAdapter.notifyDataSetChanged();
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -107,25 +104,19 @@ public class CartFragment extends Fragment {
                     //add item
                     productList.addAll(response.body().getProducts());
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-//                    tvTotalCart.setText(decimalFormat.format(response.body().getProducts().get(0).getPrice()) + "đ");
                     tv_total_product_cart.setText(decimalFormat.format(response.body().getTotal()) + "đ");
                     giatien = response.body().getTotal();
                     giatien += 15000;
                     tvTotalCart.setText(decimalFormat.format(giatien) + "đ");
-
                     Log.d("eee", "eee" + giatien);
-                    //an text
                     iconNoCart.setVisibility(View.GONE);
                     titleNoCart.setVisibility(View.GONE);
-
 
                 } else {
                     Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
                     iconNoCart.setVisibility(View.VISIBLE);
                     titleNoCart.setVisibility(View.VISIBLE);
                     layoutCart.setVisibility(View.GONE);
-                    //
-
                 }
             }
 
@@ -137,37 +128,55 @@ public class CartFragment extends Fragment {
         });
     }
 
-    public void callback() {
-        callBackUpdateDelete = new CallBack_Update_Delete() {
+    private void PostCartCheckout() {
+        List<ProductAddCart> productAddCartList;
+        productAddCartList = new ArrayList<>();
+        SharedPreferences sp = getContext().getSharedPreferences("Login", MODE_PRIVATE);
+        String token = sp.getString("token", "");
+        Retrofit retrofit1 = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "cart/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService1 = retrofit1.create(ApiService.class);
+        Call<ProductAddCart> call1 = apiService1.getlistCart(token);
+        call1.enqueue(new Callback<ProductAddCart>() {
             @Override
-            public void onclickDelete(Products products) {
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(AppConstain.BASE_URL + "cart/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                ApiService apiService = retrofit.create(ApiService.class);
-                Call<List<Products>> call = apiService.deletelistCart(id);
-                Log.d("eeeee", "eeeeeeeee" + id);
-                call.enqueue(new Callback<List<Products>>() {
-                    @Override
-                    public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
-                        Toast.makeText(getContext(), "thanh cong", Toast.LENGTH_SHORT).show();
-                    }
+            public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
+                if (response.body() != null) {
+                    productAddCartList.add(response.body());
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl(AppConstain.BASE_URL + "order/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    ApiService apiService = retrofit.create(ApiService.class);
+                    Call<List<ProductAddCart>> call2 = apiService.PostCartAddOrder(token, productAddCartList.get(0).get_id());
+                    call2.enqueue(new Callback<List<ProductAddCart>>() {
+                        @Override
+                        public void onResponse(Call<List<ProductAddCart>> call, Response<List<ProductAddCart>> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                    @Override
-                    public void onFailure(Call<List<Products>> call, Throwable t) {
-                        Toast.makeText(getContext(), "that bai", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<List<ProductAddCart>> call, Throwable t) {
+                            Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
 
             @Override
-            public void tong(int tong) {
-                DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-                tv_total_product_cart.setText(decimalFormat.format(tong) + "đ");
-                tong += 15000;
-                tvTotalCart.setText(decimalFormat.format(tong) + "đ");
+            public void onFailure(Call<ProductAddCart> call, Throwable t) {
+                Toast.makeText(getContext(), "Thêm không thành công", Toast.LENGTH_SHORT).show();
+
             }
-        };
+        });
+
+
     }
+
 }
+
