@@ -64,13 +64,12 @@ public class ChitietActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chitiet);
         tv_title_product_chitiet = findViewById(R.id.tv_title_product_chitiet);
         tv_price_product_chitiet = findViewById(R.id.tv_price_product_chitiet);
+        tv_so_luot_review = findViewById(R.id.tv_so_luot_review);
         img_product = findViewById(R.id.img_product);
         cardview_img = findViewById(R.id.cardview_img);
         recyclerView_size = findViewById(R.id.rc_view_size);
         btn_themsanpham = findViewById(R.id.btn_themsanpham);
         tv_chitietsanpham = findViewById(R.id.tv_chitietsanpham);
-
-
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_chitietsp);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -79,8 +78,7 @@ public class ChitietActivity extends AppCompatActivity {
         id = intent.getStringExtra("id");
         getDataProduct();
         Log.d("eeeee","eeeeee" + id);
-
-
+        reviews();
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
 
@@ -90,6 +88,17 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 postAddCart();
+            }
+        });
+    }
+
+    private void reviews() {
+        tv_so_luot_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
+                i.putExtra("id", id);
+                startActivity(i);
             }
         });
     }

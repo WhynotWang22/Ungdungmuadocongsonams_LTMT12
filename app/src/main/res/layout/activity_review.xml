@@ -93,60 +93,23 @@
         android:textSize="14dp"
         android:paddingLeft="32dp"
         android:layout_marginTop="30dp"/>
+
     <RatingBar
-        android:layout_width="match_parent"
+        android:id="@+id/ratingbar"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_below="@+id/tv_product_review"
-        android:id="@+id/ratingbar"
-        android:layout_marginLeft="32dp"
+        android:layout_centerInParent="true"
+        android:foregroundGravity="center"
+        android:layout_marginLeft="22dp"
         android:layout_marginTop="14dp"
         android:layout_marginRight="32dp"
-        android:layout_centerInParent="true"
+        android:progressTint="@color/rating"
         android:numStars="5"
         android:rating="5" />
     <TextView
-        android:id="@+id/tv_product_review2"
-        android:layout_below="@+id/ratingbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/interbold"
-        android:text="Thêm một số hình ảnh"
-        android:textColor="@color/mauchu"
-        android:textSize="14dp"
-        android:paddingLeft="32dp"
-        android:layout_marginTop="30dp"/>
-    <RelativeLayout
-        android:id="@+id/relativeLayout_img"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_below="@+id/tv_product_review2"
-        android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="14dp"
-        android:gravity="center"
-        android:background="@drawable/bg_img_review">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="64dp"
-                android:id="@+id/img_review"
-                android:src="@drawable/img"/>
-            <TextView
-                android:id="@+id/tv_img_review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Thêm ảnh"
-                android:layout_gravity="center"
-                android:layout_marginLeft="12dp"/>
-        </LinearLayout>
-
-    </RelativeLayout>
-    <TextView
         android:id="@+id/tv_product_review3"
-        android:layout_below="@+id/relativeLayout_img"
+        android:layout_below="@+id/ratingbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/interbold"
@@ -154,7 +117,7 @@
         android:textColor="@color/mauchu"
         android:textSize="14dp"
         android:paddingLeft="32dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="100dp"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="128dp"
@@ -179,4 +142,13 @@
         android:fontFamily="@font/interbold"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="62dp"/>
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit_comments"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/color_progressbar"
+        android:layout_centerInParent="true" />
 </RelativeLayout>

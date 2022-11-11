@@ -69,7 +69,7 @@ public class ChangesAdressActivity extends AppCompatActivity {
             return;
         }
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.7:3000/api/auth/")
+                .baseUrl("http://192.168.1.174:3000/api/auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -78,15 +78,9 @@ public class ChangesAdressActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
-//                    User userAPi = response.body();
-////                           token = String.valueOf(userAPi.getUser().token);
                     if (token != null) {
                         SharedPreferences sp = getSharedPreferences("change-password", MODE_PRIVATE);
                         SharedPreferences.Editor Ed = sp.edit();
-                        Ed.putString("token", token);
-                        Ed.putString("newAdress", newAdress);
-                        Ed.putString("xnnewAdress", xnnewAdress);
-                        Ed.commit();
                         Toast.makeText(ChangesAdressActivity.this, "Đổi Thất Bại", Toast.LENGTH_SHORT).show();
 
                     } else {
