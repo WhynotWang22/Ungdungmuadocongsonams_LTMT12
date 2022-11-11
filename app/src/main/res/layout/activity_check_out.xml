@@ -93,6 +93,7 @@
                     android:id="@+id/radio_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/interbold"
                     android:text="Nhà"
@@ -138,9 +139,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="90dp"
                 android:fontFamily="@font/intermedium"
                 android:text="Thêm"
+                android:textSize="12dp"
                 android:textColor="@color/mauchu" />
         </LinearLayout>
 
@@ -149,28 +151,23 @@
             android:layout_height="110dp"
             android:layout_gravity="center"
             android:layout_marginTop="22dp"
-            app:cardBackgroundColor="@color/mauchu"
             app:cardCornerRadius="15dp">
-
+             <ImageView
+                 android:layout_width="match_parent"
+                 android:scaleType="fitXY"
+                 android:layout_height="match_parent"
+                 android:src="@drawable/mof_delivery"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="80dp"
                 android:layout_marginTop="-20dp"
                 android:fontFamily="@font/interbold"
-                android:text="Mastercard Platinum"
+                android:text="Thanh Toán Khi Nhận Hàng"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/interbold"
-                android:text="... .... .... 567"
-                android:textColor="@color/white"
-                android:textSize="15dp" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
@@ -200,13 +197,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/radio_1"
-                android:layout_marginLeft="61dp"
                 android:id="@+id/tv_checkoutdiachi"
-                android:layout_marginTop="42dp"
                 android:fontFamily="@font/intermedium"
                 android:text="Sản phẩm"
                 android:textColor="@color/mauchu2"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                tools:ignore="DuplicateIds,NotSibling" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -228,7 +224,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
-                android:text="Tổng"
+                android:text="Tổng Tiền"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />
 

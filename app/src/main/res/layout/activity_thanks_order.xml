@@ -26,9 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-
             android:text="Đơn đặt hàng của bạn đã được chấp thuận."
-
             android:textColor="@color/white"
             android:textSize="14dp"
             android:layout_marginTop="16dp"/>
@@ -36,36 +34,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-
             android:text="Bạn sẽ sớm nhận được một email chấp nhận."
-
             android:textColor="@color/white"
             android:textSize="14dp"
             android:layout_marginTop="2dp"/>
 
         <Button
+            android:id="@+id/btn_tieptucmuasam"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/btn_login"
-            android:text="Tiếp tục mua sắm"
-            android:background="@drawable/bg_ed_pass"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:layout_marginTop="32dp"
-
-            android:textSize="16dp"
-            android:textColor="@color/black"
-            android:textAllCaps="false"
-            android:fontFamily="@font/interbold"
             android:layout_alignParentBottom="true"
-            />
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/bg_ed_pass"
+            android:fontFamily="@font/interbold"
+            android:text="Tiếp tục mua sắm"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-
             android:text="Xem đơn hàng  "
-
             android:textColor="@color/white"
             android:textSize="14dp"
             android:layout_marginTop="30.5dp"/>

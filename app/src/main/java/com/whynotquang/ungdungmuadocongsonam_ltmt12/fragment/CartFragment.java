@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.CheckOutActivity;
@@ -52,7 +55,7 @@ public class CartFragment extends Fragment {
     private TextView tvTotalCart;
     private Button btnCheckoutCart, btnvalues;
     private LinearLayout layoutCart;
-
+    private ProgressBar progressBar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -68,6 +71,11 @@ public class CartFragment extends Fragment {
         tvTotalCart = (TextView) view.findViewById(R.id.tv_total_cart);
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout_cart);
         layoutCart = (LinearLayout) view.findViewById(R.id.layout_cart);
+        progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
+        progressBar.setVisibility(View.GONE);
+
         Intent intent = getActivity().getIntent();
         id = intent.getStringExtra("id");
         getdataCart();
@@ -127,10 +135,9 @@ public class CartFragment extends Fragment {
     }
 
     private void PostCartCheckout() {
-    Intent i = new Intent(getActivity(), CheckOutActivity.class);
-    i.putExtra("key",tv_total_product_cart.getText().toString());
-    startActivity(i);
-
+        Intent i = new Intent(getActivity(), CheckOutActivity.class);
+        i.putExtra("key", tv_total_product_cart.getText().toString());
+        startActivity(i);
     }
 
 }

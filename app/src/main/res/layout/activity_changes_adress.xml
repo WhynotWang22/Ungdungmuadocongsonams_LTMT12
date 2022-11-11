@@ -38,45 +38,80 @@
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="855dp"
-        android:orientation="vertical"
+        android:layout_below="@+id/relativeLayout_number"
+        android:layout_marginTop="0dp"
         android:background="@color/layout_checkout"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout_number"
-        app:layout_constraintVertical_bias="0.5"
-        android:layout_below="@+id/relativeLayout_number">
+        app:layout_constraintVertical_bias="0.5">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="32dp"
+            android:layout_marginTop="14dp"
             android:fontFamily="@font/interbold"
+            android:paddingLeft="32dp"
             android:text="Địa chỉ nhận hàng mới"
             android:textColor="@color/mauchu"
-            android:textSize="14dp"
-            android:layout_marginTop="14dp"/>
+            android:textSize="14dp" />
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
             android:id="@+id/ed_diachi_moi"
-            android:hint="FPT Poly-Nam Từ Liêm-Hà Nội"
-            android:background="@drawable/bg_ed_pass"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
             android:layout_marginLeft="32dp"
+            android:layout_marginTop="6dp"
             android:layout_marginRight="32dp"
-            android:layout_marginTop="6dp" />
+            android:background="@drawable/bg_ed_pass"
+            android:hint="FPT Poly-Nam Từ Liêm-Hà Nội"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/interbold"
+            android:paddingLeft="32dp"
+            android:text="Xác Nhận Địa chỉ nhận hàng mới"
+            android:textColor="@color/mauchu"
+            android:textSize="14dp" />
+
+        <EditText
+            android:id="@+id/ed_xacnhandiachi_moi"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/bg_ed_pass"
+            android:hint="FPT Poly-Nam Từ Liêm-Hà Nội"
+            android:textSize="14dp" />
     </LinearLayout>
+
     <Button
+        android:id="@+id/btn_change_adress"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:id="@+id/btn_change_adress"
-        android:text="Đổi địa chỉ"
-        android:background="@drawable/bg_button"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
+        android:layout_marginBottom="62dp"
+        android:background="@drawable/bg_button"
         android:fontFamily="@font/interbold"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="62dp"/>
+        android:text="Đổi địa chỉ"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit_changeAdress"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/color_progressbar" />
 </RelativeLayout>

@@ -1,8 +1,5 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.sprite.Sprite;
@@ -28,7 +27,6 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.RealPathUtil;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
 import java.io.File;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
@@ -165,8 +163,8 @@ public class ProfileActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body()!=null) {
                     progressBar.setVisibility(View.GONE);
                     ed_email_profile.setText(response.body().getEmail());
-                    ed_hoten_profile.setText(response.body().getFull_name());
-                    ed_sdt_profile.setText(Integer.toString(response.body().getPhone_number()));
+                    ed_hoten_profile.setText(response.body().getFullName());
+                    ed_sdt_profile.setText(Integer.toString(response.body().getPhoneNumber()));
                     ed_diachi_profile.setText(response.body().getAddress());
                     linkimg = response.body().getAvatar();
                     Glide.with(ProfileActivity.this).load(response.body().getAvatar()).into(img_profile);

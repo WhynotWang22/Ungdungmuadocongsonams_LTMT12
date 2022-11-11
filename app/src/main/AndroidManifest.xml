@@ -16,16 +16,18 @@
         <activity
             android:name=".activity.CheckOutActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.ChangesAdressActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".activity.ImageProductActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <activity
             android:name=".activity.ProductCategoryActivity"
