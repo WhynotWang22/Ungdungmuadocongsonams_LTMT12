@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5E5E5"
+    android:background="#F5F5F5"
     tools:context=".activity.ChangePasswordActivity">
 
     <RelativeLayout
@@ -127,6 +127,7 @@
                 android:textColor="@color/mauchu2"
                 android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_so_sanpham"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
@@ -147,6 +148,7 @@
                 android:textColor="@color/mauchu2"
                 android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_gia_checkout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
@@ -167,6 +169,7 @@
                 android:textColor="@color/mauchu2"
                 android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_fee_ship_checkout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
@@ -187,6 +190,7 @@
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_tongtien_checkout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/interbold"
@@ -209,4 +213,15 @@
         android:text="Thanh toán"
         android:textAllCaps="false"
         android:textColor="@color/white" />
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit_checkout"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/color_progressbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 </RelativeLayout>

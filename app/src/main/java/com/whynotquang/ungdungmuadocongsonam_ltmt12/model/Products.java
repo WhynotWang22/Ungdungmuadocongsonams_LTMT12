@@ -2,21 +2,25 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.model;
 
 public class Products {
     public String productId;
-    public String color;
+    public String title;
+    public int price;
     public String size;
+    public String color;
     public int quantity;
-    public int amount;
+    public String ProductIMG;
     public String _id;
 
     public Products() {
     }
 
-    public Products(String productId, String color, String size, int quantity, int amount, String _id) {
+    public Products(String productId, String title, int price, String size, String color, int quantity, String productIMG, String _id) {
         this.productId = productId;
-        this.color = color;
+        this.title = title;
+        this.price = price;
         this.size = size;
+        this.color = color;
         this.quantity = quantity;
-        this.amount = amount;
+        ProductIMG = productIMG;
         this._id = _id;
     }
 
@@ -28,12 +32,20 @@ public class Products {
         this.productId = productId;
     }
 
-    public String getColor() {
-        return color;
+    public String getTitle() {
+        return title;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getSize() {
@@ -44,6 +56,14 @@ public class Products {
         this.size = size;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -52,12 +72,12 @@ public class Products {
         this.quantity = quantity;
     }
 
-    public int getAmount() {
-        return amount;
+    public String getProductIMG() {
+        return ProductIMG;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setProductIMG(String productIMG) {
+        ProductIMG = productIMG;
     }
 
     public String get_id() {

@@ -110,7 +110,7 @@ public class ChitietActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Products> call = apiService.postCart(token,idProduct,color,size,soluong,tongtien);
+        Call<Products> call = apiService.postCart(token,idProduct,soluong,size,color);
         call.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
@@ -126,7 +126,7 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(ChitietActivity.this, "Loi api add cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChitietActivity.this, "Lỗi api không thêm được vào giỏ hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }

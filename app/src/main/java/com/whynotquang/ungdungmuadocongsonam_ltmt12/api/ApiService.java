@@ -1,7 +1,9 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ResponseUser;
@@ -12,6 +14,7 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -62,11 +65,9 @@ public interface ApiService {
     @POST("add")
     Call<Products> postCart(@Header("Authorization") String authtoken,
                             @Field("productId") String productId,
-                            @Field("color") String color,
-                            @Field("size") String size,
                             @Field("quantity") int quantity,
-                            @Field("amount") int amount
-    );
+                            @Field("size") String size,
+                            @Field("color") String color);
     //update sdt
     @FormUrlEncoded
     @PUT("edit-phone-number")
@@ -83,8 +84,20 @@ public interface ApiService {
                               @Part("address") RequestBody diachi,
                               @Part MultipartBody.Part avatar
     );
+    //get list cart
+    @GET("list")
+    Call<Cart> getCart(@Header("Authorization") String authtoken);
+    //delete cart
+    @DELETE("delete/{id}")
+    Call<Products> deleteCart(@Header("Authorization") String authtoken,@Path("id") String id);
+    //update soluong
+    @FormUrlEncoded
+    @PUT("update/{id}")
+    Call<Products> updateCart(@Header("Authorization") String authtoken,@Path("id") String id,@Field("quantity") int quantity);
 
-
+    @POST("createCashOrder/{id}")
+    Call<Order> postOrder(@Header("Authorization") String authtoken,
+                          @Path("id") String id);
 
 
     ////changePassword
