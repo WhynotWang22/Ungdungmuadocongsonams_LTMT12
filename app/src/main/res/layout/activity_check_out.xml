@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/layout_checkout"
-    tools:context=".activity.CheckOutActivity">
+    android:background="#F5F5F5"
+    tools:context=".activity.ChangePasswordActivity">
 
     <RelativeLayout
-        android:id="@+id/relativeCheck_out2"
+        android:id="@+id/relativeLayout_number"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
@@ -16,230 +16,190 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
-        <ImageView
-            android:id="@+id/btnback_Check_out"
+        <ImageButton
+            android:id="@+id/btnback_change_number"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
+            android:background="@color/white"
             android:src="@drawable/btnback" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:fontFamily="@font/interbold"
-            android:text="Thanh Toán"
+            android:text="Thanh toán"
             android:textColor="@color/mauchu"
             android:textSize="16dp" />
+
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/layout_checkout1"
         android:layout_width="match_parent"
-        android:layout_height="21dp"
-        android:layout_below="@+id/relativeCheck_out2"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:fontFamily="@font/interbold"
-            android:text="Địa chỉ giao hàng"
-            android:textColor="@color/mauchu"
-            android:textSize="14dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
-            android:fontFamily="@font/intermedium"
-            android:text="Thêm địa chỉ mới"
-            android:id="@+id/tv_checkout_themdiachi"
-            android:textColor="@color/mauchu"
-            android:textSize="12dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_Check_out2"
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_below="@+id/layout_checkout1"
-        android:layout_marginTop="32dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout_number"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeCheck_out2"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout_number"
         app:layout_constraintVertical_bias="0.5">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="330dp"
-            android:layout_height="110dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="15dp">
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="345dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp">
-
-                <RadioButton
-                    android:id="@+id/radio_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/interbold"
-                    android:text="Nhà"
-                    android:textColor="@color/mauchu" />
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/radio_1"
-                android:layout_marginLeft="61dp"
-                android:id="@+id/tv_checkoutdiachi"
-                android:layout_marginTop="42dp"
-                android:fontFamily="@font/intermedium"
-                android:text="FPT Polytechnic Ha Noi"
-                android:textSize="12dp" />
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout3"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/layout_Check_out2"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="18dp"
-            android:layout_below="@+id/layout3"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            android:orientation="horizontal">
-
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="32dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:fontFamily="@font/interbold"
+                android:text="Địa chỉ giao hàng"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intermedium"
+                android:text="Thêm địa chỉ mới"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="232dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="22dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="32dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/interbold"
                 android:text="Phương thức thanh toán"
-                android:textColor="@color/mauchu" />
-
+                android:textColor="@color/mauchu"
+                android:textSize="14dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
                 android:fontFamily="@font/intermedium"
                 android:text="Thêm"
-                android:textSize="12dp"
-                android:textColor="@color/mauchu" />
-        </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="330dp"
-            android:layout_height="110dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="22dp"
-            app:cardCornerRadius="15dp">
-             <ImageView
-                 android:layout_width="match_parent"
-                 android:scaleType="fitXY"
-                 android:layout_height="match_parent"
-                 android:src="@drawable/mof_delivery"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="-20dp"
-                android:fontFamily="@font/interbold"
-                android:text="Thanh Toán Khi Nhận Hàng"
-                android:textColor="@color/white"
-                android:textSize="14dp" />
-
-        </androidx.cardview.widget.CardView>
+                android:textColor="@color/mauchu"
+                android:textSize="14dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_above="@+id/btn_thanhtoan"
-        android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="44dp"
-        android:orientation="vertical">
-
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="44dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interbold"
             android:text="Thông tin đặt hàng"
             android:textColor="@color/mauchu"
-            android:textSize="14dp" />
-
+            android:textSize="14dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/radio_1"
-                android:id="@+id/tv_checkoutdiachi"
                 android:fontFamily="@font/intermedium"
                 android:text="Sản phẩm"
                 android:textColor="@color/mauchu2"
-                android:textSize="14dp"
-                tools:ignore="DuplicateIds,NotSibling" />
-
+                android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_so_sanpham"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:fontFamily="@font/intermedium"
                 android:text="3 sản phẩm"
-                android:id="@+id/tv_checkout_tongsp"
                 android:textColor="@color/mauchu"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
-                android:text="Tổng Tiền"
+                android:text="Giá"
+                android:textColor="@color/mauchu2"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/tv_gia_checkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intermedium"
+                android:text="975.000đ"
                 android:textColor="@color/mauchu"
-                android:textSize="14dp" />
-
+                android:textSize="14dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:fontFamily="@font/interbold"
-                android:text="1.415.000đ"
-                android:id="@+id/tv_checkout_tongtien"
+                android:fontFamily="@font/intermedium"
+                android:text="Phí vận chuyển"
+                android:textColor="@color/mauchu2"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/tv_fee_ship_checkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intermedium"
+                android:text="15.000đ"
                 android:textColor="@color/mauchu"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intermedium"
+                android:text="Tổng"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp"/>
+            <TextView
+                android:id="@+id/tv_tongtien_checkout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/interbold"
+                android:text="999.000đ"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp"
+                android:layout_alignParentRight="true"/>
         </RelativeLayout>
     </LinearLayout>
-
     <Button
         android:id="@+id/btn_thanhtoan"
         android:layout_width="match_parent"
@@ -253,4 +213,15 @@
         android:text="Thanh toán"
         android:textAllCaps="false"
         android:textColor="@color/white" />
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit_checkout"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/color_progressbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 </RelativeLayout>

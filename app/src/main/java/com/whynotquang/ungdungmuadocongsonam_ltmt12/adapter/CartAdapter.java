@@ -2,6 +2,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -43,6 +44,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
         this.productsList = productsList;
         this.context = context;
     }
+    protected void refreshData(int position){
+        productsList.remove(position);
+        notifyDataSetChanged ();
+    }
 
     @NonNull
     @Override
@@ -53,7 +58,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartAdapter.Viewholoder holder, int position) {
+    public void onBindViewHolder(@NonNull CartAdapter.Viewholoder holder, @SuppressLint("RecyclerView") int position) {
         sp = context.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         token = sp.getString("token", "");
         Products product = productsList.get(position);
@@ -69,6 +74,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
         holder.layout_delete_item_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "cart/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -80,6 +86,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
                     @Override
                     public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                         Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+
+
                     }
 
                     @Override
@@ -88,8 +96,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
 
                     }
                 });
-
+                refreshData(position);
             }
+
 
         });
 
@@ -190,6 +199,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
 
             }
         });
+//        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
@@ -225,5 +235,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
 
 
         }
+
     }
 }

@@ -136,7 +136,7 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(ChitietActivity.this, "Loi api add cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChitietActivity.this, "Lỗi api không thêm được vào giỏ hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }

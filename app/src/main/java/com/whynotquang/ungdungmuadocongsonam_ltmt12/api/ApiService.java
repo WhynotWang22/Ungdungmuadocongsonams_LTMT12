@@ -1,7 +1,10 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
@@ -155,5 +158,15 @@ public interface ApiService {
                                      @Path("id") String id,
                                      @Field("ratingStar") Float ratingStar,
                                      @Field("commentDes") String commentDes);
+    //get list cart
+    @GET("list")
+    Call<Cart> getCart(@Header("Authorization") String authtoken);
+
+    @POST("createCashOrder/{id}")
+    Call<Order> postOrder(@Header("Authorization") String authtoken,
+                             @Path("id") String id
+    );
+    @GET("getall")
+    Call<List<Notification>> getNoti();
 
 }

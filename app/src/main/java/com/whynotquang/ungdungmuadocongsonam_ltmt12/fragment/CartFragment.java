@@ -63,22 +63,25 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
-        rc_cart = view.findViewById(R.id.rc_cart);
-        iconNoCart = (ImageView) view.findViewById(R.id.iconNoCart);
-        titleNoCart = (TextView) view.findViewById(R.id.titleNoCart);
+        rc_cart = view.findViewById(R.id.rc_view_gio_hang);
+//        iconNoCart = (ImageView) view.findViewById(R.id.iconNoCart);
+//        titleNoCart = (TextView) view.findViewById(R.id.titleNoCart);
         ///
-        tv_total_product_cart = (TextView) view.findViewById(R.id.tv_total_product_cart);
-        tvTotalCart = (TextView) view.findViewById(R.id.tv_total_cart);
-        btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout_cart);
-        layoutCart = (LinearLayout) view.findViewById(R.id.layout_cart);
-        progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
+//        tv_total_product_cart = (TextView) view.findViewById(R.id.tv_tongtien);
+        tvTotalCart = (TextView) view.findViewById(R.id.tv_tongtien);
+        btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout);
+//        layoutCart = (LinearLayout) view.findViewById(R.id.layout_cart);
+//        progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
         Sprite threeBounce = new ThreeBounce();
-        progressBar.setIndeterminateDrawable(threeBounce);
-        progressBar.setVisibility(View.GONE);
+//        progressBar.setIndeterminateDrawable(threeBounce);
+//        progressBar.setVisibility(View.GONE);
 
         Intent intent = getActivity().getIntent();
         id = intent.getStringExtra("id");
+
         getdataCart();
+
+
         btnCheckoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +93,8 @@ public class CartFragment extends Fragment {
 
 
     private void getdataCart() {
+
+
         SharedPreferences sp = getContext().getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
         Retrofit retrofit = new Retrofit.Builder()
@@ -105,40 +110,47 @@ public class CartFragment extends Fragment {
                     ///set recyclerview
                     productList = new ArrayList<>();
                     CartAdapter cartAdapter = new CartAdapter(productList, getContext());
-                    rc_cart.setAdapter(cartAdapter);
                     cartAdapter.notifyDataSetChanged();
+                    rc_cart.setAdapter(cartAdapter);
+
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     rc_cart.setLayoutManager(linearLayoutManager);
                     //add item
                     productList.addAll(response.body().getProducts());
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-                    tv_total_product_cart.setText(decimalFormat.format(response.body().getTotal()) + "đ");
+//                    tv_total_product_cart.setText(decimalFormat.format(response.body().getTotal()) + "đ");
                     tvTotalCart.setText(decimalFormat.format(giatien) + "đ");
                     Log.d("eee", "eee" + giatien);
-                    iconNoCart.setVisibility(View.GONE);
-                    titleNoCart.setVisibility(View.GONE);
+//                    iconNoCart.setVisibility(View.GONE);
+//                    titleNoCart.setVisibility(View.GONE);
+
+
 
                 } else {
                     Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
-                    iconNoCart.setVisibility(View.VISIBLE);
-                    titleNoCart.setVisibility(View.VISIBLE);
-                    layoutCart.setVisibility(View.GONE);
+//                    iconNoCart.setVisibility(View.VISIBLE);
+//                    titleNoCart.setVisibility(View.VISIBLE);
+//                    layoutCart.setVisibility(View.GONE);
                 }
+                rc_cart.getAdapter().notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<ProductAddCart> call, Throwable t) {
                 Toast.makeText(getContext(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
-                layoutCart.setVisibility(View.GONE);
+//                layoutCart.setVisibility(View.GONE);
+
             }
         });
+
     }
 
     private void PostCartCheckout() {
         Intent i = new Intent(getActivity(), CheckOutActivity.class);
-        i.putExtra("key", tv_total_product_cart.getText().toString());
+        i.putExtra("key", tvTotalCart.getText().toString());
         startActivity(i);
     }
+
 
 }
 

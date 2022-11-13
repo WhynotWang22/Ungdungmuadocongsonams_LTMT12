@@ -1,9 +1,16 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Notification {
     public String _id;
     public String title;
+    @SerializedName("body")
+    @Expose
     public String desc;
+    @SerializedName("image")
+    @Expose
     public String images;
     public String time;
 

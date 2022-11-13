@@ -1,22 +1,28 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -29,154 +35,108 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CheckOutActivity extends AppCompatActivity {
-    private String token;
-    private SharedPreferences sp;
-    private TextView tv_checkout_tongtien;
-    private TextView tv_checkout_themdiachi;
-    private TextView tv_checkout_tongsp;
-    private TextView tv_checkoutdiachi;
-    private Button btn_thanhtoan;
-    private  List<Products> productList;
-    @SuppressLint("MissingInflatedId")
+    TextView tv_so_sanpham;
+    TextView tv_gia_checkout;
+    TextView tv_fee_ship_checkout;
+    TextView tv_tongtien_checkout;
+    Button btn_thanhtoan;
+    ProgressBar progressBar;
+    String token;
+    List<Products> productsList;
+    int soluong_sanpham = 0;
+    int feeship = 15000;
+    String id = "";
+    String idUser = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
-        tv_checkout_themdiachi = findViewById(R.id.tv_checkout_themdiachi);
-        tv_checkoutdiachi = findViewById(R.id.tv_checkoutdiachi);
-        tv_checkout_tongtien = findViewById(R.id.tv_checkout_tongtien);
-        tv_checkout_tongsp = findViewById(R.id.tv_checkout_tongsp);
+        tv_so_sanpham = findViewById(R.id.tv_so_sanpham);
+        tv_gia_checkout = findViewById(R.id.tv_gia_checkout);
+        tv_fee_ship_checkout = findViewById(R.id.tv_fee_ship_checkout);
+        tv_tongtien_checkout = findViewById(R.id.tv_tongtien_checkout);
         btn_thanhtoan = findViewById(R.id.btn_thanhtoan);
-        ///get token
-        sp = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
-        token = sp.getString("token", "");
-        tv_checkout_themdiachi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CheckOutActivity.this, ChangesAdressActivity.class);
-                startActivity(intent);
-            }
-        });
+        progressBar = (ProgressBar) findViewById(R.id.spin_kit_checkout);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
+        progressBar.setVisibility(View.VISIBLE);
+        productsList = new ArrayList<>();
+
+        SharedPreferences sp1 = getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        token = sp1.getString("token", "");
+        getData();
         btn_thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postAddOrder();
+                progressBar.setVisibility(View.VISIBLE);
+                postOrder();
             }
         });
-        getDataCart();
-        getAdress(token);
-
-
     }
-
-    private void getDataCart() {
-        SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
-        String token = sp.getString("token", "");
+    public void getData() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "cart/")
+                .baseUrl("https://mofshop.shop/api/cart/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<ProductAddCart> call = apiService.getlistCart(token);
-        call.enqueue(new Callback<ProductAddCart>() {
+        Call<Cart> call = apiService.getCart(token);
+        call.enqueue(new Callback<Cart>() {
             @Override
-            public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
-                if (response.body() != null) {
-                    productList = new ArrayList<>();
-                    //add item
-                    productList.addAll(response.body().getProducts());
-                    DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-                    tv_checkout_tongtien.setText(decimalFormat.format(response.body().getTotal())+ "đ");
-
-                } else {
-                    Toast.makeText(CheckOutActivity.this, "Thất bại", Toast.LENGTH_SHORT).show();
-
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
+                    Cart gioHang = response.body();
+                    List<Products> datas = gioHang.getProducts();
+                    //dung for de doc array
+                    for (Products data : datas) {
+                        productsList.add(data);
+                    }
+                    for (int i = 0; i < productsList.size(); i++) {
+                        soluong_sanpham++;
+                    }
+                    id=response.body().get_id();
+                    idUser = gioHang.getUserId();
+                    tv_so_sanpham.setText(soluong_sanpham+" sản phẩm)");
+                    DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                    tv_gia_checkout.setText(decimalFormat.format(Integer.parseInt(response.body().getTotal()))+"đ");
+                    tv_fee_ship_checkout.setText(decimalFormat.format(feeship)+"đ");
+                    int tongtien;
+                    tongtien = Integer.parseInt(response.body().getTotal()) + feeship;
+                    tv_tongtien_checkout.setText(decimalFormat.format(tongtien)+"đ");
                 }
             }
 
             @Override
-            public void onFailure(Call<ProductAddCart> call, Throwable t) {
-                Toast.makeText(CheckOutActivity.this, "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Cart> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(CheckOutActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    private void getAdress(String token) {
+    private void postOrder() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "auth/")
+                .baseUrl("https://mofshop.shop/api/order/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<User> call = apiService.getProfile(token);
-        call.enqueue(new Callback<User>() {
+        Call<Order> call = apiService.postOrder(token,id);
+        call.enqueue(new Callback<Order>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    tv_checkoutdiachi.setText(response.body().getAddress());
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                if (response.isSuccessful()){
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                }else{
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(CheckOutActivity.this, "Không lấy được dữ liệu user", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Order> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(CheckOutActivity.this, "Lỗi api không đặt hàng được", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void postAddOrder() {
-        List<ProductAddCart> productAddCartList;
-        productAddCartList = new ArrayList<>();
-        SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
-        String token = sp.getString("token", "");
-        Retrofit retrofit1 = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "cart/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService1 = retrofit1.create(ApiService.class);
-        Call<ProductAddCart> call1 = apiService1.getlistCart(token);
-        call1.enqueue(new Callback<ProductAddCart>() {
-            @Override
-            public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
-                if (response.body() != null) {
-                    productAddCartList.add(response.body());
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(AppConstain.BASE_URL + "order/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    ApiService apiService = retrofit.create(ApiService.class);
-                    Call<List<ProductAddCart>> call2 = apiService.PostCartAddOrder(token, productAddCartList.get(0).get_id());
-                    call2.enqueue(new Callback<List<ProductAddCart>>() {
-                        @Override
-                        public void onResponse(Call<List<ProductAddCart>> call, Response<List<ProductAddCart>> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(CheckOutActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(CheckOutActivity.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<ProductAddCart>> call, Throwable t) {
-                            Toast.makeText(CheckOutActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(CheckOutActivity.this, ThanksOrder_Activity.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductAddCart> call, Throwable t) {
-                Toast.makeText(CheckOutActivity.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-    }
-
-    private void getData() {
-        Intent i = getIntent();
-        String s = i.getStringExtra("key");
-        tv_checkout_tongtien.setText(s);
     }
 }

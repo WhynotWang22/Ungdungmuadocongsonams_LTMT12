@@ -15,14 +15,18 @@ public class Cart {
     @SerializedName("products")
     @Expose
     public ArrayList<Products> products;
+    @SerializedName("Total")
+    @Expose
+    public String Total;
 
     public Cart() {
     }
 
-    public Cart(String _id, String userId, ArrayList<Products> products) {
+    public Cart(String _id, String userId, ArrayList<Products> products, String total) {
         this._id = _id;
         this.userId = userId;
         this.products = products;
+        Total = total;
     }
 
     public String get_id() {
@@ -47,5 +51,13 @@ public class Cart {
 
     public void setProducts(ArrayList<Products> products) {
         this.products = products;
+    }
+
+    public String getTotal() {
+        return Total;
+    }
+
+    public void setTotal(String total) {
+        Total = total;
     }
 }
