@@ -3,6 +3,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
@@ -30,6 +31,8 @@ public interface ApiService {
     Call<List<Banner>> getBanner();
     @GET("getall")
     Call<List<Product>> getProduct();
+    @GET("getall")
+    Call<List<Notification>> getNoti();
 
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);

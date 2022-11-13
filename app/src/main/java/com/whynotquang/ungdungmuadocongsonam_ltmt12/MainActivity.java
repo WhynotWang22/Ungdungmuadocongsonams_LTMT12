@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.AccountFragment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.CartFragment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.CategoryFragment;
@@ -30,14 +31,13 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.NotificationFragmen
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
 
-
-
-    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // main activity
         navigationView = findViewById(R.id.navigation);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
