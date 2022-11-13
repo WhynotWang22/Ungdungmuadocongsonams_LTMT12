@@ -56,7 +56,7 @@ public class NotificationFragment extends Fragment {
     private void getListProduct() {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.243:3000/api/notification/")
+                .baseUrl("https://mofshop.shop/api/notification/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

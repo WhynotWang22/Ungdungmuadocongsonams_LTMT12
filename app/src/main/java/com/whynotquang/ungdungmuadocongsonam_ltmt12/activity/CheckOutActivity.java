@@ -1,5 +1,6 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
@@ -42,6 +46,7 @@ public class CheckOutActivity extends AppCompatActivity {
     int soluong_sanpham = 0;
     int feeship = 15000;
     String id = "";
+    String idUser = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +95,7 @@ public class CheckOutActivity extends AppCompatActivity {
                         soluong_sanpham++;
                     }
                     id=response.body().get_id();
+                    idUser = gioHang.getUserId();
                     tv_so_sanpham.setText(soluong_sanpham+" sản phẩm)");
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                     tv_gia_checkout.setText(decimalFormat.format(Integer.parseInt(response.body().getTotal()))+"đ");

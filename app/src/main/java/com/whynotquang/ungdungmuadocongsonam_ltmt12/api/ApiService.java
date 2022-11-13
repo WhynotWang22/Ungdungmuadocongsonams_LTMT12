@@ -100,7 +100,8 @@ public interface ApiService {
 
     @POST("createCashOrder/{id}")
     Call<Order> postOrder(@Header("Authorization") String authtoken,
-                          @Path("id") String id);
+                          @Path("id") String id
+    );
 
 
     ////changePassword
