@@ -70,8 +70,12 @@ public class CartFragment extends Fragment {
         btn_thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), CheckOutActivity.class);
-                startActivity(intent);
+                if (productsList!=null){
+                    Intent intent = new Intent(getContext(), CheckOutActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getContext(), "Giỏ hàng trống, vui lòng thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -95,7 +99,7 @@ public class CartFragment extends Fragment {
         call.enqueue(new Callback<Cart>() {
             @Override
             public void onResponse(Call<Cart> call, Response<Cart> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body()!=null) {
                     progressBar.setVisibility(View.GONE);
                     Cart gioHang = response.body();
                     List<Products> datas = gioHang.getProducts();
@@ -116,6 +120,7 @@ public class CartFragment extends Fragment {
                     tv_tongtien.setText(decimalFormat.format(tongtien)+"đ");
                 }else {
                     progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
                 }
             }
 

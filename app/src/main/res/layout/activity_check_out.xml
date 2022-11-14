@@ -75,7 +75,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_diachi"
             android:layout_width="match_parent"
-            android:layout_height="232dp"
+            android:layout_height="238dp"
             android:layout_marginTop="22dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -90,14 +90,14 @@
                 android:text="Phương thức thanh toán"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/intermedium"
-                android:text="Thêm"
-                android:textColor="@color/mauchu"
-                android:textSize="14dp"
-                android:layout_alignParentRight="true"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/intermedium"-->
+<!--                android:text="Thêm"-->
+<!--                android:textColor="@color/mauchu"-->
+<!--                android:textSize="14dp"-->
+<!--                android:layout_alignParentRight="true"/>-->
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout

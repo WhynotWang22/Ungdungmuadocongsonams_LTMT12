@@ -16,6 +16,20 @@
         android:theme="@style/Theme.Ungdungmuadocongsonam_LTMT12"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".OrderDetailActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".OrderActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.SplashActivitys"
             android:exported="true">
             <intent-filter>

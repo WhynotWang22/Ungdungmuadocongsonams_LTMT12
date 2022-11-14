@@ -179,6 +179,11 @@ public class CheckOutActivity extends AppCompatActivity {
         });
     }
     private void postOrder() {
+        if (name==null || diachi==null || phoneNumber==null ){
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(CheckOutActivity.this, "Vui lòng chọn địa chỉ", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://mofshop.shop/api/order/")
                 .addConverterFactory(GsonConverterFactory.create())
