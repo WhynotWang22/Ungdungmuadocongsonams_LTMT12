@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CommentActivity">
+    <RelativeLayout
+        android:id="@+id/relativeLayout_comment"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageButton
+            android:id="@+id/btnback_comment"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:background="@color/white"
+            android:src="@drawable/btnback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/interbold"
+            android:text="Bình Luận"
+            android:textColor="@color/mauchu"
+            android:textSize="16dp" />
+    </RelativeLayout>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_below="@+id/relativeLayout_comment"
+     android:layout_height="match_parent"
+     android:orientation="vertical">
+     <androidx.recyclerview.widget.RecyclerView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:id="@+id/rc_comment"/>
+ </LinearLayout>
+</RelativeLayout>

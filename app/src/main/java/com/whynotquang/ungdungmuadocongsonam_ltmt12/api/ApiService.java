@@ -7,6 +7,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductComment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ResponseUser;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
@@ -168,5 +169,9 @@ public interface ApiService {
     );
     @GET("getall")
     Call<List<Notification>> getNoti();
+
+    //    ///Get comments id
+    @GET("getall/{id}")
+    Call<ProductComment>getComments(@Path("id") String id);
 
 }

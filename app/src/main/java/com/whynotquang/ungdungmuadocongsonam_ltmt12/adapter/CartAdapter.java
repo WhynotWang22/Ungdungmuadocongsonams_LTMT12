@@ -40,6 +40,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
     List<Products> productsList;
     Context context;
     private int value;
+
+    public int  changedata( List<Products> productsList){
+         return productsList.size();
+     }
+     public int tinhtong(List<Products> productsList){
+        int tong = 0;
+         for (Products x:productsList ) {
+             tong += (x.price * x.quantity);
+         }
+         return tong;
+     }
+
     public CartAdapter(List<Products> productsList, Context context) {
         this.productsList = productsList;
         this.context = context;
@@ -74,7 +86,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
         holder.layout_delete_item_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "cart/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -86,20 +97,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
                     @Override
                     public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                         Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
-
-
                     }
 
                     @Override
                     public void onFailure(Call<List<Products>> call, Throwable t) {
                         Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
-
                     }
                 });
                 refreshData(position);
             }
-
-
         });
 
 

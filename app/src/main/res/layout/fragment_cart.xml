@@ -24,11 +24,18 @@
             android:textSize="16dp" />
 
     </RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/linelayout_cart1"
+    android:layout_below="@id/relativeLayout_my_cart"
+    android:layout_height="350dp">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_view_gio_hang"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/relativeLayout_my_cart"/>
+</LinearLayout>
 <!--<RelativeLayout-->
 <!--    android:layout_width="match_parent"-->
 <!--    android:layout_height="wrap_content"-->
@@ -59,13 +66,13 @@
 <!--            android:background="@drawable/bg_btn_mgg"/>-->
 <!--    </LinearLayout>-->
     <LinearLayout
+        android:layout_below="@+id/linelayout_cart1"
         android:gravity="bottom"
+        android:id="@+id/lout_test"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rc_view_gio_hang"
         android:layout_alignParentBottom="true">
-
         <RelativeLayout
             android:id="@+id/relativeLayout_cart_1"
             android:layout_width="match_parent"
@@ -80,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
-                android:text="Mặt hàng (3 mặt hàng)"
+                android:text="Mặt hàng"
                 android:textColor="@color/mauchu2"
                 android:textSize="14dp" />
 
@@ -167,17 +174,16 @@
             android:textColor="@color/white"
             android:textSize="16dp" />
     </LinearLayout>
-
     <!--</RelativeLayout>-->
-<!--    <com.github.ybq.android.spinkit.SpinKitView-->
-<!--        android:id="@+id/spin_kit_cart"-->
-<!--        style="@style/SpinKitView.Large.Circle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerInParent="true"-->
-<!--        android:layout_gravity="center"-->
-<!--        app:SpinKit_Color="@color/color_progressbar"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="MissingConstraints" />-->
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit_cart"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/color_progressbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 </RelativeLayout>
