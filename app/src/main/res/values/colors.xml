@@ -12,7 +12,7 @@
     <color name="mauchu2">#C4C4C4</color>
     <color name="bg_xam">#F1F1F1</color>
     <color name="color_progressbar">#121212</color>
-    <color name="layout_checkout">#fffafa</color>
+    <color name="layout_checkout">#F5F5F5</color>
     <color name="rating">#FFC400</color>
 
 </resources>

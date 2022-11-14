@@ -22,10 +22,13 @@ import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CommentAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ImageSliderAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.SizeAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Comment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductComment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
 import java.text.DecimalFormat;
@@ -39,7 +42,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChitietActivity extends AppCompatActivity {
-
+    List<Comment> productCommentList;
     SliderView img_product;
     TextView tv_title_product_chitiet, tv_so_luot_review, tv_price_product_chitiet,tv_chitietsanpham;
     RadioButton radioGroup_color, radioGroup_size;
@@ -79,6 +82,7 @@ public class ChitietActivity extends AppCompatActivity {
         getDataProduct();
         Log.d("eeeee","eeeeee" + id);
         reviews();
+        getComment();
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
 
@@ -96,7 +100,7 @@ public class ChitietActivity extends AppCompatActivity {
         tv_so_luot_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), ReviewActivity.class);
+                Intent i = new Intent(getApplicationContext(), CommentActivity.class);
                 i.putExtra("id", id);
                 startActivity(i);
             }
@@ -201,5 +205,30 @@ public class ChitietActivity extends AppCompatActivity {
         });
     }
 
+   private void getComment(){
+       Retrofit retrofit = new Retrofit.Builder()
+               .baseUrl(AppConstain.BASE_URL + "comment/")
+               .addConverterFactory(GsonConverterFactory.create())
+               .build();
+       ApiService apiService = retrofit.create(ApiService.class);
+       Call<ProductComment> call = apiService.getComments(id);
+       call.enqueue(new Callback<ProductComment>() {
+           @Override
+           public void onResponse(Call<ProductComment> call, Response<ProductComment> response) {
+               if (response.body() != null) {
+                   productCommentList = new ArrayList<>();
+                   productCommentList.addAll(response.body().getProductItems());
+                   tv_so_luot_review.setText(response.body().getDem()  + " Bình Luận");
 
+               } else {
+                   Toast.makeText(ChitietActivity.this, "Không tìm thấy bình luận", Toast.LENGTH_SHORT).show();
+               }
+           }
+
+           @Override
+           public void onFailure(Call<ProductComment> call, Throwable t) {
+               Toast.makeText(ChitietActivity.this, "Không có bình luận", Toast.LENGTH_SHORT).show();
+           }
+       });
+   }
 }

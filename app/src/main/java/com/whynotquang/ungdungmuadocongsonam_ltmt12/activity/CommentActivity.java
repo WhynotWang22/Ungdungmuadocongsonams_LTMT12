@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
@@ -34,6 +35,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CommentActivity extends AppCompatActivity {
     String id;
     private RecyclerView rc_comment;
+    private TextView tv_avg;
+    private TextView tv_dem_comments;
     private CommentAdapter commentAdapter;
     List<Comment> productCommentList;
     @Override
@@ -41,7 +44,8 @@ public class CommentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
         rc_comment = findViewById(R.id.rc_comment);
-
+        tv_avg = findViewById(R.id.tv_avg);
+        tv_dem_comments = findViewById(R.id.tv_dem_comments);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         getdataComment();
@@ -50,7 +54,7 @@ public class CommentActivity extends AppCompatActivity {
 
     private void getdataComment() {
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false);
         rc_comment.setLayoutManager(linearLayoutManager);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "comment/")
@@ -64,6 +68,8 @@ public class CommentActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     productCommentList = new ArrayList<>();
                     productCommentList.addAll(response.body().getProductItems());
+                    tv_avg.setText(response.body().getAvg() + "");
+                    tv_dem_comments.setText(response.body().getDem()  + " Bình Luận");
                     CommentAdapter commentAdapter = new CommentAdapter(productCommentList,getApplicationContext());
                     rc_comment.setAdapter(commentAdapter);
                     commentAdapter.notifyDataSetChanged();
@@ -74,7 +80,7 @@ public class CommentActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ProductComment> call, Throwable t) {
-                Toast.makeText(CommentActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CommentActivity.this, "Không có bình luận", Toast.LENGTH_SHORT).show();
             }
         });
     }

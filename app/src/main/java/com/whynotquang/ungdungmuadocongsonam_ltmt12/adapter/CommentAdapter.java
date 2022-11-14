@@ -39,7 +39,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.Viewholo
       Comment comment = commentList.get(position);
       holder.tvNameCmt.setText(comment.getUserName());
       holder.edGetcomment.setText(comment.getCommentDes());
-      holder.ratingbar.getRating();
+      holder.ratingbar.setRating(comment.getRatingStar());
       Glide.with(context).load(comment.getUserIMG()).error(R.drawable.mau).into(holder.imgComment);
 
     }

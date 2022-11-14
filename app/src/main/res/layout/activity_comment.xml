@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/layout_checkout"
     tools:context=".activity.CommentActivity">
     <RelativeLayout
         android:id="@+id/relativeLayout_comment"
@@ -33,9 +34,61 @@
             android:textColor="@color/mauchu"
             android:textSize="16dp" />
     </RelativeLayout>
- <LinearLayout
+    <LinearLayout
+        android:id="@+id/ln_comment1"
+        android:layout_width="311dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/relativeLayout_comment"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="3dp"
+        android:orientation="vertical"
+        tools:ignore="Orientation">
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/interbold"
+                android:text="4.8"
+                android:textColor="@color/mauchu"
+                android:textSize="24dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/interbold"
+                android:text="/5"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="65dp"
+            android:layout_height="29dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:src="@drawable/star" />
+
+            <TextView
+                android:id="@+id/tv_dem_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="86 reviews"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
      android:layout_width="match_parent"
-     android:layout_below="@+id/relativeLayout_comment"
+     android:layout_below="@+id/ln_comment1"
      android:layout_height="match_parent"
      android:orientation="vertical">
      <androidx.recyclerview.widget.RecyclerView
