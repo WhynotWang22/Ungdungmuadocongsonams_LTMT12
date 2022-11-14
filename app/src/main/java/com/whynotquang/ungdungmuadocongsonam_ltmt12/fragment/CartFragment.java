@@ -3,8 +3,12 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -18,7 +22,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,6 +61,7 @@ public class CartFragment extends Fragment {
     private Button btnCheckoutCart, btnvalues;
     private ProgressBar progressBar;
     private LinearLayout lout_test;
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +80,7 @@ public class CartFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         id = intent.getStringExtra("id");
         getdataCart();
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("Tongtien"));
         btnCheckoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +126,7 @@ public class CartFragment extends Fragment {
 
                 }
             }
+
             @Override
             public void onFailure(Call<ProductAddCart> call, Throwable t) {
                 Toast.makeText(getContext(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
@@ -126,11 +135,21 @@ public class CartFragment extends Fragment {
 
     }
 
+    public BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int tongtien = intent.getIntExtra("tongtien", 0);
+            Log.d("msg", "onReceive: " + tongtien);
+            tv_tongtien.setText((tongtien + "đ"));
+        }
+    };
+
     private void PostCartCheckout() {
         Intent i = new Intent(getActivity(), CheckOutActivity.class);
-//        i.putExtra("key", tv_tongtien.getText().toString());
+//       i.putExtra("key", tv_tongtien.getText().toString());
         startActivity(i);
     }
-   }
+}
 
 

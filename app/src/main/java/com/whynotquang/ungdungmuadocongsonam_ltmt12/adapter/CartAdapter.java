@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,31 +36,31 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
+    int tong = 0;
+    int tong2 = 0;
+    int tong3 = 0;
     String token;
     SharedPreferences sp;
     List<Products> productsList;
     Context context;
-    private int value;
+    private int value = 0;
 
-    public int  changedata( List<Products> productsList){
-         return productsList.size();
-     }
-     public int tinhtong(List<Products> productsList){
-        int tong = 0;
-         for (Products x:productsList ) {
-             tong += (x.price * x.quantity);
-         }
-         return tong;
-     }
+    public void bindData() {
+        Intent intent = new Intent("Tongtien");
+        intent.putExtra("tongtien", tong);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+    }
 
     public CartAdapter(List<Products> productsList, Context context) {
         this.productsList = productsList;
         this.context = context;
     }
-    protected void refreshData(int position){
+
+    protected void refreshData(int position) {
         productsList.remove(position);
-        notifyDataSetChanged ();
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -126,9 +128,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
                                 String currentValue = holder.tv_values.getText().toString();
                                 value = Integer.parseInt(currentValue);
                                 value++;
-                                int tong = 0;
-                                tong = value * product.getPrice();
-                                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong) + "Đ");
+                                tong += value * product.getPrice() - (value - 1) * product.getPrice();
+                                tong3 = value * product.getPrice();
+                                bindData();
+                                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong3) + "Đ");
                                 holder.tv_values.setText(String.valueOf(value));
                                 Retrofit retrofit = new Retrofit.Builder()
                                         .baseUrl(AppConstain.BASE_URL + "cart/")
@@ -144,7 +147,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
 
                                     @Override
                                     public void onFailure(Call<List<Products>> call, Throwable t) {
-
                                         Toast.makeText(context, "tăng thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -175,9 +177,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
                 value = Integer.parseInt(currentValue);
                 value--;
                 holder.tv_values.setText(String.valueOf(value));
-                int tong = 0;
-                tong = value * product.getPrice();
-                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong) + "Đ");
+//                tong = 0;
+                tong -= value * product.getPrice();
+                tong += (value - 1) * product.getPrice();
+                tong2 = value * product.getPrice();
+                bindData();
+                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong2) + "Đ");
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "cart/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -205,8 +210,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder>{
 
             }
         });
+        tong = 0;
+        for (int i = 0; i < productsList.size(); i++) {
+            tong += productsList.get(i).getPrice() * productsList.get(i).getQuantity();
+        }
+        bindData();
 //        notifyDataSetChanged();
     }
+
     @Override
     public int getItemCount() {
         if (productsList == null) {

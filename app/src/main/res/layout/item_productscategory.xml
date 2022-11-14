@@ -26,9 +26,10 @@
                 android:id="@+id/tv_title_productcategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:gravity="center"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/interbold"
                 android:text="Adidas"
@@ -36,13 +37,13 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:layout_below="@+id/tv_title_productcategory"
                 android:id="@+id/tv_price_productcategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tv_title_productcategory"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/interbold"
+                android:gravity="center"
                 android:text="Price"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />

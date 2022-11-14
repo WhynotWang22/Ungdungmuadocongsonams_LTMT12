@@ -33,7 +33,6 @@ public class ProductCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_category);
         rc_productcategory = findViewById(R.id.rc_productcategory);
-
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         getProductCategory();

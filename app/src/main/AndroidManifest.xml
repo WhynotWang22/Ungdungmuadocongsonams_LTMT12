@@ -19,9 +19,10 @@
         <activity
             android:name=".activity.CommentActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.ProductCategoryActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".activity.CheckOutActivity"
