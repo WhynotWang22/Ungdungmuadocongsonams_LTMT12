@@ -12,5 +12,7 @@
     <color name="mauchu2">#C4C4C4</color>
     <color name="bg_xam">#F1F1F1</color>
     <color name="color_progressbar">#121212</color>
+    <color name="color_login_sign_up">#C3BCB2</color>
+    C3BCB2
 
 </resources>

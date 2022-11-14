@@ -63,6 +63,7 @@
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"/>
             <TextView
+                android:id="@+id/tv_them_dia_chi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
@@ -72,10 +73,9 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_view_diachi"
             android:layout_width="match_parent"
             android:layout_height="232dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
             android:layout_marginTop="22dp"/>
         <RelativeLayout
             android:layout_width="match_parent"

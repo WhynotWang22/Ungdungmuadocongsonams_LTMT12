@@ -2,8 +2,11 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,8 +22,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.DiaChiAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickAddressListener;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
@@ -38,14 +46,16 @@ public class CheckOutActivity extends AppCompatActivity {
     TextView tv_so_sanpham;
     TextView tv_gia_checkout;
     TextView tv_fee_ship_checkout;
-    TextView tv_tongtien_checkout;
+    TextView tv_tongtien_checkout,tv_them_dia_chi;
     Button btn_thanhtoan;
+    RecyclerView rc_view_diachi;
     ProgressBar progressBar;
     String token;
     List<Products> productsList;
+    List<Address> addressList;
     int soluong_sanpham = 0;
     int feeship = 15000;
-    String id = "";
+    String id,name,phoneNumber,diachi;
     String idUser = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +65,21 @@ public class CheckOutActivity extends AppCompatActivity {
         tv_gia_checkout = findViewById(R.id.tv_gia_checkout);
         tv_fee_ship_checkout = findViewById(R.id.tv_fee_ship_checkout);
         tv_tongtien_checkout = findViewById(R.id.tv_tongtien_checkout);
+        tv_them_dia_chi = findViewById(R.id.tv_them_dia_chi);
+        rc_view_diachi = findViewById(R.id.rc_view_diachi);
+
         btn_thanhtoan = findViewById(R.id.btn_thanhtoan);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_checkout);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
         progressBar.setVisibility(View.VISIBLE);
         productsList = new ArrayList<>();
+        addressList = new ArrayList<>();
 
         SharedPreferences sp1 = getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
         token = sp1.getString("token", "");
         getData();
+        getDataAddress();
         btn_thanhtoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +87,57 @@ public class CheckOutActivity extends AppCompatActivity {
                 postOrder();
             }
         });
+        tv_them_dia_chi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CheckOutActivity.this,AddressActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+    private void getDataAddress() {
+        DiaChiAdapter adapter = new DiaChiAdapter(addressList, new ItemClickAddressListener() {
+            @Override
+            public void onClickAddress(Address address) {
+                name = address.getName();
+                diachi = address.getDetailAddress();
+                phoneNumber = String.valueOf(address.getNumberPhone());
+            }
+        });
+        rc_view_diachi.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CheckOutActivity.this,RecyclerView.VERTICAL,false);
+        rc_view_diachi.setLayoutManager(linearLayoutManager);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://mofshop.shop/api/address/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<AddressItem> call = apiService.getAddress(token);
+        call.enqueue(new Callback<AddressItem>() {
+            @Override
+            public void onResponse(Call<AddressItem> call, Response<AddressItem> response) {
+                if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
+                    AddressItem gioHang = response.body();
+                    List<Address> datas = gioHang.getAddress();
+                    //dung for de doc array
+                    for (Address data : datas) {
+                        addressList.add(data);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddressItem> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(CheckOutActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     public void getData() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://mofshop.shop/api/cart/")
@@ -119,7 +184,7 @@ public class CheckOutActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Order> call = apiService.postOrder(token,id);
+        Call<Order> call = apiService.postOrder(token,id,name,phoneNumber,diachi);
         call.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {

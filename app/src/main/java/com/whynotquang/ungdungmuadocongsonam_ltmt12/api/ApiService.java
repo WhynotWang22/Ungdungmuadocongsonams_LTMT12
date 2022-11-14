@@ -1,5 +1,7 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
@@ -29,8 +31,10 @@ import retrofit2.http.Path;
 public interface ApiService {
     @GET("getall")
     Call<List<Banner>> getBanner();
+
     @GET("getall")
     Call<List<Product>> getProduct();
+
     @GET("getall")
     Call<List<Notification>> getNoti();
 
@@ -44,7 +48,7 @@ public interface ApiService {
     //login
     @FormUrlEncoded
     @POST("login")
-    Call<User> postLogin(@Field("email") String email,@Field("password") String password);
+    Call<User> postLogin(@Field("email") String email, @Field("password") String password);
 
     ///register
     @POST("register")
@@ -54,15 +58,17 @@ public interface ApiService {
                             @Field("phone_number") String phone_number,
                             @Field("password") String password,
                             @Field("address") String diachi
-                            );
+    );
 
 
     //get profile
     @GET("profile")
     Call<User> getProfile(@Header("Authorization") String authtoken);
+
     //logout
     @POST("logout")
     Call<User> postLogout(@Header("Authorization") String authtoken);
+
     //add cart
     @FormUrlEncoded
     @POST("add")
@@ -71,12 +77,14 @@ public interface ApiService {
                             @Field("quantity") int quantity,
                             @Field("size") String size,
                             @Field("color") String color);
+
     //update sdt
     @FormUrlEncoded
     @PUT("edit-phone-number")
     Call<User> putPhoneNumber(@Header("Authorization") String authtoken,
-                            @Field("phone_number") String phone_number
+                              @Field("phone_number") String phone_number
     );
+
     //update profile
     @Multipart
     @PUT("edits")
@@ -87,20 +95,39 @@ public interface ApiService {
                               @Part("address") RequestBody diachi,
                               @Part MultipartBody.Part avatar
     );
+
     //get list cart
     @GET("list")
     Call<Cart> getCart(@Header("Authorization") String authtoken);
+
     //delete cart
     @DELETE("delete/{id}")
-    Call<Products> deleteCart(@Header("Authorization") String authtoken,@Path("id") String id);
+    Call<Products> deleteCart(@Header("Authorization") String authtoken, @Path("id") String id);
+
     //update soluong
     @FormUrlEncoded
     @PUT("update/{id}")
-    Call<Products> updateCart(@Header("Authorization") String authtoken,@Path("id") String id,@Field("quantity") int quantity);
+    Call<Products> updateCart(@Header("Authorization") String authtoken, @Path("id") String id, @Field("quantity") int quantity);
 
+    //post order
+    @FormUrlEncoded
     @POST("createCashOrder/{id}")
     Call<Order> postOrder(@Header("Authorization") String authtoken,
-                          @Path("id") String id
+                          @Path("id") String id,
+                          @Field("name") String name,
+                          @Field("phoneNumber") String phoneNumber,
+                          @Field("address") String address
+                          );
+    //get list address
+    @GET("getallShippingAddress")
+    Call<AddressItem> getAddress(@Header("Authorization") String authtoken);
+    //post address
+    @FormUrlEncoded
+    @POST("addShippingAddress")
+    Call<Address> postAddress(@Header("Authorization") String authtoken,
+                              @Field("Name") String name,
+                              @Field("DetailAddress") String detailAddress,
+                              @Field("NumberPhone") int numberPhone
     );
 
 
@@ -108,7 +135,7 @@ public interface ApiService {
     @FormUrlEncoded
     @PUT("change-password")
     Call<ResponseUser> updateExcute(
-            @Field("oldPassword")String oldPassword,
+            @Field("oldPassword") String oldPassword,
             @Field("newPassword") String newPassword,
             @Header("Authorization") String authtoken
     );
