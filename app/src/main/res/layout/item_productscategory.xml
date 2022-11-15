@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="145dp"
     android:layout_height="238dp"
-    android:layout_margin="16dp"
+    android:layout_margin="18dp"
     android:id="@+id/card_ItemClickDetail"
     app:cardCornerRadius="8dp"
     android:background="@drawable/bg_product_review">
-
     <LinearLayout
+        android:gravity="center"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

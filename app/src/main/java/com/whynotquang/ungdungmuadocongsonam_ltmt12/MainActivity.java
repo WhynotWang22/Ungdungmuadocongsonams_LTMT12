@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.LoginActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment.AccountFragment;
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void getData(String token) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
+                .baseUrl(AppConstain.BASE_URL + "auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

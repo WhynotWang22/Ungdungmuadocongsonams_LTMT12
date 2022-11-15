@@ -43,7 +43,8 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
      holder.tvTitleProductcategory.setText(product.getTitle());
      DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
      holder.tvPriceProductcategory.setText("Giá:" +decimalFormat.format(product.getPrice())+ "Đ");
-     Glide.with(context).load(product.getImg()).error(R.drawable.full).into(holder.imgProductcategory);
+     Glide.with(context).load(product.getImg()).placeholder(R.drawable.full)
+             .error(R.drawable.full).into(holder.imgProductcategory);
       holder.card_ItemClickDetail.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {

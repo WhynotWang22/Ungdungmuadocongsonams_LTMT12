@@ -43,6 +43,10 @@ public interface ApiService {
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);
 
+    //get ao polo
+    @GET("getall/6364c85e71ea07f8ca10730f")
+    Call<List<Product>> getAoPolo();
+
 
     @GET("getall")
     Call<List<Category>> getCategory();
@@ -61,7 +65,6 @@ public interface ApiService {
                             @Field("password") String password,
                             @Field("address") String diachi
     );
-
 
     //get profile
     @GET("profile")

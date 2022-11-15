@@ -21,6 +21,7 @@ import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.DiaChiAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -110,7 +111,7 @@ public class CheckOutActivity extends AppCompatActivity {
         rc_view_diachi.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/address/")
+                .baseUrl(AppConstain.BASE_URL + "address/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -140,7 +141,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
     public void getData() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/cart/")
+                .baseUrl(AppConstain.BASE_URL + "cart/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -185,7 +186,7 @@ public class CheckOutActivity extends AppCompatActivity {
             return;
         }
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/order/")
+                .baseUrl(AppConstain.BASE_URL + "order/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

@@ -39,6 +39,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.ultil.CheckConnection;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -80,9 +81,8 @@ public class CartFragment extends Fragment {
         progressBar.setVisibility(View.GONE);
         Intent intent = getActivity().getIntent();
         id = intent.getStringExtra("id");
-
+        CheckInternet();
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("Tongtien"));
-        getdataCart();
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("Tongtien"));
         btnCheckoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +93,13 @@ public class CartFragment extends Fragment {
         return view;
     }
 
-
+    private void CheckInternet(){
+        if (CheckConnection.haveNetwordConnection(getContext())){
+            getdataCart();
+        }else {
+            CheckConnection.showToast_Short(getContext(),"Kiểm Tra kết nối của bạn");
+        }
+    }
 
     private void getdataCart() {
         SharedPreferences sp = getContext().getSharedPreferences("Login", MODE_PRIVATE);
@@ -108,7 +114,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
                 if (response.body() != null) {
-                    int tong=0;
+                    int tong = 0;
                     ///set recyclerview
                     productList = new ArrayList<>();
                     CartAdapter cartAdapter = new CartAdapter(productList, getContext());
@@ -119,11 +125,11 @@ public class CartFragment extends Fragment {
                     //add item
                     productList.addAll(response.body().getProducts());
                     ///lay so luong sp trong gio hang
-
+                    for (int i = 0; i < productList.size(); i++) {
+                        soluongsanpham++;
+                    }
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-//                    tv_tongtiensp.setText(cartAdapter.getItemCount() + "sản phẩm)");
-//                    tv_tongtien.setText(decimalFormat.format(response.body().getTotal()) + "đ");
-
+                    tv_tongtiensp.setText(cartAdapter.getItemCount() + "sản phẩm)");
                 } else {
                     Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
 
