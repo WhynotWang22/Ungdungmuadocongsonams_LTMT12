@@ -1,6 +1,5 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -18,18 +16,13 @@ import android.widget.Toast;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.DiaChiAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickAddressListener;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickAddressListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
@@ -111,7 +104,7 @@ public class CheckOutActivity extends AppCompatActivity {
         rc_view_diachi.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "address/")
+                .baseUrl("https://mofshop.shop/api/address/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -141,7 +134,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
     public void getData() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "cart/")
+                .baseUrl("https://mofshop.shop/api/cart/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -186,7 +179,7 @@ public class CheckOutActivity extends AppCompatActivity {
             return;
         }
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "order/")
+                .baseUrl("https://mofshop.shop/api/order/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -196,7 +189,10 @@ public class CheckOutActivity extends AppCompatActivity {
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if (response.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CheckOutActivity.this,ThanksOrder_Activity.class);
+                    startActivity(intent);
+                    finishAffinity();
+//                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                 }else{
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();

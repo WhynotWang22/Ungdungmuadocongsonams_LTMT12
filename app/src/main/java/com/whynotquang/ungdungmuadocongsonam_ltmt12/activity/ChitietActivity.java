@@ -20,9 +20,8 @@ import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CommentAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ImageSliderAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.SizeAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -80,7 +79,6 @@ public class ChitietActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         getDataProduct();
-        Log.d("eeeee","eeeeee" + id);
         reviews();
         getComment();
         list_img = new ArrayList<>();

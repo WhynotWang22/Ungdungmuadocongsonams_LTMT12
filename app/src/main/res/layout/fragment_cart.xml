@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.CartFragment">
-
     <RelativeLayout
         android:id="@+id/relativeLayout_my_cart"
         android:layout_width="match_parent"
@@ -24,111 +23,17 @@
             android:textSize="16dp" />
 
     </RelativeLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/linelayout_cart1"
-    android:layout_below="@id/relativeLayout_my_cart"
-    android:layout_height="350dp">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_view_gio_hang"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout_my_cart"/>
-</LinearLayout>
-<!--<RelativeLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:layout_alignParentBottom="true">-->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginRight="32dp"-->
-<!--        android:layout_marginLeft="32dp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:id="@+id/liner_mgg">-->
-<!--        <EditText-->
-<!--            android:layout_width="201dp"-->
-<!--            android:layout_height="56dp"-->
-<!--            android:hint="Nhập mã phiếu giảm giá"-->
-<!--            android:fontFamily="@font/intermedium"-->
-<!--            android:textColorHint="@color/mauxam"-->
-<!--            android:textSize="14dp"-->
-<!--            android:background="@drawable/bg_ed_mgg"/>-->
-<!--        <Button-->
-<!--            android:layout_width="110dp"-->
-<!--            android:layout_height="56dp"-->
-<!--            android:text="Áp dụng"-->
-<!--            android:fontFamily="@font/interbold"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="14dp"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:background="@drawable/bg_btn_mgg"/>-->
-<!--    </LinearLayout>-->
     <LinearLayout
-        android:layout_below="@+id/linelayout_cart1"
-        android:gravity="bottom"
         android:id="@+id/lout_test"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-        <RelativeLayout
-            android:id="@+id/relativeLayout_cart_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="27dp"
-            android:layout_marginRight="32dp">
-
-            <TextView
-                android:id="@+id/tv_soluong_sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/intermedium"
-                android:text="Mặt hàng"
-                android:textColor="@color/mauchu2"
-                android:textSize="14dp" />
-
-            <TextView
-                android:id="@+id/tv_tongtiensp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:fontFamily="@font/intermedium"
-                android:text="0đ"
-                android:textColor="@color/mauchu"
-                android:textSize="14dp" />
-        </RelativeLayout>
-
-<!--        <RelativeLayout-->
-<!--            android:id="@+id/relativeLayout_cart_2"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_below="@+id/relativeLayout_cart_1"-->
-<!--            android:layout_marginLeft="32dp"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:layout_marginRight="32dp">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:fontFamily="@font/intermedium"-->
-<!--                android:text="Phí vận chuyển"-->
-<!--                android:textColor="@color/mauchu2"-->
-<!--                android:textSize="14dp" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tv_phivanchuyen"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:fontFamily="@font/intermedium"-->
-<!--                android:text="0đ"-->
-<!--                android:textColor="@color/mauchu"-->
-<!--                android:textSize="14dp" />-->
-<!--        </RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/relativeLayout_cart_3"

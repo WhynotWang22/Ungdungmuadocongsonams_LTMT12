@@ -12,7 +12,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 
 public class ThanksOrder_Activity extends AppCompatActivity {
-    private Button btn_tieptucmuasam;
+    private Button btn_tieptucmuasam,btn_xemdonhang;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -20,10 +20,19 @@ public class ThanksOrder_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thanks_order);
         btn_tieptucmuasam = findViewById(R.id.btn_tieptucmuasam);
+        btn_xemdonhang = findViewById(R.id.btn_xemdonhang);
         btn_tieptucmuasam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ThanksOrder_Activity.this, MainActivity.class);
+                startActivity(intent);
+                finishAffinity();
+            }
+        });
+        btn_xemdonhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ThanksOrder_Activity.this, OrderActivity.class);
                 startActivity(intent);
             }
         });

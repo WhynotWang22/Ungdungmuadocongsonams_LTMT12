@@ -1,19 +1,15 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickAddressListener;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickAddressListener;
 
 import java.util.List;
 

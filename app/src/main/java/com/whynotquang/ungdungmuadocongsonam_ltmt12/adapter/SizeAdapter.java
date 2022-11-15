@@ -8,7 +8,7 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 
 import java.util.ArrayList;
@@ -34,15 +34,15 @@ public class SizeAdapter extends RecyclerView.Adapter<SizeHolder> {
     public void onBindViewHolder(@NonNull SizeHolder holder, int position) {
         holder.radio_size.setText(list.get(position));
         holder.radio_size.setChecked(position == selectedPosition);
-        holder.radio_size.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    selectedPosition = holder.getAdapterPosition();
-                    itemClickListener.onClickSize(holder.radio_size.getText().toString());
-                }
+            public void onClick(View v) {
+                selectedPosition = holder.getAdapterPosition();
+                notifyItemRangeChanged(0, list.size());
+                itemClickListener.onClickSize(holder.radio_size.getText().toString());
             }
-        });
+        };
+        holder.radio_size.setOnClickListener(clickListener);
     }
 
     @Override

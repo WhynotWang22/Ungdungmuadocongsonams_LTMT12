@@ -137,6 +137,16 @@ public interface ApiService {
                               @Field("NumberPhone") int numberPhone
     );
 
+    //get order
+    @GET("getallOrderByuser")
+    Call<List<Order>> getOrder(@Header("Authorization") String authtoken);
+
+    //get detail order
+    @GET("getDetailOrder/{id}")
+    Call<Order> getDetailOrder(
+//            @Header("Authorization") String authtoken,
+                               @Path("id") String id);
+
     ///changeAdress
     @FormUrlEncoded
     @PUT("change-address")
