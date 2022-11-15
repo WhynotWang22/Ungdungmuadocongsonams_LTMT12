@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -64,14 +65,14 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         private ImageView imgProductcategory;
         private TextView tvTitleProductcategory;
         private TextView tvPriceProductcategory;
-        private CardView card_ItemClickDetail;
+        private RelativeLayout card_ItemClickDetail;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
             imgProductcategory = (ImageView)itemView.findViewById(R.id.img_productcategory);
             tvTitleProductcategory = (TextView) itemView.findViewById(R.id.tv_title_productcategory);
             tvPriceProductcategory = (TextView) itemView.findViewById(R.id.tv_price_productcategory);
-            card_ItemClickDetail = (CardView) itemView.findViewById(R.id.card_ItemClickDetail);
+            card_ItemClickDetail = (RelativeLayout) itemView.findViewById(R.id.card_ItemClickDetail);
         }
     }
 }

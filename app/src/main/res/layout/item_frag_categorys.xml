@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/cardview_frag_categorys"
-    android:layout_marginTop="25dp">
+    android:layout_marginTop="12dp">
 
   <RelativeLayout
       android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/mau"
             android:scaleType="centerCrop"
             android:id="@+id/image_category_frag">
         </ImageView>

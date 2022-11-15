@@ -71,15 +71,13 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         rc_cart = view.findViewById(R.id.rc_view_gio_hang);
         tv_tongtien = (TextView) view.findViewById(R.id.tv_tongtien);
-        tv_tongtiensp = (TextView) view.findViewById(R.id.tv_tongtiensp);
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout);
         progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
         lout_test = (LinearLayout) view.findViewById(R.id.lout_test);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
         progressBar.setVisibility(View.GONE);
-        Intent intent = getActivity().getIntent();
-        id = intent.getStringExtra("id");
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
 
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("Tongtien"));
         getdataCart();

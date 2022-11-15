@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.CategoryFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F5F5F5">
      <RelativeLayout
          android:id="@+id/rl_frag_category"
          android:layout_width="match_parent"
@@ -13,27 +14,20 @@
          android:background="@color/white"
          tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/im_frag_category"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="25dp"
-            android:src="@drawable/btnback" />
-
         <TextView
             android:id="@+id/tv_frag_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/interbold"
-            android:text="Thể Loại"
+            android:text="Danh mục"
             android:textColor="@color/mauchu"
             android:textSize="16dp" />
 
      </RelativeLayout>
      <androidx.recyclerview.widget.RecyclerView
          android:layout_width="match_parent"
-         android:layout_height="550dp"
-         android:id="@+id/rc_fg_category"/>
+         android:layout_height="wrap_content"
+         android:id="@+id/rc_fg_category"
+         android:paddingBottom="100dp"/>
 </LinearLayout>

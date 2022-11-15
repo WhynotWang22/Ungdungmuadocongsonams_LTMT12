@@ -16,14 +16,22 @@
         android:theme="@style/Theme.Ungdungmuadocongsonam_LTMT12"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".OrderDetailActivity"
+            android:name=".activity.ProductCategoryActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".activity.CommentActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".activity.OrderDetailActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".OrderActivity"
+            android:name=".activity.OrderActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
