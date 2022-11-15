@@ -42,6 +42,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
         holder.tv_title_order.setText(order.get_id());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tv_thanhtien_order.setText(decimalFormat.format(order.getTotal()) + "đ");
+        holder.tv_trangthai_order.setText(order.getStatus());
         Glide.with(context).load("https://beebot-sg-knowledgecloud.oss-ap-southeast-1.aliyuncs.com/kc/kc-media/kc-oss-1590723244161-3-01.jpg").into(holder.img_sanpham_order);
 
         if (order.getStatus().equalsIgnoreCase("Đang chờ xác nhận")) {
@@ -52,8 +53,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
             holder.tv_trangthai_order.setTextColor(Color.parseColor("#E49542"));
         } else if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
             holder.tv_trangthai_order.setTextColor(Color.parseColor("#4CAF50"));
-        } else {
-            holder.tv_trangthai_order.setText(order.getStatus());
         }
 //        holder.tv_title_order.setText(order.get_id());
 //        holder.tv_title_order.setText(order.get_id());

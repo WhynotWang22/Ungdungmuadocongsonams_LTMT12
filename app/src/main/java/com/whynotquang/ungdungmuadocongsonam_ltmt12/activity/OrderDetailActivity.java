@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +48,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     List<Products> productList;
     ProductOrderAdapter adapter;
     int soluong = 0;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         tv_tongtien_orderdetail = findViewById(R.id.tv_tongtien_orderdetail);
         tv_thanhtoan_orderdetail = findViewById(R.id.tv_thanhtoan_orderdetail);
         tv_thanks_orderdetail = findViewById(R.id.tv_thanks_orderdetail);
+        layout = findViewById(R.id.layout_donhang_1);
 
         recyclerView = findViewById(R.id.rc_view_product_orderdetail);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_orderdetail);
@@ -68,6 +73,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        Log.d("id","id: "+id);
         getData();
     }
 
@@ -88,13 +94,25 @@ public class OrderDetailActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Order> call = apiService.getDetailOrder(token, id);
+        Call<Order> call = apiService.getDetailOrder(id);
         call.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.e("id","data"+response.body().getStatus());
                     progressBar.setVisibility(View.GONE);
                     Order order = response.body();
+
+                    if (order.getStatus().equalsIgnoreCase("Đang chờ xác nhận")) {
+                        layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
+                    } else if (order.getStatus().equalsIgnoreCase("Đang chuẩn bị hàng")) {
+                        layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
+                    } else if (order.getStatus().equalsIgnoreCase("Đang giao hàng")) {
+                        layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
+                    } else if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
+                        layout.setBackgroundColor(getResources().getColor(R.color.color_xanh));
+                    }
+
                     tv_trangthai_donhangchitiet.setText(order.getStatus());
                     tv_name_orderdetail.setText(order.getName());
                     tv_sdt_orderdetail.setText(String.valueOf(order.getPhoneNumber()));

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ChitietActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
@@ -64,7 +66,14 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
         holder.tv_sizecolor_product_detail.setText("Size: "+product.getSize()+" | Màu: "+product.getColor());
         holder.tv_soluong_product_detail_order.setText(String.valueOf(product.getQuantity())+" sản phẩm");
         Glide.with(context).load(product.getProductIMG()).into(holder.img_product_detail_order);
-
+        holder.layout_item_order_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ChitietActivity.class);
+                intent.putExtra("id",productsList.get(position).get_id());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -76,6 +85,7 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
     }
 
     public class Viewholoder extends RecyclerView.ViewHolder {
+        RelativeLayout layout_item_order_detail;
         ImageView img_product_detail_order;
         TextView tv_thanhtien_product_detail_order,tv_soluong_product_detail_order,tv_title_product_detail_order,tv_sizecolor_product_detail;
         public Viewholoder(@NonNull View itemView) {
@@ -86,6 +96,7 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
             tv_soluong_product_detail_order =  itemView.findViewById(R.id.tv_soluong_product_detail_order);
             tv_title_product_detail_order = itemView.findViewById(R.id.tv_title_product_detail_order);
             tv_sizecolor_product_detail =  itemView.findViewById(R.id.tv_sizecolor_product_detail);
+            layout_item_order_detail =  itemView.findViewById(R.id.layout_item_order_detail);
 
         }
 

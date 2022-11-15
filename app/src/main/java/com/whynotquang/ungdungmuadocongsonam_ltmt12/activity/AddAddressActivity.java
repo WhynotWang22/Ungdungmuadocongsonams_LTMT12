@@ -2,12 +2,14 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class AddAddressActivity extends AppCompatActivity {
     EditText ed_address_addaddress,ed_name_addaddress,ed_sdt_addaddress;
     Button btn_add_address;
     ProgressBar progressBar;
+    ImageView btnback_add_address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class AddAddressActivity extends AppCompatActivity {
         ed_sdt_addaddress = findViewById(R.id.ed_sdt_addaddress);
         ed_address_addaddress = findViewById(R.id.ed_address_addaddress);
         btn_add_address = findViewById(R.id.btn_add_address);
+        btnback_add_address = findViewById(R.id.btnback_add_address);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_add_address);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -61,6 +65,13 @@ public class AddAddressActivity extends AppCompatActivity {
                 }
                 progressBar.setVisibility(View.VISIBLE);
                 postAddress(name,address, Integer.parseInt(sdt));
+            }
+        });
+        btnback_add_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddAddressActivity.this,AddressActivity.class);
+                startActivity(intent);
             }
         });
     }

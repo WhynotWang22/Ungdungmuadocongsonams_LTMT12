@@ -40,7 +40,6 @@
         android:layout_height="89dp"
         android:orientation="vertical"
         android:layout_below="@id/relativeLayout_chitiet_donhang"
-        android:background="#4CAF50"
         android:paddingTop="24dp"
         android:paddingLeft="19dp">
         <TextView

@@ -140,7 +140,9 @@ public interface ApiService {
 
     //get detail order
     @GET("getDetailOrder/{id}")
-    Call<Order> getDetailOrder(@Header("Authorization") String authtoken, @Path("id") String id);
+    Call<Order> getDetailOrder(
+//            @Header("Authorization") String authtoken,
+                               @Path("id") String id);
 
     ///changeAdress
     @FormUrlEncoded

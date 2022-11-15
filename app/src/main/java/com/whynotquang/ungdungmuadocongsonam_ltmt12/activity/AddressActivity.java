@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class AddressActivity extends AppCompatActivity {
     AddressAdapter adapter;
     List<Address> addressList;
     ProgressBar progressBar;
+    ImageView btnback_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class AddressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_address);
         recyclerView = findViewById(R.id.rc_view_sodiachi);
         button = findViewById(R.id.btn_address);
+        btnback_address = findViewById(R.id.btnback_address);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_address);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -61,6 +64,13 @@ public class AddressActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddressActivity.this,AddAddressActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnback_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddressActivity.this,CheckOutActivity.class);
                 startActivity(intent);
             }
         });

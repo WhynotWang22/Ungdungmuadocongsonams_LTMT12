@@ -23,7 +23,6 @@
     </LinearLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        app:cardCornerRadius="8dp"
         android:background="@drawable/bg_product_review"
         android:layout_height="match_parent">
         <FrameLayout
