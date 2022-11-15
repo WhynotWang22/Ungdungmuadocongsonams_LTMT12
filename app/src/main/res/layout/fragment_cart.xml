@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.CartFragment">
-
     <RelativeLayout
         android:id="@+id/relativeLayout_my_cart"
         android:layout_width="match_parent"
@@ -24,21 +23,12 @@
             android:textSize="16dp" />
 
     </RelativeLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/linelayout_cart1"
-    android:layout_below="@id/relativeLayout_my_cart"
-    android:layout_height="600dp">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_view_gio_hang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout_my_cart"/>
-</LinearLayout>
     <LinearLayout
-        android:layout_below="@+id/linelayout_cart1"
-        android:gravity="bottom"
         android:id="@+id/lout_test"
         android:orientation="vertical"
         android:layout_width="match_parent"

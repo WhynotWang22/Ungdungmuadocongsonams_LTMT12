@@ -1,6 +1,7 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
         holder.tv_desc_noti.setText(notification.getDesc());
         holder.tv_time_noti.setText(notification.getTime());
         Glide.with(context).load(notification.getImages()).into(holder.imageView);
+        holder.tv_title_noti.setMaxLines(1);
+        holder.tv_title_noti.setEllipsize(TextUtils.TruncateAt.END);
+        holder.tv_desc_noti.setMaxLines(2);
+        holder.tv_desc_noti.setEllipsize(TextUtils.TruncateAt.END);
 
     }
 
