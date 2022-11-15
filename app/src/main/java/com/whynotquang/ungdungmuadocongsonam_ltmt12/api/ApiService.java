@@ -1,13 +1,13 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductComment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ResponseUser;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
@@ -35,29 +35,15 @@ public interface ApiService {
     @GET("getall")
     Call<List<Product>> getProduct();
 
+    @GET("getall")
+    Call<List<Notification>> getNoti();
+
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);
 
 
     @GET("getall")
     Call<List<Category>> getCategory();
-
-    //get category theo items
-    @GET("getall/{id}")
-    Call<List<Product>> getAllproductbycategory(@Path("id") String id);
-
-    //get ao polo
-    @GET("getall/634d16bfb1d500646457f11d")
-    Call<List<Product>> getAoPolo();
-
-    ////changePassword
-    @FormUrlEncoded
-    @PUT("change-password")
-    Call<ResponseUser> updateExcute(
-            @Field("oldPassword") String oldPassword,
-            @Field("newPassword") String newPassword,
-            @Header("Authorization") String authtoken
-    );
 
     //login
     @FormUrlEncoded
@@ -74,12 +60,6 @@ public interface ApiService {
                             @Field("address") String diachi
     );
 
-    ///change pass after send link to your email
-    @FormUrlEncoded
-    @POST("forgot-password")
-    Call<User> postSendEmail(
-            @Field("email") String email,
-            @Header("Authorization") String authtoken);
 
     //get profile
     @GET("profile")
@@ -94,11 +74,9 @@ public interface ApiService {
     @POST("add")
     Call<Products> postCart(@Header("Authorization") String authtoken,
                             @Field("productId") String productId,
-                            @Field("color") String color,
-                            @Field("size") String size,
                             @Field("quantity") int quantity,
-                            @Field("amount") int amount
-    );
+                            @Field("size") String size,
+                            @Field("color") String color);
 
     //update sdt
     @FormUrlEncoded
@@ -118,60 +96,47 @@ public interface ApiService {
                               @Part MultipartBody.Part avatar
     );
 
-    ///get list cart
-    @GET("list")
-    Call<ProductAddCart> getlistCart(@Header("Authorization")
-                                             String authtoken);
-
-
-    ///delete item cart
-    @DELETE("delete/{itemId}")
-    Call<List<Products>> deletelistCart(@Header("Authorization") String authtoken,
-                                        @Path("itemId") String itemId);
-
-
-    ////tang so luong item cart
-    @FormUrlEncoded
-    @PUT("update/{itemId}")
-    Call<List<Products>> PostUpdateItemCart(@Header("Authorization") String authtoken,
-                                            @Path("itemId") String itemId,
-                                            @Field("quantity") int quantity
-    );
-
-    ///add order
-    @POST("createCashOrder/{cartId}")
-    Call<List<ProductAddCart>> PostCartAddOrder(@Header("Authorization") String authtoken,
-                                                @Path("cartId") String cartId
-    );
-
-    ///changeAdress
-    @FormUrlEncoded
-    @PUT("change-address")
-    Call<List<User>> putchangeAdress(@Header("Authorization") String authtoken,
-                                     @Field("address") String address
-
-    );
-
-    ///Comment Reviews
-    @FormUrlEncoded
-    @POST("add/{id}")
-    Call<List<Product>> postComment(@Header("Authorization") String authtoken,
-                                     @Path("id") String id,
-                                     @Field("ratingStar") Float ratingStar,
-                                     @Field("commentDes") String commentDes);
     //get list cart
     @GET("list")
     Call<Cart> getCart(@Header("Authorization") String authtoken);
 
+    //delete cart
+    @DELETE("delete/{id}")
+    Call<Products> deleteCart(@Header("Authorization") String authtoken, @Path("id") String id);
+
+    //update soluong
+    @FormUrlEncoded
+    @PUT("update/{id}")
+    Call<Products> updateCart(@Header("Authorization") String authtoken, @Path("id") String id, @Field("quantity") int quantity);
+
+    //post order
+    @FormUrlEncoded
     @POST("createCashOrder/{id}")
     Call<Order> postOrder(@Header("Authorization") String authtoken,
-                             @Path("id") String id
+                          @Path("id") String id,
+                          @Field("name") String name,
+                          @Field("phoneNumber") String phoneNumber,
+                          @Field("address") String address
+                          );
+    //get list address
+    @GET("getallShippingAddress")
+    Call<AddressItem> getAddress(@Header("Authorization") String authtoken);
+    //post address
+    @FormUrlEncoded
+    @POST("addShippingAddress")
+    Call<Address> postAddress(@Header("Authorization") String authtoken,
+                              @Field("Name") String name,
+                              @Field("DetailAddress") String detailAddress,
+                              @Field("NumberPhone") int numberPhone
     );
-    @GET("getall")
-    Call<List<Notification>> getNoti();
 
-    //    ///Get comments id
-    @GET("getall/{id}")
-    Call<ProductComment>getComments(@Path("id") String id);
 
+    ////changePassword
+    @FormUrlEncoded
+    @PUT("change-password")
+    Call<ResponseUser> updateExcute(
+            @Field("oldPassword") String oldPassword,
+            @Field("newPassword") String newPassword,
+            @Header("Authorization") String authtoken
+    );
 }

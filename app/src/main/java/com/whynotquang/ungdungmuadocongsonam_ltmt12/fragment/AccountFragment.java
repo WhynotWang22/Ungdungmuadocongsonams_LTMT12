@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.AddAddressActivity;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.AddressActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.LoginActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ProfileActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -64,6 +66,13 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ProfileActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        btn_diachi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddressActivity.class);
                 getActivity().startActivity(intent);
             }
         });

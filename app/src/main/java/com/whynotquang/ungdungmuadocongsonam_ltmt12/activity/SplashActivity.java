@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
@@ -22,50 +25,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SplashActivity extends AppCompatActivity {
 
+    Button btn_login_splash;
+    TextView txt_signup_splash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                SharedPreferences sp = SplashActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
-                String token = sp.getString("token","");
-                Log.d("aaa","token 1: "+token);
-                if (token.isEmpty()){
-                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                } else {
-                    getData(token);
-                }
-            }
-        },1000);
-    }
-    private void getData(String token) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<User> call = apiService.getProfile(token);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }else {
-                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                }
-            }
+        btn_login_splash = findViewById(R.id.btn_login_splash);
+        txt_signup_splash = findViewById(R.id.txt_signup_splash);
 
+        getWindow().setStatusBarColor(getResources().getColor(R.color.color_login_sign_up));
+
+        btn_login_splash.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
-                Toast.makeText(SplashActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+            }
+        });
+        txt_signup_splash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SplashActivity.this, Sign_Activity.class);
+                startActivity(intent);
             }
         });
     }

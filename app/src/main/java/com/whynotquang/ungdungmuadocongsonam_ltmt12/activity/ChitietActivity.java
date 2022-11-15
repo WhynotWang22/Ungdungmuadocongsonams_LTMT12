@@ -124,7 +124,7 @@ public class ChitietActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Products> call = apiService.postCart(token,idProduct,color,size,soluong,tongtien);
+        Call<Products> call = apiService.postCart(token,idProduct,soluong,size,color);
         call.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {

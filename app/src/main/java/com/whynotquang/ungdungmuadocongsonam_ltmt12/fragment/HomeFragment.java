@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         SliderPhoto();
         getListProduct();
         getListCategory();
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.bg_xam));
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.color_bar));
 
         return view;
     }

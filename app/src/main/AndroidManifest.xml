@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -17,19 +16,44 @@
         android:theme="@style/Theme.Ungdungmuadocongsonam_LTMT12"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activity.CommentActivity"
+            android:name=".OrderDetailActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
-            android:name=".activity.ProductCategoryActivity"
+            android:name=".OrderActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
+        <activity
+            android:name=".activity.SplashActivitys"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.AddressActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.AddAddressActivity"
+            android:exported="true" />
         <activity
             android:name=".activity.CheckOutActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ProfileActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ImageProductActivity"
             android:exported="false">
@@ -64,7 +88,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.ChangeNumberActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ChangePasswordActivity"
             android:exported="false" />
@@ -82,7 +106,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <service
             android:name=".model.PushNotificationService"
