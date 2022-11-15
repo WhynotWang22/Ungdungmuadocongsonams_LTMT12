@@ -87,6 +87,8 @@ public class AddressActivity extends AppCompatActivity {
                         addressList.add(data);
                         adapter.notifyDataSetChanged();
                     }
+                }else {
+                    progressBar.setVisibility(View.GONE);
                 }
             }
 

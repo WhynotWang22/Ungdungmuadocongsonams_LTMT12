@@ -189,7 +189,10 @@ public class CheckOutActivity extends AppCompatActivity {
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if (response.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CheckOutActivity.this,ThanksOrder_Activity.class);
+                    startActivity(intent);
+                    finishAffinity();
+//                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                 }else{
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();

@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:layout_centerVertical="true">
         <ImageView
-            android:id="@+id/img_sanpham_order"
+            android:id="@+id/img_product_detail_order"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/product"
@@ -22,7 +22,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="10dp">
             <TextView
-                android:id="@+id/tv_title_order"
+                android:id="@+id/tv_title_product_detail_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Áo Hoodie Classic 0332"
@@ -30,7 +30,7 @@
                 android:textSize="14dp"
                 android:textColor="@color/mauchu"/>
             <TextView
-                android:id="@+id/tv_size_color_order"
+                android:id="@+id/tv_sizecolor_product_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Size"
@@ -38,7 +38,7 @@
                 android:textSize="12dp"
                 android:textColor="@color/mauchu2"/>
             <TextView
-                android:id="@+id/tv_soluong_order"
+                android:id="@+id/tv_soluong_product_detail_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1 sản phẩm"
@@ -49,39 +49,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/car"
-                        android:layout_gravity="center_vertical"/>
-                    <TextView
-                        android:id="@+id/tv_trangthai_order"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Đang giao hàng"
-                        android:fontFamily="@font/intermedium"
-                        android:textSize="12dp"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="@color/mauchu2"/>
-                </LinearLayout>
-                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentRight="true">
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Thành tiền:"-->
-<!--                        android:fontFamily="@font/intermedium"-->
-<!--                        android:textSize="12dp"-->
-<!--                        android:layout_marginLeft="8dp"-->
-<!--                        android:textColor="@color/mauchu2"/>-->
+                    android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/tv_thanhtien_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thành tiền:"
+                        android:fontFamily="@font/intermedium"
+                        android:textSize="12dp"
+                        android:textColor="@color/mauchu2"/>
+                    <TextView
+                        android:id="@+id/tv_thanhtien_product_detail_order"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="335.000đ"
