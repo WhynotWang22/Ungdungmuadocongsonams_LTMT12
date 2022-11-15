@@ -28,7 +28,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickAddressListener;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickListener;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 

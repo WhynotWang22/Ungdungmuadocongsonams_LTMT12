@@ -3,7 +3,9 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -88,25 +90,42 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
         holder.layout_delete_item_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(AppConstain.BASE_URL + "cart/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                ApiService apiService = retrofit.create(ApiService.class);
-                Call<List<Products>> call = apiService.deletelistCart(token, product._id);
-                Log.d("eeeee", "eeeeeeeee" + product._id + token);
-                call.enqueue(new Callback<List<Products>>() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Bạn có muốn xóa không?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
-                        Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
-                    }
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharedPreferences sp1 = context.getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
+                        String token = sp1.getString("token", "");
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(AppConstain.BASE_URL + "cart/")
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+                        ApiService apiService = retrofit.create(ApiService.class);
+                        Call<Products> call = apiService.deleteCart(token, product._id);
+                        Log.d("eeeee", "eeeeeeeee" + product._id + token);
+                        call.enqueue(new Callback<Products>() {
+                            @Override
+                            public void onResponse(Call<Products> call, Response<Products> response) {
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                refreshData(position);
+                            }
 
-                    @Override
-                    public void onFailure(Call<List<Products>> call, Throwable t) {
-                        Toast.makeText(context, "Xóa Thành Công", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onFailure(Call<Products> call, Throwable t) {
+                                Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
-                refreshData(position);
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.show();
+
             }
         });
 
@@ -138,16 +157,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                                         .addConverterFactory(GsonConverterFactory.create())
                                         .build();
                                 ApiService apiService = retrofit.create(ApiService.class);
-                                Call<List<Products>> call1 = apiService.PostUpdateItemCart(token, product._id, value);
-                                call1.enqueue(new Callback<List<Products>>() {
+                                Call<Products> call1 = apiService.updateCart(token, product._id, value);
+                                call1.enqueue(new Callback<Products>() {
                                     @Override
-                                    public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
-                                        Toast.makeText(context, "tăng thất bại", Toast.LENGTH_SHORT).show();
+                                    public void onResponse(Call<Products> call, Response<Products> response) {
+                                        Toast.makeText(context, "Tăng thành công", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
-                                    public void onFailure(Call<List<Products>> call, Throwable t) {
-                                        Toast.makeText(context, "tăng thành công", Toast.LENGTH_SHORT).show();
+                                    public void onFailure(Call<Products> call, Throwable t) {
+                                        Toast.makeText(context, "Tăng thất bại ", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             } else {
@@ -188,16 +207,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
-                Call<List<Products>> call = apiService.PostUpdateItemCart(token, product._id, value);
-                call.enqueue(new Callback<List<Products>>() {
+                Call<Products> call = apiService.updateCart(token, product._id, value);
+                call.enqueue(new Callback<Products>() {
                     @Override
-                    public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
-                        Toast.makeText(context, "Giảm thất bại", Toast.LENGTH_SHORT).show();
+                    public void onResponse(Call<Products> call, Response<Products> response) {
+                        Toast.makeText(context, "Giảm thành công", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onFailure(Call<List<Products>> call, Throwable t) {
-                        Toast.makeText(context, "Giảm thành công", Toast.LENGTH_SHORT).show();
+                    public void onFailure(Call<Products> call, Throwable t) {
+                        Toast.makeText(context, "Giảm thất bại ", Toast.LENGTH_SHORT).show();
                     }
                 });
 

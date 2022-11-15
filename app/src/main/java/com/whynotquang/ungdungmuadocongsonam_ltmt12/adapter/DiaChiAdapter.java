@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickAddressListener;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ItemClickListener;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.InterFace.ItemClickListener;
 
 import java.util.List;
 

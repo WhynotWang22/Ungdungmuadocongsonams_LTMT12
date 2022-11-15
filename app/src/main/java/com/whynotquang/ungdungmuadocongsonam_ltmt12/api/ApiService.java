@@ -8,6 +8,8 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductComment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ResponseUser;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
@@ -117,10 +119,12 @@ public interface ApiService {
                           @Field("name") String name,
                           @Field("phoneNumber") String phoneNumber,
                           @Field("address") String address
-                          );
+    );
+
     //get list address
     @GET("getallShippingAddress")
     Call<AddressItem> getAddress(@Header("Authorization") String authtoken);
+
     //post address
     @FormUrlEncoded
     @POST("addShippingAddress")
@@ -129,6 +133,26 @@ public interface ApiService {
                               @Field("DetailAddress") String detailAddress,
                               @Field("NumberPhone") int numberPhone
     );
+
+    ///changeAdress
+    @FormUrlEncoded
+    @PUT("change-address")
+    Call<List<User>> putchangeAdress(@Header("Authorization") String authtoken,
+                                     @Field("address") String address
+
+    );
+
+    //    ///Get comments id
+    @GET("getall/{id}")
+    Call<ProductComment> getComments(@Path("id") String id);
+
+    ///Comment Reviews
+    @FormUrlEncoded
+    @POST("add/{id}")
+    Call<List<Product>> postComment(@Header("Authorization") String authtoken,
+                                    @Path("id") String id,
+                                    @Field("ratingStar") Float ratingStar,
+                                    @Field("commentDes") String commentDes);
 
 
     ////changePassword
@@ -139,4 +163,13 @@ public interface ApiService {
             @Field("newPassword") String newPassword,
             @Header("Authorization") String authtoken
     );
+
+    //get category theo items
+    @GET("getall/{id}")
+    Call<List<Product>> getAllproductbycategory(@Path("id") String id);
+
+    ///get list cart
+    @GET("list")
+    Call<ProductAddCart> getlistCart(@Header("Authorization")
+                                             String authtoken);
 }

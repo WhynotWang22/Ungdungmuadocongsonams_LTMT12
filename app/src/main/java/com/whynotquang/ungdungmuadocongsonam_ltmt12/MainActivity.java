@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body()!=null) {
-                    FirebaseMessaging.getInstance().subscribeToTopic(response.body()._id);
+                    FirebaseMessaging.getInstance().subscribeToTopic(response.body().getId());
                 }
             }
 
