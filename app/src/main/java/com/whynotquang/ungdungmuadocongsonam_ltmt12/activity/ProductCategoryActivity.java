@@ -43,6 +43,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
         ProductCategoryAdapter productCategoryAdapter = new ProductCategoryAdapter(productList,getApplicationContext());
         rc_productcategory.setAdapter(productCategoryAdapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        rc_productcategory.setHasFixedSize(true);
         rc_productcategory.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()

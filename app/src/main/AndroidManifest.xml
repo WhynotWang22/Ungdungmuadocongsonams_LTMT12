@@ -21,6 +21,10 @@
             android:exported="false">
         </activity>
         <activity
+            android:name=".activity.OrderActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".activity.CommentActivity"
             android:exported="false">
         </activity>
