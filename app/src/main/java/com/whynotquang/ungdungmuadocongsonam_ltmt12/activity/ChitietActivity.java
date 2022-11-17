@@ -105,6 +105,7 @@ public class ChitietActivity extends AppCompatActivity {
         });
     }
 
+
     private void postAddCart() {
         if (color==null){
             Toast.makeText(ChitietActivity.this, "Vui lòng chọn màu", Toast.LENGTH_SHORT).show();
@@ -202,28 +203,27 @@ public class ChitietActivity extends AppCompatActivity {
             }
         });
     }
+    private void getComment(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "comment/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<ProductComment> call = apiService.getComments(id);
+        call.enqueue(new Callback<ProductComment>() {
+            @Override
+            public void onResponse(Call<ProductComment> call, Response<ProductComment> response) {
+                if (response.body() != null) {
+                    productCommentList = new ArrayList<>();
+                    productCommentList.addAll(response.body().getProductItems());
+                    tv_so_luot_review.setText(response.body().getDem()  + " Bình Luận");
 
-   private void getComment(){
-       Retrofit retrofit = new Retrofit.Builder()
-               .baseUrl(AppConstain.BASE_URL + "comment/")
-               .addConverterFactory(GsonConverterFactory.create())
-               .build();
-       ApiService apiService = retrofit.create(ApiService.class);
-       Call<ProductComment> call = apiService.getComments(id);
-       call.enqueue(new Callback<ProductComment>() {
-           @Override
-           public void onResponse(Call<ProductComment> call, Response<ProductComment> response) {
-               if (response.body() != null) {
-                   productCommentList = new ArrayList<>();
-                   productCommentList.addAll(response.body().getProductItems());
-                   tv_so_luot_review.setText(response.body().getDem()  + " Bình Luận");
+                }
+            }
+            @Override
+            public void onFailure(Call<ProductComment> call, Throwable t) {
+            }
+        });
+    }
 
-               }
-           }
-           @Override
-           public void onFailure(Call<ProductComment> call, Throwable t) {
-               Toast.makeText(ChitietActivity.this, "Không có bình luận", Toast.LENGTH_SHORT).show();
-           }
-       });
-   }
 }

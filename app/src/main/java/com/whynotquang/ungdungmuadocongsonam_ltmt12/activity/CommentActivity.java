@@ -73,7 +73,8 @@ public class CommentActivity extends AppCompatActivity {
                     CommentAdapter commentAdapter = new CommentAdapter(productCommentList,getApplicationContext());
                     rc_comment.setAdapter(commentAdapter);
                     commentAdapter.notifyDataSetChanged();
-                } else {
+                }
+                else {
                     Toast.makeText(CommentActivity.this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
                 }
             }
