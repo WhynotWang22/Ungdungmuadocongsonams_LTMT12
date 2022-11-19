@@ -50,8 +50,8 @@ public class CheckOutActivity extends AppCompatActivity {
     TextView tv_so_sanpham;
     TextView tv_gia_checkout;
     TextView tv_fee_ship_checkout;
-    TextView tv_tongtien_checkout,tv_them_dia_chi;
-    Button btn_thanhtoan,btn_momo;
+    TextView tv_tongtien_checkout, tv_them_dia_chi;
+    Button btn_thanhtoan, btn_momo;
     RecyclerView rc_view_diachi;
     ProgressBar progressBar;
     String token;
@@ -59,7 +59,7 @@ public class CheckOutActivity extends AppCompatActivity {
     List<Address> addressList;
     int soluong_sanpham = 0;
     int feeship = 15000;
-    String id,name,phoneNumber,diachi;
+    String id, name, phoneNumber, diachi;
     String idUser = "";
     //////
     private String fee = "0";
@@ -68,6 +68,7 @@ public class CheckOutActivity extends AppCompatActivity {
     private String merchantCode = "MOMO0WGP20220901";
     private String merchantNameLabel = "Nguyễn Đình Quang";
     private String description = "Thanh toán dịch vụ mua hàng online";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +104,7 @@ public class CheckOutActivity extends AppCompatActivity {
         tv_them_dia_chi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CheckOutActivity.this,AddressActivity.class);
+                Intent intent = new Intent(CheckOutActivity.this, AddressActivity.class);
                 startActivity(intent);
             }
         });
@@ -115,8 +116,14 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         });
     }
+
     //Get token through MoMo app
     private void requestPayment() {
+        if (name == null || diachi == null || phoneNumber == null) {
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(CheckOutActivity.this, "Vui lòng chọn địa chỉ", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "cart/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -132,7 +139,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     AppMoMoLib.getInstance().setActionType(AppMoMoLib.ACTION_TYPE.GET_TOKEN);
                     int tongxien = Integer.parseInt(response.body().getTotal());
                     String ids = String.valueOf(response.body().get_id());
-                    Map<String, Object> eventValue = new HashMap<> ();
+                    Map<String, Object> eventValue = new HashMap<>();
                     //client Required
                     eventValue.put("merchantname", merchantName); //Tên đối tác. được đăng ký tại https://business.momo.vn. VD: Google, Apple, Tiki , CGV Cinemas
                     eventValue.put("merchantcode", merchantCode); //Mã đối tác, được cung cấp bởi MoMo tại https://business.momo.vn
@@ -152,34 +159,35 @@ public class CheckOutActivity extends AppCompatActivity {
 
 
     }
+
     //Get token callback from MoMo app an submit to server side
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
-            if(data != null) {
-                if(data.getIntExtra("status", -1) == 0) {
+        if (requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
+            if (data != null) {
+                if (data.getIntExtra("status", -1) == 0) {
                     //TOKEN IS AVAILABLE
 //                    String token = data.getStringExtra("data"); //Token response
 //                    String phoneNumber = data.getStringExtra("phonenumber");
                     String env = data.getStringExtra("env");
-                    if(env == null){
+                    if (env == null) {
                         env = "app";
                         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(AppConstain.BASE_URL + "order/")
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
                         ApiService apiService = retrofit.create(ApiService.class);
-                        Call<Order> call = apiService.postCardOrder(token,id,name,phoneNumber,diachi);
+                        Call<Order> call = apiService.postCardOrder(token, id, name, phoneNumber, diachi);
                         call.enqueue(new Callback<Order>() {
                             @Override
                             public void onResponse(Call<Order> call, Response<Order> response) {
-                                if (response.isSuccessful()){
+                                if (response.isSuccessful()) {
                                     progressBar.setVisibility(View.GONE);
-                                    Intent intent = new Intent(CheckOutActivity.this,ThanksOrder_Activity.class);
+                                    Intent intent = new Intent(CheckOutActivity.this, ThanksOrder_Activity.class);
                                     startActivity(intent);
                                     finishAffinity();
-//                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                                }else{
+                                 Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                                } else {
                                     progressBar.setVisibility(View.GONE);
                                     Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
                                 }
@@ -193,16 +201,16 @@ public class CheckOutActivity extends AppCompatActivity {
                         });
                     }
 
-                    if(token != null && !token.equals("")) {
+                    if (token != null && !token.equals("")) {
                         // TODO: send phoneNumber & token to your server side to process payment with MoMo server
                         // IF Momo topup success, continue to process your order
                     } else {
                     }
-                } else if(data.getIntExtra("status", -1) == 1) {
+                } else if (data.getIntExtra("status", -1) == 1) {
                     //TOKEN FAIL
-                    String message = data.getStringExtra("message") != null?data.getStringExtra("message"):"Thất bại";
+                    String message = data.getStringExtra("message") != null ? data.getStringExtra("message") : "Thất bại";
 
-                } else if(data.getIntExtra("status", -1) == 2) {
+                } else if (data.getIntExtra("status", -1) == 2) {
                     //TOKEN FAIL
                 } else {
                     //TOKEN FAIL
@@ -223,7 +231,7 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         });
         rc_view_diachi.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CheckOutActivity.this,RecyclerView.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CheckOutActivity.this, RecyclerView.VERTICAL, false);
         rc_view_diachi.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -276,15 +284,15 @@ public class CheckOutActivity extends AppCompatActivity {
                     for (int i = 0; i < productsList.size(); i++) {
                         soluong_sanpham++;
                     }
-                    id=response.body().get_id();
+                    id = response.body().get_id();
                     idUser = gioHang.getUserId();
-                    tv_so_sanpham.setText(soluong_sanpham+" sản phẩm)");
+                    tv_so_sanpham.setText(soluong_sanpham + " sản phẩm)");
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                    tv_gia_checkout.setText(decimalFormat.format(Integer.parseInt(response.body().getTotal()))+"đ");
-                    tv_fee_ship_checkout.setText(decimalFormat.format(feeship)+"đ");
+                    tv_gia_checkout.setText(decimalFormat.format(Integer.parseInt(response.body().getTotal())) + "đ");
+                    tv_fee_ship_checkout.setText(decimalFormat.format(feeship) + "đ");
                     int tongtien;
                     tongtien = Integer.parseInt(response.body().getTotal()) + feeship;
-                    tv_tongtien_checkout.setText(decimalFormat.format(tongtien)+"đ");
+                    tv_tongtien_checkout.setText(decimalFormat.format(tongtien) + "đ");
                 }
             }
 
@@ -295,8 +303,9 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         });
     }
+
     private void postOrder() {
-        if (name==null || diachi==null || phoneNumber==null ){
+        if (name == null || diachi == null || phoneNumber == null) {
             progressBar.setVisibility(View.GONE);
             Toast.makeText(CheckOutActivity.this, "Vui lòng chọn địa chỉ", Toast.LENGTH_SHORT).show();
             return;
@@ -306,17 +315,17 @@ public class CheckOutActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Order> call = apiService.postOrder(token,id,name,phoneNumber,diachi);
+        Call<Order> call = apiService.postOrder(token, id, name, phoneNumber, diachi);
         call.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
-                    Intent intent = new Intent(CheckOutActivity.this,ThanksOrder_Activity.class);
+                    Intent intent = new Intent(CheckOutActivity.this, ThanksOrder_Activity.class);
                     startActivity(intent);
                     finishAffinity();
 //                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
                 }
