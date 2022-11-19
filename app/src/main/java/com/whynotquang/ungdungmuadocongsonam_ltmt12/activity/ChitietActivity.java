@@ -83,15 +83,14 @@ public class ChitietActivity extends AppCompatActivity {
         getComment();
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
-
         selectSize();
-
         btn_themsanpham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 postAddCart();
             }
         });
+
     }
 
     private void reviews() {

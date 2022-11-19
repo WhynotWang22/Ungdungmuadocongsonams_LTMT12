@@ -44,12 +44,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import vn.momo.momo_partner.AppMoMoLib;
+
 public class CheckOutActivity extends AppCompatActivity {
     TextView tv_so_sanpham;
     TextView tv_gia_checkout;
     TextView tv_fee_ship_checkout;
     TextView tv_tongtien_checkout,tv_them_dia_chi;
-    Button btn_thanhtoan;
+    Button btn_thanhtoan,btn_momo;
     RecyclerView rc_view_diachi;
     ProgressBar progressBar;
     String token;
@@ -59,10 +61,18 @@ public class CheckOutActivity extends AppCompatActivity {
     int feeship = 15000;
     String id,name,phoneNumber,diachi;
     String idUser = "";
+    //////
+    private String fee = "0";
+    int environment = 0;//developer default
+    private String merchantName = "Thanh toán đơn hàng";
+    private String merchantCode = "MOMO0WGP20220901";
+    private String merchantNameLabel = "Nguyễn Đình Quang";
+    private String description = "Thanh toán dịch vụ mua hàng online";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
+        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT);
         tv_so_sanpham = findViewById(R.id.tv_so_sanpham);
         tv_gia_checkout = findViewById(R.id.tv_gia_checkout);
         tv_fee_ship_checkout = findViewById(R.id.tv_fee_ship_checkout);
@@ -71,6 +81,7 @@ public class CheckOutActivity extends AppCompatActivity {
         rc_view_diachi = findViewById(R.id.rc_view_diachi);
 
         btn_thanhtoan = findViewById(R.id.btn_thanhtoan);
+        btn_momo = findViewById(R.id.btn_momo);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_checkout);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -96,8 +107,111 @@ public class CheckOutActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btn_momo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestPayment();
+
+            }
+        });
     }
     //Get token through MoMo app
+    private void requestPayment() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "cart/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<Cart> call = apiService.getCart(token);
+        call.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
+                    AppMoMoLib.getInstance().setAction(AppMoMoLib.ACTION.PAYMENT);
+                    AppMoMoLib.getInstance().setActionType(AppMoMoLib.ACTION_TYPE.GET_TOKEN);
+                    int tongxien = Integer.parseInt(response.body().getTotal());
+                    String ids = String.valueOf(response.body().get_id());
+                    Map<String, Object> eventValue = new HashMap<> ();
+                    //client Required
+                    eventValue.put("merchantname", merchantName); //Tên đối tác. được đăng ký tại https://business.momo.vn. VD: Google, Apple, Tiki , CGV Cinemas
+                    eventValue.put("merchantcode", merchantCode); //Mã đối tác, được cung cấp bởi MoMo tại https://business.momo.vn
+                    eventValue.put("amount", tongxien); //Kiểu integer
+                    eventValue.put("orderId", ids); //uniqueue id cho BillId, giá trị duy nhất cho mỗi BILL
+                    eventValue.put("orderLabel", "Mã đơn hàng"); //gán nhãn
+                    AppMoMoLib.getInstance().requestMoMoCallBack(CheckOutActivity.this, eventValue);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(CheckOutActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+    //Get token callback from MoMo app an submit to server side
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
+            if(data != null) {
+                if(data.getIntExtra("status", -1) == 0) {
+                    //TOKEN IS AVAILABLE
+//                    String token = data.getStringExtra("data"); //Token response
+//                    String phoneNumber = data.getStringExtra("phonenumber");
+                    String env = data.getStringExtra("env");
+                    if(env == null){
+                        env = "app";
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(AppConstain.BASE_URL + "order/")
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+                        ApiService apiService = retrofit.create(ApiService.class);
+                        Call<Order> call = apiService.postCardOrder(token,id,name,phoneNumber,diachi);
+                        call.enqueue(new Callback<Order>() {
+                            @Override
+                            public void onResponse(Call<Order> call, Response<Order> response) {
+                                if (response.isSuccessful()){
+                                    progressBar.setVisibility(View.GONE);
+                                    Intent intent = new Intent(CheckOutActivity.this,ThanksOrder_Activity.class);
+                                    startActivity(intent);
+                                    finishAffinity();
+//                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Order> call, Throwable t) {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(CheckOutActivity.this, "Lỗi api không đặt hàng được", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    if(token != null && !token.equals("")) {
+                        // TODO: send phoneNumber & token to your server side to process payment with MoMo server
+                        // IF Momo topup success, continue to process your order
+                    } else {
+                    }
+                } else if(data.getIntExtra("status", -1) == 1) {
+                    //TOKEN FAIL
+                    String message = data.getStringExtra("message") != null?data.getStringExtra("message"):"Thất bại";
+
+                } else if(data.getIntExtra("status", -1) == 2) {
+                    //TOKEN FAIL
+                } else {
+                    //TOKEN FAIL
+                }
+            } else {
+            }
+        } else {
+        }
+    }
 
     private void getDataAddress() {
         DiaChiAdapter adapter = new DiaChiAdapter(addressList, new ItemClickAddressListener() {

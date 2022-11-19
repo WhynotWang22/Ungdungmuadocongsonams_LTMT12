@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    tools:context=".activity.ChangePasswordActivity">
+    tools:context=".activity.CheckOutActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout_number"
@@ -207,10 +207,23 @@
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="62dp"
+        android:layout_marginBottom="72dp"
         android:background="@drawable/bg_button"
         android:fontFamily="@font/interbold"
         android:text="Thanh toán"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/btn_momo"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_momo"
+        android:fontFamily="@font/interbold"
+        android:text="MOMO"
         android:textAllCaps="false"
         android:textColor="@color/white" />
     <com.github.ybq.android.spinkit.SpinKitView
