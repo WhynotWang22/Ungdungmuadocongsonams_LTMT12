@@ -206,7 +206,7 @@
                 android:textSize="14dp" />
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="32dp"
+                android:layout_height="35dp"
                 android:layout_below="@+id/tv_size"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"

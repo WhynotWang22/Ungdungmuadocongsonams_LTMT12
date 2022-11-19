@@ -218,7 +218,7 @@ public class ProfileActivity extends AppCompatActivity {
             uri = data.getData();
             img_profile.setImageURI(uri);
         }else {
-                Toast.makeText(ProfileActivity.this, "Vui lòng chọn ảnh", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, "Vui lòng chọn ảnh", Toast.LENGTH_SHORT).show();
         }
     }
 }

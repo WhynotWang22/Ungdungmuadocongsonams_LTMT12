@@ -99,6 +99,26 @@
 <!--                android:textSize="14dp"-->
 <!--                android:layout_alignParentRight="true"/>-->
         </RelativeLayout>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:paddingTop="10dp"
+            android:checkedButton="@id/btn_radio_nhanthanhtoan">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_radio_nhanthanhtoan"
+                android:text="Thanh toán khi nhận hàng"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_radio_stripe"
+                android:text="Stripe"
+                />
+        </RadioGroup>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
