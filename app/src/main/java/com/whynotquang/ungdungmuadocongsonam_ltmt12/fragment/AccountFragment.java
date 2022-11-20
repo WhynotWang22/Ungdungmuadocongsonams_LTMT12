@@ -26,6 +26,8 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.AddressActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.LoginActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.OrderActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ProfileActivity;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.SettingActivity;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.StoreActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
@@ -81,6 +83,20 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), OrderActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), SettingActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+        btn_privacy_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), StoreActivity.class);
                 getActivity().startActivity(intent);
             }
         });

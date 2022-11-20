@@ -10,18 +10,19 @@
         android:orientation="horizontal">
         <RadioButton
             android:id="@+id/radio_size"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginRight="12dp"
             android:background="@drawable/radio_size_select"
             android:button="@android:color/transparent"
             android:fontFamily="@font/intermedium"
-            android:paddingLeft="11dp"
-            android:paddingTop="5dp"
-            android:paddingRight="11dp"
-            android:paddingBottom="5dp"
             android:text="S"
+            android:gravity="center"
             android:textColor="@color/mauxam"
             android:textSize="12dp" />
+        <!--            android:paddingLeft="11dp"-->
+        <!--            android:paddingTop="5dp"-->
+        <!--            android:paddingRight="11dp"-->
+        <!--            android:paddingBottom="5dp"-->
     </RadioGroup>
 </RelativeLayout>

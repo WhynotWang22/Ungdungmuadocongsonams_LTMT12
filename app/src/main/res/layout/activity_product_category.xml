@@ -15,10 +15,11 @@
      tools:layout_editor_absoluteX="1dp"
      tools:layout_editor_absoluteY="1dp">
 
-  <ImageView
+  <ImageButton
       android:id="@+id/btnback_category"
       android:layout_width="24dp"
       android:layout_height="24dp"
+      android:background="@color/white"
       android:layout_centerVertical="true"
       android:layout_marginLeft="25dp"
       android:src="@drawable/btnback" />

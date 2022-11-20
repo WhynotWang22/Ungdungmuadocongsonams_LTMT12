@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     EditText ed_pass_current,ed_pass_moi,ed_nhap_lai_pass;
     Button btn_change_pass;
     String token = null;
+    ImageButton btnback_changepass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
         ed_pass_moi = findViewById(R.id.ed_pass_moi);
         ed_nhap_lai_pass = findViewById(R.id.ed_nhap_lai_pass);
         btn_change_pass = findViewById(R.id.btn_change_pass);
+        btnback_changepass = findViewById(R.id.btnback_changepass);
+        btnback_changepass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         changePassword();
     }
     private void changePassword() {

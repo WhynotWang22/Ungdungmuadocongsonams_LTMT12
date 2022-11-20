@@ -13,10 +13,11 @@
         android:background="@color/white"
         tools:ignore="MissingConstraints">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_setting"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:background="@color/white"
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
             android:src="@drawable/btnback" />
@@ -223,7 +224,7 @@
     </LinearLayout>
 <!--    4-->
     <LinearLayout
-        android:id="@+id/ll_Change_Password"
+        android:id="@+id/linear_Change_Password"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_below="@+id/ll_Currency"
@@ -274,10 +275,10 @@
     </LinearLayout>
 <!--    5-->
     <LinearLayout
-        android:id="@+id/ll_Notification_Setting"
+        android:id="@+id/linear_Notification_Setting"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_below="@+id/ll_Change_Password"
+        android:layout_below="@+id/linear_Change_Password"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
