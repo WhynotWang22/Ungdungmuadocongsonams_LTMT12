@@ -76,7 +76,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        Log.d("id","id: "+id);
+        Log.d("id", "id: " + id);
         getData();
         btnback_chitiet_donhang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +108,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.e("id","data"+response.body().getStatus());
+                    Log.e("id", "data" + response.body().getStatus());
                     progressBar.setVisibility(View.GONE);
                     Order order = response.body();
 

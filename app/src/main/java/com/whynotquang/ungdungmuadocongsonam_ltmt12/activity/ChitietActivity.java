@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class ChitietActivity extends AppCompatActivity {
     TextView tv_title_product_chitiet, tv_so_luot_review, tv_price_product_chitiet,tv_chitietsanpham;
     RadioButton radioGroup_color, radioGroup_size;
     Button btn_themsanpham;
+    ImageButton btnback_chitiet;
     List<Product> productList;
     String id;
     ArrayList<String> list_img;
@@ -71,6 +73,7 @@ public class ChitietActivity extends AppCompatActivity {
         cardview_img = findViewById(R.id.cardview_img);
         recyclerView_size = findViewById(R.id.rc_view_size);
         btn_themsanpham = findViewById(R.id.btn_themsanpham);
+        btnback_chitiet = findViewById(R.id.btnback_chitiet);
         tv_chitietsanpham = findViewById(R.id.tv_chitietsanpham);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_chitietsp);
         Sprite threeBounce = new ThreeBounce();
@@ -90,7 +93,12 @@ public class ChitietActivity extends AppCompatActivity {
                 postAddCart();
             }
         });
-
+        btnback_chitiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void reviews() {

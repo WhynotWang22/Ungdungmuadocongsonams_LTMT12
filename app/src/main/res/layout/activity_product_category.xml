@@ -36,9 +36,9 @@
  </RelativeLayout>
  <androidx.recyclerview.widget.RecyclerView
      android:layout_below="@+id/relativeLayout_category"
+     android:layout_marginTop="10dp"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content"
+     android:layout_height="match_parent"
      android:id="@+id/rc_productcategory"
-     android:layout_marginRight="32dp"
-     android:layout_marginLeft="32dp"/>
+   />
 </RelativeLayout>

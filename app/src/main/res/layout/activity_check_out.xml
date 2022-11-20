@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="1dp">
 
         <ImageButton
-            android:id="@+id/btnback_change_number"
+            android:id="@+id/btnback_checkout"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
