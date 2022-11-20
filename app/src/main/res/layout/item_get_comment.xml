@@ -42,19 +42,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="-20dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="-30dp"
                 android:orientation="vertical">
 
                 <RatingBar
+                    android:progressTint="@color/rating"
+                    android:layout_marginLeft="40dp"
                     android:id="@+id/ratingbar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/rating_5"
                     android:isIndicator="true"
                     android:numStars="5"
-                    android:progressTint="@color/rating"
                     android:rating="5" />
             </LinearLayout>
 
