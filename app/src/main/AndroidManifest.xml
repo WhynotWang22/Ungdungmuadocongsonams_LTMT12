@@ -15,14 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ungdungmuadocongsonam_LTMT12"
         android:usesCleartextTraffic="true">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activity.StoreActivity"
+            android:exported="true">
+        </activity>
         <activity
             android:name=".activity.ProductCategoryActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".activity.CommentActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".activity.OrderDetailActivity"
             android:exported="false">
@@ -32,8 +39,7 @@
         </activity>
         <activity
             android:name=".activity.OrderActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activity.SplashActivitys"
             android:exported="true">
@@ -78,8 +84,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.ThanksOrder_Activity"
-            android:exported="false" >
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".activity.OrderFailed_Activity"
             android:exported="true" />
@@ -103,8 +108,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.SplashActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

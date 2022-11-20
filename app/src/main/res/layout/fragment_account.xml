@@ -217,7 +217,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="65dp"
                 android:fontFamily="@font/interbold"
-                android:text="Privacy Settings"
+                android:text="Cửa hàng"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />
 
