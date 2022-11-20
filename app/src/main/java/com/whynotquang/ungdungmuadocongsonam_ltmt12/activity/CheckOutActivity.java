@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -62,6 +64,7 @@ public class CheckOutActivity extends AppCompatActivity {
     TextView tv_fee_ship_checkout;
     TextView tv_tongtien_checkout, tv_them_dia_chi;
     Button btn_thanhtoan;
+    ImageButton btnback_checkout;
     RecyclerView rc_view_diachi;
     ProgressBar progressBar;
     RadioButton btn_radio_nhanthanhtoan,btn_radio_stripe;
@@ -90,6 +93,7 @@ public class CheckOutActivity extends AppCompatActivity {
         rc_view_diachi = findViewById(R.id.rc_view_diachi);
         btn_radio_nhanthanhtoan = findViewById(R.id.btn_radio_nhanthanhtoan);
         btn_radio_stripe = findViewById(R.id.btn_radio_stripe);
+        btnback_checkout = findViewById(R.id.btnback_checkout);
 
         btn_thanhtoan = findViewById(R.id.btn_thanhtoan);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_checkout);
@@ -132,6 +136,12 @@ public class CheckOutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CheckOutActivity.this, AddressActivity.class);
                 startActivity(intent);
+            }
+        });
+        btnback_checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
         paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);

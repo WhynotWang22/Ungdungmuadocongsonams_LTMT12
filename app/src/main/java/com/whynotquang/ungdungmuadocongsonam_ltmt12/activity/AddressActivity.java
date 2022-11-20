@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class AddressActivity extends AppCompatActivity {
     AddressAdapter adapter;
     List<Address> addressList;
     ProgressBar progressBar;
-    ImageView btnback_address;
+    ImageButton btnback_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +71,7 @@ public class AddressActivity extends AppCompatActivity {
         btnback_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddressActivity.this,CheckOutActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }

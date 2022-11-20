@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class OrderActivity extends AppCompatActivity {
     List<Order> orderList;
     OrderAdapter adapter;
     ProgressBar progressBar;
+    ImageButton btnback_order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class OrderActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rc_view_order);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_donhangcuatoi);
         Sprite threeBounce = new ThreeBounce();
+        btnback_order = findViewById(R.id.btnback_order);
+
         progressBar.setIndeterminateDrawable(threeBounce);
         progressBar.setVisibility(View.VISIBLE);
         orderList = new ArrayList<>();
@@ -53,6 +57,12 @@ public class OrderActivity extends AppCompatActivity {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(OrderActivity.this,DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
         getData();
+        btnback_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void getData() {

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class CommentActivity extends AppCompatActivity {
     private TextView tv_dem_comments;
     private CommentAdapter commentAdapter;
     List<Comment> productCommentList;
+    ImageButton btnback_comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +48,16 @@ public class CommentActivity extends AppCompatActivity {
         rc_comment = findViewById(R.id.rc_comment);
         tv_avg = findViewById(R.id.tv_avg);
         tv_dem_comments = findViewById(R.id.tv_dem_comments);
+        btnback_comment = findViewById(R.id.btnback_comment);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         getdataComment();
-
+        btnback_comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void getdataComment() {

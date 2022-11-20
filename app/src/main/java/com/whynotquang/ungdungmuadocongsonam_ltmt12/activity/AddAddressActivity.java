@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class AddAddressActivity extends AppCompatActivity {
     EditText ed_address_addaddress,ed_name_addaddress,ed_sdt_addaddress;
     Button btn_add_address;
     ProgressBar progressBar;
-    ImageView btnback_add_address;
+    ImageButton btnback_add_address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +71,7 @@ public class AddAddressActivity extends AppCompatActivity {
         btnback_add_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddAddressActivity.this,AddressActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }

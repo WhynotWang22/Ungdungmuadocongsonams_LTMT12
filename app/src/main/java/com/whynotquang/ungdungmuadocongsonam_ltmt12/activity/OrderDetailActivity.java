@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     TextView tv_trangthai_donhangchitiet, tv_name_orderdetail, tv_sdt_orderdetail, tv_diachi_orderdetail, tv_madon_orderdetail,
             tv_soluong_orderdetail, tv_time_orderdetail, tv_tongtien_orderdetail, tv_thanhtoan_orderdetail, tv_thanks_orderdetail;
     RecyclerView recyclerView;
+    ImageButton btnback_chitiet_donhang;
     String id;
     ProgressBar progressBar;
     List<Products> productList;
@@ -65,6 +67,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         tv_thanhtoan_orderdetail = findViewById(R.id.tv_thanhtoan_orderdetail);
         tv_thanks_orderdetail = findViewById(R.id.tv_thanks_orderdetail);
         layout = findViewById(R.id.layout_donhang_1);
+        btnback_chitiet_donhang = findViewById(R.id.btnback_chitiet_donhang);
 
         recyclerView = findViewById(R.id.rc_view_product_orderdetail);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_orderdetail);
@@ -75,6 +78,12 @@ public class OrderDetailActivity extends AppCompatActivity {
         id = intent.getStringExtra("id");
         Log.d("id","id: "+id);
         getData();
+        btnback_chitiet_donhang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void getData() {

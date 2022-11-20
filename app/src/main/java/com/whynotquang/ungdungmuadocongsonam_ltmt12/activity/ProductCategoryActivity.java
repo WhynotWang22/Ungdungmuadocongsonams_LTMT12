@@ -2,6 +2,8 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductCategoryActivity extends AppCompatActivity {
 
     RecyclerView rc_productcategory;
+    ImageButton btnback_category;
     List<Product> productList;
     String id;
     @Override
@@ -33,9 +36,16 @@ public class ProductCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_category);
         rc_productcategory = findViewById(R.id.rc_productcategory);
+        btnback_category = findViewById(R.id.btnback_category);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         getProductCategory();
+        btnback_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void getProductCategory() {

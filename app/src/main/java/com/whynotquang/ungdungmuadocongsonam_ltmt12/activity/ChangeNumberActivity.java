@@ -8,6 +8,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class ChangeNumberActivity extends AppCompatActivity {
     EditText ed_sdt_moi, ed_nhap_lai_sdt;
     Button btn_change_sdt;
     ProgressBar progressBar;
+    ImageButton btnback_change_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class ChangeNumberActivity extends AppCompatActivity {
         ed_sdt_moi = findViewById(R.id.ed_sdt_moi);
         ed_nhap_lai_sdt = findViewById(R.id.ed_nhap_lai_sdt);
         btn_change_sdt = findViewById(R.id.btn_change_sdt);
+        btnback_change_number = findViewById(R.id.btnback_change_number);
 
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_change_phone_number);
         Sprite threeBounce = new ThreeBounce();
@@ -69,6 +73,12 @@ public class ChangeNumberActivity extends AppCompatActivity {
                     return;
                 }
                 putData(sdt2);
+            }
+        });
+        btnback_change_number.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }

@@ -11,6 +11,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btn_change_profile;
     ProgressBar progressBar;
     ImageView img_profile;
+    ImageButton btnback_profile;
     String token;
     Uri uri;
     String linkimg;
@@ -56,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         ed_sdt_profile = findViewById(R.id.ed_phone_number_profile);
         btn_change_profile = findViewById(R.id.btn_change_profile);
         img_profile = findViewById(R.id.profile_image);
+        btnback_profile = findViewById(R.id.btnback_profile);
 
 
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_change_profile);
@@ -78,6 +81,12 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 editData();
+            }
+        });
+        btnback_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }

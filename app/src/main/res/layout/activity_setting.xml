@@ -13,10 +13,11 @@
         android:background="@color/white"
         tools:ignore="MissingConstraints">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_setting"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:background="@color/white"
             android:layout_centerVertical="true"
             android:layout_marginLeft="25dp"
             android:src="@drawable/btnback" />

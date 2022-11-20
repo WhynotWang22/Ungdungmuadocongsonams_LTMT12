@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -50,6 +51,7 @@ public class ReviewActivity extends AppCompatActivity {
     private EditText edCmtReview;
     private Button btnReview;
     private ProgressBar progressBar;
+    ImageButton btnback_review;
 
     ///
     @SuppressLint("MissingInflatedId")
@@ -65,6 +67,7 @@ public class ReviewActivity extends AppCompatActivity {
         tvColorProductReview = (TextView) findViewById(R.id.tv_color_product_review);
         tvProductReview = (TextView) findViewById(R.id.tv_product_review);
         ratingbar = (RatingBar) findViewById(R.id.ratingbar);
+        btnback_review = findViewById(R.id.btnback_review);
         tvProductReview3 = (TextView) findViewById(R.id.tv_product_review3);
         edCmtReview = (EditText) findViewById(R.id.ed_cmt_review);
         btnReview = (Button) findViewById(R.id.btn_review);
@@ -87,6 +90,12 @@ public class ReviewActivity extends AppCompatActivity {
                     return;
                 }
                 PostComment();
+            }
+        });
+        btnback_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
