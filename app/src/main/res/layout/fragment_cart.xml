@@ -91,4 +91,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+    <LinearLayout
+        android:id="@+id/layout_not_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="244dp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/empty_cart_icon"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hổng có gì trong giỏ hết"
+            android:fontFamily="@font/interbold"
+            android:textSize="14dp"
+            android:gravity="center"
+            android:textColor="@color/mauchu"/>
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Hãy đi mua sắm một số sản phẩm đáng yêu từ chúng tôi !"
+            android:fontFamily="@font/intermedium"
+            android:textSize="12dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/mauchu2"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
 </RelativeLayout>

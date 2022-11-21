@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.AddAddressActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.AddressActivity;
@@ -46,6 +49,7 @@ public class AccountFragment extends Fragment {
     String token;
     SharedPreferences sp;
     LinearLayout liner_profile;
+    ProgressBar progressBar;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -63,6 +67,10 @@ public class AccountFragment extends Fragment {
         btn_privacy_setting = view.findViewById(R.id.btn_privacy_setting);
         btn_logout = view.findViewById(R.id.btn_logout);
         liner_profile = view.findViewById(R.id.liner_profile);
+        progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_account);
+        Sprite threeBounce = new ThreeBounce();
+        progressBar.setIndeterminateDrawable(threeBounce);
+        progressBar.setVisibility(View.VISIBLE);
 
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         liner_profile.setOnClickListener(new View.OnClickListener() {
@@ -104,13 +112,14 @@ public class AccountFragment extends Fragment {
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 logOut();
             }
         });
         sp = getContext().getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         token = sp.getString("token", "");
         getData(token);
-        Log.d("aaa", "token: " + token);
+//        Log.d("aaa", "token: " + token);
         return view;
     }
 
@@ -124,7 +133,8 @@ public class AccountFragment extends Fragment {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
@@ -132,16 +142,15 @@ public class AccountFragment extends Fragment {
                     SharedPreferences.Editor Ed = sp.edit();
                     Ed.clear();
                     Ed.commit();
-                }else {
-                    Toast.makeText(getContext(), "Đăng xuất ko thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Đăng xuất không thành công", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getContext(), "Lỗi api đăng xuất"+t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("aaa", "err: " + t.getMessage());
-
+                Toast.makeText(getContext(), "Lỗi api đăng xuất", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -156,19 +165,23 @@ public class AccountFragment extends Fragment {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful() && response.body()!=null) {
+                if (response.isSuccessful() && response.body() != null) {
                     tv_email.setText(response.body().getEmail());
                     tv_name.setText(response.body().getFullName());
                     Glide.with(getContext()).load(response.body().getAvatar()).into(avt);
+                    progressBar.setVisibility(View.GONE);
+                } else {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    getActivity().finishAffinity();
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Intent intent = new Intent(getContext(),LoginActivity.class);
-                startActivity(intent);
-                getActivity().finishAffinity();
-                Toast.makeText(getContext(), "Không lấy được dữ liệu user", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
             }
         });
     }

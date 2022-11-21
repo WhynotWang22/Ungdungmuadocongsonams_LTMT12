@@ -1,246 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
     tools:context=".fragment.CategoryFragment">
-
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="64dp"
-        android:fontFamily="@font/interbold"
-        android:text="Tài khoản"
-        android:textColor="@color/mauchu"
-        android:textFontWeight="700"
-        android:textSize="22dp" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="36dp"
-        android:id="@+id/liner_profile">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/avt"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            />
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/interbold"
+            android:text="Tài khoản"
+            android:textColor="@color/mauchu"
+            android:textFontWeight="700"
+            android:textSize="22dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="36dp"
+            android:id="@+id/liner_profile">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avt"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginLeft="32dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="32dp">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:fontFamily="@font/interbold"
+                    android:textColor="@color/mauchu"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/intermedium"
+                    android:textColor="@color/mauchu2"
+                    android:textSize="14dp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
-            android:paddingRight="32dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_name"
+            <RelativeLayout
+                android:id="@+id/btn_my_order"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginLeft="32dp"
-                android:fontFamily="@font/interbold"
-                android:textColor="@color/mauchu"
-                android:textSize="18dp" />
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp">
 
-            <TextView
-                android:id="@+id/tv_email"
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/myorder" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="65dp"
+                    android:fontFamily="@font/interbold"
+                    android:text="Đơn hàng của bạn"
+                    android:textColor="@color/mauchu"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/left" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_diachi"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/intermedium"
-                android:textColor="@color/mauchu2"
-                android:textSize="14dp" />
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/diachi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="65dp"
+                    android:fontFamily="@font/interbold"
+                    android:text="Địa chỉ giao hàng"
+                    android:textColor="@color/mauchu"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/left" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_phuongthucthanhtoan"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/wallet" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="65dp"
+                    android:fontFamily="@font/interbold"
+                    android:text="Phương thức thanh toán"
+                    android:textColor="@color/mauchu"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/left" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_setting"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/setting" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="65dp"
+                    android:fontFamily="@font/interbold"
+                    android:text="Cài đặt"
+                    android:textColor="@color/mauchu"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/left" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/btn_privacy_setting"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/setting3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="65dp"
+                    android:fontFamily="@font/interbold"
+                    android:text="Cửa hàng"
+                    android:textColor="@color/mauchu"
+                    android:textSize="14dp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/left" />
+            </RelativeLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/interbold"
+            android:text="Đăng xuất"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
+    <com.github.ybq.android.spinkit.SpinKitView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit_account"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/btn_my_order"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="32dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/myorder" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="65dp"
-                android:fontFamily="@font/interbold"
-                android:text="Đơn hàng của bạn"
-                android:textColor="@color/mauchu"
-                android:textSize="14dp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/left" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/btn_diachi"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="32dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/diachi" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="65dp"
-                android:fontFamily="@font/interbold"
-                android:text="Địa chỉ giao hàng"
-                android:textColor="@color/mauchu"
-                android:textSize="14dp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/left" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/btn_phuongthucthanhtoan"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="32dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/wallet" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="65dp"
-                android:fontFamily="@font/interbold"
-                android:text="Phương thức thanh toán"
-                android:textColor="@color/mauchu"
-                android:textSize="14dp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/left" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/btn_setting"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="32dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/setting" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginLeft="65dp"
-                android:fontFamily="@font/interbold"
-                android:text="Cài đặt"
-                android:textColor="@color/mauchu"
-                android:textSize="14dp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/left" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/btn_privacy_setting"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="32dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/setting3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="65dp"
-                android:fontFamily="@font/interbold"
-                android:text="Cửa hàng"
-                android:textColor="@color/mauchu"
-                android:textSize="14dp" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/left" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginRight="32dp"
-        android:background="@drawable/bg_button"
-        android:fontFamily="@font/interbold"
-        android:text="Đăng xuất"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16dp" />
-</LinearLayout>
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/color_progressbar"
+        android:layout_centerInParent="true" />
+</RelativeLayout>

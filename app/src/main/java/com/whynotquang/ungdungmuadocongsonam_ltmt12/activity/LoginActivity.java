@@ -55,10 +55,6 @@ public class LoginActivity extends AppCompatActivity {
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.bg_xam));
 
-        SharedPreferences sp = LoginActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
-        String aaa = sp.getString("token","");
-        Log.d("aaa","token logout: "+aaa);
-
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

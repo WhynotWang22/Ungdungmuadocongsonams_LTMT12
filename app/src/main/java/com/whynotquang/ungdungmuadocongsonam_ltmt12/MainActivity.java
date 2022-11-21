@@ -48,14 +48,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
+    boolean switch_noti;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // main activity
         navigationView = findViewById(R.id.navigation);
-
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -84,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
         });
         SharedPreferences sp = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
+        SharedPreferences sp1 = getApplicationContext().getSharedPreferences("switch", MODE_PRIVATE);
+        switch_noti = sp1.getBoolean("value", true);
         getData(token);
     }
+
     private void getData(String token) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://mofshop.shop/api/auth/")
@@ -96,8 +98,16 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful() && response.body()!=null) {
-                    FirebaseMessaging.getInstance().subscribeToTopic(response.body().getId());
+                if (response.isSuccessful() && response.body() != null) {
+                    if (switch_noti == true) {
+                        //dk nhan all
+                        FirebaseMessaging.getInstance().subscribeToTopic("all");
+                        //dang ky nhan thong bao users
+                        FirebaseMessaging.getInstance().subscribeToTopic(response.body().getId());
+                    } else {
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic("all");
+                        FirebaseMessaging.getInstance().unsubscribeFromTopic(response.body().getId());
+                    }
                 }
             }
 

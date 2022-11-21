@@ -55,8 +55,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 token = sp.getString("token","");
                 String  oldPassword= ed_pass_current.getText().toString();
                 String newPassword = ed_pass_moi.getText().toString();
-//                String repeat = ed_nhap_lai_pass.getText().toString();
-
 
                 if (oldPassword.isEmpty()){
                     ed_pass_current.setError("Không được để trống");
@@ -68,11 +66,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     ed_pass_current.requestFocus();
                     return;
                 }
-//                if (repeat.isEmpty()){
-//                    ed_pass_current.setError("khong duoc de trong");
-//                    ed_pass_current.requestFocus();
-//                    return;
-//                }
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://mofshop.shop/api/auth/")
                         .addConverterFactory(GsonConverterFactory.create())

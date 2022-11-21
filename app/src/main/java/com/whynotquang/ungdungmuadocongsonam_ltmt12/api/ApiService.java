@@ -1,5 +1,9 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
+
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
@@ -31,6 +35,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiService {
+
     @GET("getall")
     Call<List<Banner>> getBanner();
 
