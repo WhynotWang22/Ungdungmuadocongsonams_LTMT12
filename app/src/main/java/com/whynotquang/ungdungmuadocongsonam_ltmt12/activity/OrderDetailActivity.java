@@ -99,7 +99,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         SharedPreferences sp1 = getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
         String token = sp1.getString("token", "");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://mofshop.shop/api/order/")
+                .baseUrl(AppConstain.BASE_URL + "order/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
