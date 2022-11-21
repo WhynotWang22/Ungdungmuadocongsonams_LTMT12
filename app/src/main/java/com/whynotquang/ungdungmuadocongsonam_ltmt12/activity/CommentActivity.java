@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,11 +44,17 @@ public class CommentActivity extends AppCompatActivity {
     private TextView tv_avg;
     private TextView tv_dem_comments;
     private CommentAdapter commentAdapter;
+    private RatingBar ratingbar_cmt1;
     private ProgressBar progress5;
     private ProgressBar progress4;
     private ProgressBar progress3;
     private ProgressBar progress2;
     private ProgressBar progress1;
+    private TextView tvDemsao1;
+    private TextView tvDemsao2;
+    private TextView tvDemsao3;
+    private TextView tvDemsao4;
+    private TextView tvDemsao5;
     List<Comment> productCommentList;
     List<Comment> productCommentList1 = new ArrayList<>();
     List<Comment> productCommentList2 = new ArrayList<>();
@@ -60,11 +67,16 @@ public class CommentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
-
+        ratingbar_cmt1 = findViewById(R.id.ratingbar_cmt1);
         rc_comment = findViewById(R.id.rc_comment);
         tv_avg = findViewById(R.id.tv_avg);
         tv_dem_comments = findViewById(R.id.tv_dem_comments);
         btnback_comment = findViewById(R.id.btnback_comment);
+        tvDemsao1 = (TextView) findViewById(R.id.tv_demsao1);
+        tvDemsao2 = (TextView) findViewById(R.id.tv_demsao2);
+        tvDemsao3 = (TextView) findViewById(R.id.tv_demsao3);
+        tvDemsao4 = (TextView) findViewById(R.id.tv_demsao4);
+        tvDemsao5 = (TextView) findViewById(R.id.tv_demsao5);
         progress5 = (ProgressBar) findViewById(R.id.progress_5);
         progress4 = (ProgressBar) findViewById(R.id.progress_4);
         progress3 = (ProgressBar) findViewById(R.id.progress_3);
@@ -101,6 +113,7 @@ public class CommentActivity extends AppCompatActivity {
                     CommentAdapter commentAdapter = new CommentAdapter(productCommentList,getApplicationContext());
                     rc_comment.setAdapter(commentAdapter);
                     for (int i = 0; i < productCommentList.size(); i++) {
+                        ratingbar_cmt1.setRating((response.body().getAvg()));
                         if (productCommentList.get(i).getRatingStar() == 1) {
                             productCommentList1.add(productCommentList.get(i));
                         } else if (productCommentList.get(i).getRatingStar() == 1) {
@@ -132,6 +145,11 @@ public class CommentActivity extends AppCompatActivity {
                         progress3.setProgress(productCommentList3.size());
                         progress4.setProgress(productCommentList4.size());
                         progress5.setProgress(productCommentList5.size());
+                        tvDemsao5.setText(String.valueOf(productCommentList5.size()));
+                        tvDemsao4.setText(String.valueOf(productCommentList4.size()));
+                        tvDemsao3.setText(String.valueOf(productCommentList3.size()));
+                        tvDemsao2.setText(String.valueOf(productCommentList2.size()));
+                        tvDemsao1.setText(String.valueOf(productCommentList1.size()));
                     }
                     commentAdapter.notifyDataSetChanged();
                 }

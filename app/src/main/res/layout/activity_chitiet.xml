@@ -104,11 +104,16 @@
                         android:layout_marginTop="18dp"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <RatingBar
+                            android:progressTint="@color/rating"
+                            android:id="@+id/ratingbar_chitiet"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
                             android:layout_width="wrap_content"
-                            android:layout_height="12dp"
-                            android:src="@drawable/star" />
-
+                            android:layout_height="wrap_content"
+                            android:layout_alignRight="@+id/rating_5"
+                            android:isIndicator="true"
+                            android:numStars="5"
+                            android:rating="5" />
                         <TextView
                             android:id="@+id/tv_so_luot_review"
                             android:layout_width="wrap_content"

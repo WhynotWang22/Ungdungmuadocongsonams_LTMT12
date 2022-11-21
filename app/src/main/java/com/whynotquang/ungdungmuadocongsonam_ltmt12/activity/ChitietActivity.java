@@ -1,5 +1,6 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +64,8 @@ public class ChitietActivity extends AppCompatActivity {
     int soluong=1;
     String color;
     String size;
+    RatingBar ratingbar_chitiet;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +73,7 @@ public class ChitietActivity extends AppCompatActivity {
         tv_title_product_chitiet = findViewById(R.id.tv_title_product_chitiet);
         tv_price_product_chitiet = findViewById(R.id.tv_price_product_chitiet);
         tv_so_luot_review = findViewById(R.id.tv_so_luot_review);
+        ratingbar_chitiet  = findViewById(R.id.ratingbar_chitiet);
         img_product = findViewById(R.id.img_product);
         cardview_img = findViewById(R.id.cardview_img);
         recyclerView_size = findViewById(R.id.rc_view_size);
@@ -224,11 +229,14 @@ public class ChitietActivity extends AppCompatActivity {
                     productCommentList = new ArrayList<>();
                     productCommentList.addAll(response.body().getProductItems());
                     tv_so_luot_review.setText(response.body().getDem()  + " Bình Luận");
-
+                    for (int i = 0; i < productCommentList.size(); i++) {
+                        ratingbar_chitiet.setRating((response.body().getAvg()));
+                    }
                 }
             }
             @Override
             public void onFailure(Call<ProductComment> call, Throwable t) {
+
             }
         });
     }
