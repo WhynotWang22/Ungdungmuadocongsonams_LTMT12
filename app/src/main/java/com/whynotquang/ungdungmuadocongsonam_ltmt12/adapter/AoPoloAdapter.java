@@ -40,7 +40,9 @@ public class AoPoloAdapter extends RecyclerView.Adapter<AoPoloAdapter.viewholode
       holder.tvTitleProductAopolo.setText(product.getTitle());
       DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
       holder.tvPriceProductAopolo.setText("Giá:" +decimalFormat.format(product.getPrice())+ "Đ");
-      Glide.with(context).load(product.getImg()).error(R.drawable.full).into(holder.imgProductAopolo);
+      Glide.with(context).load(product.getImg()).error(R.drawable.full)
+              .placeholder(R.drawable.full)
+              .into(holder.imgProductAopolo);
     }
 
     @Override
@@ -49,7 +51,6 @@ public class AoPoloAdapter extends RecyclerView.Adapter<AoPoloAdapter.viewholode
     }
 
     public class viewholoder extends RecyclerView.ViewHolder {
-
         private RelativeLayout cardviewAopolo;
         private ImageView imgProductAopolo;
         private TextView tvTitleProductAopolo;

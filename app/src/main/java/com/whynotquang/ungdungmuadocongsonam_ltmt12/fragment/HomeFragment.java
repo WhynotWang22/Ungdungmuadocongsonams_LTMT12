@@ -26,6 +26,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.ultil.CheckConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +41,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     SliderView img_slide;
-    RecyclerView rc_view_duocdexuat,rc_view_danhmuc;
+    RecyclerView rc_view_duocdexuat,rc_view_danhmuc,rc_view_aopolo;
     //
     List<Product> productList;
     List<Category> categoryList;
+    List<Product> productListAopolo;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -51,12 +53,48 @@ public class HomeFragment extends Fragment {
         img_slide = view.findViewById(R.id.img_slidebanner);
         rc_view_duocdexuat = view.findViewById(R.id.rc_view_duocdexuat);
         rc_view_danhmuc = view.findViewById(R.id.rc_view_danhmuc);
-        SliderPhoto();
-        getListProduct();
-        getListCategory();
+        rc_view_aopolo = view.findViewById(R.id.rc_view_aopolo);
+        CheckInternet();
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.color_bar));
 
         return view;
+    }
+    private void CheckInternet(){
+        if (CheckConnection.haveNetwordConnection(getContext())){
+            SliderPhoto();
+            getListProduct();
+            getListCategory();
+            getAopolo();
+        }else {
+            CheckConnection.showToast_Short(getContext(),"Kiểm Tra kết nối của bạn");
+        }
+    }
+    private void getAopolo() {
+        productListAopolo = new ArrayList<>();
+        ProductAdapter productAdapter = new ProductAdapter(getContext(),productListAopolo);
+        rc_view_aopolo.setAdapter(productAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
+        rc_view_aopolo.setLayoutManager(linearLayoutManager);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "categorys/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<List<Product>> call = apiService.getAoPolo();
+        call.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.body() !=null){
+                    productListAopolo.addAll(response.body());
+                    productAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(getContext(), "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getListCategory() {

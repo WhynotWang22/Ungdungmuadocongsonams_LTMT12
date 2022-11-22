@@ -31,7 +31,9 @@ public class BannerAdapter extends SliderViewAdapter<BannerAdapter.Holder> {
     @Override
     public void onBindViewHolder(Holder viewHolder, int position) {
         Banner banner = bannerList.get(position);
-        Glide.with(viewHolder.imageView).load(banner.getAnh()).into(viewHolder.imageView);
+        Glide.with(viewHolder.imageView).load(banner.getAnh()).placeholder(R.drawable.full)
+                .error(R.drawable.full)
+                .into(viewHolder.imageView);
     }
 
     @Override

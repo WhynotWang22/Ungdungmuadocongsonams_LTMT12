@@ -42,7 +42,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
         holder.tv_title_product.setText(product.getTitle());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tv_price_product.setText(decimalFormat.format(product.getPrice())+ "đ");
-        Glide.with(context).load(product.getImg()).into(holder.img_product);
+        Glide.with(context).load(product.getImg()).placeholder(R.drawable.full)
+                .into(holder.img_product);
         holder.tv_title_product.setMaxLines(1);
         holder.tv_title_product.setEllipsize(TextUtils.TruncateAt.END);
 

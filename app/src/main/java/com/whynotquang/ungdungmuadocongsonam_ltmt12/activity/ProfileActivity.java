@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.RealPathUtil;
@@ -132,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity {
         MultipartBody.Part body = MultipartBody.Part.createFormData("avatar",file.getName(),requestBodyImg);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
+                .baseUrl(AppConstain.BASE_URL + "auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -161,7 +162,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void getData() {
         progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/auth/")
+                .baseUrl(AppConstain.BASE_URL + "auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

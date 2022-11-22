@@ -48,6 +48,10 @@ public interface ApiService {
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);
 
+    //get ao polo
+    @GET("getall/6364c85e71ea07f8ca10730f")
+    Call<List<Product>> getAoPolo();
+
 
     @GET("getall")
     Call<List<Category>> getCategory();
@@ -66,7 +70,6 @@ public interface ApiService {
                             @Field("password") String password,
                             @Field("address") String diachi
     );
-
 
     //get profile
     @GET("profile")
@@ -187,4 +190,14 @@ public interface ApiService {
     @GET("list")
     Call<ProductAddCart> getlistCart(@Header("Authorization")
                                              String authtoken);
+
+    //post order MoMo
+    @FormUrlEncoded
+    @POST("createCardOrder/{id}")
+    Call<Order> postCardOrder(@Header("Authorization") String authtoken,
+                          @Path("id") String id,
+                          @Field("name") String name,
+                          @Field("phoneNumber") String phoneNumber,
+                          @Field("address") String address
+    );
 }

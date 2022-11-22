@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,7 +16,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.PaymentSheet;
 import com.stripe.android.paymentsheet.PaymentSheetResult;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.DiaChiAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -57,6 +58,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import vn.momo.momo_partner.AppMoMoLib;
 
 public class CheckOutActivity extends AppCompatActivity {
     TextView tv_so_sanpham;
@@ -67,7 +69,7 @@ public class CheckOutActivity extends AppCompatActivity {
     ImageButton btnback_checkout;
     RecyclerView rc_view_diachi;
     ProgressBar progressBar;
-    RadioButton btn_radio_nhanthanhtoan,btn_radio_stripe;
+    RadioButton btn_radio_nhanthanhtoan, btn_radio_stripe, btn_radio_momo;
     String token;
     List<Products> productsList;
     List<Address> addressList;
@@ -80,11 +82,20 @@ public class CheckOutActivity extends AppCompatActivity {
     private static final String BACKEND_URL = "https://mofshop.shop/api/order";
     private String paymentIntentClientSecret;
     private PaymentSheet paymentSheet;
+    ///MOMO
+    private String fee = "0";
+    int environment = 0;//developer default
+    private String merchantName = "Thanh toán đơn hàng";
+    private String merchantCode = "MOMO0WGP20220901";
+    private String merchantNameLabel = "Nguyễn Đình Quang";
+    private String description = "Thanh toán dịch vụ mua hàng online";
 
+    @SuppressLint({"CutPasteId", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
+        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT);
         tv_so_sanpham = findViewById(R.id.tv_so_sanpham);
         tv_gia_checkout = findViewById(R.id.tv_gia_checkout);
         tv_fee_ship_checkout = findViewById(R.id.tv_fee_ship_checkout);
@@ -93,8 +104,8 @@ public class CheckOutActivity extends AppCompatActivity {
         rc_view_diachi = findViewById(R.id.rc_view_diachi);
         btn_radio_nhanthanhtoan = findViewById(R.id.btn_radio_nhanthanhtoan);
         btn_radio_stripe = findViewById(R.id.btn_radio_stripe);
+        btn_radio_momo = findViewById(R.id.btn_radio_momo);
         btnback_checkout = findViewById(R.id.btnback_checkout);
-
         btn_thanhtoan = findViewById(R.id.btn_thanhtoan);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_checkout);
         Sprite threeBounce = new ThreeBounce();
@@ -123,11 +134,13 @@ public class CheckOutActivity extends AppCompatActivity {
                 }
 //                postOrder();
                 String typePay = "";
-                if (btn_radio_nhanthanhtoan.isChecked()){
+                if (btn_radio_nhanthanhtoan.isChecked()) {
                     postOrder();
-                }else if (btn_radio_stripe.isChecked()){
+                } else if (btn_radio_stripe.isChecked()) {
                     PaymentSheet.Configuration configuration = new PaymentSheet.Configuration("Example, Inc.");
                     paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration);
+                }if (btn_radio_momo.isChecked()){
+                      requestPayment();
                 }
             }
         });
@@ -162,7 +175,7 @@ public class CheckOutActivity extends AppCompatActivity {
         rc_view_diachi.setLayoutManager(linearLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/address/")
+                .baseUrl(AppConstain.BASE_URL + "address/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -192,7 +205,7 @@ public class CheckOutActivity extends AppCompatActivity {
 
     public void getData() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/cart/")
+                .baseUrl(AppConstain.BASE_URL + "cart/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -237,7 +250,7 @@ public class CheckOutActivity extends AppCompatActivity {
     private void postOrder() {
         progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://mofshop.shop/api/order/")
+                .baseUrl(AppConstain.BASE_URL + "order/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
@@ -347,6 +360,100 @@ public class CheckOutActivity extends AppCompatActivity {
         } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
             Throwable error = ((PaymentSheetResult.Failed) paymentSheetResult).getError();
             showAlert("Thanh toán thất bại.", error.getLocalizedMessage());
+        }
+    }
+    private void requestPayment() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "cart/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<Cart> call = apiService.getCart(token);
+        call.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
+                    AppMoMoLib.getInstance().setAction(AppMoMoLib.ACTION.PAYMENT);
+                    AppMoMoLib.getInstance().setActionType(AppMoMoLib.ACTION_TYPE.GET_TOKEN);
+                    int tongxien = Integer.parseInt(response.body().getTotal());
+                    String ids = String.valueOf(response.body().get_id());
+                    Map<String, Object> eventValue = new HashMap<> ();
+                    //client Required
+                    eventValue.put("merchantname", merchantName); //Tên đối tác. được đăng ký tại https://business.momo.vn. VD: Google, Apple, Tiki , CGV Cinemas
+                    eventValue.put("merchantcode", merchantCode); //Mã đối tác, được cung cấp bởi MoMo tại https://business.momo.vn
+                    eventValue.put("amount", tongxien); //Kiểu integer
+                    eventValue.put("orderId", ids); //uniqueue id cho BillId, giá trị duy nhất cho mỗi BILL
+                    eventValue.put("orderLabel", "Mã đơn hàng"); //gán nhãn
+                    AppMoMoLib.getInstance().requestMoMoCallBack(CheckOutActivity.this, eventValue);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(CheckOutActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    //Get token callback from MoMo app an submit to server side
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
+            if(data != null) {
+                if(data.getIntExtra("status", -1) == 0) {
+                    //TOKEN IS AVAILABLE
+//                    String token = data.getStringExtra("data"); //Token response
+//                    String phoneNumber = data.getStringExtra("phonenumber");
+                    String env = data.getStringExtra("env");
+                    if(env == null){
+                        env = "app";
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .baseUrl(AppConstain.BASE_URL + "order/")
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .build();
+                        ApiService apiService = retrofit.create(ApiService.class);
+                        Call<Order> call = apiService.postCardOrder(token,id,name,phoneNumber,diachi);
+                        call.enqueue(new Callback<Order>() {
+                            @Override
+                            public void onResponse(Call<Order> call, Response<Order> response) {
+                                if (response.isSuccessful()){
+                                    progressBar.setVisibility(View.GONE);
+                                    Intent intent = new Intent(CheckOutActivity.this,ThanksOrder_Activity.class);
+                                    startActivity(intent);
+                                    finishAffinity();
+//                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Order> call, Throwable t) {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(CheckOutActivity.this, "Lỗi api không đặt hàng được", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    if(token != null && !token.equals("")) {
+                        // TODO: send phoneNumber & token to your server side to process payment with MoMo server
+                        // IF Momo topup success, continue to process your order
+                    } else {
+                    }
+                } else if(data.getIntExtra("status", -1) == 1) {
+                    //TOKEN FAIL
+                    String message = data.getStringExtra("message") != null?data.getStringExtra("message"):"Thất bại";
+
+                } else if(data.getIntExtra("status", -1) == 2) {
+                    //TOKEN FAIL
+                } else {
+                    //TOKEN FAIL
+                }
+            } else {
+            }
+        } else {
         }
     }
 }
