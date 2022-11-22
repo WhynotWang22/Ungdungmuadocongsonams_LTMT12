@@ -39,7 +39,6 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.ultil.CheckConnection;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -62,7 +61,8 @@ public class CartFragment extends Fragment {
     private TextView tv_tongtiensp;
     private Button btnCheckoutCart, btnvalues;
     private ProgressBar progressBar;
-    private LinearLayout lout_test;
+    private LinearLayout layout_thanhtoan;
+    LinearLayout layout_not_cart;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,31 +75,31 @@ public class CartFragment extends Fragment {
         tv_tongtiensp = (TextView) view.findViewById(R.id.tv_tongtiensp);
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout);
         progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
-        lout_test = (LinearLayout) view.findViewById(R.id.lout_test);
+        layout_thanhtoan = (LinearLayout) view.findViewById(R.id.lout_test);
+        layout_not_cart =  view.findViewById(R.id.layout_not_cart);
+
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
         progressBar.setVisibility(View.GONE);
-        Intent intent = getActivity().getIntent();
-        id = intent.getStringExtra("id");
-        CheckInternet();
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("Tongtien"));
+        getdataCart();
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(broadcastReceiver, new IntentFilter("Tongtien"));
+
         btnCheckoutCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PostCartCheckout();
             }
         });
+        layout_not_cart.setVisibility(View.GONE);
+        layout_thanhtoan.setVisibility(View.GONE);
+
         return view;
     }
 
-    private void CheckInternet(){
-        if (CheckConnection.haveNetwordConnection(getContext())){
-            getdataCart();
-        }else {
-            CheckConnection.showToast_Short(getContext(),"Kiểm Tra kết nối của bạn");
-        }
-    }
+
 
     private void getdataCart() {
         SharedPreferences sp = getContext().getSharedPreferences("Login", MODE_PRIVATE);
@@ -114,7 +114,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
                 if (response.body() != null) {
-                    int tong = 0;
+                    int tong=0;
                     ///set recyclerview
                     productList = new ArrayList<>();
                     CartAdapter cartAdapter = new CartAdapter(productList, getContext());
@@ -126,10 +126,18 @@ public class CartFragment extends Fragment {
                     productList.addAll(response.body().getProducts());
                     ///lay so luong sp trong gio hang
                     for (int i = 0; i < productList.size(); i++) {
-                        soluongsanpham++;
+                        tong++;
                     }
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-                    tv_tongtiensp.setText(cartAdapter.getItemCount() + "sản phẩm)");
+                    tv_tongtiensp.setText( tong + "sản phẩm)");
+//                    tv_tongtien.setText(decimalFormat.format(response.body().getTotal()) + "đ");
+                    if (productList==null){
+                        layout_thanhtoan.setVisibility(View.GONE);
+                        layout_not_cart.setVisibility(View.VISIBLE);
+                    }else {
+                        layout_thanhtoan.setVisibility(View.VISIBLE);
+                        layout_not_cart.setVisibility(View.GONE);
+                    }
                 } else {
                     Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
 
@@ -138,6 +146,8 @@ public class CartFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ProductAddCart> call, Throwable t) {
+                layout_thanhtoan.setVisibility(View.GONE);
+                layout_not_cart.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
             }
         });
