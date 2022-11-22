@@ -18,11 +18,11 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class AoPoloAdapter extends RecyclerView.Adapter<AoPoloAdapter.viewholoder> {
+public class TopBanChayAdapter extends RecyclerView.Adapter<TopBanChayAdapter.viewholoder> {
     List<Product> productList;
     Context context;
 
-    public AoPoloAdapter(List<Product> productList, Context context) {
+    public TopBanChayAdapter(List<Product> productList, Context context) {
         this.productList = productList;
         this.context = context;
     }

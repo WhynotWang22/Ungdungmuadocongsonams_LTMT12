@@ -1,5 +1,6 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
     List<Product> productList;
     List<Category> categoryList;
     List<Product> productListAopolo;
+    @SuppressLint("MissingInflatedId")
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -61,25 +63,25 @@ public class HomeFragment extends Fragment {
     private void CheckInternet(){
         if (CheckConnection.haveNetwordConnection(getContext())){
             SliderPhoto();
-            getListProduct();
+            getDexuatchoban();
             getListCategory();
-            getAopolo();
+            getTop10();
         }else {
             CheckConnection.showToast_Short(getContext(),"Kiểm Tra kết nối của bạn");
         }
     }
-    private void getAopolo() {
+    private void getTop10() {
         productListAopolo = new ArrayList<>();
         ProductAdapter productAdapter = new ProductAdapter(getContext(),productListAopolo);
         rc_view_aopolo.setAdapter(productAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false);
         rc_view_aopolo.setLayoutManager(linearLayoutManager);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "categorys/")
+                .baseUrl(AppConstain.BASE_URL + "products/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Product>> call = apiService.getAoPolo();
+        Call<List<Product>> call = apiService.getTop10();
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -100,7 +102,7 @@ public class HomeFragment extends Fragment {
         categoryList = new ArrayList<>();
         CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categoryList);
         rc_view_danhmuc.setAdapter(categoryAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),4);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2,GridLayoutManager.HORIZONTAL, false);
         rc_view_danhmuc.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -125,12 +127,12 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void getListProduct() {
+    private void getDexuatchoban() {
         productList = new ArrayList<>();
         ProductAdapter productAdapter = new ProductAdapter(getContext(), productList);
         rc_view_duocdexuat.setAdapter(productAdapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        rc_view_duocdexuat.setLayoutManager(linearLayoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        rc_view_duocdexuat.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "products/")
