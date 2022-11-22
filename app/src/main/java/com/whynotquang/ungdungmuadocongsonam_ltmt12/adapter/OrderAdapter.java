@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,16 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ChitietActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.OrderDetailActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
     Context context;
     List<Order> orderList;
+    List<Products> productsList;
 
     public OrderAdapter(Context context, List<Order> orderList) {
         this.context = context;
@@ -39,11 +43,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
     @Override
     public void onBindViewHolder(@NonNull OrderHolder holder, @SuppressLint("RecyclerView") int position) {
         Order order = orderList.get(position);
-        holder.tv_title_order.setText(order.get_id());
+        holder.tv_title_order.setText(order.getProducts().get(0).getTitle());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tv_thanhtien_order.setText(decimalFormat.format(order.getTotal()) + "đ");
         holder.tv_trangthai_order.setText(order.getStatus());
-        Glide.with(context).load("https://beebot-sg-knowledgecloud.oss-ap-southeast-1.aliyuncs.com/kc/kc-media/kc-oss-1590723244161-3-01.jpg").into(holder.img_sanpham_order);
+        Glide.with(context).load(order.getProducts().get(0).getProductIMG()).into(holder.img_sanpham_order);
+        int soluong = 0;
+        for (int i = 0; i < order.getProducts().size(); i++) {
+            soluong++;
+        }
+        holder.tv_soluong_order.setText(String.valueOf(soluong)+" sản phẩm");
+        holder.tv_size_color_order.setText("Size: "+order.getProducts().get(0).getSize()+" | Color: "+order.getProducts().get(0).getColor());
 
         if (order.getStatus().equalsIgnoreCase("Đang chờ xác nhận")) {
             holder.tv_trangthai_order.setTextColor(Color.parseColor("#E49542"));
