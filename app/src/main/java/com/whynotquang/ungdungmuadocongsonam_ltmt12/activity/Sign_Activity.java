@@ -87,6 +87,10 @@ public class Sign_Activity extends AppCompatActivity {
                     Toast.makeText(Sign_Activity.this, "Số điện thoại phải trên 10 số", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                else if(phone_number.length()>10){
+                    Toast.makeText(Sign_Activity.this, "Số điện thoại chỉ được 10 số", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 else if (password.length() < 6) {
                     Toast.makeText(Sign_Activity.this, "Mật khẩu phải dài hơn 6 ký tự", Toast.LENGTH_SHORT).show();
                     return;

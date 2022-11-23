@@ -15,6 +15,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.Category_Frag_Adapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.ultil.CheckConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +36,16 @@ public class CategoryFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_category, container, false);
         rc_fg_category = view.findViewById(R.id.rc_fg_category);
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
-
-        getListCategorys();
+        CheckInternet();
         return  view;
     }
-
+    private void CheckInternet(){
+        if (CheckConnection.haveNetwordConnection(getContext())){
+            getListCategorys();
+        }else {
+            CheckConnection.showToast_Short(getContext(),"Kiểm Tra kết nối của bạn");
+        }
+    }
     private void getListCategorys() {
         categoryList = new ArrayList<>();
         Category_Frag_Adapter category_frag_adapter = new Category_Frag_Adapter(categoryList,getContext());

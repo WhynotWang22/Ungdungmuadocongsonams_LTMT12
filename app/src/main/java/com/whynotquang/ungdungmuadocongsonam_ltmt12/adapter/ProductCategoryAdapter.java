@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,26 +33,26 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
     @NonNull
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(context).inflate(R.layout.item_productscategory,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_productscategory,parent,false);
         return new viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-     Product product = productList.get(position);
-     holder.tvTitleProductcategory.setText(product.getTitle());
-     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-     holder.tvPriceProductcategory.setText("Giá:" +decimalFormat.format(product.getPrice())+ "Đ");
-     Glide.with(context).load(product.getImg()).error(R.drawable.full).into(holder.imgProductcategory);
-      holder.card_ItemClickDetail.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              Intent intent = new Intent(context, ChitietActivity.class);
-              intent.putExtra("id",product.get_id());
-              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-              context.startActivity(intent);
-          }
-      });
+        Product product = productList.get(position);
+        holder.tvTitleProductcategory.setText(product.getTitle());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.tvPriceProductcategory.setText("Giá:" +decimalFormat.format(product.getPrice())+ "Đ");
+        Glide.with(context).load(product.getImg()).error(R.drawable.full).into(holder.imgProductcategory);
+        holder.card_ItemClickDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ChitietActivity.class);
+                intent.putExtra("id",product.get_id());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -65,14 +64,14 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         private ImageView imgProductcategory;
         private TextView tvTitleProductcategory;
         private TextView tvPriceProductcategory;
-        private RelativeLayout card_ItemClickDetail;
+        private CardView card_ItemClickDetail;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
             imgProductcategory = (ImageView)itemView.findViewById(R.id.img_productcategory);
             tvTitleProductcategory = (TextView) itemView.findViewById(R.id.tv_title_productcategory);
             tvPriceProductcategory = (TextView) itemView.findViewById(R.id.tv_price_productcategory);
-            card_ItemClickDetail = (RelativeLayout) itemView.findViewById(R.id.card_ItemClickDetail);
+            card_ItemClickDetail = (CardView) itemView.findViewById(R.id.card_ItemClickDetail);
         }
     }
 }

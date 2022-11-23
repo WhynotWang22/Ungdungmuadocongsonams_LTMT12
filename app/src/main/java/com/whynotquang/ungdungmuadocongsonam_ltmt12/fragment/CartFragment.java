@@ -72,6 +72,7 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         rc_cart = view.findViewById(R.id.rc_view_gio_hang);
         tv_tongtien = (TextView) view.findViewById(R.id.tv_tongtien);
+        tv_tongtiensp = (TextView) view.findViewById(R.id.tv_tongtiensp);
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout);
         progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
         layout_thanhtoan = (LinearLayout) view.findViewById(R.id.lout_test);
@@ -124,9 +125,11 @@ public class CartFragment extends Fragment {
                     //add item
                     productList.addAll(response.body().getProducts());
                     ///lay so luong sp trong gio hang
-
+                    for (int i = 0; i < productList.size(); i++) {
+                        tong++;
+                    }
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-//                    tv_tongtiensp.setText(cartAdapter.getItemCount() + "sản phẩm)");
+                    tv_tongtiensp.setText( tong + "sản phẩm)");
 //                    tv_tongtien.setText(decimalFormat.format(response.body().getTotal()) + "đ");
                     if (productList==null){
                         layout_thanhtoan.setVisibility(View.GONE);

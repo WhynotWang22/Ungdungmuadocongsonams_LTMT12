@@ -39,6 +39,7 @@ public interface ApiService {
     @GET("getall")
     Call<List<Banner>> getBanner();
 
+    //lay tat ca san pham
     @GET("getall")
     Call<List<Product>> getProduct();
 
@@ -47,6 +48,10 @@ public interface ApiService {
 
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);
+
+    //get de xuat top 10 ban chay
+    @GET("gettop10")
+    Call<List<Product>> getTop10();
 
 
     @GET("getall")
@@ -66,7 +71,6 @@ public interface ApiService {
                             @Field("password") String password,
                             @Field("address") String diachi
     );
-
 
     //get profile
     @GET("profile")
@@ -187,4 +191,14 @@ public interface ApiService {
     @GET("list")
     Call<ProductAddCart> getlistCart(@Header("Authorization")
                                              String authtoken);
+
+    //post order MoMo
+    @FormUrlEncoded
+    @POST("createCardOrder/{id}")
+    Call<Order> postCardOrder(@Header("Authorization") String authtoken,
+                          @Path("id") String id,
+                          @Field("name") String name,
+                          @Field("phoneNumber") String phoneNumber,
+                          @Field("address") String address
+    );
 }
