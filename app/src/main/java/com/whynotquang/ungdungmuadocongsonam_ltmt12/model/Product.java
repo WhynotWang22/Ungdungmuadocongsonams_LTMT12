@@ -13,7 +13,7 @@ public class Product {
     public String desc;
     public String category;
     public ArrayList<String> sizes = null;
-    public String color;
+    public ArrayList<String> color = null;
     public int stock;
     public String img;
     public ArrayList<String> img_product = null;
@@ -21,7 +21,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String _id, String title, int price, String desc, String category, ArrayList<String> sizes, String color, int stock, String img, ArrayList<String> img_product) {
+    public Product(String _id, String title, int price, String desc, String category, ArrayList<String> sizes, ArrayList<String> color, int stock, String img, ArrayList<String> img_product) {
         this._id = _id;
         this.title = title;
         this.price = price;
@@ -82,11 +82,11 @@ public class Product {
         this.sizes = sizes;
     }
 
-    public String getColor() {
+    public ArrayList<String> getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(ArrayList<String> color) {
         this.color = color;
     }
 

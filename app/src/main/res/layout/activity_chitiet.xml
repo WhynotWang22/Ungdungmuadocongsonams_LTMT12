@@ -156,46 +156,20 @@
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />
 
-            <RadioGroup
-                android:id="@+id/radioGroup_color"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_view_color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_below="@+id/tvmau"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="32dp"
-                android:checkedButton="@id/color_white"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/color_black"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/bg_color_black"
-                    android:button="@android:color/transparent"
-                    android:padding="5dp" />
-
-                <RadioButton
-                    android:id="@+id/color_white"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/bg_color_white"
-                    android:button="@android:color/transparent" />
-
-                <RadioButton
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="@drawable/bg_color_xam"
-                    android:button="@android:color/transparent" />
-            </RadioGroup>
+                android:layout_marginRight="32dp"/>
 
             <TextView
                 android:id="@+id/tv_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/radioGroup_color"
+                android:layout_below="@+id/rc_view_color"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginRight="32dp"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <RadioGroup
+        android:id="@+id/radioGroup_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/radio_color"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/bg_color_white"
+            android:button="@android:color/transparent"
+            android:fontFamily="@font/intermedium"
+            android:gravity="center"
+            android:textColor="@color/mauxam"
+            android:textSize="12dp" />
+    </RadioGroup>
+</RelativeLayout>
