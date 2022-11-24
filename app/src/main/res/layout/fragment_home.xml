@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="20dp">
             <com.smarteist.autoimageslider.SliderView
@@ -67,32 +67,35 @@
             android:fontFamily="@font/interbold"
             android:text="Danh mục"
             android:textColor="@color/mauchu"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_below="@+id/cardview_imgslide"
             android:textSize="18dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_danhmuc"
             android:layout_width="match_parent"
             android:layout_height="236dp"
             android:layout_below="@+id/tv_danhmuc"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="32dp" />
+
         <TextView
             android:id="@+id/tv_duocdexuat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interbold"
-            android:text="Được đề xuất cho bạn"
+            android:text="Top 10 sản phẩm bán chạy"
             android:textColor="@color/mauchu"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_below="@+id/rc_view_danhmuc"
             android:textSize="18dp" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_view_duocdexuat"
+            android:id="@+id/rc_view_aopolo"
             android:layout_width="match_parent"
             android:layout_height="242dp"
             android:layout_below="@+id/tv_duocdexuat"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"/>
         <TextView
             android:id="@+id/tv_aopolo"
@@ -100,17 +103,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:fontFamily="@font/interbold"
-            android:text="Áo Polo"
+            android:text="Được Đề Xuất Cho Bạn"
             android:textColor="@color/mauchu"
-            android:layout_marginLeft="16dp"
-            android:layout_below="@+id/rc_view_duocdexuat"
+            android:layout_marginLeft="32dp"
+            android:layout_below="@+id/rc_view_aopolo"
             android:textSize="18dp" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_view_aopolo"
+            android:id="@+id/rc_view_duocdexuat"
             android:layout_width="match_parent"
-            android:layout_height="342dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tv_aopolo"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"/>
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>

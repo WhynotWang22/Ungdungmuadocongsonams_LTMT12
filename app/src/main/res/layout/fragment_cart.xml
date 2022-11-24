@@ -50,9 +50,8 @@
             android:id="@+id/relativeLayout_cart_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="27dp"
+            android:layout_marginTop="35dp"
             android:layout_marginRight="32dp">
 
             <TextView
@@ -70,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:fontFamily="@font/intermedium"
-                android:text="0đ"
+                android:text="0"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />
         </RelativeLayout>
@@ -110,7 +109,7 @@
             android:layout_height="56dp"
             android:layout_below="@id/relativeLayout_cart_3"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="32dp"
             android:background="@drawable/bg_button"
             android:fontFamily="@font/interbold"

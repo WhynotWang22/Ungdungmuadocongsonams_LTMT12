@@ -108,7 +108,11 @@ public class CommentActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     productCommentList = new ArrayList<>();
                     productCommentList.addAll(response.body().getProductItems());
-                    tv_avg.setText(response.body().getAvg() + "");
+                    if (response.body().getAvg() == null){
+                        tv_avg.setText("0");
+                    }else{
+                        tv_avg.setText(String.valueOf(response.body().getAvg()));
+                    }
                     tv_dem_comments.setText(response.body().getDem()  + " Bình Luận");
                     CommentAdapter commentAdapter = new CommentAdapter(productCommentList,getApplicationContext());
                     rc_comment.setAdapter(commentAdapter);
@@ -153,7 +157,7 @@ public class CommentActivity extends AppCompatActivity {
                     }
                     commentAdapter.notifyDataSetChanged();
                 }
-                else {
+                else  {
                     Toast.makeText(CommentActivity.this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
                 }
             }

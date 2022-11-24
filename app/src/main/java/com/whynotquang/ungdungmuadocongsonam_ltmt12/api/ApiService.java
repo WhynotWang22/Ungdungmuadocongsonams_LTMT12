@@ -39,6 +39,7 @@ public interface ApiService {
     @GET("getall")
     Call<List<Banner>> getBanner();
 
+    //lay tat ca san pham
     @GET("getall")
     Call<List<Product>> getProduct();
 
@@ -48,9 +49,9 @@ public interface ApiService {
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);
 
-    //get ao polo
-    @GET("getall/6364c85e71ea07f8ca10730f")
-    Call<List<Product>> getAoPolo();
+    //get de xuat top 10 ban chay
+    @GET("gettop10")
+    Call<List<Product>> getTop10();
 
 
     @GET("getall")
