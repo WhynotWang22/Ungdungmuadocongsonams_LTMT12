@@ -22,7 +22,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.OrderDetailActivity"
+            android:name=".activity.ProductCategoryActivity"
             android:exported="false">
         </activity>
         <activity
@@ -52,9 +52,6 @@
         <activity
             android:name=".activity.AddressActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
         <activity
             android:name=".activity.AddAddressActivity"
