@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ProductCategoryActivity">
+    tools:context=".activity.ProductCategoryActivity"
+    android:background="#F5F5F5">
  <RelativeLayout
      android:id="@+id/relativeLayout_category"
      android:layout_width="match_parent"
@@ -36,9 +37,8 @@
  </RelativeLayout>
  <androidx.recyclerview.widget.RecyclerView
      android:layout_below="@+id/relativeLayout_category"
-     android:layout_marginTop="10dp"
      android:layout_width="match_parent"
-     android:layout_height="match_parent"
+     android:layout_height="wrap_content"
      android:id="@+id/rc_productcategory"
-   />
+     android:paddingRight="6dp"/>
 </RelativeLayout>

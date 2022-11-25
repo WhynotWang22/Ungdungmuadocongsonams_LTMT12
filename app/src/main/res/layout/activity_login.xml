@@ -65,7 +65,7 @@
               android:layout_height="wrap_content"
               android:drawablePadding="12dp"
               android:background="@drawable/bg_ed_pass"
-              android:drawableStart="@drawable/email"
+              android:drawableStart="@drawable/lock"
               android:fontFamily="@font/intermedium"
               android:textSize="14dp"
               android:hint="Mật khẩu"

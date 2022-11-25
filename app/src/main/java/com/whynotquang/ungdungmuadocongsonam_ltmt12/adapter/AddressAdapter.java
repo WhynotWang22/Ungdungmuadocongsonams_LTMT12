@@ -35,7 +35,6 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressHolder> {
         holder.tv_name_address.setText(address.getName());
         holder.tv_sdt_address.setText(String.valueOf(address.getNumberPhone()));
         holder.tv_diachi_address.setText(address.getDetailAddress());
-
     }
 
     @Override

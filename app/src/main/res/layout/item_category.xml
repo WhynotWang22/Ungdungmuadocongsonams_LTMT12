@@ -3,9 +3,11 @@
     android:layout_width="64dp"
     android:layout_height="90dp"
     android:orientation="vertical"
-    android:id="@+id/cardview_productcatgory"
     android:layout_marginTop="15dp"
-    android:layout_marginRight="10dp">
+    android:id="@+id/cardview_productcatgory"
+    android:layout_centerInParent="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginLeft="23dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_category"
@@ -22,10 +24,10 @@
         android:layout_below="@id/img_category"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/interbold"
+        android:fontFamily="@font/intermedium"
         android:text="Áo Polo"
         android:textColor="@color/mauchu"
-        android:textSize="11dp" />
+        android:textSize="12dp" />
 
 
 </RelativeLayout>

@@ -57,14 +57,14 @@ public class AddressActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         getData();
         addressList = new ArrayList<>();
-        adapter = new AddressAdapter(AddressActivity.this,addressList);
+        adapter = new AddressAdapter(AddressActivity.this, addressList);
         recyclerView.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddressActivity.this,RecyclerView.VERTICAL,false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(AddressActivity.this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddressActivity.this,AddAddressActivity.class);
+                Intent intent = new Intent(AddressActivity.this, AddAddressActivity.class);
                 startActivity(intent);
             }
         });
@@ -78,7 +78,7 @@ public class AddressActivity extends AppCompatActivity {
 
     private void getData() {
         SharedPreferences sp = AddressActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
-        String token = sp.getString("token","");
+        String token = sp.getString("token", "");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://mofshop.shop/api/address/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -88,7 +88,7 @@ public class AddressActivity extends AppCompatActivity {
         call.enqueue(new Callback<AddressItem>() {
             @Override
             public void onResponse(Call<AddressItem> call, Response<AddressItem> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
                     AddressItem addressItem = response.body();
                     List<Address> datas = addressItem.getAddress();
@@ -97,7 +97,8 @@ public class AddressActivity extends AppCompatActivity {
                         addressList.add(data);
                         adapter.notifyDataSetChanged();
                     }
-                }else {
+                    Log.d("aaa", "data " + addressList.size());
+                } else {
                     progressBar.setVisibility(View.GONE);
                 }
             }
@@ -107,5 +108,13 @@ public class AddressActivity extends AppCompatActivity {
                 Toast.makeText(AddressActivity.this, "Không lấy được dư liệu địa chỉ", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        addressList.clear();
+        getData();
+        adapter.notifyDataSetChanged();
     }
 }
