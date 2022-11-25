@@ -106,11 +106,11 @@
 
                         <RatingBar
                             android:progressTint="@color/rating"
-                            android:id="@+id/ratingbar"
+                            android:id="@+id/ratingBar_chitiet"
                             style="@style/Widget.AppCompat.RatingBar.Small"
                             android:layout_width="wrap_content"
                             android:layout_height="15dp"
-                            android:layout_alignRight="@+id/ratingBar_chitiet"
+                            android:layout_alignRight="@+id/rating_5"
                             android:isIndicator="true"
                             android:numStars="5"
                             android:rating="5" />

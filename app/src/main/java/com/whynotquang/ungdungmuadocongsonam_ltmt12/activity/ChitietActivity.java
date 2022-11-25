@@ -254,7 +254,7 @@ public class ChitietActivity extends AppCompatActivity {
                     productCommentList.addAll(response.body().getProductItems());
                     tv_so_luot_review.setText(response.body().getDem() + " Bình Luận");
                     for (int i = 0; i < productCommentList.size(); i++) {
-                        ratingBar_chitiet.setRating(Float.valueOf(response.body().getAvg()));
+                        ratingBar_chitiet.setRating(response.body().getAvg());
                     }
                 } else {
                     Toast.makeText(ChitietActivity.this, "Không tìm thấy bình luận", Toast.LENGTH_SHORT).show();
