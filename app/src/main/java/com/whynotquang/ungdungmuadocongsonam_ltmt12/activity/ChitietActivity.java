@@ -1,6 +1,5 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,9 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,8 +63,6 @@ public class ChitietActivity extends AppCompatActivity {
     int soluong=1;
     String color;
     String size;
-    RatingBar ratingbar_chitiet;
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,13 +70,13 @@ public class ChitietActivity extends AppCompatActivity {
         tv_title_product_chitiet = findViewById(R.id.tv_title_product_chitiet);
         tv_price_product_chitiet = findViewById(R.id.tv_price_product_chitiet);
         tv_so_luot_review = findViewById(R.id.tv_so_luot_review);
-        ratingbar_chitiet  = findViewById(R.id.ratingbar_chitiet);
         img_product = findViewById(R.id.img_product);
         cardview_img = findViewById(R.id.cardview_img);
         recyclerView_size = findViewById(R.id.rc_view_size);
         btn_themsanpham = findViewById(R.id.btn_themsanpham);
-        btnback_chitiet = findViewById(R.id.btnback_chitiet);
         tv_chitietsanpham = findViewById(R.id.tv_chitietsanpham);
+        btnback_chitiet = findViewById(R.id.btnback_chitiet);
+
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_chitietsp);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -91,7 +88,9 @@ public class ChitietActivity extends AppCompatActivity {
         getComment();
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
+
         selectSize();
+
         btn_themsanpham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,7 +115,6 @@ public class ChitietActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void postAddCart() {
         if (color==null){
@@ -168,6 +166,11 @@ public class ChitietActivity extends AppCompatActivity {
                 });
                 size = s;
             }
+
+            @Override
+            public void onClickColor(String s) {
+
+            }
         };
     }
 
@@ -189,7 +192,7 @@ public class ChitietActivity extends AppCompatActivity {
                     tv_chitietsanpham.setText(response.body().getDesc());
                     idProduct = response.body().get_id();
                     tongtien= response.body().getPrice();
-                    color= response.body().getColor();
+                    color= String.valueOf(response.body().getColor());
 
                     list_img = response.body().getImg_product();
                     ImageSliderAdapter imageSlider = new ImageSliderAdapter(ChitietActivity.this, list_img);
@@ -215,30 +218,31 @@ public class ChitietActivity extends AppCompatActivity {
             }
         });
     }
-    private void getComment(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(AppConstain.BASE_URL + "comment/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<ProductComment> call = apiService.getComments(id);
-        call.enqueue(new Callback<ProductComment>() {
-            @Override
-            public void onResponse(Call<ProductComment> call, Response<ProductComment> response) {
-                if (response.body() != null) {
-                    productCommentList = new ArrayList<>();
-                    productCommentList.addAll(response.body().getProductItems());
-                    tv_so_luot_review.setText(response.body().getDem()  + " Bình Luận");
-                    for (int i = 0; i < productCommentList.size(); i++) {
-                        ratingbar_chitiet.setRating((response.body().getAvg()));
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<ProductComment> call, Throwable t) {
 
-            }
-        });
-    }
+   private void getComment(){
+       Retrofit retrofit = new Retrofit.Builder()
+               .baseUrl(AppConstain.BASE_URL + "comment/")
+               .addConverterFactory(GsonConverterFactory.create())
+               .build();
+       ApiService apiService = retrofit.create(ApiService.class);
+       Call<ProductComment> call = apiService.getComments(id);
+       call.enqueue(new Callback<ProductComment>() {
+           @Override
+           public void onResponse(Call<ProductComment> call, Response<ProductComment> response) {
+               if (response.body() != null) {
+                   productCommentList = new ArrayList<>();
+                   productCommentList.addAll(response.body().getProductItems());
+                   tv_so_luot_review.setText(response.body().getDem()  + " Bình Luận");
 
+               } else {
+                   Toast.makeText(ChitietActivity.this, "Không tìm thấy bình luận", Toast.LENGTH_SHORT).show();
+               }
+           }
+
+           @Override
+           public void onFailure(Call<ProductComment> call, Throwable t) {
+               Toast.makeText(ChitietActivity.this, "Không có bình luận", Toast.LENGTH_SHORT).show();
+           }
+       });
+   }
 }

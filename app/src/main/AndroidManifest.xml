@@ -22,7 +22,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.OrderDetailActivity"
+            android:name=".activity.ProductCategoryActivity"
             android:exported="false">
         </activity>
         <activity
@@ -37,10 +37,11 @@
             android:name=".activity.CommentActivity"
             android:exported="false">
         </activity>
-        <activity
-            android:name=".activity.ProductCategoryActivity"
-            android:exported="false">
-        </activity>
+<!--        <activity-->
+<!--            android:name=".activity.ProductCategoryActivity"-->
+<!--            android:exported="false"-->
+<!--            tools:ignore="DuplicateActivity">-->
+<!--        </activity>-->
         <activity
             android:name=".activity.SplashActivitys"
             android:exported="true">
@@ -52,9 +53,10 @@
         <activity
             android:name=".activity.AddressActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.OrderDetailActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".activity.AddAddressActivity"
@@ -106,15 +108,15 @@
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true" />
-<!--        <activity-->
-<!--            android:name=".activity.SplashActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />

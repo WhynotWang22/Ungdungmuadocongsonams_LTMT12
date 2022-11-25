@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/layout_item_search">
+
+    <ImageView
+        android:id="@+id/img_search"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_search_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/img_search"
+        android:fontFamily="@font/interbold"
+        android:text="Iphone 12"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/mauchu"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_search_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_search_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/img_search"
+        android:fontFamily="@font/intermedium"
+        android:text="20.000.000 VND"
+        android:textColor="#F44336"
+        android:textSize="12sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/img_search"
+        android:layout_marginTop="5dp"
+        android:background="@color/mauchu2"/>
+
+</RelativeLayout>
