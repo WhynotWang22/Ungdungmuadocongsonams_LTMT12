@@ -100,7 +100,7 @@
         android:textSize="14dp"
         android:drawablePadding="12dp"
         android:background="@drawable/bg_ed_pass"
-        android:drawableStart="@drawable/email"
+        android:drawableStart="@drawable/lock"
         android:hint="Mật Khẩu"
         android:inputType="textPassword"
         android:maxLines="1"

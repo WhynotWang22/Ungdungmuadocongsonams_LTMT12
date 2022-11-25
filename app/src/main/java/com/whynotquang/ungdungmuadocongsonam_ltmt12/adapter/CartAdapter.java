@@ -85,8 +85,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
         holder.tvColorCart.setText("Color:" + product.getColor());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
         holder.tv_price_cart.setText("Giá:" + decimalFormat.format(product.getPrice()) + "Đ");
-        Glide.with(context).load(product.getProductIMG()).placeholder(R.drawable.full)
-                .error(R.drawable.mau).into(holder.img_cart);
+        Glide.with(context).load(product.getProductIMG()).into(holder.img_cart);
 
         holder.layout_delete_item_cart.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -50,7 +50,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
 
     private void getProductCategory() {
         productList = new ArrayList<>();
-        ProductCategoryAdapter productCategoryAdapter = new ProductCategoryAdapter(productList,getApplicationContext());
+        ProductCategoryAdapter productCategoryAdapter = new ProductCategoryAdapter(ProductCategoryActivity.this,productList);
         rc_productcategory.setAdapter(productCategoryAdapter);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
         rc_productcategory.setHasFixedSize(true);

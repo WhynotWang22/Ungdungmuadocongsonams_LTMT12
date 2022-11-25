@@ -77,6 +77,7 @@ public class CheckOutActivity extends AppCompatActivity {
     String token;
     List<Products> productsList;
     List<Address> addressList;
+    DiaChiAdapter adapter;
     int soluong_sanpham = 0;
     int feeship = 0;
     String id, name, phoneNumber, diachi;
@@ -143,8 +144,9 @@ public class CheckOutActivity extends AppCompatActivity {
                 } else if (btn_radio_stripe.isChecked()) {
                     PaymentSheet.Configuration configuration = new PaymentSheet.Configuration("Example, Inc.");
                     paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration);
-                }if (btn_radio_momo.isChecked()){
-                      requestPayment();
+                }
+                if (btn_radio_momo.isChecked()) {
+                    requestPayment();
                 }
             }
         });
@@ -166,7 +168,7 @@ public class CheckOutActivity extends AppCompatActivity {
     }
 
     private void getDataAddress() {
-        DiaChiAdapter adapter = new DiaChiAdapter(addressList, new ItemClickAddressListener() {
+        adapter = new DiaChiAdapter(addressList, new ItemClickAddressListener() {
             @Override
             public void onClickAddress(Address address) {
                 name = address.getName();
@@ -366,6 +368,7 @@ public class CheckOutActivity extends AppCompatActivity {
             showAlert("Thanh toán thất bại.", error.getLocalizedMessage());
         }
     }
+
     private void requestPayment() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "cart/")
@@ -382,7 +385,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     AppMoMoLib.getInstance().setActionType(AppMoMoLib.ACTION_TYPE.GET_TOKEN);
                     int tongxien = Integer.parseInt(response.body().getTotal());
                     String ids = String.valueOf(response.body().get_id());
-                    Map<String, Object> eventValue = new HashMap<> ();
+                    Map<String, Object> eventValue = new HashMap<>();
                     //client Required
                     eventValue.put("merchantname", merchantName); //Tên đối tác. được đăng ký tại https://business.momo.vn. VD: Google, Apple, Tiki , CGV Cinemas
                     eventValue.put("merchantcode", merchantCode); //Mã đối tác, được cung cấp bởi MoMo tại https://business.momo.vn
@@ -400,34 +403,35 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         });
     }
+
     //Get token callback from MoMo app an submit to server side
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
-            if(data != null) {
-                if(data.getIntExtra("status", -1) == 0) {
+        if (requestCode == AppMoMoLib.getInstance().REQUEST_CODE_MOMO && resultCode == -1) {
+            if (data != null) {
+                if (data.getIntExtra("status", -1) == 0) {
                     //TOKEN IS AVAILABLE
 //                    String token = data.getStringExtra("data"); //Token response
 //                    String phoneNumber = data.getStringExtra("phonenumber");
                     String env = data.getStringExtra("env");
-                    if(env == null){
+                    if (env == null) {
                         env = "app";
                         Retrofit retrofit = new Retrofit.Builder()
                                 .baseUrl(AppConstain.BASE_URL + "order/")
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
                         ApiService apiService = retrofit.create(ApiService.class);
-                        Call<Order> call = apiService.postCardOrder(token,id,name,phoneNumber,diachi);
+                        Call<Order> call = apiService.postCardOrder(token, id, name, phoneNumber, diachi);
                         call.enqueue(new Callback<Order>() {
                             @Override
                             public void onResponse(Call<Order> call, Response<Order> response) {
-                                if (response.isSuccessful()){
+                                if (response.isSuccessful()) {
                                     progressBar.setVisibility(View.GONE);
-                                    Intent intent = new Intent(CheckOutActivity.this,ThanksOrder_Activity.class);
+                                    Intent intent = new Intent(CheckOutActivity.this, ThanksOrder_Activity.class);
                                     startActivity(intent);
                                     finishAffinity();
 //                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                                }else{
+                                } else {
                                     progressBar.setVisibility(View.GONE);
                                     Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
                                 }
@@ -441,16 +445,16 @@ public class CheckOutActivity extends AppCompatActivity {
                         });
                     }
 
-                    if(token != null && !token.equals("")) {
+                    if (token != null && !token.equals("")) {
                         // TODO: send phoneNumber & token to your server side to process payment with MoMo server
                         // IF Momo topup success, continue to process your order
                     } else {
                     }
-                } else if(data.getIntExtra("status", -1) == 1) {
+                } else if (data.getIntExtra("status", -1) == 1) {
                     //TOKEN FAIL
-                    String message = data.getStringExtra("message") != null?data.getStringExtra("message"):"Thất bại";
+                    String message = data.getStringExtra("message") != null ? data.getStringExtra("message") : "Thất bại";
 
-                } else if(data.getIntExtra("status", -1) == 2) {
+                } else if (data.getIntExtra("status", -1) == 2) {
                     //TOKEN FAIL
                 } else {
                     //TOKEN FAIL
@@ -459,5 +463,12 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         } else {
         }
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        addressList.clear();
+        getData();
+        adapter.notifyDataSetChanged();
     }
 }

@@ -18,6 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -118,7 +120,7 @@ public class AccountFragment extends Fragment {
         });
         sp = getContext().getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         token = sp.getString("token", "");
-        getData(token);
+//        getData(token);
 //        Log.d("aaa", "token: " + token);
         return view;
     }
@@ -166,6 +168,9 @@ public class AccountFragment extends Fragment {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    if (getActivity() == null) {
+                        return;
+                    }
                     tv_email.setText(response.body().getEmail());
                     tv_name.setText(response.body().getFullName());
                     Glide.with(getContext()).load(response.body().getAvatar()).into(avt);
@@ -184,5 +189,12 @@ public class AccountFragment extends Fragment {
                 Toast.makeText(getContext(), "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("aaa","onStart");
+        getData(token);
     }
 }

@@ -65,7 +65,8 @@ public class AddAddressActivity extends AppCompatActivity {
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                postAddress(name,address, Integer.parseInt(sdt));
+                int phone = Integer.valueOf(sdt);
+                postAddress(name,address, phone);
             }
         });
         btnback_add_address.setOnClickListener(new View.OnClickListener() {

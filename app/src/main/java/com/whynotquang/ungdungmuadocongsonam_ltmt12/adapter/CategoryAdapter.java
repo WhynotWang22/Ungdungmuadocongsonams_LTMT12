@@ -45,8 +45,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
         Category category = categoryList.get(position);
         holder.tv_title_category.setText(category.getTitle());
         Glide.with(context).load(category.getCateImg())
-                .placeholder(R.drawable.full)
-                .error(R.drawable.full)
                 .into(holder.img_category);
 
         holder.cardview_productbycategory.setOnClickListener(new View.OnClickListener() {

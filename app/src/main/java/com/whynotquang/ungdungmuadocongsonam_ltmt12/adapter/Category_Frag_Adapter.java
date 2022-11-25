@@ -41,8 +41,7 @@ public class Category_Frag_Adapter extends RecyclerView.Adapter<Category_Frag_Ad
     public void onBindViewHolder(@NonNull Category_Frag_Adapter.viewholder holder, int position) {
       Category category = categoryList.get(position);
       holder.tvTitleCategoryFrag.setText(category.getTitle());
-      Glide.with(context).load(category.getCateImg()).placeholder(R.drawable.full)
-              .error(R.drawable.full)
+      Glide.with(context).load(category.getCateImg())
               .into(holder.imageCategoryFrag);
         holder.cardviewFragCategorys.setOnClickListener(new View.OnClickListener() {
             @Override
