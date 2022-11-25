@@ -30,7 +30,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/interbold"
+                android:fontFamily="@font/intermedium"
                 android:text="Adidas"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />
@@ -42,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/interbold"
+                android:fontFamily="@font/intermedium"
                 android:text="Price"
-                android:textColor="@color/mauchu"
+                android:textColor="@color/color_do"
                 android:textSize="14dp" />
         </RelativeLayout>
     </LinearLayout>

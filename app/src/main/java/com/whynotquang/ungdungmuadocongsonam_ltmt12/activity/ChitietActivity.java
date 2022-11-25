@@ -1,5 +1,6 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +67,9 @@ public class ChitietActivity extends AppCompatActivity {
     int soluong = 1;
     String color;
     String size;
+    RatingBar ratingBar_chitiet;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +84,7 @@ public class ChitietActivity extends AppCompatActivity {
         btn_themsanpham = findViewById(R.id.btn_themsanpham);
         tv_chitietsanpham = findViewById(R.id.tv_chitietsanpham);
         btnback_chitiet = findViewById(R.id.btnback_chitiet);
-
+        ratingBar_chitiet = findViewById(R.id.ratingBar_chitiet);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_chitietsp);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -249,7 +253,9 @@ public class ChitietActivity extends AppCompatActivity {
                     productCommentList = new ArrayList<>();
                     productCommentList.addAll(response.body().getProductItems());
                     tv_so_luot_review.setText(response.body().getDem() + " Bình Luận");
-
+                    for (int i = 0; i < productCommentList.size(); i++) {
+                        ratingBar_chitiet.setRating(Float.valueOf(response.body().getAvg()));
+                    }
                 } else {
                     Toast.makeText(ChitietActivity.this, "Không tìm thấy bình luận", Toast.LENGTH_SHORT).show();
                 }

@@ -160,7 +160,8 @@ public class CartFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             int tongtien = intent.getIntExtra("tongtien", 0);
             Log.d("msg", "onReceive: " + tongtien);
-            tv_tongtien.setText((tongtien + "đ"));
+            DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
+            tv_tongtien.setText((tongtien + "vnđ"));
         }
     };
 
