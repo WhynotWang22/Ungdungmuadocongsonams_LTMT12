@@ -29,7 +29,8 @@ public class ImageSliderAdapter extends SliderViewAdapter<ImageSliderAdapter.MyH
 
     @Override
     public void onBindViewHolder(MyHolder viewHolder, int position) {
-        Glide.with(context).load(list.get(position)).error(R.drawable.full).into(viewHolder.imageView);
+        Glide.with(context).load(list.get(position)).error(R.drawable.full).placeholder(R.drawable.full)
+                .into(viewHolder.imageView);
     }
 
     @Override

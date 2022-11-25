@@ -61,7 +61,7 @@
                         android:textColor="@color/mauchu2"/>
                     <TextView
                         android:id="@+id/tv_thanhtien_product_detail_order"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="335.000đ"
                         android:fontFamily="@font/intermedium"
@@ -69,6 +69,15 @@
                         android:layout_marginLeft="8dp"
                         android:textColor="#E53935"
                         android:layout_marginRight="5dp"/>
+                 <TextView
+                     android:layout_marginLeft="15dp"
+                     android:textSize="12dp"
+                     android:textColor="@color/mauchu"
+                     android:id="@+id/tv_danhgiasp"
+                     android:fontFamily="@font/intermedium"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Đánh Giá"/>
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>

@@ -1,22 +1,11 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
-
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -30,11 +19,9 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ChitietActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.BannerAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CategoryAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ProductAdapter;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ProductSearchAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
@@ -53,14 +40,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     SliderView img_slide;
-    RecyclerView rc_view_duocdexuat, rc_view_danhmuc;
-    AutoCompleteTextView ed_search;
-    ImageButton imageButton, btn_close_search;
-    RelativeLayout layout_search;
+    RecyclerView rc_view_duocdexuat,rc_view_danhmuc;
     //
     List<Product> productList;
     List<Category> categoryList;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -68,45 +51,19 @@ public class HomeFragment extends Fragment {
         img_slide = view.findViewById(R.id.img_slidebanner);
         rc_view_duocdexuat = view.findViewById(R.id.rc_view_duocdexuat);
         rc_view_danhmuc = view.findViewById(R.id.rc_view_danhmuc);
-        ed_search = view.findViewById(R.id.ed_search);
-        imageButton = view.findViewById(R.id.btn_search);
-        btn_close_search = view.findViewById(R.id.btn_close_search);
-        layout_search = view.findViewById(R.id.layout_search);
         SliderPhoto();
         getListProduct();
         getListCategory();
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.color_bar));
 
-        layout_search.setVisibility(View.GONE);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                layout_search.setVisibility(View.VISIBLE);
-                ed_search.requestFocus();
-            }
-        });
-        btn_close_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                layout_search.setVisibility(View.GONE);
-                ed_search.setText("");
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-            }
-        });
-        setSanphamSearchAdapter();
         return view;
-    }
-
-    private void setSanphamSearchAdapter() {
-        ProductSearchAdapter adapter = new ProductSearchAdapter(getActivity(), android.R.layout.activity_list_item, productList);
-        ed_search.setAdapter(adapter);
     }
 
     private void getListCategory() {
         categoryList = new ArrayList<>();
         CategoryAdapter categoryAdapter = new CategoryAdapter(getContext(), categoryList);
         rc_view_danhmuc.setAdapter(categoryAdapter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),4);
         rc_view_danhmuc.setLayoutManager(gridLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -118,7 +75,7 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                if (response.body() != null) {
+                if (response.body() != null){
                     categoryList.addAll(response.body());
                     categoryAdapter.notifyDataSetChanged();
                 }
@@ -147,7 +104,7 @@ public class HomeFragment extends Fragment {
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                if (response.body() != null) {
+                if (response.body() != null){
                     productList.addAll(response.body());
                     productAdapter.notifyDataSetChanged();
                 }
