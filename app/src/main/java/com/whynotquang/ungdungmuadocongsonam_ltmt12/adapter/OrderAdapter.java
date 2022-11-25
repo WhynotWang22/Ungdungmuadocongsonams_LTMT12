@@ -26,6 +26,7 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
     Context context;
     List<Order> orderList;
+    List<Products> productsList;
 
     public OrderAdapter(Context context, List<Order> orderList) {
         this.context = context;

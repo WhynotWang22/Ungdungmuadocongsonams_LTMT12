@@ -11,62 +11,33 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:id="@+id/layout1"
-            android:layout_marginTop="16dp">
+            android:layout_height="wrap_content"
+            android:id="@+id/layout1">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/playfairdisplay_bold"
                 android:text="MOF"
                 android:textSize="24dp" />
-            <ImageButton
-                android:id="@+id/btn_search"
-                android:layout_width="24dp"
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:src="@drawable/btnsearch"
+                app:searchIcon="@drawable/btnsearch"
                 android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="32dp"
                 android:background="#F5F5F5"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/layout_search"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true">
-                <AutoCompleteTextView
-                    android:id="@+id/ed_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:src="@drawable/btnsearch"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
-                    android:fontFamily="@font/intermedium"
-                    android:background="@drawable/bg_ed_search"/>
-                <ImageButton
-                    android:id="@+id/btn_close_search"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@drawable/close"
-                    android:background="@color/white"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="50dp"/>
-            </RelativeLayout>
         </RelativeLayout>
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_imgslide"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout1"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="10dp"
             app:cardCornerRadius="20dp">
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/img_slidebanner"
@@ -96,32 +67,35 @@
             android:fontFamily="@font/interbold"
             android:text="Danh mục"
             android:textColor="@color/mauchu"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_below="@+id/cardview_imgslide"
             android:textSize="18dp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_danhmuc"
             android:layout_width="match_parent"
             android:layout_height="236dp"
             android:layout_below="@+id/tv_danhmuc"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="32dp" />
+
         <TextView
             android:id="@+id/tv_duocdexuat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/interbold"
-            android:text="Được đề xuất cho bạn"
+            android:text="Top 10 sản phẩm bán chạy"
             android:textColor="@color/mauchu"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_below="@+id/rc_view_danhmuc"
             android:textSize="18dp" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_view_duocdexuat"
+            android:id="@+id/rc_view_aopolo"
             android:layout_width="match_parent"
             android:layout_height="242dp"
             android:layout_below="@+id/tv_duocdexuat"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"/>
         <TextView
             android:id="@+id/tv_aopolo"
@@ -129,17 +103,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
             android:fontFamily="@font/interbold"
-            android:text="Áo Polo"
+            android:text="Được Đề Xuất Cho Bạn"
             android:textColor="@color/mauchu"
-            android:layout_marginLeft="16dp"
-            android:layout_below="@+id/rc_view_duocdexuat"
+            android:layout_marginLeft="32dp"
+            android:layout_below="@+id/rc_view_aopolo"
             android:textSize="18dp" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_view_aopolo"
+            android:id="@+id/rc_view_duocdexuat"
             android:layout_width="match_parent"
-            android:layout_height="342dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/tv_aopolo"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="32dp"
             android:layout_marginTop="16dp"/>
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
