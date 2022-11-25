@@ -166,6 +166,11 @@ public class ChitietActivity extends AppCompatActivity {
                 });
                 size = s;
             }
+
+            @Override
+            public void onClickColor(String s) {
+
+            }
         };
     }
 
@@ -187,7 +192,7 @@ public class ChitietActivity extends AppCompatActivity {
                     tv_chitietsanpham.setText(response.body().getDesc());
                     idProduct = response.body().get_id();
                     tongtien= response.body().getPrice();
-                    color= response.body().getColor();
+                    color= String.valueOf(response.body().getColor());
 
                     list_img = response.body().getImg_product();
                     ImageSliderAdapter imageSlider = new ImageSliderAdapter(ChitietActivity.this, list_img);
