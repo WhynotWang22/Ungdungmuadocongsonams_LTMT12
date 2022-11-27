@@ -4,8 +4,8 @@
     android:id="@+id/cardview_product"
     android:layout_width="145dp"
     android:layout_height="238dp"
-    android:layout_marginRight="12dp"
-    android:background="@drawable/bg_img">
+    android:layout_marginRight="10dp"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -17,8 +17,7 @@
             android:layout_width="145dp"
             android:layout_height="160dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/product"
-            android:padding="5dp"/>
+            android:src="@drawable/product" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
