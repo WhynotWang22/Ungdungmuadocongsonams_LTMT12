@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
@@ -55,7 +56,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 token = sp.getString("token","");
                 String  oldPassword= ed_pass_current.getText().toString();
                 String newPassword = ed_pass_moi.getText().toString();
-
+                String nhaplaipassmoi = ed_nhap_lai_pass.getText().toString();
                 if (oldPassword.isEmpty()){
                     ed_pass_current.setError("Không được để trống");
                     ed_pass_current.requestFocus();
@@ -66,8 +67,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     ed_pass_current.requestFocus();
                     return;
                 }
+                else if (!newPassword.equals(nhaplaipassmoi)) {
+                    Toast.makeText(ChangePasswordActivity.this, "Mật khẩu  nhập lại không khớp", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://mofshop.shop/api/auth/")
+                        .baseUrl(AppConstain.BASE_URL + "auth/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
@@ -79,13 +84,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             ResponseUser userAPi = response.body();
 //                           token = String.valueOf(userAPi.getUser().token);
                             if (token !=null){
-                                SharedPreferences sp= getSharedPreferences("change-password", MODE_PRIVATE);
-                                SharedPreferences.Editor Ed= sp.edit();
-                                Ed.putString("token",token);
-                                Ed.putString("oldPassword",oldPassword);
-                                Ed.putString("newPassword",newPassword);
-                                Ed.commit();
-                                Intent intent = new Intent(ChangePasswordActivity.this, MainActivity.class);
+                                Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finishAffinity();
                                 Toast.makeText(ChangePasswordActivity.this, "thành công", Toast.LENGTH_SHORT).show();
