@@ -25,7 +25,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductSearchAdapter extends ArrayAdapter<Product> {
+public class ProductSearchAdapter extends ArrayAdapter<Product>{
     Context context;
     List<Product> sanPhamList;
 
