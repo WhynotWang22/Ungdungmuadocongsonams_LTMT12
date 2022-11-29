@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +27,11 @@ import com.bumptech.glide.Glide;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -107,6 +111,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                         call.enqueue(new Callback<Products>() {
                             @Override
                             public void onResponse(Call<Products> call, Response<Products> response) {
+                                EventBus.getDefault().postSticky(new Even(1));
                                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                 refreshData(position);
                             }

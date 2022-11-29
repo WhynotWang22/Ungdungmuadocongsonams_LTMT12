@@ -33,6 +33,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.OrderActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ProfileActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.SettingActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.StoreActivity;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.YeuThichActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
@@ -45,7 +46,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AccountFragment extends Fragment {
 
     TextView tv_name, tv_email;
-    RelativeLayout btn_my_order, btn_diachi, btn_phuongthucthanhtoan, btn_setting, btn_privacy_setting;
+    RelativeLayout btn_my_order, btn_diachi, btn_yeuthich, btn_setting, btn_privacy_setting;
     Button btn_logout;
     ImageView avt;
     String token;
@@ -64,7 +65,7 @@ public class AccountFragment extends Fragment {
         avt = view.findViewById(R.id.avt);
         btn_my_order = view.findViewById(R.id.btn_my_order);
         btn_diachi = view.findViewById(R.id.btn_diachi);
-        btn_phuongthucthanhtoan = view.findViewById(R.id.btn_phuongthucthanhtoan);
+        btn_yeuthich = view.findViewById(R.id.btn_yeuthich);
         btn_setting = view.findViewById(R.id.btn_setting);
         btn_privacy_setting = view.findViewById(R.id.btn_privacy_setting);
         btn_logout = view.findViewById(R.id.btn_logout);
@@ -110,7 +111,13 @@ public class AccountFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
-
+        btn_yeuthich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), YeuThichActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,10 +36,15 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.CheckOutActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CartAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -122,15 +128,9 @@ public class CartFragment extends Fragment {
                     rc_cart.setAdapter(cartAdapter);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     rc_cart.setLayoutManager(linearLayoutManager);
-                    //add item
                     productList.addAll(response.body().getProducts());
-                    ///lay so luong sp trong gio hang
-                    for (int i = 0; i < productList.size(); i++) {
-                        tong++;
-                    }
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-                    tv_tongtiensp.setText( tong + "sản phẩm)");
-//                    tv_tongtien.setText(decimalFormat.format(response.body().getTotal()) + "đ");
+                    tv_tongtiensp.setText( productList.size() + "sản phẩm)");
                     if (productList==null){
                         layout_thanhtoan.setVisibility(View.GONE);
                         layout_not_cart.setVisibility(View.VISIBLE);
@@ -161,7 +161,7 @@ public class CartFragment extends Fragment {
             int tongtien = intent.getIntExtra("tongtien", 0);
             Log.d("msg", "onReceive: " + tongtien);
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-            tv_tongtien.setText((tongtien + "vnđ"));
+            tv_tongtien.setText(decimalFormat.format(tongtien)+ " vnđ");
         }
     };
 
@@ -169,6 +169,27 @@ public class CartFragment extends Fragment {
         Intent i = new Intent(getActivity(), CheckOutActivity.class);
 //       i.putExtra("key", tv_tongtien.getText().toString());
         startActivity(i);
+    }
+    ///tai lai du lieu
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(Even event) {
+        if (event.getId() == 1) {
+            getdataCart();
+        }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }
 

@@ -3,14 +3,13 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +24,8 @@ import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ColorAdapter;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.FavoritesAdapter;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ImageSliderAdapter;
@@ -32,8 +33,13 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.SizeAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Comment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductComment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -47,10 +53,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChitietActivity extends AppCompatActivity {
     List<Comment> productCommentList;
+    List<Products> prolistyeuthich;
+    Product products = new Product();
     SliderView img_product;
     TextView tv_title_product_chitiet, tv_so_luot_review, tv_price_product_chitiet, tv_chitietsanpham;
     Button btn_themsanpham;
     ImageButton btnback_chitiet;
+    ImageView btnYeuthich;
     List<Product> productList;
     String id;
     ArrayList<String> list_img;
@@ -74,10 +83,12 @@ public class ChitietActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chitiet);
+        prolistyeuthich = new ArrayList<>();
         tv_title_product_chitiet = findViewById(R.id.tv_title_product_chitiet);
         tv_price_product_chitiet = findViewById(R.id.tv_price_product_chitiet);
         tv_so_luot_review = findViewById(R.id.tv_so_luot_review);
         img_product = findViewById(R.id.img_product);
+        btnYeuthich = (ImageView) findViewById(R.id.btn_yeuthich);
         cardview_img = findViewById(R.id.cardview_img);
         recyclerView_size = findViewById(R.id.rc_view_size);
         rc_view_color = findViewById(R.id.rc_view_color);
@@ -94,10 +105,11 @@ public class ChitietActivity extends AppCompatActivity {
         getDataProduct();
         reviews();
         getComment();
+        addYeuThich();
+        getListyeuthich();
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
         list_color = new ArrayList<>();
-
         selectSize();
 
         btn_themsanpham.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +122,70 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+    }
+
+    private void getListyeuthich() {
+        SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
+        String token = sp.getString("token", "");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "favorite/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<ProductAddCart> call = apiService.getListFavorite(token);
+        call.enqueue(new Callback<ProductAddCart>() {
+            @Override
+            public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
+                if (response.body() != null) {
+                    ///check yeu thich hien nen tim
+                    FavoritesAdapter favoritesAdapter = new FavoritesAdapter(getApplicationContext(), prolistyeuthich);
+                    favoritesAdapter.notifyDataSetChanged();
+                    prolistyeuthich.addAll(response.body().getProducts());
+                    EventBus.getDefault().postSticky(new Even(1));
+                    for (Products tim : prolistyeuthich) {
+                        if (tim.getProductId().equals(products.get_id())) {
+                            btnYeuthich.setColorFilter(Color.RED);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductAddCart> call, Throwable t) {
+                Toast.makeText(ChitietActivity.this, "loi api", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void addYeuThich() {
+        btnYeuthich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sp = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
+                String token = sp.getString("token", "");
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(AppConstain.BASE_URL + "favorite/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                ApiService apiService = retrofit.create(ApiService.class);
+                Call<ProductAddCart> call = apiService.postAddFavorite(token, idProduct);
+                call.enqueue(new Callback<ProductAddCart>() {
+                    @Override
+                    public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(ChitietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ChitietActivity.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ProductAddCart> call, Throwable t) {
+                        Toast.makeText(ChitietActivity.this, "loi api", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -208,12 +284,10 @@ public class ChitietActivity extends AppCompatActivity {
                     idProduct = response.body().get_id();
                     tongtien = response.body().getPrice();
 //                    color= response.body().getColor();
-
                     list_img = response.body().getImg_product();
                     ImageSliderAdapter imageSlider = new ImageSliderAdapter(ChitietActivity.this, list_img);
                     img_product.setSliderAdapter(imageSlider);
                     img_product.startAutoCycle();
-
                     //size
                     list_sizes = response.body().getSizes();
                     sizeAdapter = new SizeAdapter(list_sizes, itemClickListener);
@@ -226,6 +300,7 @@ public class ChitietActivity extends AppCompatActivity {
                     rc_view_color.setAdapter(colorAdapter);
                     LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(ChitietActivity.this, RecyclerView.HORIZONTAL, false);
                     rc_view_color.setLayoutManager(linearLayoutManager2);
+                    products = response.body();
                 } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(ChitietActivity.this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
@@ -265,5 +340,27 @@ public class ChitietActivity extends AppCompatActivity {
             public void onFailure(Call<ProductComment> call, Throwable t) {
             }
         });
+    }
+
+    //tai lai du lieu
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(Even event) {
+        if (event.getId() == 1) {
+            getListyeuthich();
+        }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 }

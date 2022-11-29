@@ -60,8 +60,6 @@ public class ProfileActivity extends AppCompatActivity {
         btn_change_profile = findViewById(R.id.btn_change_profile);
         img_profile = findViewById(R.id.profile_image);
         btnback_profile = findViewById(R.id.btnback_profile);
-
-
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_change_profile);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);

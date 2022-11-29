@@ -201,4 +201,17 @@ public interface ApiService {
                           @Field("phoneNumber") String phoneNumber,
                           @Field("address") String address
     );
+    ////post yeu thich
+    @POST("AddFavorite/{id}")
+    Call<ProductAddCart> postAddFavorite(@Header("Authorization") String authtoken,
+                                         @Path("id")String id);
+
+    ///get list yeu thich
+    @GET("FavoriteListByUserId")
+    Call<ProductAddCart> getListFavorite(@Header("Authorization")
+                                         String authtoken);
+    ///delete item Favorite
+    @DELETE("DeleteFavorite/{itemId}")
+    Call<Products> deleteItemFavorite
+    (@Header("Authorization") String authtoken, @Path("itemId") String id);
 }
