@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.AddAddressActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.AddressActivity;
@@ -53,6 +54,7 @@ public class AccountFragment extends Fragment {
     SharedPreferences sp;
     LinearLayout liner_profile;
     ProgressBar progressBar;
+    String id;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -151,6 +153,8 @@ public class AccountFragment extends Fragment {
                     SharedPreferences.Editor Ed = sp.edit();
                     Ed.clear();
                     Ed.commit();
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(id);
+                    Log.d("aaa","oid : "+id);
                 } else {
                     Toast.makeText(getContext(), "Đăng xuất không thành công", Toast.LENGTH_SHORT).show();
                 }
@@ -181,6 +185,7 @@ public class AccountFragment extends Fragment {
                     tv_email.setText(response.body().getEmail());
                     tv_name.setText(response.body().getFullName());
                     Glide.with(getContext()).load(response.body().getAvatar()).into(avt);
+                    id = response.body().getId();
                     progressBar.setVisibility(View.GONE);
                 } else {
                     Intent intent = new Intent(getContext(), LoginActivity.class);

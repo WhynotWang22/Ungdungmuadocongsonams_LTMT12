@@ -1,6 +1,9 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -53,7 +56,7 @@ public class NotificationFragment extends Fragment {
         getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
 
         notificationList = new ArrayList<>();
-        getListProduct();
+        getNoti();
 
         adapter = new NotificationAdapter(getActivity(),notificationList);
         recyclerView.setAdapter(adapter);
@@ -63,13 +66,15 @@ public class NotificationFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);
         return view;
     }
-    private void getListProduct() {
+    private void getNoti() {
+        SharedPreferences sp = getContext().getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
+        String token = sp.getString("token", "");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://mofshop.shop/api/notification/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Notification>> call = apiService.getNoti();
+        Call<List<Notification>> call = apiService.getNoti(token);
         call.enqueue(new Callback<List<Notification>>() {
             @Override
             public void onResponse(Call<List<Notification>> call, Response<List<Notification>> response) {

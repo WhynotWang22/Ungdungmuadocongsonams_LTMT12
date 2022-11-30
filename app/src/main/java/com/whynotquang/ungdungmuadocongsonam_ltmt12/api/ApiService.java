@@ -43,8 +43,9 @@ public interface ApiService {
     @GET("getall")
     Call<List<Product>> getProduct();
 
-    @GET("getall")
-    Call<List<Notification>> getNoti();
+    //get noti
+    @GET("getAll")
+    Call<List<Notification>> getNoti(@Header("Authorization") String authtoken);
 
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);

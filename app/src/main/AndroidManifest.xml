@@ -19,8 +19,7 @@
         tools:replace="android:theme">
         <activity
             android:name=".activity.YeuThichActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -42,6 +41,11 @@
             android:name=".activity.YeuThichActivity"
             android:exported="false"
             tools:ignore="DuplicateActivity"></activity>
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".activity.SplashActivitys"
             android:exported="true">
