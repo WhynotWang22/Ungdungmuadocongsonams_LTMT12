@@ -1,10 +1,12 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -23,10 +25,10 @@ import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.smarteist.autoimageslider.SliderView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ColorAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.FavoritesAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickListener;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ImageSliderAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.SizeAdapter;
@@ -77,6 +79,8 @@ public class ChitietActivity extends AppCompatActivity {
     String color;
     String size;
     RatingBar ratingBar_chitiet;
+    int position = 0;
+    int count;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -103,15 +107,14 @@ public class ChitietActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         getDataProduct();
+        getListyeuthich();
         reviews();
         getComment();
         addYeuThich();
-        getListyeuthich();
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
         list_color = new ArrayList<>();
         selectSize();
-
         btn_themsanpham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +127,38 @@ public class ChitietActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
     }
+
+    private void xoadulieu() {
+        btnYeuthich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sp1 = getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
+                String token = sp1.getString("token", "");
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(AppConstain.BASE_URL + "favorite/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                ApiService apiService = retrofit.create(ApiService.class);
+                Call<Products> call = apiService.deleteItemFavorite(token, prolistyeuthich.get(position).get_id());
+                Log.d("e", "e" + prolistyeuthich.get(position).get_id());
+                call.enqueue(new Callback<Products>() {
+                    @Override
+                    public void onResponse(Call<Products> call, Response<Products> response) {
+                        EventBus.getDefault().postSticky(new Even(1));
+                        Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Products> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
 
     private void getListyeuthich() {
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
@@ -140,15 +174,18 @@ public class ChitietActivity extends AppCompatActivity {
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
                 if (response.body() != null) {
                     ///check yeu thich hien nen tim
+                    EventBus.getDefault().postSticky(new Even(1));
                     FavoritesAdapter favoritesAdapter = new FavoritesAdapter(getApplicationContext(), prolistyeuthich);
                     favoritesAdapter.notifyDataSetChanged();
                     prolistyeuthich.addAll(response.body().getProducts());
-                    EventBus.getDefault().postSticky(new Even(1));
                     for (Products tim : prolistyeuthich) {
                         if (tim.getProductId().equals(products.get_id())) {
                             btnYeuthich.setColorFilter(Color.RED);
+                            xoadulieu();
                         }
                     }
+
+
                 }
             }
 
@@ -170,7 +207,8 @@ public class ChitietActivity extends AppCompatActivity {
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
-                Call<ProductAddCart> call = apiService.postAddFavorite(token, idProduct);
+                Call<ProductAddCart> call = apiService.postAddFavorite(token, products.get_id());
+                Log.d("ee", "e" + products.get_id());
                 call.enqueue(new Callback<ProductAddCart>() {
                     @Override
                     public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
@@ -272,6 +310,7 @@ public class ChitietActivity extends AppCompatActivity {
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
         Call<Product> call = apiService.getDetailProduct(id);
+        Log.d("ee", "e" + id);
         call.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {

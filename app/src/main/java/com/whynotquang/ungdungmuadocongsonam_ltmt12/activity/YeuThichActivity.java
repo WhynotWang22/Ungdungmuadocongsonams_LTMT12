@@ -13,6 +13,8 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
@@ -20,6 +22,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.FavoritesAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
@@ -37,18 +40,30 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class YeuThichActivity extends AppCompatActivity {
-     private List<Products> prolistyeuthich;
-     private RecyclerView rc_cothebancungthich;
+    private List<Products> prolistyeuthich;
+    private RecyclerView rc_cothebancungthich;
+    private ImageButton btnbackYeuthich;
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yeu_thich);
         rc_cothebancungthich = findViewById(R.id.rc_cothebancungthich);
-        getListyeuthich();
+        btnbackYeuthich = (ImageButton) findViewById(R.id.btnback_yeuthich);
+        getListyeuthichTim();
+        btnbackYeuthich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
 
     }
-    private void getListyeuthich() {
+
+    private void getListyeuthichTim() {
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
         Retrofit retrofit = new Retrofit.Builder()
@@ -64,13 +79,14 @@ public class YeuThichActivity extends AppCompatActivity {
                     ///set recyclerview
                     prolistyeuthich = new ArrayList<>();
                     prolistyeuthich.addAll(response.body().getProducts());
-                    FavoritesAdapter favoritesAdapter = new FavoritesAdapter(getApplicationContext(),prolistyeuthich);
+                    FavoritesAdapter favoritesAdapter = new FavoritesAdapter(getApplicationContext(), prolistyeuthich);
                     favoritesAdapter.notifyDataSetChanged();
                     rc_cothebancungthich.setAdapter(favoritesAdapter);
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
                     rc_cothebancungthich.setLayoutManager(gridLayoutManager);
                 }
             }
+
             @Override
             public void onFailure(Call<ProductAddCart> call, Throwable t) {
                 Toast.makeText(YeuThichActivity.this, "Loi api", Toast.LENGTH_SHORT).show();
@@ -82,7 +98,7 @@ public class YeuThichActivity extends AppCompatActivity {
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onMessageEvent(Even event) {
         if (event.getId() == 1) {
-            getListyeuthich();
+            getListyeuthichTim();
         }
     }
 

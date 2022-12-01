@@ -129,7 +129,6 @@ public class CartFragment extends Fragment {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     rc_cart.setLayoutManager(linearLayoutManager);
                     productList.addAll(response.body().getProducts());
-                    DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
                     tv_tongtiensp.setText( productList.size() + "sản phẩm)");
                     if (productList==null){
                         layout_thanhtoan.setVisibility(View.GONE);

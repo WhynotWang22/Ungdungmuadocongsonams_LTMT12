@@ -15,7 +15,7 @@
         tools:layout_editor_absoluteY="1dp">
 
         <ImageButton
-            android:id="@+id/btnback_chitiet"
+            android:id="@+id/btnback_yeuthich"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"

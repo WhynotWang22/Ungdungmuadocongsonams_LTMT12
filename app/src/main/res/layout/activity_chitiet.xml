@@ -127,7 +127,6 @@
                             android:textSize="12dp" />
                     </LinearLayout>
                 </LinearLayout>
-
                 <ImageView
                     android:id="@+id/btn_yeuthich"
                     android:layout_width="20dp"

@@ -1,17 +1,13 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PixelFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -28,6 +24,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ChitietActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
@@ -45,7 +42,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Viewholoder> {
     Context context;
     List<Products> productsList;
-
     public FavoritesAdapter(Context context, List<Products> productsList) {
         this.context = context;
         this.productsList = productsList;
@@ -56,6 +52,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     public FavoritesAdapter.Viewholoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_yeuthich, parent, false);
         return new Viewholoder(view);
+
     }
 
     @Override
@@ -74,15 +71,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 context.startActivity(intent);
             }
         });
-
         holder.layoutyeuthichDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setTitle("Bạn có muốn xóa không?");
-//                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
                 SharedPreferences sp1 = context.getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
                 String token = sp1.getString("token", "");
                 Retrofit retrofit = new Retrofit.Builder()
@@ -91,7 +82,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
                 Call<Products> call = apiService.deleteItemFavorite(token, products.get_id());
-                Log.d("eeeee", "eeeeeeeee" + products.get_id() + token);
+                Log.d("eeeee", "eeeeeeeee" + products.get_id());
                 call.enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(Call<Products> call, Response<Products> response) {
@@ -106,16 +97,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 });
             }
         });
-//                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.dismiss();
-//                    }
-//                });
-//                builder.show();
-//            }
-//        });
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -124,6 +109,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         }
         return 0;
     }
+
 
     public class Viewholoder extends RecyclerView.ViewHolder {
         private SwipeRevealLayout rlYeuthich;
@@ -142,4 +128,5 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             tvPriceProductYeuthich = (TextView) itemView.findViewById(R.id.tv_price_product_yeuthich);
         }
     }
+
 }
