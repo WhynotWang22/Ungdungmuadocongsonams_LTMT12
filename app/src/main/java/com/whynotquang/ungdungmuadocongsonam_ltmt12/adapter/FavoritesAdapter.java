@@ -52,11 +52,9 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     public FavoritesAdapter.Viewholoder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_yeuthich, parent, false);
         return new Viewholoder(view);
-
     }
-
     @Override
-    public void onBindViewHolder(@NonNull FavoritesAdapter.Viewholoder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull FavoritesAdapter.Viewholoder holder, @SuppressLint("RecyclerView")int position) {
         Products products = productsList.get(position);
         holder.tvTitleProductYeuthich.setText(products.getTitle());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
@@ -81,8 +79,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
-                Call<Products> call = apiService.deleteItemFavorite(token, products.get_id());
-                Log.d("eeeee", "eeeeeeeee" + products.get_id());
+                Call<Products> call = apiService.deleteItemFavorite(token, products.getProductId());
+                Log.d("eeeee", "eeeeeeeee" + products.getProductId());
                 call.enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(Call<Products> call, Response<Products> response) {

@@ -79,15 +79,12 @@ public class ChitietActivity extends AppCompatActivity {
     String color;
     String size;
     RatingBar ratingBar_chitiet;
-    int position = 0;
     int count;
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chitiet);
-        prolistyeuthich = new ArrayList<>();
         tv_title_product_chitiet = findViewById(R.id.tv_title_product_chitiet);
         tv_price_product_chitiet = findViewById(R.id.tv_price_product_chitiet);
         tv_so_luot_review = findViewById(R.id.tv_so_luot_review);
@@ -114,6 +111,7 @@ public class ChitietActivity extends AppCompatActivity {
         list_img = new ArrayList<>();
         list_sizes = new ArrayList<>();
         list_color = new ArrayList<>();
+        prolistyeuthich = new ArrayList<>();
         selectSize();
         btn_themsanpham.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,32 +129,33 @@ public class ChitietActivity extends AppCompatActivity {
     }
 
     private void xoadulieu() {
-        btnYeuthich.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sp1 = getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
-                String token = sp1.getString("token", "");
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(AppConstain.BASE_URL + "favorite/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                ApiService apiService = retrofit.create(ApiService.class);
-                Call<Products> call = apiService.deleteItemFavorite(token, prolistyeuthich.get(position).get_id());
-                Log.d("e", "e" + prolistyeuthich.get(position).get_id());
-                call.enqueue(new Callback<Products>() {
-                    @Override
-                    public void onResponse(Call<Products> call, Response<Products> response) {
-                        EventBus.getDefault().postSticky(new Even(1));
-                        Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
-                    }
+//             Products products = prolistyeuthich.get(0);
+             btnYeuthich.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     SharedPreferences sp1 = getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
+                     String token = sp1.getString("token", "");
+                     Retrofit retrofit = new Retrofit.Builder()
+                             .baseUrl(AppConstain.BASE_URL + "favorite/")
+                             .addConverterFactory(GsonConverterFactory.create())
+                             .build();
+                     ApiService apiService = retrofit.create(ApiService.class);
+                     Call<Products> call = apiService.deleteItemFavorite(token, products.get_id());
+                     Log.d("e", "e" + products.get_id());
+                     call.enqueue(new Callback<Products>() {
+                         @Override
+                         public void onResponse(Call<Products> call, Response<Products> response) {
+                             EventBus.getDefault().postSticky(new Even(1));
+                             Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                         }
 
-                    @Override
-                    public void onFailure(Call<Products> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+                         @Override
+                         public void onFailure(Call<Products> call, Throwable t) {
+                             Toast.makeText(getApplicationContext(), "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+                         }
+                     });
+                 }
+             });
     }
 
 
@@ -386,6 +385,7 @@ public class ChitietActivity extends AppCompatActivity {
     public void onMessageEvent(Even event) {
         if (event.getId() == 1) {
             getListyeuthich();
+            xoadulieu();
         }
     }
 

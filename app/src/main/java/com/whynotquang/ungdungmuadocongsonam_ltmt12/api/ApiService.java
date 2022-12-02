@@ -212,9 +212,9 @@ public interface ApiService {
     Call<ProductAddCart> getListFavorite(@Header("Authorization")
                                          String authtoken);
     ///delete item Favorite
-    @DELETE("DeleteFavorite/{itemId}")
+    @DELETE("DeleteFavorite/{itemProductId}")
     Call<Products> deleteItemFavorite
-    (@Header("Authorization") String authtoken, @Path("itemId") String id);
+    (@Header("Authorization") String authtoken, @Path("itemProductId") String id);
 
 
 }
