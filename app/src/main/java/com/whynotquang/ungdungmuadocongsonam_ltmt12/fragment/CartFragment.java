@@ -120,7 +120,6 @@ public class CartFragment extends Fragment {
             @Override
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
                 if (response.body() != null) {
-                    int tong=0;
                     ///set recyclerview
                     productList = new ArrayList<>();
                     CartAdapter cartAdapter = new CartAdapter(productList, getContext());

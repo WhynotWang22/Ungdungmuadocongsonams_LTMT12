@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Bookmark;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
@@ -49,6 +50,8 @@ public interface ApiService {
 
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);
+
+
 
     //get de xuat top 10 ban chay
     @GET("gettop10")
@@ -209,12 +212,16 @@ public interface ApiService {
 
     ///get list yeu thich
     @GET("FavoriteListByUserId")
-    Call<ProductAddCart> getListFavorite(@Header("Authorization")
+    Call<List<Bookmark>> getListFavorite(@Header("Authorization")
                                          String authtoken);
+
     ///delete item Favorite
     @DELETE("DeleteFavorite/{itemProductId}")
     Call<Products> deleteItemFavorite
     (@Header("Authorization") String authtoken, @Path("itemProductId") String id);
 
+
+    @GET("FavorGetOne/{id}")
+    Call<Bookmark> getBookmarkById(@Header("Authorization") String authtoken,  @Path("id") String id);
 
 }

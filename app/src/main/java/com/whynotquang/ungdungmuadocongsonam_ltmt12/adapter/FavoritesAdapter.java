@@ -24,8 +24,8 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ChitietActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Bookmark;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,8 +41,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Viewholoder> {
     Context context;
-    List<Products> productsList;
-    public FavoritesAdapter(Context context, List<Products> productsList) {
+    List<Bookmark> productsList;
+
+    public FavoritesAdapter(Context context, List<Bookmark> productsList) {
         this.context = context;
         this.productsList = productsList;
     }
@@ -53,22 +54,38 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         View view = LayoutInflater.from(context).inflate(R.layout.item_yeuthich, parent, false);
         return new Viewholoder(view);
     }
+
     @Override
-    public void onBindViewHolder(@NonNull FavoritesAdapter.Viewholoder holder, @SuppressLint("RecyclerView")int position) {
-        Products products = productsList.get(position);
-        holder.tvTitleProductYeuthich.setText(products.getTitle());
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-        holder.tvPriceProductYeuthich.setText("Giá:" + decimalFormat.format(products.getPrice()) + "vnđ");
-        Glide.with(context).load(products.getProductIMG()).into(holder.imgProductYeuthich);
-        holder.imgProductYeuthich.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ChitietActivity.class);
-                intent.putExtra("id", productsList.get(position).getProductId());
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }
-        });
+    public void onBindViewHolder(@NonNull FavoritesAdapter.Viewholoder holder, @SuppressLint("RecyclerView") int position) {
+        Bookmark bookmark = productsList.get(position);
+        if (bookmark != null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(AppConstain.BASE_URL + "products/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            ApiService apiService = retrofit.create(ApiService.class);
+            apiService.getDetailProduct(bookmark.getProductId()).enqueue(new Callback<Product>() {
+                @Override
+                public void onResponse(Call<Product> call, Response<Product> response) {
+                    holder.tvTitleProductYeuthich.setText(response.body().getTitle());
+                    holder.tvPriceProductYeuthich.setText(new DecimalFormat("###,###,###,###").format(response.body().getPrice()) + "vnđ");
+                    Glide.with(context).load(response.body().getImg()).into(holder.imgProductYeuthich);
+                    holder.imgProductYeuthich.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, ChitietActivity.class);
+                            intent.putExtra("id", productsList.get(position).getProductId());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }
+                    });
+                }
+                @Override
+                public void onFailure(Call<Product> call, Throwable t) {
+
+                }
+            });
+        }
         holder.layoutyeuthichDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,12 +96,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
-                Call<Products> call = apiService.deleteItemFavorite(token, products.getProductId());
-                Log.d("eeeee", "eeeeeeeee" + products.getProductId());
+                Call<Products> call = apiService.deleteItemFavorite(token, bookmark.getProductId());
+                Log.d("eeeee", "eeeeeeeee" + bookmark.getProductId());
                 call.enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(Call<Products> call, Response<Products> response) {
-                        EventBus.getDefault().postSticky(new Even(1));
+                        EventBus.getDefault().postSticky(new Even(2));
                         Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                     }
 
@@ -95,9 +112,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 });
             }
         });
-
     }
-
 
 
     @Override

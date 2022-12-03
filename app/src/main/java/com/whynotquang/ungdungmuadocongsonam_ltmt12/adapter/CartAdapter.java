@@ -113,7 +113,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                             public void onResponse(Call<Products> call, Response<Products> response) {
                                 EventBus.getDefault().postSticky(new Even(1));
                                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                                refreshData(position);
+//                                refreshData(position);
                             }
 
                             @Override
