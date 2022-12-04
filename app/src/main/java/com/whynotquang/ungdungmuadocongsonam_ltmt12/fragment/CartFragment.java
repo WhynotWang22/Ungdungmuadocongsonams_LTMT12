@@ -81,7 +81,7 @@ public class CartFragment extends Fragment {
         tv_soluong_cart = (TextView) view.findViewById(R.id.tv_soluong_cart);
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout);
         progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
-        layout_thanhtoan = (LinearLayout) view.findViewById(R.id.lout_test);
+        layout_thanhtoan = (LinearLayout) view.findViewById(R.id.layout_thanhtoan);
         layout_not_cart =  view.findViewById(R.id.layout_not_cart);
 
         Sprite threeBounce = new ThreeBounce();

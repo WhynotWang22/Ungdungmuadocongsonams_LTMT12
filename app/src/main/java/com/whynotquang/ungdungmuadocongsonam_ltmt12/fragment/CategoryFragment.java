@@ -36,6 +36,7 @@ public class CategoryFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_category, container, false);
         rc_fg_category = view.findViewById(R.id.rc_fg_category);
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         CheckInternet();
         return  view;
     }

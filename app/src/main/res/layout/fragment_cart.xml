@@ -29,30 +29,27 @@
         android:orientation="vertical"
         android:id="@+id/linelayout_cart1"
         android:layout_below="@id/relativeLayout_my_cart"
-        android:layout_height="500dp">
+        android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_gio_hang"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/relativeLayout_my_cart"/>
+            android:layout_below="@+id/relativeLayout_my_cart"
+            android:paddingBottom="240dp"/>
     </LinearLayout>
-
     <LinearLayout
-        android:layout_below="@+id/linelayout_cart1"
-        android:gravity="bottom"
-        android:id="@+id/lout_test"
-        android:orientation="vertical"
+        android:id="@+id/layout_thanhtoan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true">
-
         <RelativeLayout
             android:id="@+id/relativeLayout_cart_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginRight="32dp">
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:id="@+id/tv_soluong_sp"
@@ -119,7 +116,6 @@
             android:textColor="@color/white"
             android:textSize="16dp" />
     </LinearLayout>
-    <!--</RelativeLayout>-->
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spin_kit_cart"
         style="@style/SpinKitView.Large.Circle"
