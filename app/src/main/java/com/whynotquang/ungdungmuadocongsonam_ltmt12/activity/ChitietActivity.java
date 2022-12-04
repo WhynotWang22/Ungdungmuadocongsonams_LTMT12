@@ -80,6 +80,7 @@ public class ChitietActivity extends AppCompatActivity {
     String size;
     RatingBar ratingBar_chitiet;
     private Boolean ischecked = true;
+    int stock;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -179,9 +180,9 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ChitietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChitietActivity.this, "Thêm yêu thích thành công", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ChitietActivity.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChitietActivity.this, "Thêm yêu thích không thành công", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -237,6 +238,11 @@ public class ChitietActivity extends AppCompatActivity {
             Toast.makeText(ChitietActivity.this, "Vui lòng chọn size", Toast.LENGTH_SHORT).show();
             return;
         }
+        Log.d("aaa","stock "+stock);
+        if (stock < 1) {
+            Toast.makeText(ChitietActivity.this, "Sản phẩm đã hết hàng.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         progressBar.setVisibility(View.VISIBLE);
         SharedPreferences sp = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
@@ -285,6 +291,7 @@ public class ChitietActivity extends AppCompatActivity {
                     tv_chitietsanpham.setText(response.body().getDesc());
                     idProduct = response.body().get_id();
                     tongtien = response.body().getPrice();
+                    stock = response.body().getStock();
 //                    color= response.body().getColor();
                     list_img = response.body().getImg_product();
                     ImageSliderAdapter imageSlider = new ImageSliderAdapter(ChitietActivity.this, list_img);

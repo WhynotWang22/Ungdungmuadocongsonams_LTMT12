@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
@@ -43,6 +44,7 @@ public class AddressActivity extends AppCompatActivity {
     List<Address> addressList;
     ProgressBar progressBar;
     ImageButton btnback_address;
+    RelativeLayout layout_check_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +53,12 @@ public class AddressActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rc_view_sodiachi);
         button = findViewById(R.id.btn_address);
         btnback_address = findViewById(R.id.btnback_address);
+        layout_check_address = findViewById(R.id.layout_check_address);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_address);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
         progressBar.setVisibility(View.VISIBLE);
+        layout_check_address.setVisibility(View.GONE);
         getData();
         addressList = new ArrayList<>();
         adapter = new AddressAdapter(AddressActivity.this, addressList);
@@ -97,7 +101,9 @@ public class AddressActivity extends AppCompatActivity {
                         addressList.add(data);
                         adapter.notifyDataSetChanged();
                     }
-                    Log.d("aaa", "data " + addressList.size());
+                    if (addressList.size() == 0) {
+                        layout_check_address.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     progressBar.setVisibility(View.GONE);
                 }

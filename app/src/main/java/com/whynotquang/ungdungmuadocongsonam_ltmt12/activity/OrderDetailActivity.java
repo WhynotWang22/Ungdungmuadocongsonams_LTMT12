@@ -120,6 +120,8 @@ public class OrderDetailActivity extends AppCompatActivity {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
                     } else if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_xanh));
+                    }else if (order.getStatus().equalsIgnoreCase("Người dùng hủy đơn hàng")) {
+                        layout.setBackgroundColor(getResources().getColor(R.color.color_do));
                     }
 
                     tv_trangthai_donhangchitiet.setText(order.getStatus());

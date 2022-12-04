@@ -42,12 +42,12 @@
             android:exported="false"
             tools:ignore="DuplicateActivity"></activity>
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".activity.WelcomeActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".activity.SplashActivitys"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -91,20 +91,11 @@
             android:name=".activity.ThanksOrder_Activity"
             android:exported="false" />
         <activity
-            android:name=".activity.OrderFailed_Activity"
-            android:exported="true" />
-        <activity
-            android:name=".activity.Screen_404_Activity"
-            android:exported="true" />
-        <activity
             android:name=".activity.CardActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ReviewActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.ChangeNumberActivity"
-            android:exported="true" />
         <activity
             android:name=".activity.ChangePasswordActivity"
             android:exported="false" />

@@ -29,7 +29,7 @@
         android:orientation="vertical"
         android:id="@+id/linelayout_cart1"
         android:layout_below="@id/relativeLayout_my_cart"
-        android:layout_height="350dp">
+        android:layout_height="500dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_gio_hang"
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/tv_tongtiensp"
+                android:id="@+id/tv_soluong_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -81,7 +81,8 @@
             android:layout_below="@+id/relativeLayout_cart_1"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="12dp"
-            android:layout_marginRight="32dp">
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"

@@ -58,17 +58,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class CartFragment extends Fragment {
-    int soluongsanpham = 0;
-    String id;
+
     RecyclerView rc_cart;
     private CartAdapter cartAdapter;
     List<Products> productList;
     private TextView tv_tongtien;
-    private TextView tv_tongtiensp;
+    private TextView tv_soluong_cart;
     private Button btnCheckoutCart, btnvalues;
     private ProgressBar progressBar;
     private LinearLayout layout_thanhtoan;
     LinearLayout layout_not_cart;
+    int tongtien_cart = 0;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -78,7 +78,7 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         rc_cart = view.findViewById(R.id.rc_view_gio_hang);
         tv_tongtien = (TextView) view.findViewById(R.id.tv_tongtien);
-        tv_tongtiensp = (TextView) view.findViewById(R.id.tv_tongtiensp);
+        tv_soluong_cart = (TextView) view.findViewById(R.id.tv_soluong_cart);
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout);
         progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
         layout_thanhtoan = (LinearLayout) view.findViewById(R.id.lout_test);
@@ -128,8 +128,8 @@ public class CartFragment extends Fragment {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     rc_cart.setLayoutManager(linearLayoutManager);
                     productList.addAll(response.body().getProducts());
-                    tv_tongtiensp.setText( productList.size() + "sản phẩm)");
-                    if (productList==null){
+                    tv_soluong_cart.setText( productList.size() + " sản phẩm");
+                    if (productList==null || productList.size() == 0){
                         layout_thanhtoan.setVisibility(View.GONE);
                         layout_not_cart.setVisibility(View.VISIBLE);
                     }else {
@@ -159,14 +159,18 @@ public class CartFragment extends Fragment {
             int tongtien = intent.getIntExtra("tongtien", 0);
             Log.d("msg", "onReceive: " + tongtien);
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-            tv_tongtien.setText(decimalFormat.format(tongtien)+ " vnđ");
+            tv_tongtien.setText(decimalFormat.format(tongtien)+ " đ");
+            tongtien_cart = tongtien;
         }
     };
 
     private void PostCartCheckout() {
-        Intent i = new Intent(getActivity(), CheckOutActivity.class);
-//       i.putExtra("key", tv_tongtien.getText().toString());
-        startActivity(i);
+        if (tongtien_cart < 20000){
+            Toast.makeText(getActivity(), "Vui lòng đặt đơn hàng trên 20.000đ.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(getActivity(),CheckOutActivity.class);
+        startActivity(intent);
     }
     ///tai lai du lieu
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)

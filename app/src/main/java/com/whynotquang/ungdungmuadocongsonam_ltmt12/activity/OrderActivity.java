@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
@@ -37,16 +38,18 @@ public class OrderActivity extends AppCompatActivity {
     OrderAdapter adapter;
     ProgressBar progressBar;
     ImageButton btnback_order;
+    RelativeLayout layout_check_order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         recyclerView = findViewById(R.id.rc_view_order);
+        layout_check_order = findViewById(R.id.layout_check_order);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_donhangcuatoi);
         Sprite threeBounce = new ThreeBounce();
         btnback_order = findViewById(R.id.btnback_order);
-
+        layout_check_order.setVisibility(View.GONE);
         progressBar.setIndeterminateDrawable(threeBounce);
         progressBar.setVisibility(View.VISIBLE);
         orderList = new ArrayList<>();
@@ -81,6 +84,11 @@ public class OrderActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     orderList.addAll(response.body());
                     adapter.notifyDataSetChanged();
+                    if (orderList == null || orderList.size() == 0){
+                        layout_check_order.setVisibility(View.VISIBLE);
+                    }else {
+                        layout_check_order.setVisibility(View.GONE);
+                    }
                 } else {
                     progressBar.setVisibility(View.GONE);
                 }

@@ -233,7 +233,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     id = response.body().get_id();
                     idUser = gioHang.getUserId();
                     amount = Double.valueOf(response.body().getTotal());
-                    tv_so_sanpham.setText(soluong_sanpham + " sản phẩm)");
+                    tv_so_sanpham.setText(soluong_sanpham + " sản phẩm");
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                     tv_gia_checkout.setText(decimalFormat.format(Integer.parseInt(response.body().getTotal())) + "đ");
                     tv_fee_ship_checkout.setText(decimalFormat.format(feeship) + "đ");

@@ -60,4 +60,5 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:20.4.0"
     implementation 'com.github.momo-wallet:mobile-sdk:1.0.7'
     implementation 'org.greenrobot:eventbus:3.0.0'
+
 }
