@@ -66,7 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_marginLeft="5dp"
-                            android:fontFamily="@font/interbold"
+                            android:fontFamily="@font/intermedium"
                             android:paddingLeft="10dp"
                             android:text="Size: |"
                             android:textSize="14dp" />
@@ -77,7 +77,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_marginLeft="10dp"
-                            android:fontFamily="@font/interbold"
+                            android:fontFamily="@font/intermedium"
                             android:paddingRight="10dp"
                             android:text="Color:"
                             android:textSize="14dp" />
