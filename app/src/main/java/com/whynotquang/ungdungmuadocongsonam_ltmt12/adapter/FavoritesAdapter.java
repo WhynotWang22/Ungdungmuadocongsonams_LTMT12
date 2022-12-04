@@ -86,32 +86,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 }
             });
         }
-        holder.layoutyeuthichDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sp1 = context.getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
-                String token = sp1.getString("token", "");
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(AppConstain.BASE_URL + "favorite/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                ApiService apiService = retrofit.create(ApiService.class);
-                Call<Products> call = apiService.deleteItemFavorite(token, bookmark.getProductId());
-                Log.d("eeeee", "eeeeeeeee" + bookmark.getProductId());
-                call.enqueue(new Callback<Products>() {
-                    @Override
-                    public void onResponse(Call<Products> call, Response<Products> response) {
-                        EventBus.getDefault().postSticky(new Even(2));
-                        Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Products> call, Throwable t) {
-                        Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
     }
 
 
@@ -125,19 +99,16 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
 
     public class Viewholoder extends RecyclerView.ViewHolder {
-        private SwipeRevealLayout rlYeuthich;
-        private RelativeLayout layoutyeuthichDelete;
         private ImageView imgProductYeuthich;
         private TextView tvTitleProductYeuthich;
-        private LinearLayout layoutPriceCategory;
+        private RelativeLayout layoutPriceCategory;
         private TextView tvPriceProductYeuthich;
 
         public Viewholoder(@NonNull View itemView) {
             super(itemView);
-            layoutyeuthichDelete = (RelativeLayout) itemView.findViewById(R.id.layoutyeuthich_delete);
             imgProductYeuthich = (ImageView) itemView.findViewById(R.id.img_product_yeuthich);
             tvTitleProductYeuthich = (TextView) itemView.findViewById(R.id.tv_title_product_yeuthich);
-            layoutPriceCategory = (LinearLayout) itemView.findViewById(R.id.layout_price_category);
+            layoutPriceCategory = (RelativeLayout) itemView.findViewById(R.id.layout_price_category);
             tvPriceProductYeuthich = (TextView) itemView.findViewById(R.id.tv_price_product_yeuthich);
         }
     }
