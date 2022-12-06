@@ -88,7 +88,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
         holder.tvTitleCart.setText(product.getTitle());
         holder.tv_values.setText(Integer.toString(product.getQuantity()));
         holder.tvSizeCart.setText("Size:" + product.getSize());
-        holder.tvColorCart.setText("Color:" + product.getColor());
+        holder.tvColorCart.setText("| Color:" + product.getColor());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
         holder.tv_price_cart.setText("Giá: " + decimalFormat.format(product.getPrice()) + "đ");
         Glide.with(context).load(product.getProductIMG()).into(holder.img_cart);
@@ -109,7 +109,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                                 .build();
                         ApiService apiService = retrofit.create(ApiService.class);
                         Call<Products> call = apiService.deleteCart(token, product._id);
-                        Log.d("eeeee", "eeeeeeeee" + product._id + token);
                         call.enqueue(new Callback<Products>() {
                             @Override
                             public void onResponse(Call<Products> call, Response<Products> response) {
