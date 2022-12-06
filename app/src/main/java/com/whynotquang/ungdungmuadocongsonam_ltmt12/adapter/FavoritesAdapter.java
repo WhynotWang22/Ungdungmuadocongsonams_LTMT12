@@ -87,8 +87,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             });
         }
     }
-
-
     @Override
     public int getItemCount() {
         if (productsList != null) {
@@ -96,8 +94,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         }
         return 0;
     }
-
-
     public class Viewholoder extends RecyclerView.ViewHolder {
         private ImageView imgProductYeuthich;
         private TextView tvTitleProductYeuthich;

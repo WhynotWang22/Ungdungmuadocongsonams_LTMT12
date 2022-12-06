@@ -32,6 +32,8 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -113,7 +115,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                             public void onResponse(Call<Products> call, Response<Products> response) {
                                 EventBus.getDefault().postSticky(new Even(1));
                                 Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-//                                refreshData(position);
                             }
 
                             @Override
@@ -133,7 +134,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
 
             }
         });
-
 
         holder.btnplus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,9 +166,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                                 call1.enqueue(new Callback<Products>() {
                                     @Override
                                     public void onResponse(Call<Products> call, Response<Products> response) {
+                                        EventBus.getDefault().postSticky(new Even(1));
                                         Toast.makeText(context, "Tăng thành công", Toast.LENGTH_SHORT).show();
                                     }
-
                                     @Override
                                     public void onFailure(Call<Products> call, Throwable t) {
                                         Toast.makeText(context, "Tăng thất bại ", Toast.LENGTH_SHORT).show();
@@ -179,7 +179,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                             }
                         }
                     }
-
                     @Override
                     public void onFailure(Call<Product> call, Throwable t) {
                         Toast.makeText(context, "that bai", Toast.LENGTH_SHORT).show();
@@ -194,6 +193,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                 }
             }
         });
+        int sl = (Integer.parseInt(holder.tv_values.getText().toString()));
+        if (sl <= 1) {
+            holder.btnminus.setVisibility(View.GONE);
+        }
         holder.btnminus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,7 +208,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                 tong -= value * product.getPrice();
                 tong += (value - 1) * product.getPrice();
                 tong2 = value * product.getPrice();
-                bindData();
+//                bindData();
                 holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong2) + "Đ");
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "cart/")
@@ -227,7 +230,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
 
                 int sl = (Integer.parseInt(holder.tv_values.getText().toString()));
                 if (sl <= 1) {
-                    holder.btnminus.setVisibility(View.INVISIBLE);
+                    holder.btnminus.setVisibility(View.GONE);
                 } else {
                     holder.btnminus.setVisibility(View.VISIBLE);
                 }
@@ -239,7 +242,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
             tong += productsList.get(i).getPrice() * productsList.get(i).getQuantity();
         }
         bindData();
-//        notifyDataSetChanged();
     }
 
     @Override
@@ -273,9 +275,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
             btnminus = (Button) itemView.findViewById(R.id.btnminus);
             tv_values = (TextView) itemView.findViewById(R.id.tv_values);
             btnplus = (Button) itemView.findViewById(R.id.btnplus);
-
-
         }
-
     }
 }
