@@ -58,7 +58,6 @@ public class AddressActivity extends AppCompatActivity {
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
         progressBar.setVisibility(View.VISIBLE);
-        layout_check_address.setVisibility(View.GONE);
         getData();
         addressList = new ArrayList<>();
         adapter = new AddressAdapter(AddressActivity.this, addressList);
@@ -103,6 +102,8 @@ public class AddressActivity extends AppCompatActivity {
                     }
                     if (addressList.size() == 0) {
                         layout_check_address.setVisibility(View.VISIBLE);
+                    }else {
+                        layout_check_address.setVisibility(View.GONE);
                     }
                 } else {
                     progressBar.setVisibility(View.GONE);

@@ -47,6 +47,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigationView;
     boolean switch_noti;
+    private long backPressedTime;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,5 +115,16 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Không lấy được dữ liệu user", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime+2000> System.currentTimeMillis()){
+            super.onBackPressed();
+            return;
+        }else {
+            Toast.makeText(this, "Nhấn trở lại tiếp để thoát app.", Toast.LENGTH_SHORT).show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

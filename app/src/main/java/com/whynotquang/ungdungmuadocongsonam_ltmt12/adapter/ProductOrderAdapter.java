@@ -111,7 +111,7 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
                          holder.tv_danhgiasp.setVisibility(View.GONE);
                      } else if (order.getStatus().equalsIgnoreCase("Đang giao hàng")) {
                          holder.tv_danhgiasp.setVisibility(View.GONE);
-                     } else if (order.getStatus().equalsIgnoreCase("Người dùng hủy đơn hàng")) {
+                     } else if (order.getStatus().equalsIgnoreCase("Người dùng đã hủy đơn hàng")) {
                          holder.tv_danhgiasp.setVisibility(View.GONE);
                      }
 

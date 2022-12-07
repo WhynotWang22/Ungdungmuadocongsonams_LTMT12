@@ -144,7 +144,7 @@ public interface ApiService {
     Call<Address> postAddress(@Header("Authorization") String authtoken,
                               @Field("Name") String name,
                               @Field("DetailAddress") String detailAddress,
-                              @Field("NumberPhone") int numberPhone
+                              @Field("NumberPhone") String numberPhone
     );
 
     //get order
@@ -156,6 +156,11 @@ public interface ApiService {
     Call<Order> getDetailOrder(
 //            @Header("Authorization") String authtoken,
                                @Path("id") String id);
+    //post cancel order
+    @POST("changeStatusToCancel/{id}")
+    Call<Order> postCannelOrder(
+//            @Header("Authorization") String authtoken,
+            @Path("id") String id);
 
     ///changeAdress
     @FormUrlEncoded

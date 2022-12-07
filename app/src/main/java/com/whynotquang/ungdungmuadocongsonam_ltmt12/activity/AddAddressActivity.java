@@ -65,8 +65,8 @@ public class AddAddressActivity extends AppCompatActivity {
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                int phone = Integer.valueOf(sdt);
-                postAddress(name,address, phone);
+//                int phone = Integer.parseInt(ed_sdt_addaddress.getText().toString());
+                postAddress(name,address, sdt);
             }
         });
         btnback_add_address.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +77,7 @@ public class AddAddressActivity extends AppCompatActivity {
         });
     }
 
-    private void postAddress(String name, String address, int sdt) {
+    private void postAddress(String name, String address, String sdt) {
         SharedPreferences sp = AddAddressActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token","");
 

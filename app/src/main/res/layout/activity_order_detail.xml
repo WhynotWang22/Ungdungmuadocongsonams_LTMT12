@@ -247,6 +247,26 @@
             android:paddingRight="32dp"
             android:id="@+id/rc_view_product_orderdetail"/>
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/layout_btn_cancel_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/btn_cancel_order"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Hủy đơn hàng"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/intermedium"
+            android:background="@drawable/bg_button_cancel"
+            android:layout_marginBottom="35dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spin_kit_orderdetail"
         style="@style/SpinKitView.Large.Circle"

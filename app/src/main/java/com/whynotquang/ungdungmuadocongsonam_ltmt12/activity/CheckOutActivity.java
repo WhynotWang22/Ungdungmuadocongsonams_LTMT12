@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -83,6 +84,7 @@ public class CheckOutActivity extends AppCompatActivity {
     String id, name, phoneNumber, diachi;
     String idUser = "";
     double amount = 0;
+    LinearLayout layout_no_diachi;
     private static final String TAG = "CheckoutActivity";
     private static final String BACKEND_URL = "https://mofshop.shop/api/order";
     private String paymentIntentClientSecret;
@@ -112,6 +114,7 @@ public class CheckOutActivity extends AppCompatActivity {
         btn_radio_momo = findViewById(R.id.btn_radio_momo);
         btnback_checkout = findViewById(R.id.btnback_checkout);
         btn_thanhtoan = findViewById(R.id.btn_thanhtoan);
+        layout_no_diachi = findViewById(R.id.layout_no_diachi);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_checkout);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -197,6 +200,11 @@ public class CheckOutActivity extends AppCompatActivity {
                     for (Address data : datas) {
                         addressList.add(data);
                         adapter.notifyDataSetChanged();
+                    }
+                    if (addressList.size() ==0){
+                        layout_no_diachi.setVisibility(View.VISIBLE);
+                    }else {
+                        layout_no_diachi.setVisibility(View.GONE);
                     }
                 }
             }
@@ -469,6 +477,6 @@ public class CheckOutActivity extends AppCompatActivity {
         super.onRestart();
         addressList.clear();
         getData();
-        adapter.notifyDataSetChanged();
+        getDataAddress();
     }
 }

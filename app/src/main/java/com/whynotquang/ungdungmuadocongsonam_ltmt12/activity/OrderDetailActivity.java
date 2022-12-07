@@ -12,9 +12,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,8 @@ public class OrderDetailActivity extends AppCompatActivity {
     ProductOrderAdapter adapter;
     int soluong = 0;
     LinearLayout layout;
+    RelativeLayout layout_btn_cancel_order;
+    Button btn_cancel_order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class OrderDetailActivity extends AppCompatActivity {
         tv_thanks_orderdetail = findViewById(R.id.tv_thanks_orderdetail);
         layout = findViewById(R.id.layout_donhang_1);
         btnback_chitiet_donhang = findViewById(R.id.btnback_chitiet_donhang);
+        layout_btn_cancel_order = findViewById(R.id.layout_btn_cancel_order);
+        btn_cancel_order = findViewById(R.id.btn_cancel_order);
 
         recyclerView = findViewById(R.id.rc_view_product_orderdetail);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_orderdetail);
@@ -82,6 +88,45 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+        layout_btn_cancel_order.setVisibility(View.GONE);
+        btn_cancel_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                postCacnel();
+            }
+        });
+    }
+
+    private void postCacnel() {
+        SharedPreferences sp1 = getApplicationContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        String token = sp1.getString("token", "");
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "order/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<Order> call = apiService.postCannelOrder(id);
+        call.enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                if (response.isSuccessful()){
+                    progressBar.setVisibility(View.GONE);
+                    getData();
+                    layout_btn_cancel_order.setVisibility(View.GONE);
+                    Toast.makeText(OrderDetailActivity.this, "Hủy thành công", Toast.LENGTH_SHORT).show();
+                }else {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(OrderDetailActivity.this, "Hủy không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(OrderDetailActivity.this, "Hủy không thành công", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -114,14 +159,19 @@ public class OrderDetailActivity extends AppCompatActivity {
 
                     if (order.getStatus().equalsIgnoreCase("Đang chờ xác nhận")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
+                        layout_btn_cancel_order.setVisibility(View.VISIBLE);
                     } else if (order.getStatus().equalsIgnoreCase("Đang chuẩn bị hàng")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
+                        layout_btn_cancel_order.setVisibility(View.GONE);
                     } else if (order.getStatus().equalsIgnoreCase("Đang giao hàng")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
+                        layout_btn_cancel_order.setVisibility(View.GONE);
                     } else if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_xanh));
-                    }else if (order.getStatus().equalsIgnoreCase("Người dùng hủy đơn hàng")) {
+                        layout_btn_cancel_order.setVisibility(View.GONE);
+                    }else if (order.getStatus().equalsIgnoreCase("Người dùng đã hủy đơn hàng")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_do));
+                        layout_btn_cancel_order.setVisibility(View.GONE);
                     }
 
                     tv_trangthai_donhangchitiet.setText(order.getStatus());

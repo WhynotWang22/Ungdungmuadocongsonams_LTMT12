@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
             holder.tv_trangthai_order.setTextColor(Color.parseColor("#E49542"));
         } else if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
             holder.tv_trangthai_order.setTextColor(Color.parseColor("#4CAF50"));
+        }else if (order.getStatus().equalsIgnoreCase("Người dùng đã hủy đơn hàng")) {
+            holder.tv_trangthai_order.setTextColor(Color.RED);
         }
 //        holder.tv_title_order.setText(order.get_id());
 //        holder.tv_title_order.setText(order.get_id());
@@ -74,6 +77,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
                 context.startActivity(intent);
             }
         });
+        holder.tv_trangthai_order.setMaxLines(1);
+        holder.tv_trangthai_order.setEllipsize(TextUtils.TruncateAt.END);
+        holder.tv_title_order.setMaxLines(1);
+        holder.tv_title_order.setEllipsize(TextUtils.TruncateAt.END);
     }
 
     @Override

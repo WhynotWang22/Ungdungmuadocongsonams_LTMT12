@@ -12,7 +12,7 @@ public class Address {
     private String detailAddress;
     @SerializedName("NumberPhone")
     @Expose
-    private Integer numberPhone;
+    private String numberPhone;
     @SerializedName("_id")
     @Expose
     private String id;
@@ -20,7 +20,7 @@ public class Address {
     public Address() {
     }
 
-    public Address(String name, String detailAddress, Integer numberPhone, String id) {
+    public Address(String name, String detailAddress, String numberPhone, String id) {
         this.name = name;
         this.detailAddress = detailAddress;
         this.numberPhone = numberPhone;
@@ -43,11 +43,11 @@ public class Address {
         this.detailAddress = detailAddress;
     }
 
-    public Integer getNumberPhone() {
+    public String getNumberPhone() {
         return numberPhone;
     }
 
-    public void setNumberPhone(Integer numberPhone) {
+    public void setNumberPhone(String numberPhone) {
         this.numberPhone = numberPhone;
     }
 

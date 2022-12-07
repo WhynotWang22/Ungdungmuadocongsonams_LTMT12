@@ -100,4 +100,10 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        orderList.clear();
+        getData();
+    }
 }
