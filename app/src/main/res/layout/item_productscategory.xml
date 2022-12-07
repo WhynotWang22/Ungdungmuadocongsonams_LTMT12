@@ -51,13 +51,15 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/color_do"
                     android:textSize="14dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
                     android:fontFamily="@font/intermedium"
                     android:text="Đã bán 999"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/tv_productcatagory_daban"
                     android:textColor="@color/mauchu"
                     android:textSize="12dp" />
             </RelativeLayout>

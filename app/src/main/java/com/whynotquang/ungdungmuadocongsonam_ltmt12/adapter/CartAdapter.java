@@ -207,7 +207,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                 tong -= value * product.getPrice();
                 tong += (value - 1) * product.getPrice();
                 tong2 = value * product.getPrice();
-//                bindData();
+                bindData();
                 holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong2) + "Đ");
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "cart/")

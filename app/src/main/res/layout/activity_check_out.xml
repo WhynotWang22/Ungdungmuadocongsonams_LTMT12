@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout_number"
         android:orientation="vertical"
+        android:id="@+id/rl_layout_tt1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -97,6 +98,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_layout_tt1"
         android:orientation="vertical"
         android:paddingLeft="32dp"
         android:paddingRight="32dp"
@@ -104,7 +106,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="66dp">
+            android:layout_marginTop="16dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -132,7 +134,7 @@
                 android:layout_height="35dp"
                 android:background="@drawable/bg_radio_button"
                 android:button="@null"
-                android:textSize="12dp"
+                android:textSize="11dp"
                 android:layout_marginHorizontal="2dp"
                 android:textColor="@drawable/radio_text_selector"
                 android:fontFamily="@font/intermedium"
@@ -144,8 +146,8 @@
                 android:layout_height="35dp"
                 android:background="@drawable/bg_radio_button"
                 android:button="@null"
-                android:textSize="12dp"
-                android:layout_marginLeft="8dp"
+                android:textSize="11dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@drawable/radio_text_selector"
                 android:fontFamily="@font/intermedium"
                 android:id="@+id/btn_radio_stripe"
@@ -156,8 +158,8 @@
                 android:layout_height="35dp"
                 android:background="@drawable/bg_radio_button"
                 android:button="@null"
-                android:textSize="12dp"
-                android:layout_marginLeft="8dp"
+                android:textSize="11dp"
+                android:layout_marginLeft="5dp"
                 android:textColor="@drawable/radio_text_selector"
                 android:fontFamily="@font/intermedium"
                 android:id="@+id/btn_radio_momo"
@@ -257,7 +259,7 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <Button
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/btn_thanhtoan"
             android:layout_width="match_parent"
             android:layout_height="56dp"

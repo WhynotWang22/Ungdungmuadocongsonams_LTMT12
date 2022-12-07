@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.OrderDetailActivity">
+
     <RelativeLayout
         android:id="@+id/relativeLayout_chitiet_donhang"
         android:layout_width="match_parent"
@@ -34,238 +35,284 @@
             android:textSize="16dp" />
 
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/layout_donhang_1"
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:orientation="vertical"
         android:layout_below="@id/relativeLayout_chitiet_donhang"
-        android:paddingTop="24dp"
-        android:paddingLeft="19dp">
+        android:orientation="vertical"
+        android:paddingLeft="19dp"
+        android:paddingTop="24dp">
+
         <TextView
             android:id="@+id/tv_trangthai_donhangchitiet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/intermedium"
             android:textColor="@color/white"
-            android:textSize="14dp"
-            android:fontFamily="@font/intermedium"/>
+            android:textSize="14dp" />
+
         <TextView
             android:id="@+id/tv_thanks_orderdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/intermedium"
             android:text="Cảm ơn bạn đã mua sắm"
             android:textColor="@color/white"
-            android:textSize="10dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/intermedium"/>
+            android:textSize="10dp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layout_donhang_2"
         android:layout_width="match_parent"
         android:layout_height="93dp"
-        android:orientation="vertical"
         android:layout_below="@id/layout_donhang_1"
+        android:layout_marginTop="11dp"
         android:background="@color/white"
-        android:layout_marginTop="11dp">
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/tv_diachi_order_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/intermedium"
+            android:paddingLeft="10dp"
             android:text="Địa chỉ nhận hàng"
             android:textColor="@color/mauchu"
-            android:textSize="14dp"
-            android:paddingLeft="10dp"
-            android:fontFamily="@font/intermedium"/>
+            android:textSize="14dp" />
+
         <TextView
             android:id="@+id/tv_name_orderdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/intermedium"
+            android:paddingLeft="10dp"
             android:text="Nguyễn Văn A"
             android:textColor="@color/mauchu2"
-            android:textSize="12dp"
-            android:paddingLeft="10dp"
-            android:fontFamily="@font/intermedium"/>
+            android:textSize="12dp" />
+
         <TextView
             android:id="@+id/tv_sdt_orderdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/intermedium"
+            android:paddingLeft="10dp"
             android:text="0123456789"
             android:textColor="@color/mauchu2"
-            android:textSize="12dp"
-            android:paddingLeft="10dp"
-            android:fontFamily="@font/intermedium"/>
+            android:textSize="12dp" />
+
         <TextView
             android:id="@+id/tv_diachi_orderdetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/intermedium"
+            android:paddingLeft="10dp"
             android:text="Phường Quan Hoa, Cầu Giấy, Hà Nội"
             android:textColor="@color/mauchu2"
-            android:textSize="12dp"
-            android:paddingLeft="10dp"
-            android:fontFamily="@font/intermedium"/>
+            android:textSize="12dp" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layout_donhang_3"
         android:layout_width="match_parent"
         android:layout_height="107dp"
-        android:orientation="vertical"
-        android:background="@color/white"
         android:layout_below="@id/layout_donhang_2"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/intermedium"
                 android:text="Mã đơn hàng"
                 android:textColor="#000000"
-                android:textSize="12dp"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/intermedium"/>
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/tv_madon_orderdetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/intermedium"
                 android:text="JEBVIDNCSIJNS123"
                 android:textColor="#000000"
-                android:textSize="12dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:fontFamily="@font/intermedium"/>
+                android:textSize="12dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/intermedium"
                 android:text="Thời gian đặt hàng"
                 android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/intermedium"/>
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/tv_time_orderdetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/intermedium"
                 android:text="11:12"
                 android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:fontFamily="@font/intermedium"/>
+                android:textSize="12dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/intermedium"
                 android:text="Số lượng"
                 android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/intermedium"/>
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/tv_soluong_orderdetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:fontFamily="@font/intermedium"/>
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/intermedium"
+                android:textColor="@color/mauchu2"
+                android:textSize="12dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/intermedium"
                 android:text="Tổng tiền"
                 android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/intermedium"/>
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/tv_tongtien_orderdetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:fontFamily="@font/intermedium"/>
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/intermedium"
+                android:textColor="@color/mauchu2"
+                android:textSize="12dp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/intermedium"
                 android:text="Phương thức thanh toán"
                 android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/intermedium"/>
+                android:textSize="12dp" />
+
             <TextView
                 android:id="@+id/tv_thanhtoan_orderdetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/mauchu2"
-                android:textSize="12dp"
-                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:fontFamily="@font/intermedium"/>
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/intermedium"
+                android:textColor="@color/mauchu2"
+                android:textSize="12dp" />
         </RelativeLayout>
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/layout_sanpham"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_donhang_3"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_donhang_3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/intermedium"
             android:text="Sản phẩm"
             android:textColor="@color/mauchu"
-            android:textSize="14dp"
-            android:layout_marginLeft="10dp"
-            android:fontFamily="@font/intermedium"
-            android:layout_below="@+id/layout_donhang_3"
-            android:layout_marginTop="10dp"/>
+            android:textSize="14dp" />
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_view_product_orderdetail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:paddingLeft="32dp"
-            android:paddingRight="32dp"
-            android:id="@+id/rc_view_product_orderdetail"/>
+            android:paddingRight="32dp" />
     </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/layout_btn_cancel_order"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/layout_sanpham">
         <Button
             android:id="@+id/btn_cancel_order"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Hủy đơn hàng"
-            android:textColor="@color/white"
-            android:textSize="14dp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/intermedium"
-            android:background="@drawable/bg_button_cancel"
-            android:layout_marginBottom="35dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginTop="5dp"/>
+            android:background="@drawable/bg_button_cancel"
+            android:fontFamily="@font/intermedium"
+            android:text="Hủy đơn hàng"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layout_callshop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_btn_cancel_order">
+        <Button
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_call_shop"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/bg_button_callshop"
+            android:fontFamily="@font/intermedium"
+            android:text="Liên Hệ"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
     </RelativeLayout>
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spin_kit_orderdetail"

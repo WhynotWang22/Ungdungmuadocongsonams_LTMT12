@@ -1,14 +1,20 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +29,7 @@ import android.widget.Toast;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.CartAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.ProductOrderAdapter;
@@ -30,6 +37,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -55,6 +63,8 @@ public class OrderDetailActivity extends AppCompatActivity {
     LinearLayout layout;
     RelativeLayout layout_btn_cancel_order;
     Button btn_cancel_order;
+    Button btn_call_shop;
+    private static final int REQUEST_CALL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +81,10 @@ public class OrderDetailActivity extends AppCompatActivity {
         tv_thanhtoan_orderdetail = findViewById(R.id.tv_thanhtoan_orderdetail);
         tv_thanks_orderdetail = findViewById(R.id.tv_thanks_orderdetail);
         layout = findViewById(R.id.layout_donhang_1);
+        btn_call_shop = findViewById(R.id.btn_call_shop);
         btnback_chitiet_donhang = findViewById(R.id.btnback_chitiet_donhang);
         layout_btn_cancel_order = findViewById(R.id.layout_btn_cancel_order);
         btn_cancel_order = findViewById(R.id.btn_cancel_order);
-
         recyclerView = findViewById(R.id.rc_view_product_orderdetail);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_orderdetail);
         Sprite threeBounce = new ThreeBounce();
@@ -98,6 +108,12 @@ public class OrderDetailActivity extends AppCompatActivity {
                 postCacnel();
             }
         });
+        btn_call_shop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callShop();
+            }
+        });
     }
 
     private void postCacnel() {
@@ -112,12 +128,12 @@ public class OrderDetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
                     getData();
                     layout_btn_cancel_order.setVisibility(View.GONE);
                     Toast.makeText(OrderDetailActivity.this, "Hủy thành công", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(OrderDetailActivity.this, "Hủy không thành công", Toast.LENGTH_SHORT).show();
                 }
@@ -129,6 +145,56 @@ public class OrderDetailActivity extends AppCompatActivity {
                 Toast.makeText(OrderDetailActivity.this, "Hủy không thành công", Toast.LENGTH_SHORT).show();
             }
         });
+
+    }
+
+    int phone;
+
+    private void callShop() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "auth/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        apiService.getPhoneAdmin().enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()){
+                    phone = response.body().getPhoneNumber();
+                    Log.d("aa", "a" + phone);
+                    if (phone > 0) {
+                        if (ContextCompat.checkSelfPermission(OrderDetailActivity.this,
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(OrderDetailActivity.this,
+                                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                        } else {
+                            String dial = "tel:" + phone;
+                            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                        }
+
+                    }
+                }
+//                Toast.makeText(OrderDetailActivity.this, "Thanh Cong", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                //                Toast.makeText(OrderDetailActivity.this, "that bai", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                callShop();
+            } else {
+                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void getData() {
@@ -169,7 +235,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                     } else if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_xanh));
                         layout_btn_cancel_order.setVisibility(View.GONE);
-                    }else if (order.getStatus().equalsIgnoreCase("Người dùng đã hủy đơn hàng")) {
+                    } else if (order.getStatus().equalsIgnoreCase("Người dùng đã hủy đơn hàng")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_do));
                         layout_btn_cancel_order.setVisibility(View.GONE);
                     }

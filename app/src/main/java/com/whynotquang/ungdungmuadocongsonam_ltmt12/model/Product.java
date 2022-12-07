@@ -15,13 +15,14 @@ public class Product {
     public ArrayList<String> sizes = null;
     public ArrayList<String> color = null;
     public int stock;
+    public int sold;
     public String img;
     public ArrayList<String> img_product = null;
 
     public Product() {
     }
 
-    public Product(String _id, String title, int price, String desc, String category, ArrayList<String> sizes, ArrayList<String> color, int stock, String img, ArrayList<String> img_product) {
+    public Product(String _id, String title, int price, String desc, String category, ArrayList<String> sizes, ArrayList<String> color, int stock, int sold, String img, ArrayList<String> img_product) {
         this._id = _id;
         this.title = title;
         this.price = price;
@@ -30,6 +31,7 @@ public class Product {
         this.sizes = sizes;
         this.color = color;
         this.stock = stock;
+        this.sold = sold;
         this.img = img;
         this.img_product = img_product;
     }
@@ -112,5 +114,9 @@ public class Product {
 
     public void setImg_product(ArrayList<String> img_product) {
         this.img_product = img_product;
+    }
+
+    public int getSold() {
+        return sold;
     }
 }

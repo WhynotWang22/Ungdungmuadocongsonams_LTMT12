@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/intermedium"
                     android:text="Đã bán 999"
+                    android:id="@+id/tv_favorites_daban"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:textColor="@color/mauchu"

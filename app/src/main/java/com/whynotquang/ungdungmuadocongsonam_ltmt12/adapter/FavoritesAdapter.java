@@ -68,6 +68,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
                     holder.tvTitleProductYeuthich.setText(response.body().getTitle());
+                    holder.tv_favorites_daban.setText("Đã Bán"+ response.body().getSold() + "");
                     holder.tvPriceProductYeuthich.setText(new DecimalFormat("###,###,###,###").format(response.body().getPrice()) + "vnđ");
                     Glide.with(context).load(response.body().getImg()).into(holder.imgProductYeuthich);
                     holder.imgProductYeuthich.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +100,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         private TextView tvTitleProductYeuthich;
         private RelativeLayout layoutPriceCategory;
         private TextView tvPriceProductYeuthich;
+        private TextView tv_favorites_daban;
 
         public Viewholoder(@NonNull View itemView) {
             super(itemView);
@@ -106,6 +108,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             tvTitleProductYeuthich = (TextView) itemView.findViewById(R.id.tv_title_product_yeuthich);
             layoutPriceCategory = (RelativeLayout) itemView.findViewById(R.id.layout_price_category);
             tvPriceProductYeuthich = (TextView) itemView.findViewById(R.id.tv_price_product_yeuthich);
+            tv_favorites_daban = (TextView) itemView.findViewById(R.id.tv_favorites_daban);
         }
     }
 

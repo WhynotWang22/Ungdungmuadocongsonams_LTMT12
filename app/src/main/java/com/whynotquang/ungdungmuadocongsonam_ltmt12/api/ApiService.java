@@ -51,8 +51,6 @@ public interface ApiService {
     @GET("getone/{id}")
     Call<Product> getDetailProduct(@Path("id") String id);
 
-
-
     //get de xuat top 10 ban chay
     @GET("gettop10")
     Call<List<Product>> getTop10();
@@ -147,6 +145,11 @@ public interface ApiService {
                               @Field("NumberPhone") String numberPhone
     );
 
+    //Delete Adress
+    @DELETE("deleteShippingAddress/{itemId}")
+    Call<Address> deleteAddress(@Header("Authorization") String authtoken,
+            @Path("itemId")String id);
+
     //get order
     @GET("getallOrderByuser")
     Call<List<Order>> getOrder(@Header("Authorization") String authtoken);
@@ -225,8 +228,12 @@ public interface ApiService {
     Call<Products> deleteItemFavorite
     (@Header("Authorization") String authtoken, @Path("itemProductId") String id);
 
-
+    ///check yeu thich
     @GET("FavorGetOne/{id}")
     Call<Bookmark> getBookmarkById(@Header("Authorization") String authtoken,  @Path("id") String id);
+
+    ///get phone admin to call
+    @GET("profileAdmin")
+    Call<User> getPhoneAdmin();
 
 }
