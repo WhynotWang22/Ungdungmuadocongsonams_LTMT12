@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,10 +31,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
-    EditText ed_pass_current,ed_pass_moi,ed_nhap_lai_pass;
+    EditText ed_pass_current, ed_pass_moi, ed_nhap_lai_pass;
     Button btn_change_pass;
     String token = null;
     ImageButton btnback_changepass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,50 +53,66 @@ public class ChangePasswordActivity extends AppCompatActivity {
         });
         changePassword();
     }
+
     private void changePassword() {
         btn_change_pass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences sp = ChangePasswordActivity.this.getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
-                token = sp.getString("token","");
-                String  oldPassword= ed_pass_current.getText().toString();
+                token = sp.getString("token", "");
+                String oldPassword = ed_pass_current.getText().toString();
                 String newPassword = ed_pass_moi.getText().toString();
                 String nhaplaipassmoi = ed_nhap_lai_pass.getText().toString();
-                if (oldPassword.isEmpty()){
+
+                if (oldPassword.isEmpty()) {
                     ed_pass_current.setError("Không được để trống");
                     ed_pass_current.requestFocus();
                     return;
                 }
-                if (newPassword.isEmpty()){
-                    ed_pass_current.setError("không được để trống");
-                    ed_pass_current.requestFocus();
+                if (newPassword.isEmpty()) {
+                    ed_pass_moi.setError("không được để trống");
+                    ed_pass_moi.requestFocus();
                     return;
                 }
-                else if (!newPassword.equals(nhaplaipassmoi)) {
+                if (nhaplaipassmoi.isEmpty()) {
+                    ed_nhap_lai_pass.setError("không được để trống");
+                    ed_nhap_lai_pass.requestFocus();
+                    return;
+                } else if (!newPassword.equals(nhaplaipassmoi)) {
                     Toast.makeText(ChangePasswordActivity.this, "Mật khẩu  nhập lại không khớp", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "auth/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
-                Call<ResponseUser> call = apiService.updateExcute( oldPassword, newPassword,token);
+                Call<ResponseUser> call = apiService.updateExcute(oldPassword, newPassword, token);
                 call.enqueue(new Callback<ResponseUser>() {
                     @Override
-                    public void onResponse(Call<ResponseUser> call, Response<ResponseUser> response) {
-                        if (response.isSuccessful()){
+                    public void onResponse
+                            (Call<ResponseUser> call, Response<ResponseUser> response) {
+                        if (response.isSuccessful()) {
                             ResponseUser userAPi = response.body();
-//                           token = String.valueOf(userAPi.getUser().token);
-                            if (token !=null){
+//                          token = String.valueOf(userAPi.getUser().getTokens());
+                            if (token != null) {
                                 Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finishAffinity();
-                                Toast.makeText(ChangePasswordActivity.this, "thành công", Toast.LENGTH_SHORT).show();
+                                Toast toast = new Toast(ChangePasswordActivity.this);
+                                LayoutInflater inflater  = getLayoutInflater();
+                                View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
+                                TextView tv_message_toast = view.findViewById(R.id.tv_message_toast);
+                                tv_message_toast.setText("Đổi mật khẩu thành công");
+                                toast.setView(view);
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.show();
 
-                            }else{
-                                Log.e("error","aaaaaaaaaaaaaaaaaaaaaa");
                             }
+                        } else if (response.code() == 401) {
+                            Toast.makeText(ChangePasswordActivity.this, "Mật khẩu cũ sai", Toast.LENGTH_SHORT).show();
                         }
                     }
 

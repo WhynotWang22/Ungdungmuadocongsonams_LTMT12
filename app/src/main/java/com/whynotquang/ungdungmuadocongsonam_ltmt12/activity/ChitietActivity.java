@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -257,7 +260,15 @@ public class ChitietActivity extends AppCompatActivity {
             public void onResponse(Call<Products> call, Response<Products> response) {
                 if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(ChitietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    Toast toast = new Toast(ChitietActivity.this);
+                    LayoutInflater inflater  = getLayoutInflater();
+                    View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
+                    TextView tv_message_toast = view.findViewById(R.id.tv_message_toast);
+                    tv_message_toast.setText("Thêm thành công");
+                    toast.setView(view);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.show();
+//                    Toast.makeText(ChitietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                 } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(ChitietActivity.this, "Thêm không thành công", Toast.LENGTH_SHORT).show();
