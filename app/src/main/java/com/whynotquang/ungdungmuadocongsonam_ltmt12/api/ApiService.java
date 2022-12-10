@@ -236,4 +236,10 @@ public interface ApiService {
     @GET("profileAdmin")
     Call<User> getPhoneAdmin();
 
+    //rest pass
+    @FormUrlEncoded
+    @POST("forgot-password")
+    Call<User> postRestPass(
+            @Field("email") String email
+    );
 }

@@ -74,16 +74,21 @@
               android:lines="1"
               />
       </com.google.android.material.textfield.TextInputLayout>
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="32dp"
-            android:fontFamily="@font/intermedium"
-            android:gravity="right"
-            android:text="Quên mật khẩu?"
-            android:textColor="@color/mauchu"
-            android:textSize="14dp" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_quen_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/intermedium"
+                android:text="Quên mật khẩu?"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/mauchu"
+                android:textSize="14dp" />
+        </RelativeLayout>
 
         <Button
             android:id="@+id/btn_login"

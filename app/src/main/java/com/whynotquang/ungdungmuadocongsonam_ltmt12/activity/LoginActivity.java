@@ -3,7 +3,6 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -35,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText ed_email,ed_pass;
     Button button_login;
     String token = null;
-    TextView tvDangkychuyenamn;
+    TextView tvDangkychuyenamn,tv_quen_pass;
     ProgressBar progressBar;
 
     @Override
@@ -46,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         ed_pass = findViewById(R.id.ed_password_login);
         button_login = findViewById(R.id.btn_login);
         tvDangkychuyenamn = (TextView) findViewById(R.id.tv_dangkychuyenamn);
+        tv_quen_pass = (TextView) findViewById(R.id.tv_quen_pass);
         progressBar = (ProgressBar)findViewById(R.id.spin_kit_login_in);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -89,6 +89,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this,Sign_Activity.class);
+                startActivity(intent);
+            }
+        });
+        tv_quen_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });

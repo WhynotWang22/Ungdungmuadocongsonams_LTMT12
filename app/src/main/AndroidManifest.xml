@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Ungdungmuadocongsonam_LTMT12"
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
+        <activity android:name=".activity.ForgotPasswordActivity">
+
+        </activity>
         <activity
             android:name=".activity.YeuThichActivity"
             android:exported="false"></activity>

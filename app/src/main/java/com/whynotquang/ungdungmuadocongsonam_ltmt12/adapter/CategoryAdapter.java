@@ -14,11 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ProductCategoryActivity;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.SendemailActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 
-import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
