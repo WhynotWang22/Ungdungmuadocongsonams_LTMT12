@@ -13,7 +13,7 @@ public class Order {
     public String paymentMethodType;
     public boolean isPaid;
     public String status;
-    public Date CreatedAt;
+    public Date createdAt;
     public String _id;
 
     public Order() {
@@ -29,7 +29,7 @@ public class Order {
         this.paymentMethodType = paymentMethodType;
         this.isPaid = isPaid;
         this.status = status;
-        CreatedAt = createdAt;
+        this.createdAt = createdAt;
         this._id = _id;
     }
 
@@ -106,11 +106,11 @@ public class Order {
     }
 
     public Date getCreatedAt() {
-        return CreatedAt;
+        return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
-        CreatedAt = createdAt;
+        this.createdAt = createdAt;
     }
 
     public String get_id() {

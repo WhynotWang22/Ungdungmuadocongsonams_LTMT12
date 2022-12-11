@@ -244,6 +244,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                     tv_sdt_orderdetail.setText(String.valueOf(order.getPhoneNumber()));
                     tv_diachi_orderdetail.setText(order.getAddress());
                     tv_madon_orderdetail.setText(order.get_id());
+                    tv_time_orderdetail.setText(order.getCreatedAt() + "");
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                     tv_tongtien_orderdetail.setText(decimalFormat.format(order.getTotal()) + "đ");
                     tv_thanhtoan_orderdetail.setText(order.getPaymentMethodType());
