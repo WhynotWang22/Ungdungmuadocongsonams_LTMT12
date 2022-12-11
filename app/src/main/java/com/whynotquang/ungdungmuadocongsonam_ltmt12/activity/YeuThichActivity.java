@@ -92,4 +92,5 @@ public class YeuThichActivity extends AppCompatActivity {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
 }

@@ -149,7 +149,6 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     int phone;
-
     private void callShop() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "auth/")
@@ -160,7 +159,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
-                    phone = response.body().getPhoneNumber();
+                    phone = (response.body().getPhoneNumber());
                     Log.d("aa", "a" + phone);
                     if (phone > 0) {
                         if (ContextCompat.checkSelfPermission(OrderDetailActivity.this,

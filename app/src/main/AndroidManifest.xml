@@ -94,9 +94,6 @@
             android:name=".activity.ThanksOrder_Activity"
             android:exported="false" />
         <activity
-            android:name=".activity.CardActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.ReviewActivity"
             android:exported="false" />
         <activity

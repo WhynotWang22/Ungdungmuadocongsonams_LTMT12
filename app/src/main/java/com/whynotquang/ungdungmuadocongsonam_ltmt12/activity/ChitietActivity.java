@@ -159,7 +159,7 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
                 btnYeuthich.setColorFilter(Color.BLACK);
-                Toast.makeText(getApplicationContext(), "Xóa thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Bỏ thành công", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -183,7 +183,14 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ChitietActivity.this, "Thêm yêu thích thành công", Toast.LENGTH_SHORT).show();
+                    Toast toast = new Toast(ChitietActivity.this);
+                    LayoutInflater inflater  = getLayoutInflater();
+                    View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
+                    TextView tv_message_toast = view.findViewById(R.id.tv_message_toast);
+                    tv_message_toast.setText("Thêm yêu thích thành công");
+                    toast.setView(view);
+                    toast.setDuration(Toast.LENGTH_SHORT);
+                    toast.show();
                 } else {
                     Toast.makeText(ChitietActivity.this, "Thêm yêu thích không thành công", Toast.LENGTH_SHORT).show();
                 }

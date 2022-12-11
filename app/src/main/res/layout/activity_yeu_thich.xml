@@ -36,7 +36,8 @@
 <androidx.recyclerview.widget.RecyclerView
     android:layout_below="@+id/relativeLayout_yeuthich"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:paddingRight="6dp"
+    android:layout_height="wrap_content"
     android:id="@+id/rc_cothebancungthich"
     tools:ignore="MissingConstraints" />
 </RelativeLayout>

@@ -142,7 +142,7 @@
         android:textAllCaps="false"
         android:fontFamily="@font/interbold"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="62dp" />
+        android:layout_marginBottom="32dp" />
     <com.github.ybq.android.spinkit.SpinKitView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/spin_kit_change_profile"

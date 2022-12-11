@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
@@ -72,7 +73,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 }
                 progressBar.setVisibility(View.VISIBLE);
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("https://mofshop.shop/api/auth/")
+                        .baseUrl(AppConstain.BASE_URL +"auth/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
                 ApiService apiService = retrofit.create(ApiService.class);
