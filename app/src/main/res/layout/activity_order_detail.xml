@@ -270,9 +270,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_product_orderdetail"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="32dp"
-            android:paddingRight="32dp" />
+            android:paddingRight="32dp"
+            android:layout_marginBottom="100dp"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -280,7 +281,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/layout_sanpham">
+        android:layout_alignParentBottom="true">
         <Button
             android:id="@+id/btn_cancel_order"
             android:layout_width="match_parent"
@@ -294,13 +295,8 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="14dp" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/layout_callshop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_btn_cancel_order">
         <Button
+            android:layout_below="@+id/btn_cancel_order"
             android:layout_marginTop="5dp"
             android:id="@+id/btn_call_shop"
             android:layout_width="match_parent"
@@ -312,7 +308,8 @@
             android:text="Liên Hệ"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="14dp" />
+            android:textSize="14dp"
+            android:layout_marginBottom="25dp"/>
     </RelativeLayout>
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/spin_kit_orderdetail"

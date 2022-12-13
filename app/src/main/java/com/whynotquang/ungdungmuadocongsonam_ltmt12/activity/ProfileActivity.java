@@ -172,7 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     ed_email_profile.setText(response.body().getEmail());
                     ed_hoten_profile.setText(response.body().getFullName());
-                    ed_sdt_profile.setText(Integer.toString(response.body().getPhoneNumber()));
+                    ed_sdt_profile.setText(String.valueOf(response.body().getPhoneNumber()));
                     ed_diachi_profile.setText(response.body().getAddress());
                     linkimg = response.body().getAvatar();
                     Glide.with(ProfileActivity.this).load(response.body().getAvatar()).into(img_profile);

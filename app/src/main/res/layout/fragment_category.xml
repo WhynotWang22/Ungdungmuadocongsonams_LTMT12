@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragment.CategoryFragment"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="#FAFAFA">
      <RelativeLayout
          android:id="@+id/rl_frag_category"
          android:layout_width="match_parent"
@@ -29,5 +29,5 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:id="@+id/rc_fg_category"
-         android:paddingBottom="100dp"/>
+         android:paddingBottom="56dp"/>
 </LinearLayout>

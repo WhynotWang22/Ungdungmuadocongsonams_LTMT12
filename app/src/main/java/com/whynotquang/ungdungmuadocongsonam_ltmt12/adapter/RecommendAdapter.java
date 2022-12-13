@@ -40,7 +40,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendHolder> {
     public void onBindViewHolder(@NonNull RecommendHolder holder, @SuppressLint("RecyclerView") int position) {
         Product product = productList.get(position);
         holder.tv_title_product_dexuat.setText(product.getTitle());
-        holder.tv_product_daban.setText("Đã Bán" + product.getSold() + "");
+        holder.tv_product_daban.setText("Đã bán " + String.valueOf(product.getSold()));
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tv_price_product_dexuat.setText(decimalFormat.format(product.getPrice())+ "đ");
         Glide.with(context).load(product.getImg())

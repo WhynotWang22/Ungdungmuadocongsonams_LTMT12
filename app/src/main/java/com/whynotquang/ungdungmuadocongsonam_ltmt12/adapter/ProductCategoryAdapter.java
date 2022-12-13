@@ -42,7 +42,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         Product product = productList.get(position);
         holder.tvTitleProductcategory.setText(product.getTitle());
-        holder.tv_productcatagory_daban.setText("Đã Bán"+ product.getSold() + "");
+        holder.tv_productcatagory_daban.setText("Đã bán "+ String.valueOf(product.getSold()));
         holder.tvTitleProductcategory.setMaxLines(2);
         holder.tvTitleProductcategory.setEllipsize(TextUtils.TruncateAt.END);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");

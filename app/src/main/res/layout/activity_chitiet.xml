@@ -121,7 +121,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="12dp"
                             android:fontFamily="@font/intermedium"
-                            android:text="86 Đánh giá"
+                            android:text="0 Đánh giá"
                             android:textColor="@color/mauxam"
                             android:layout_gravity="center_vertical"
                             android:textSize="12dp" />
@@ -214,7 +214,8 @@
                 android:fontFamily="@font/intermedium"
                 android:text=""
                 android:textColor="@color/mauchu2"
-                android:textSize="12dp" />
+                android:textSize="12dp"
+                android:layout_marginBottom="100dp"/>
 
 <!--            <TextView-->
 <!--                android:id="@+id/tv_cothebancungthich"-->

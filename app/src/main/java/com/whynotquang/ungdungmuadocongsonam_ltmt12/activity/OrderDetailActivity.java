@@ -61,7 +61,6 @@ public class OrderDetailActivity extends AppCompatActivity {
     ProductOrderAdapter adapter;
     int soluong = 0;
     LinearLayout layout;
-    RelativeLayout layout_btn_cancel_order;
     Button btn_cancel_order;
     Button btn_call_shop;
     private static final int REQUEST_CALL = 1;
@@ -83,7 +82,6 @@ public class OrderDetailActivity extends AppCompatActivity {
         layout = findViewById(R.id.layout_donhang_1);
         btn_call_shop = findViewById(R.id.btn_call_shop);
         btnback_chitiet_donhang = findViewById(R.id.btnback_chitiet_donhang);
-        layout_btn_cancel_order = findViewById(R.id.layout_btn_cancel_order);
         btn_cancel_order = findViewById(R.id.btn_cancel_order);
         recyclerView = findViewById(R.id.rc_view_product_orderdetail);
         progressBar = (ProgressBar) findViewById(R.id.spin_kit_orderdetail);
@@ -100,7 +98,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        layout_btn_cancel_order.setVisibility(View.GONE);
+        btn_cancel_order.setVisibility(View.GONE);
         btn_cancel_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,7 +129,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
                     getData();
-                    layout_btn_cancel_order.setVisibility(View.GONE);
+                    btn_cancel_order.setVisibility(View.GONE);
                     Toast.makeText(OrderDetailActivity.this, "Hủy thành công", Toast.LENGTH_SHORT).show();
                 } else {
                     progressBar.setVisibility(View.GONE);
@@ -224,19 +222,19 @@ public class OrderDetailActivity extends AppCompatActivity {
 
                     if (order.getStatus().equalsIgnoreCase("Đang chờ xác nhận")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
-                        layout_btn_cancel_order.setVisibility(View.VISIBLE);
+                        btn_cancel_order.setVisibility(View.VISIBLE);
                     } else if (order.getStatus().equalsIgnoreCase("Đang chuẩn bị hàng")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
-                        layout_btn_cancel_order.setVisibility(View.GONE);
+                        btn_cancel_order.setVisibility(View.GONE);
                     } else if (order.getStatus().equalsIgnoreCase("Đang giao hàng")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_maucam));
-                        layout_btn_cancel_order.setVisibility(View.GONE);
+                        btn_cancel_order.setVisibility(View.GONE);
                     } else if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_xanh));
-                        layout_btn_cancel_order.setVisibility(View.GONE);
+                        btn_cancel_order.setVisibility(View.GONE);
                     } else if (order.getStatus().equalsIgnoreCase("Người dùng đã hủy đơn hàng")) {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_do));
-                        layout_btn_cancel_order.setVisibility(View.GONE);
+                        btn_cancel_order.setVisibility(View.GONE);
                     }
 
                     tv_trangthai_donhangchitiet.setText(order.getStatus());

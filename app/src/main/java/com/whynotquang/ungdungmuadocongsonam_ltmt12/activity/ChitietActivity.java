@@ -383,7 +383,7 @@ public class ChitietActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     productCommentList = new ArrayList<>();
                     productCommentList.addAll(response.body().getProductItems());
-                    tv_so_luot_review.setText(response.body().getDem() + " Bình Luận");
+                    tv_so_luot_review.setText(response.body().getDem() + " Đánh giá");
                     for (int i = 0; i < productCommentList.size(); i++) {
                         ratingBar_chitiet.setRating(response.body().getAvg());
                     }
