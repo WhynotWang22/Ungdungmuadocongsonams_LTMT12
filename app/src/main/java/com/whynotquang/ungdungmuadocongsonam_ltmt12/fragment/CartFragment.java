@@ -137,7 +137,7 @@ public class CartFragment extends Fragment {
                         layout_not_cart.setVisibility(View.GONE);
                     }
                 } else {
-                    Toast.makeText(getContext(), "Thất bại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -146,7 +146,7 @@ public class CartFragment extends Fragment {
             public void onFailure(Call<ProductAddCart> call, Throwable t) {
                 layout_thanhtoan.setVisibility(View.GONE);
                 layout_not_cart.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
             }
         });
 

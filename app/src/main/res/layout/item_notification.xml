@@ -34,11 +34,12 @@
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/tv_title_noti"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Your Order is on the way"
                 android:fontFamily="@font/interbold"
                 android:textColor="@color/mauchu"
+                android:layout_marginRight="50dp"
                 android:textSize="12dp" />
             <TextView
                 android:id="@+id/tv_time_noti"

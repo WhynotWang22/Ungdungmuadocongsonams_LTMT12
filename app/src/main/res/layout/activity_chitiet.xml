@@ -54,7 +54,8 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="32dp"
-                app:cardCornerRadius="48dp">
+                app:cardCornerRadius="48dp"
+                app:cardElevation="0dp">
 
                 <com.smarteist.autoimageslider.SliderView
                     android:id="@+id/img_product"

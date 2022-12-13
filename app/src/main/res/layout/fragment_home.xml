@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment"
-    android:background="@color/white">
+    android:background="@color/mau_xam">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -69,7 +69,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="16dp"
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="1dp">
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/img_slidebanner"
                 android:layout_width="match_parent"
@@ -125,7 +126,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_view_aopolo"
             android:layout_width="match_parent"
-            android:layout_height="238dp"
+            android:layout_height="240dp"
             android:layout_below="@+id/tv_duocdexuat"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -134,7 +135,7 @@
             android:id="@+id/tv_aopolo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/interbold"
             android:text="Được Đề Xuất Cho Bạn"
             android:textColor="@color/mauchu"

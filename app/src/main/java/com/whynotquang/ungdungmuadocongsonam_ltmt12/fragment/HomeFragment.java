@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment {
         btn_close_search = view.findViewById(R.id.btn_close_search);
         layout_search = view.findViewById(R.id.layout_search);
         CheckInternet();
-        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.white));
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.mau_xam));
         layout_search.setVisibility(View.GONE);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

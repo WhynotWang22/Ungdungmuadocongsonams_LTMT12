@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 
 public class ProductHolder extends RecyclerView.ViewHolder {
-    RelativeLayout cardview_product;
+    CardView cardview_product;
      TextView tv_title_product;
      TextView tv_price_product;
      ImageView img_product;
