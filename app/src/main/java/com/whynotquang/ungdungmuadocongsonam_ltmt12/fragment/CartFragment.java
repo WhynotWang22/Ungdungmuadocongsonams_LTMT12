@@ -119,7 +119,7 @@ public class CartFragment extends Fragment {
         call.enqueue(new Callback<ProductAddCart>() {
             @Override
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
-                if (response.body() != null) {
+                if (response.isSuccessful() &&response.body() != null) {
                     ///set recyclerview
                     productList = new ArrayList<>();
                     CartAdapter cartAdapter = new CartAdapter(productList, getContext());
@@ -146,7 +146,7 @@ public class CartFragment extends Fragment {
             public void onFailure(Call<ProductAddCart> call, Throwable t) {
                 layout_thanhtoan.setVisibility(View.GONE);
                 layout_not_cart.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
             }
         });
 

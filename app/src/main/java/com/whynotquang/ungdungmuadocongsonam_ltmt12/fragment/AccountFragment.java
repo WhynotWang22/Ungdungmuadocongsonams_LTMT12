@@ -206,7 +206,6 @@ public class AccountFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.d("aaa","onStart");
         getData(token);
     }
 }
