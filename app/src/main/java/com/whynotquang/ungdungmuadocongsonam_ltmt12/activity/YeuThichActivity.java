@@ -3,13 +3,19 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.ybq.android.spinkit.SpinKitView;
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.FavoritesAdapter;
@@ -34,6 +40,8 @@ public class YeuThichActivity extends AppCompatActivity {
     private RecyclerView rc_cothebancungthich;
     private ImageButton btnbackYeuthich;
     private FavoritesAdapter favoritesAdapter;
+    private ProgressBar spinKitYeuthich;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +49,12 @@ public class YeuThichActivity extends AppCompatActivity {
         setContentView(R.layout.activity_yeu_thich);
         rc_cothebancungthich = findViewById(R.id.rc_cothebancungthich);
         rc_cothebancungthich.setLayoutManager(new GridLayoutManager(this, 2));
-        btnbackYeuthich = (ImageButton) findViewById(R.id.btnback_yeuthich);
+        spinKitYeuthich = (SpinKitView) findViewById(R.id.spin_kit_yeuthich);
+        Sprite threeBounce = new ThreeBounce();
+        spinKitYeuthich.setIndeterminateDrawable(threeBounce);
         getListyeuthichTim();
+        spinKitYeuthich.setVisibility(View.VISIBLE);
+        btnbackYeuthich = (ImageButton) findViewById(R.id.btnback_yeuthich);
         btnbackYeuthich.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +64,7 @@ public class YeuThichActivity extends AppCompatActivity {
 
 
     }
+
     private void getListyeuthichTim() {
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
@@ -64,16 +77,19 @@ public class YeuThichActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Bookmark>> call, Response<List<Bookmark>> response) {
                 if (response.isSuccessful()) {
+                    spinKitYeuthich.setVisibility(View.GONE);
                     favoritesAdapter = new FavoritesAdapter(YeuThichActivity.this, response.body());
                     rc_cothebancungthich.setAdapter(favoritesAdapter);
                 }
             }
+
             @Override
             public void onFailure(Call<List<Bookmark>> call, Throwable t) {
 
             }
         });
     }
+
     ///tai lai du lieu
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onMessageEvent(Even event) {
@@ -81,16 +97,17 @@ public class YeuThichActivity extends AppCompatActivity {
             getListyeuthichTim();
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
     }
+
     @SuppressLint("MissingSuperCall")
     @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
-
 }

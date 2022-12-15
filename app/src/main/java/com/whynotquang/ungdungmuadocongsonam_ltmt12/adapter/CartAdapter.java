@@ -92,7 +92,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
         holder.tv_price_cart.setText("Giá: " + decimalFormat.format(product.getPrice()) + "đ");
         Glide.with(context).load(product.getProductIMG()).into(holder.img_cart);
-
         holder.layout_delete_item_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

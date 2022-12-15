@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
@@ -111,5 +112,4 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
             tv_favorites_daban = (TextView) itemView.findViewById(R.id.tv_favorites_daban);
         }
     }
-
 }
