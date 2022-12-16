@@ -1,6 +1,6 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.model;
 
-public class Bookmark {
+public class Favourites {
     public String _id;
     public String userId;
     public String productId;

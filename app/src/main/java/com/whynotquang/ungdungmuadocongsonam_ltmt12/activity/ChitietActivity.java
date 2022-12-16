@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,16 +34,14 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.SizeAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.interFace.ItemClickListener;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Bookmark;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Favourites;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Comment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductComment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -177,11 +174,11 @@ public class ChitietActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<ProductAddCart> call = apiService.postAddFavorite(token, products.get_id());
+        Call<Cart> call = apiService.postAddFavorite(token, products.get_id());
         Log.d("ee", "e" + products.get_id());
-        call.enqueue(new Callback<ProductAddCart>() {
+        call.enqueue(new Callback<Cart>() {
             @Override
-            public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
                 if (response.isSuccessful()) {
                     Toast toast = new Toast(ChitietActivity.this);
                     LayoutInflater inflater  = getLayoutInflater();
@@ -197,7 +194,7 @@ public class ChitietActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ProductAddCart> call, Throwable t) {
+            public void onFailure(Call<Cart> call, Throwable t) {
             }
         });
     }
@@ -336,9 +333,9 @@ public class ChitietActivity extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     ApiService apiService = retrofit.create(ApiService.class);
-                    apiService.getBookmarkById(token, response.body().get_id()).enqueue(new Callback<Bookmark>() {
+                    apiService.getFavotires(token, response.body().get_id()).enqueue(new Callback<Favourites>() {
                         @Override
-                        public void onResponse(Call<Bookmark> call, Response<Bookmark> response) {
+                        public void onResponse(Call<Favourites> call, Response<Favourites> response) {
                             if (response.isSuccessful()) {
                                 if (response.body().isFavorite()) {
                                     btnYeuthich.setColorFilter(Color.RED);
@@ -351,7 +348,7 @@ public class ChitietActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Bookmark> call, Throwable t) {
+                        public void onFailure(Call<Favourites> call, Throwable t) {
 
                         }
                     });

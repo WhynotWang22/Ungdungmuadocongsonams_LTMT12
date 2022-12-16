@@ -1,19 +1,14 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.api;
 
-import static android.content.Context.MODE_PRIVATE;
-
-import android.content.SharedPreferences;
-
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Address;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.AddressItem;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Bookmark;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Favourites;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Notification;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductComment;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ResponseUser;
@@ -201,7 +196,7 @@ public interface ApiService {
 
     ///get list cart
     @GET("list")
-    Call<ProductAddCart> getlistCart(@Header("Authorization")
+    Call<Cart> getlistCart(@Header("Authorization")
                                              String authtoken);
 
     //post order MoMo
@@ -215,12 +210,12 @@ public interface ApiService {
     );
     ////post yeu thich
     @POST("AddFavorite/{id}")
-    Call<ProductAddCart> postAddFavorite(@Header("Authorization") String authtoken,
+    Call<Cart> postAddFavorite(@Header("Authorization") String authtoken,
                                          @Path("id")String id);
 
     ///get list yeu thich
     @GET("FavoriteListByUserId")
-    Call<List<Bookmark>> getListFavorite(@Header("Authorization")
+    Call<List<Favourites>> getListFavorite(@Header("Authorization")
                                          String authtoken);
 
     ///delete item Favorite
@@ -230,7 +225,7 @@ public interface ApiService {
 
     ///check yeu thich
     @GET("FavorGetOne/{id}")
-    Call<Bookmark> getBookmarkById(@Header("Authorization") String authtoken,  @Path("id") String id);
+    Call<Favourites> getFavotires(@Header("Authorization") String authtoken, @Path("id") String id);
 
     ///get phone admin to call
     @GET("profileAdmin")

@@ -40,7 +40,6 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Cart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.ProductAddCart;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
 import org.greenrobot.eventbus.EventBus;
@@ -83,7 +82,7 @@ public class CartFragment extends Fragment {
         btnCheckoutCart = (Button) view.findViewById(R.id.btn_checkout);
         progressBar = (ProgressBar) view.findViewById(R.id.spin_kit_cart);
         layout_thanhtoan = (LinearLayout) view.findViewById(R.id.layout_thanhtoan);
-        layout_not_cart =  view.findViewById(R.id.layout_not_cart);
+        layout_not_cart = view.findViewById(R.id.layout_not_cart);
 
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
@@ -107,7 +106,6 @@ public class CartFragment extends Fragment {
     }
 
 
-
     private void getdataCart() {
         SharedPreferences sp = getContext().getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
@@ -116,11 +114,11 @@ public class CartFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<ProductAddCart> call = apiService.getlistCart(token);
-        call.enqueue(new Callback<ProductAddCart>() {
+        Call<Cart> call = apiService.getlistCart(token);
+        call.enqueue(new Callback<Cart>() {
             @Override
-            public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
-                if (response.isSuccessful() &&response.body() != null) {
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                if (response.isSuccessful() && response.body() != null) {
                     ///set recyclerview
                     productList = new ArrayList<>();
                     CartAdapter cartAdapter = new CartAdapter(productList, getContext());
@@ -129,11 +127,11 @@ public class CartFragment extends Fragment {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     rc_cart.setLayoutManager(linearLayoutManager);
                     productList.addAll(response.body().getProducts());
-                    tv_soluong_cart.setText( productList.size() + " sản phẩm");
-                    if (productList==null || productList.size() == 0){
+                    tv_soluong_cart.setText(productList.size() + " sản phẩm");
+                    if (productList == null || productList.size() == 0) {
                         layout_thanhtoan.setVisibility(View.GONE);
                         layout_not_cart.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         layout_thanhtoan.setVisibility(View.VISIBLE);
                         layout_not_cart.setVisibility(View.GONE);
                     }
@@ -143,7 +141,7 @@ public class CartFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ProductAddCart> call, Throwable t) {
+            public void onFailure(Call<Cart> call, Throwable t) {
                 layout_thanhtoan.setVisibility(View.GONE);
                 layout_not_cart.setVisibility(View.VISIBLE);
 //                Toast.makeText(getActivity(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
@@ -159,19 +157,20 @@ public class CartFragment extends Fragment {
             int tongtien = intent.getIntExtra("tongtien", 0);
             Log.d("msg", "onReceive: " + tongtien);
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-            tv_tongtien.setText(decimalFormat.format(tongtien)+ " đ");
+            tv_tongtien.setText(decimalFormat.format(tongtien) + " đ");
             tongtien_cart = tongtien;
         }
     };
 
     private void PostCartCheckout() {
-        if (tongtien_cart < 20000){
+        if (tongtien_cart < 20000) {
             Toast.makeText(getActivity(), "Vui lòng đặt đơn hàng trên 20.000đ.", Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent intent = new Intent(getActivity(),CheckOutActivity.class);
+        Intent intent = new Intent(getActivity(), CheckOutActivity.class);
         startActivity(intent);
     }
+
     ///tai lai du lieu
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onMessageEvent(Even event) {
