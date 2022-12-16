@@ -162,10 +162,10 @@ public class ChitietActivity extends AppCompatActivity {
         call.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     btnYeuthich.setColorFilter(Color.BLACK);
                     Toast.makeText(getApplicationContext(), "Xóa thành công khỏi mục đã thích!", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "Xóa không thành công", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -299,8 +299,9 @@ public class ChitietActivity extends AppCompatActivity {
             public void run() {
                 dialog.dismiss();
             }
-        },1000);
+        }, 1000);
     }
+
     private void showNotiCheck(String text) {
         Dialog dialog = new Dialog(ChitietActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -315,7 +316,7 @@ public class ChitietActivity extends AppCompatActivity {
             public void run() {
                 dialog.dismiss();
             }
-        },1000);
+        }, 1000);
     }
 
     public void getDataProduct() {
@@ -329,7 +330,7 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.body() != null) {
-                    Log.d("","" + id);
+                    Log.d("", "" + id);
                     progressBar.setVisibility(View.GONE);
                     tv_title_product_chitiet.setText(response.body().getTitle());
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
@@ -402,11 +403,10 @@ public class ChitietActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<ProductComment> call = apiService.getComments(id);
-        call.enqueue(new Callback<ProductComment>() {
+        apiService.getComments(id).enqueue(new Callback<ProductComment>() {
             @Override
             public void onResponse(Call<ProductComment> call, Response<ProductComment> response) {
-                if (response.body() != null) {
+                if (response.isSuccessful()) {
                     productCommentList = new ArrayList<>();
                     productCommentList.addAll(response.body().getProductItems());
                     tv_so_luot_review.setText(response.body().getDem() + " Đánh giá");
@@ -417,9 +417,9 @@ public class ChitietActivity extends AppCompatActivity {
                     Toast.makeText(ChitietActivity.this, "Không tìm thấy bình luận", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ProductComment> call, Throwable t) {
+
             }
         });
     }
