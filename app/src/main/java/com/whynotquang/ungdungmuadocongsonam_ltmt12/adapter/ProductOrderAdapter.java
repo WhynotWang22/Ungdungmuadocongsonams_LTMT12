@@ -80,8 +80,7 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
                 context.startActivity(intent);
             }
         });
-        holder.tv_danhgiasp.setVisibility(View.GONE);
-
+//        holder.tv_danhgiasp.setVisibility(View.GONE);
         //phan danh gia
         Intent intent = ((Activity) context).getIntent();
         id = intent.getStringExtra("id");

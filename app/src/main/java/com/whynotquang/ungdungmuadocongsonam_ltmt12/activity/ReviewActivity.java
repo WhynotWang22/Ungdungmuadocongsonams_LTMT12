@@ -142,25 +142,26 @@ public class ReviewActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<List<Product>> call1 = apiService.postComment(token, id, ratingBar1, commentDes);
-        call1.enqueue(new Callback<List<Product>>() {
+        Call<Product> call1 = apiService.postComment(token, id, ratingBar1, commentDes);
+        call1.enqueue(new Callback<Product>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(ReviewActivity.this, "Lỗi Api", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.VISIBLE);
+                    edCmtReview.setText("");
+                    Toast.makeText(ReviewActivity.this, "Comment Thành Công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finishAffinity();
                 } else {
                     Toast.makeText(ReviewActivity.this, "Comment không thành công", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-                progressBar.setVisibility(View.VISIBLE);
-                edCmtReview.setText("");
-                Toast.makeText(ReviewActivity.this, "Comment Thành Công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
-                startActivity(intent);
-                finishAffinity();
+            public void onFailure(Call<Product> call, Throwable t) {
+                Toast.makeText(ReviewActivity.this, "Lỗi Mạng", Toast.LENGTH_SHORT).show();
+
             }
         });
 

@@ -175,7 +175,7 @@ public interface ApiService {
     ///Comment Reviews
     @FormUrlEncoded
     @POST("add/{id}")
-    Call<List<Product>> postComment(@Header("Authorization") String authtoken,
+    Call<Product> postComment(@Header("Authorization") String authtoken,
                                     @Path("id") String id,
                                     @Field("ratingStar") Float ratingStar,
                                     @Field("commentDes") String commentDes);
