@@ -3,8 +3,6 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -21,8 +19,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter.FavoritesAdapter;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Bookmark;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Favourites;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -73,9 +70,9 @@ public class YeuThichActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        apiService.getListFavorite(token).enqueue(new Callback<List<Bookmark>>() {
+        apiService.getListFavorite(token).enqueue(new Callback<List<Favourites>>() {
             @Override
-            public void onResponse(Call<List<Bookmark>> call, Response<List<Bookmark>> response) {
+            public void onResponse(Call<List<Favourites>> call, Response<List<Favourites>> response) {
                 if (response.isSuccessful()) {
                     spinKitYeuthich.setVisibility(View.GONE);
                     favoritesAdapter = new FavoritesAdapter(YeuThichActivity.this, response.body());
@@ -84,7 +81,7 @@ public class YeuThichActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Bookmark>> call, Throwable t) {
+            public void onFailure(Call<List<Favourites>> call, Throwable t) {
 
             }
         });

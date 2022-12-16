@@ -149,8 +149,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     }
 
-    BigInteger phone;
-
+    String phone;
     private void callShop() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "auth/")
@@ -161,7 +160,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
-                    phone = new BigInteger("0988886666");
+                    phone = (response.body().getPhoneNumber());
                     if (ContextCompat.checkSelfPermission(OrderDetailActivity.this,
                             Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(OrderDetailActivity.this,

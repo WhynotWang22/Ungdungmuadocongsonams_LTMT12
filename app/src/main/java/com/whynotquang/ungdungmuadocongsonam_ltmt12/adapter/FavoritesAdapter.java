@@ -3,33 +3,23 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.activity.ChitietActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.even.Even;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Bookmark;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Favourites;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
-import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -42,9 +32,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Viewholoder> {
     Context context;
-    List<Bookmark> productsList;
+    List<Favourites> productsList;
 
-    public FavoritesAdapter(Context context, List<Bookmark> productsList) {
+    public FavoritesAdapter(Context context, List<Favourites> productsList) {
         this.context = context;
         this.productsList = productsList;
     }
@@ -58,14 +48,14 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.Viewholoder holder, @SuppressLint("RecyclerView") int position) {
-        Bookmark bookmark = productsList.get(position);
-        if (bookmark != null) {
+        Favourites favourites = productsList.get(position);
+        if (favourites != null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(AppConstain.BASE_URL + "products/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             ApiService apiService = retrofit.create(ApiService.class);
-            apiService.getDetailProduct(bookmark.getProductId()).enqueue(new Callback<Product>() {
+            apiService.getDetailProduct(favourites.getProductId()).enqueue(new Callback<Product>() {
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
                     holder.tvTitleProductYeuthich.setText(response.body().getTitle());
