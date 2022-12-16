@@ -1,16 +1,21 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -154,17 +159,20 @@ public class ChitietActivity extends AppCompatActivity {
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
         Call<Products> call = apiService.deleteItemFavorite(token, products.get_id());
-        Log.d("e", "e" + products.get_id());
         call.enqueue(new Callback<Products>() {
             @Override
             public void onResponse(Call<Products> call, Response<Products> response) {
-                btnYeuthich.setColorFilter(Color.BLACK);
-                Toast.makeText(getApplicationContext(), "Bỏ thành công", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful()){
+                    btnYeuthich.setColorFilter(Color.BLACK);
+                    Toast.makeText(getApplicationContext(), "Xóa thành công khỏi mục đã thích!", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Xóa không thành công", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -178,19 +186,11 @@ public class ChitietActivity extends AppCompatActivity {
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
         Call<ProductAddCart> call = apiService.postAddFavorite(token, products.get_id());
-        Log.d("ee", "e" + products.get_id());
         call.enqueue(new Callback<ProductAddCart>() {
             @Override
             public void onResponse(Call<ProductAddCart> call, Response<ProductAddCart> response) {
                 if (response.isSuccessful()) {
-                    Toast toast = new Toast(ChitietActivity.this);
-                    LayoutInflater inflater  = getLayoutInflater();
-                    View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
-                    TextView tv_message_toast = view.findViewById(R.id.tv_message_toast);
-                    tv_message_toast.setText("Thêm yêu thích thành công");
-                    toast.setView(view);
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.show();
+                    Toast.makeText(ChitietActivity.this, "Thêm thành công vào mục đã thích!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ChitietActivity.this, "Thêm yêu thích không thành công", Toast.LENGTH_SHORT).show();
                 }
@@ -241,16 +241,18 @@ public class ChitietActivity extends AppCompatActivity {
 
     private void postAddCart() {
         if (color == null) {
-            Toast.makeText(ChitietActivity.this, "Vui lòng chọn màu", Toast.LENGTH_SHORT).show();
+            showNotiCheck("Vui lòng chọn Màu");
+//            Toast.makeText(ChitietActivity.this, "Vui lòng chọn màu", Toast.LENGTH_SHORT).show();
             return;
         }
         if (size == null) {
-            Toast.makeText(ChitietActivity.this, "Vui lòng chọn size", Toast.LENGTH_SHORT).show();
+            showNotiCheck("Vui lòng chọn Size");
+//            Toast.makeText(ChitietActivity.this, "Vui lòng chọn size", Toast.LENGTH_SHORT).show();
             return;
         }
-        Log.d("aaa","stock "+stock);
         if (stock < 1) {
-            Toast.makeText(ChitietActivity.this, "Sản phẩm đã hết hàng.", Toast.LENGTH_SHORT).show();
+            showNotiCheck("Sản phẩm đã hết hàng.");
+//            Toast.makeText(ChitietActivity.this, "Sản phẩm đã hết hàng.", Toast.LENGTH_SHORT).show();
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
@@ -267,14 +269,7 @@ public class ChitietActivity extends AppCompatActivity {
             public void onResponse(Call<Products> call, Response<Products> response) {
                 if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
-                    Toast toast = new Toast(ChitietActivity.this);
-                    LayoutInflater inflater  = getLayoutInflater();
-                    View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
-                    TextView tv_message_toast = view.findViewById(R.id.tv_message_toast);
-                    tv_message_toast.setText("Thêm thành công");
-                    toast.setView(view);
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.show();
+                    showNoti("Đã thêm vào giỏ");
 //                    Toast.makeText(ChitietActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                 } else {
                     progressBar.setVisibility(View.GONE);
@@ -285,9 +280,42 @@ public class ChitietActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Products> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-//                Toast.makeText(ChitietActivity.this, "Lỗi api không thêm được vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChitietActivity.this, "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void showNoti(String text) {
+        Dialog dialog = new Dialog(ChitietActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setDimAmount(0.0f);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.custom_dialog);
+        TextView tv_noti = dialog.findViewById(R.id.tv_dialog_noti);
+        tv_noti.setText(text);
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        },1000);
+    }
+    private void showNotiCheck(String text) {
+        Dialog dialog = new Dialog(ChitietActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setDimAmount(0.0f);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.custom_dialog_check);
+        TextView tv_noti = dialog.findViewById(R.id.tv_dialog_noti_check);
+        tv_noti.setText(text);
+        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        },1000);
     }
 
     public void getDataProduct() {
@@ -297,7 +325,6 @@ public class ChitietActivity extends AppCompatActivity {
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
         Call<Product> call = apiService.getDetailProduct(id);
-        Log.d("ee", "e" + id);
         call.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
@@ -355,8 +382,6 @@ public class ChitietActivity extends AppCompatActivity {
 
                         }
                     });
-                    Log.d("ee", "e" + id);
-
                 } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(ChitietActivity.this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
@@ -365,7 +390,7 @@ public class ChitietActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
-//                Toast.makeText(ChitietActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChitietActivity.this, "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
             }
         });
     }

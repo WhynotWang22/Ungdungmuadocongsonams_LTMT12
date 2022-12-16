@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_noti"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp">
+    <ImageView
+        android:id="@+id/img_dialog_noti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_luu_y"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_below="@+id/img_dialog_noti"
+        android:id="@+id/tv_dialog_noti_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/intermedium"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:text="Đã thêm vào giỏ"/>
+</RelativeLayout>
