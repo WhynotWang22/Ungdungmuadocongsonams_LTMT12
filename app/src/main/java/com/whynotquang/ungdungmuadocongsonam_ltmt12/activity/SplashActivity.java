@@ -67,7 +67,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
                 startActivity(intent);
                 finishAffinity();
-                Toast.makeText(SplashActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SplashActivity.this, "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
             }
         });
     }

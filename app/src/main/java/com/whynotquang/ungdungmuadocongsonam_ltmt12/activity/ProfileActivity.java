@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -111,16 +114,14 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(ProfileActivity.this, "Số điện thoại phải trên 10 số", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (img_profile==null){
+        if (uri==null){
             Toast.makeText(ProfileActivity.this, "Vui lòng chọn ảnh", Toast.LENGTH_SHORT).show();
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        String strRealPath = RealPathUtil.getRealPath(ProfileActivity.this,uri);
 
-
+        String strRealPath = RealPathUtil.getRealPath(ProfileActivity.this, uri);
         File file = new File(strRealPath);
-
 
         RequestBody requestBodyName = RequestBody.create(MediaType.parse("multipart/form-data"),full_name);
         RequestBody requestBodyEmail = RequestBody.create(MediaType.parse("multipart/form-data"),email);

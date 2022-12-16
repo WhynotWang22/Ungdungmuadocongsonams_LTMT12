@@ -39,8 +39,11 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -90,7 +93,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        Log.d("id", "id: " + id);
+        Log.d("aaa", "id: " + id);
         getData();
         btnback_chitiet_donhang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +149,8 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     }
 
-    int phone;
+    BigInteger phone;
+
     private void callShop() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "auth/")
@@ -156,19 +160,15 @@ public class OrderDetailActivity extends AppCompatActivity {
         apiService.getPhoneAdmin().enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()){
-                    phone = (response.body().getPhoneNumber());
-                    Log.d("aa", "a" + phone);
-                    if (phone > 0) {
-                        if (ContextCompat.checkSelfPermission(OrderDetailActivity.this,
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(OrderDetailActivity.this,
-                                    new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-                        } else {
-                            String dial = "tel:" + phone;
-                            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
-                        }
-
+                if (response.isSuccessful()) {
+                    phone = new BigInteger("0988886666");
+                    if (ContextCompat.checkSelfPermission(OrderDetailActivity.this,
+                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(OrderDetailActivity.this,
+                                new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+                    } else {
+                        String dial = "tel:" + phone;
+                        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
                     }
                 }
 //                Toast.makeText(OrderDetailActivity.this, "Thanh Cong", Toast.LENGTH_SHORT).show();
@@ -216,7 +216,6 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.e("id", "data" + response.body().getStatus());
                     progressBar.setVisibility(View.GONE);
                     Order order = response.body();
 
@@ -242,7 +241,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                     tv_sdt_orderdetail.setText(String.valueOf(order.getPhoneNumber()));
                     tv_diachi_orderdetail.setText(order.getAddress());
                     tv_madon_orderdetail.setText(order.get_id());
-                    tv_time_orderdetail.setText(order.getCreatedAt() + "");
+                    tv_time_orderdetail.setText(getFormattedDate(order.getCreatedAt()));
                     DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                     tv_tongtien_orderdetail.setText(decimalFormat.format(order.getTotal()) + "đ");
                     tv_thanhtoan_orderdetail.setText(order.getPaymentMethodType());
@@ -269,5 +268,11 @@ public class OrderDetailActivity extends AppCompatActivity {
                 Toast.makeText(OrderDetailActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String getFormattedDate(Date timeZone) {
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String formattedDate = df.format(timeZone);
+        return formattedDate;
     }
 }

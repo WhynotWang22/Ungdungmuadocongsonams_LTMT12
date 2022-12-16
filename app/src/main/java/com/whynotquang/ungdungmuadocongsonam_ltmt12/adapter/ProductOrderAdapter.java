@@ -80,6 +80,8 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
                 context.startActivity(intent);
             }
         });
+        holder.tv_danhgiasp.setVisibility(View.GONE);
+
         //phan danh gia
         Intent intent = ((Activity) context).getIntent();
         id = intent.getStringExtra("id");
@@ -93,7 +95,6 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.e("id", "data" + response.body().getStatus());
                     Order order = response.body();
                      if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
                          holder.tv_danhgiasp.setOnClickListener(new View.OnClickListener() {

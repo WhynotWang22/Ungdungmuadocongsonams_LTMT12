@@ -83,6 +83,7 @@ public class OrderActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
                     orderList.addAll(response.body());
+                    recyclerView.getRecycledViewPool().clear();
                     adapter.notifyDataSetChanged();
                     if (orderList == null || orderList.size() == 0){
                         layout_check_order.setVisibility(View.VISIBLE);

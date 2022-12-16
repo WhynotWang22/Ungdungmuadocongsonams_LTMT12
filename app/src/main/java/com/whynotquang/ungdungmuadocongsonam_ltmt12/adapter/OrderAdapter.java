@@ -73,7 +73,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, OrderDetailActivity.class);
-                intent.putExtra("id", orderList.get(position).get_id());
+                intent.putExtra("id", order.get_id());
                 context.startActivity(intent);
             }
         });

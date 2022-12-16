@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     User userApi = response.body();
-                    token = String.valueOf(userApi.getTokens());
+                    token = userApi.getToken();
                     if (token !=null){
                         progressBar.setVisibility(View.GONE);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -124,18 +124,18 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor Ed= sp.edit();
                         Ed.putString("email",userApi.getEmail());
                         Ed.putString("id",userApi.getId());
-                        Ed.putString("token", String.valueOf(userApi.getToken()));
+                        Ed.putString("token", userApi.getToken());
                         Ed.commit();
                     }
                 }else {
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Lỗi api login", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
             }
         });
     }

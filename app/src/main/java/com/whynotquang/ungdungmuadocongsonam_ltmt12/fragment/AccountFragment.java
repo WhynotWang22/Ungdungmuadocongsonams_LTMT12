@@ -154,7 +154,6 @@ public class AccountFragment extends Fragment {
                     Ed.clear();
                     Ed.commit();
                     FirebaseMessaging.getInstance().unsubscribeFromTopic(id);
-                    Log.d("aaa","oid : "+id);
                 } else {
                     Toast.makeText(getContext(), "Đăng xuất không thành công", Toast.LENGTH_SHORT).show();
                 }
@@ -162,7 +161,7 @@ public class AccountFragment extends Fragment {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getContext(), "Lỗi api đăng xuất", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
@@ -198,7 +197,7 @@ public class AccountFragment extends Fragment {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getContext(), "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -69,8 +69,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
                     holder.tvTitleProductYeuthich.setText(response.body().getTitle());
-                    holder.tv_favorites_daban.setText("Đã Bán"+ response.body().getSold() + "");
-                    holder.tvPriceProductYeuthich.setText(new DecimalFormat("###,###,###,###").format(response.body().getPrice()) + "vnđ");
+                    holder.tv_favorites_daban.setText("Đã bán "+ response.body().getSold() + "");
+                    holder.tvPriceProductYeuthich.setText(new DecimalFormat("###,###,###,###").format(response.body().getPrice()) + "đ");
                     Glide.with(context).load(response.body().getImg()).into(holder.imgProductYeuthich);
                     holder.imgProductYeuthich.setOnClickListener(new View.OnClickListener() {
                         @Override

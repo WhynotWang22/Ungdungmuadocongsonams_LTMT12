@@ -3,6 +3,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -138,7 +139,6 @@ public class CartFragment extends Fragment {
                     }
                 } else {
                     Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
-
                 }
             }
 
@@ -146,7 +146,7 @@ public class CartFragment extends Fragment {
             public void onFailure(Call<ProductAddCart> call, Throwable t) {
                 layout_thanhtoan.setVisibility(View.GONE);
                 layout_not_cart.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "Giỏ hàng đang trống", Toast.LENGTH_SHORT).show();
             }
         });
 
