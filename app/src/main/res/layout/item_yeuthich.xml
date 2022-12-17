@@ -17,8 +17,7 @@
             android:id="@+id/img_product_yeuthich"
             android:layout_width="187dp"
             android:layout_height="187dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/product"/>
+            android:scaleType="centerCrop" />
         <RelativeLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
