@@ -49,35 +49,19 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @Override
     public void onBindViewHolder(@NonNull FavoritesAdapter.Viewholoder holder, @SuppressLint("RecyclerView") int position) {
         Favourites favourites = productsList.get(position);
-        if (favourites != null) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(AppConstain.BASE_URL + "products/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            ApiService apiService = retrofit.create(ApiService.class);
-            apiService.getDetailProduct(favourites.getProductId()).enqueue(new Callback<Product>() {
-                @Override
-                public void onResponse(Call<Product> call, Response<Product> response) {
-                    holder.tvTitleProductYeuthich.setText(response.body().getTitle());
-                    holder.tv_favorites_daban.setText("Đã bán "+ response.body().getSold() + "");
-                    holder.tvPriceProductYeuthich.setText(new DecimalFormat("###,###,###,###").format(response.body().getPrice()) + "đ");
-                    Glide.with(context).load(response.body().getImg()).into(holder.imgProductYeuthich);
-                    holder.imgProductYeuthich.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(context, ChitietActivity.class);
-                            intent.putExtra("id", productsList.get(position).getProductId());
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            context.startActivity(intent);
-                        }
-                    });
-                }
-                @Override
-                public void onFailure(Call<Product> call, Throwable t) {
-
-                }
-            });
-        }
+        holder.tvTitleProductYeuthich.setText(favourites.getTitle());
+        holder.tv_favorites_daban.setText("Đã bán "+ favourites.getSold() + "");
+        holder.tvPriceProductYeuthich.setText(new DecimalFormat("###,###,###,###").format(favourites.getPrice()) + "đ");
+        Glide.with(context).load(favourites.getProductIMG()).into(holder.imgProductYeuthich);
+        holder.imgProductYeuthich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ChitietActivity.class);
+                intent.putExtra("id", productsList.get(position).getProductId());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
     }
     @Override
     public int getItemCount() {

@@ -5,9 +5,10 @@ public class Favourites {
     public String userId;
     public String productId;
     public boolean isFavorite;
-    public String createdAt;
-    public String updatedAt;
-    public int __v;
+    public String title;
+    public String ProductIMG;
+    public int price;
+    public int sold;
 
     public String get_id() {
         return _id;
@@ -25,15 +26,19 @@ public class Favourites {
         return isFavorite;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getTitle() {
+        return title;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getProductIMG() {
+        return ProductIMG;
     }
 
-    public int get__v() {
-        return __v;
+    public int getPrice() {
+        return price;
+    }
+
+    public int getSold() {
+        return sold;
     }
 }

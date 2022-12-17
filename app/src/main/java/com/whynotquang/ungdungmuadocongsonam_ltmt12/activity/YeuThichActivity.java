@@ -25,6 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,7 +39,7 @@ public class YeuThichActivity extends AppCompatActivity {
     private ImageButton btnbackYeuthich;
     private FavoritesAdapter favoritesAdapter;
     private ProgressBar spinKitYeuthich;
-
+    private List<Favourites> favouritesList;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class YeuThichActivity extends AppCompatActivity {
     }
 
     private void getListyeuthichTim() {
+        favouritesList = new ArrayList<>();
         SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
         String token = sp.getString("token", "");
         Retrofit retrofit = new Retrofit.Builder()
@@ -74,6 +76,7 @@ public class YeuThichActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Favourites>> call, Response<List<Favourites>> response) {
                 if (response.isSuccessful()) {
+                    favouritesList.addAll(response.body());
                     spinKitYeuthich.setVisibility(View.GONE);
                     favoritesAdapter = new FavoritesAdapter(YeuThichActivity.this, response.body());
                     rc_cothebancungthich.setAdapter(favoritesAdapter);
