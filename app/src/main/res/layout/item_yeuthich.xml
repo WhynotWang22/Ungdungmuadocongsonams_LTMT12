@@ -15,6 +15,7 @@
         android:orientation="vertical">
         <ImageView
             android:id="@+id/img_product_yeuthich"
+            android:src="@drawable/product"
             android:layout_width="187dp"
             android:layout_height="187dp"
             android:scaleType="centerCrop" />

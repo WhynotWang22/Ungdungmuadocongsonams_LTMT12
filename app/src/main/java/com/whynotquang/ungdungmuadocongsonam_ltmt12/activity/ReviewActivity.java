@@ -113,9 +113,9 @@ public class ReviewActivity extends AppCompatActivity {
                 if (response.body() != null) {
                     tvNameProductReview.setText(response.body().getTitle());
                     tvSizeProductReview.setText("Size:" + response.body().getSizes().get(0) + "|");
-                    tvColorProductReview.setText("Color:" + response.body().getColor());
+                    tvColorProductReview.setText("Color:" + response.body().getColor().get(0)+ "|");
                     Glide.with(getApplicationContext()).load(response.body().getImg())
-                            .override(64, 70)
+                            .override(70, 70)
                             .error(R.drawable.mau)
                             .into(imgProductReview);
 

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,6 +125,8 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
                 Toast.makeText(context, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
             }
         });
+        holder.tv_title_product_detail_order.setMaxLines(1);
+        holder.tv_title_product_detail_order.setEllipsize(TextUtils.TruncateAt.END);
     }
 
     @Override
