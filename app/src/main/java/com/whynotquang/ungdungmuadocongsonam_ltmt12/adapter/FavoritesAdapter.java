@@ -3,6 +3,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,10 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 context.startActivity(intent);
             }
         });
+        holder.tvTitleProductYeuthich.setMaxLines(1);
+        holder.tvTitleProductYeuthich.setEllipsize(TextUtils.TruncateAt.END);
+        holder.tvPriceProductYeuthich.setMaxLines(1);
+        holder.tvPriceProductYeuthich.setEllipsize(TextUtils.TruncateAt.END);
     }
     @Override
     public int getItemCount() {
