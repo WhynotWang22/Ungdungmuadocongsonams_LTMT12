@@ -24,8 +24,11 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReviewActivity extends AppCompatActivity {
     private List<Product> productList;
-    String id;
+    String id,size,color;
     private RatingBar ratingBar;
     private ImageView btnbackReview;
     private LinearLayout productReview;
@@ -80,6 +83,8 @@ public class ReviewActivity extends AppCompatActivity {
         ///
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        size = intent.getStringExtra("size");
+        color = intent.getStringExtra("color");
         getdata();
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +94,7 @@ public class ReviewActivity extends AppCompatActivity {
                     Toast.makeText(ReviewActivity.this, "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                PostComment();
+                PostComment();
             }
         });
         btnback_review.setOnClickListener(new View.OnClickListener() {
@@ -111,11 +116,12 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.body() != null) {
+                    Product product = response.body();
                     tvNameProductReview.setText(response.body().getTitle());
-                    tvSizeProductReview.setText("Size:" + response.body().getSizes().get(0) + "|");
-                    tvColorProductReview.setText("Color:" + response.body().getColor());
+                    tvSizeProductReview.setText("Size:" + size + "|");
+                    tvColorProductReview.setText("Màu:" + color);
                     Glide.with(getApplicationContext()).load(response.body().getImg())
-                            .override(64, 70)
+                            .override(70, 70)
                             .error(R.drawable.mau)
                             .into(imgProductReview);
 
@@ -126,43 +132,44 @@ public class ReviewActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
-                Toast.makeText(ReviewActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReviewActivity.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-//    private void PostComment() {
-//        String commentDes = edCmtReview.getText().toString().trim();
-//        Float ratingBar1 = ratingBar.getRating();
-//        SharedPreferences sp = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
-//        String token = sp.getString("token", "");
-//        productList = new ArrayList<>();
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(AppConstain.BASE_URL + "comment/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        ApiService apiService = retrofit.create(ApiService.class);
-//        Call<List<Product>> call1 = apiService.postComment(token, id, ratingBar1, commentDes);
-//        call1.enqueue(new Callback<List<Product>>() {
-//            @Override
-//            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-//                if (response.isSuccessful()) {
-//                    Toast.makeText(ReviewActivity.this, "Lỗi Api", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(ReviewActivity.this, "Comment không thành công", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Product>> call, Throwable t) {
-//                progressBar.setVisibility(View.VISIBLE);
-//                edCmtReview.setText("");
-//                Toast.makeText(ReviewActivity.this, "Comment Thành Công", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(ReviewActivity.this, OrderActivity.class);
-//                startActivity(intent);
-//                finishAffinity();
-//            }
-//        });
-//
-//    }
+    private void PostComment() {
+        String commentDes = edCmtReview.getText().toString().trim();
+        Float ratingBar1 = ratingBar.getRating();
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("Login", MODE_PRIVATE);
+        String token = sp.getString("token", "");
+        productList = new ArrayList<>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "comment/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<Product> call1 = apiService.postComment(token, id, ratingBar1, commentDes);
+        call1.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    edCmtReview.setText("");
+                    Toast.makeText(ReviewActivity.this, "Comment Thành Công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finishAffinity();
+                } else {
+                    Toast.makeText(ReviewActivity.this, "Comment không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Toast.makeText(ReviewActivity.this, "Lỗi Mạng", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
 }
