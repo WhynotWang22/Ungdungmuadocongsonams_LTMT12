@@ -102,6 +102,8 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
                              public void onClick(View view) {
                                  Intent intent = new Intent(context, ReviewActivity.class);
                                  intent.putExtra("id", productsList.get(position).getProductId());
+                                 intent.putExtra("size", productsList.get(position).getSize());
+                                 intent.putExtra("color", productsList.get(position).getColor());
                                  context.startActivity(intent);
                              }
                          });

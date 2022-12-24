@@ -24,8 +24,11 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Order;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Products;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +40,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReviewActivity extends AppCompatActivity {
     private List<Product> productList;
-    String id;
+    String id,size,color;
     private RatingBar ratingBar;
     private ImageView btnbackReview;
     private LinearLayout productReview;
@@ -80,6 +83,8 @@ public class ReviewActivity extends AppCompatActivity {
         ///
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        size = intent.getStringExtra("size");
+        color = intent.getStringExtra("color");
         getdata();
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +116,10 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.body() != null) {
+                    Product product = response.body();
                     tvNameProductReview.setText(response.body().getTitle());
-                    tvSizeProductReview.setText("Size:" + response.body().getSizes().get(2) + "|");
-                    tvColorProductReview.setText("Màu:" + response.body().getColor().get(2));
+                    tvSizeProductReview.setText("Size:" + size + "|");
+                    tvColorProductReview.setText("Màu:" + color);
                     Glide.with(getApplicationContext()).load(response.body().getImg())
                             .override(70, 70)
                             .error(R.drawable.mau)
@@ -126,7 +132,7 @@ public class ReviewActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
-                Toast.makeText(ReviewActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReviewActivity.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
             }
         });
     }
