@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -90,8 +91,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
         holder.tvSizeCart.setText("Size:" + product.getSize());
         holder.tvColorCart.setText("| Color:" + product.getColor());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-        holder.tv_price_cart.setText("Giá: " + decimalFormat.format(product.getPrice()) + "đ");
+        holder.tv_price_cart.setText(decimalFormat.format(product.getPrice()) + "đ");
         Glide.with(context).load(product.getProductIMG()).into(holder.img_cart);
+        holder.tvTitleCart.setMaxLines(1);
+        holder.tvTitleCart.setEllipsize(TextUtils.TruncateAt.END);
         holder.layout_delete_item_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,13 +114,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                         call.enqueue(new Callback<Products>() {
                             @Override
                             public void onResponse(Call<Products> call, Response<Products> response) {
-                                EventBus.getDefault().postSticky(new Even(1));
-                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                if (response.isSuccessful()) {
+                                    EventBus.getDefault().postSticky(new Even(1));
+                                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<Products> call, Throwable t) {
-                                Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -153,7 +160,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                                 tong += value * product.getPrice() - (value - 1) * product.getPrice();
                                 tong3 = value * product.getPrice();
                                 bindData();
-                                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong3) + "Đ");
+//                                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong3) + "Đ");
                                 holder.tv_values.setText(String.valueOf(value));
                                 Retrofit retrofit = new Retrofit.Builder()
                                         .baseUrl(AppConstain.BASE_URL + "cart/")
@@ -164,12 +171,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                                 call1.enqueue(new Callback<Products>() {
                                     @Override
                                     public void onResponse(Call<Products> call, Response<Products> response) {
-                                        EventBus.getDefault().postSticky(new Even(1));
-                                        Toast.makeText(context, "Tăng thành công", Toast.LENGTH_SHORT).show();
+                                        if (response.isSuccessful()) {
+                                            EventBus.getDefault().postSticky(new Even(1));
+//                                           Toast.makeText(context, "Tăng thành công", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(context, "Tăng không thành công", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
+
                                     @Override
                                     public void onFailure(Call<Products> call, Throwable t) {
-                                        Toast.makeText(context, "Tăng thất bại ", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             } else {
@@ -177,22 +189,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                             }
                         }
                     }
+
                     @Override
                     public void onFailure(Call<Product> call, Throwable t) {
-                        Toast.makeText(context, "that bai", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                int sl = (Integer.parseInt(holder.tv_values.getText().toString()));
-                if (sl <= 1) {
-                    holder.btnminus.setVisibility(View.INVISIBLE);
-                } else {
-                    holder.btnminus.setVisibility(View.VISIBLE);
-                }
+//                int sl = (Integer.parseInt(holder.tv_values.getText().toString()));
+//                if (sl <= 1) {
+//                    holder.btnminus.setVisibility(View.VISIBLE);
+//                } else {
+//                    holder.btnminus.setVisibility(View.GONE);
+//                }
             }
         });
         int sl = (Integer.parseInt(holder.tv_values.getText().toString()));
         if (sl <= 1) {
+            holder.btnminus.setFocusable(false);
             holder.btnminus.setVisibility(View.GONE);
         }
         holder.btnminus.setOnClickListener(new View.OnClickListener() {
@@ -207,7 +221,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                 tong += (value - 1) * product.getPrice();
                 tong2 = value * product.getPrice();
                 bindData();
-                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong2) + "Đ");
+//                holder.tv_price_cart.setText("Giá:" + decimalFormat.format(tong2) + "Đ");
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "cart/")
                         .addConverterFactory(GsonConverterFactory.create())
@@ -217,12 +231,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.Viewholoder> {
                 call.enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(Call<Products> call, Response<Products> response) {
-                        Toast.makeText(context, "Giảm thành công", Toast.LENGTH_SHORT).show();
+                        if (response.isSuccessful()) {
+//                            Toast.makeText(context, "Giảm thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Giảm không thành công", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<Products> call, Throwable t) {
-                        Toast.makeText(context, "Giảm thất bại ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
                     }
                 });
 

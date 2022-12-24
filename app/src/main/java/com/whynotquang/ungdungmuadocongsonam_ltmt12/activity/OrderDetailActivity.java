@@ -125,7 +125,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Order> call = apiService.postCannelOrder(id);
+        Call<Order> call = apiService.postCannelOrder(token,id);
         call.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
@@ -143,7 +143,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(OrderDetailActivity.this, "Hủy không thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderDetailActivity.this, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -234,8 +234,11 @@ public class OrderDetailActivity extends AppCompatActivity {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_do));
                         btn_cancel_order.setVisibility(View.GONE);
                     }
-
-                    tv_trangthai_donhangchitiet.setText(order.getStatus());
+                    if (order.getStatus().equalsIgnoreCase("người dùng đã hủy đơn hàng")){
+                        tv_trangthai_donhangchitiet.setText("Đơn hàng đã hủy");
+                    }else {
+                        tv_trangthai_donhangchitiet.setText(order.getStatus());
+                    }
                     tv_name_orderdetail.setText(order.getName());
                     tv_sdt_orderdetail.setText(String.valueOf(order.getPhoneNumber()));
                     tv_diachi_orderdetail.setText(order.getAddress());
@@ -264,7 +267,7 @@ public class OrderDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
-                Toast.makeText(OrderDetailActivity.this, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderDetailActivity.this, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
             }
         });
     }

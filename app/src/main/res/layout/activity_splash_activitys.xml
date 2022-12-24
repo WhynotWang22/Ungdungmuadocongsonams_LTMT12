@@ -23,7 +23,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Men Official Fashion"
+            android:text="Mof Shop"
             android:fontFamily="@font/interbold"
             android:textSize="20dp"
             android:textColor="@color/mauchu"

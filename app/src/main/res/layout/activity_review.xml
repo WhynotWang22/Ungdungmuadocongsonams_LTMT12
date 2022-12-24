@@ -124,12 +124,14 @@
         android:layout_height="128dp"
         android:layout_below="@id/tv_product_review3"
         android:hint="Bình luận"
+        android:textSize="12dp"
+        android:fontFamily="@font/intermedium"
         android:id="@+id/ed_cmt_review"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="14dp"
         android:layout_marginRight="32dp"
-        android:background="@drawable/bg_ed_cmt"
-        android:padding="20dp"/>
+        android:inputType="text"
+        android:background="@drawable/bg_ed_cmt" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="56dp"

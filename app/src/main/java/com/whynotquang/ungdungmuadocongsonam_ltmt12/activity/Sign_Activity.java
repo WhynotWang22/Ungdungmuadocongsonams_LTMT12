@@ -155,7 +155,7 @@ public class Sign_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(Sign_Activity.this, "Vui lòng kiểm tra lại mạng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Sign_Activity.this, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
             }
         });
     }

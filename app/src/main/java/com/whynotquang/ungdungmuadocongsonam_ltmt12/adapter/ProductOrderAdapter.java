@@ -73,7 +73,8 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
         holder.tv_sizecolor_product_detail.setText("Size: " + product.getSize() + " | Màu: " + product.getColor());
         holder.tv_soluong_product_detail_order.setText(String.valueOf(product.getQuantity()) + " sản phẩm");
         Glide.with(context).load(product.getProductIMG()).into(holder.img_product_detail_order);
-        holder.tv_title_product_detail_order.setOnClickListener(new View.OnClickListener() {
+        holder.tv_danhgiasp.setVisibility(View.GONE);
+        holder.layout_item_order_detail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChitietActivity.class);
@@ -97,6 +98,7 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
                 if (response.isSuccessful() && response.body() != null) {
                     Order order = response.body();
                      if (order.getStatus().equalsIgnoreCase("Giao hàng thành công")) {
+                         holder.tv_danhgiasp.setVisibility(View.VISIBLE);
                          holder.tv_danhgiasp.setOnClickListener(new View.OnClickListener() {
                              @Override
                              public void onClick(View view) {

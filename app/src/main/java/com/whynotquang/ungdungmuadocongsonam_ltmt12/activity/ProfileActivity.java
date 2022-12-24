@@ -152,7 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(ProfileActivity.this, "Loi api", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -183,7 +183,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(ProfileActivity.this, "Không lấy được dữ liệu user", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
             }
         });
     }

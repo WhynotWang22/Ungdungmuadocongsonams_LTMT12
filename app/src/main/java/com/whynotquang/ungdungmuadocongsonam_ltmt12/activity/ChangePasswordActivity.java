@@ -118,7 +118,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponseUser> call, Throwable t) {
-                        Toast.makeText(ChangePasswordActivity.this, "That bai", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePasswordActivity.this, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

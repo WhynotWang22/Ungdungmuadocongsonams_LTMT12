@@ -1,6 +1,8 @@
 package com.whynotquang.ungdungmuadocongsonam_ltmt12.fragment;
 
+
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +38,7 @@ import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Banner;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Category;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.Product;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.ultil.CheckConnection;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.List;

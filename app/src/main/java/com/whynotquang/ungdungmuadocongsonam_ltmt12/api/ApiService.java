@@ -157,7 +157,7 @@ public interface ApiService {
     //post cancel order
     @POST("changeStatusToCancel/{id}")
     Call<Order> postCannelOrder(
-//            @Header("Authorization") String authtoken,
+            @Header("Authorization") String authtoken,
             @Path("id") String id);
 
     ///changeAdress

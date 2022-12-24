@@ -66,6 +66,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderHolder> {
             holder.tv_trangthai_order.setTextColor(Color.parseColor("#4CAF50"));
         }else if (order.getStatus().equalsIgnoreCase("Người dùng đã hủy đơn hàng")) {
             holder.tv_trangthai_order.setTextColor(Color.RED);
+            holder.tv_trangthai_order.setText("Đơn hàng đã hủy");
         }
 //        holder.tv_title_order.setText(order.get_id());
 //        holder.tv_title_order.setText(order.get_id());

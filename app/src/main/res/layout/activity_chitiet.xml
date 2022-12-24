@@ -92,10 +92,11 @@
 
                     <TextView
                         android:id="@+id/tv_title_product_chitiet"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/interbold"
                         android:text=""
+                        android:paddingRight="15dp"
                         android:textColor="@color/mauchu"
                         android:textSize="18dp" />
 
