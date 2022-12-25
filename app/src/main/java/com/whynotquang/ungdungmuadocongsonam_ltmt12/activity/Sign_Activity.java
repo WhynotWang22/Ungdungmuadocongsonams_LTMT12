@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.ThreeBounce;
+import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.api.ApiService;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.model.User;
@@ -51,7 +52,7 @@ public class Sign_Activity extends AppCompatActivity {
         ed_diachi = (EditText) findViewById(R.id.ed_diachi);
         chuyenmanhinh();
 
-        progressBar = (ProgressBar)findViewById(R.id.spin_kit_sign_up);
+        progressBar = (ProgressBar) findViewById(R.id.spin_kit_sign_up);
         Sprite threeBounce = new ThreeBounce();
         progressBar.setIndeterminateDrawable(threeBounce);
 
@@ -78,20 +79,16 @@ public class Sign_Activity extends AppCompatActivity {
                 else if (!validateEmail(email)) {
                     Toast.makeText(Sign_Activity.this, "Email không đúng định dạng", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (!validatePhone(phone_number)) {
+                } else if (!validatePhone(phone_number)) {
                     Toast.makeText(Sign_Activity.this, "Số điện thoại phải là số", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (phone_number.length()<10) {
+                } else if (phone_number.length() < 10) {
                     Toast.makeText(Sign_Activity.this, "Số điện thoại phải trên 10 số", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if(phone_number.length()>10){
+                } else if (phone_number.length() > 10) {
                     Toast.makeText(Sign_Activity.this, "Số điện thoại chỉ được 10 số", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                else if (password.length() < 6) {
+                } else if (password.length() < 6) {
                     Toast.makeText(Sign_Activity.this, "Mật khẩu phải dài hơn 6 ký tự", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -100,13 +97,16 @@ public class Sign_Activity extends AppCompatActivity {
             }
         });
     }
+
     public boolean isValidName(String name) {
         return Pattern.compile("/^[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]*$/").matcher(name).matches();
     }
+
     private boolean validateEmail(String email) {
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
+
     private boolean validatePhone(String phone) {
         Pattern pattern = Patterns.PHONE;
         return pattern.matcher(phone).matches();
@@ -127,7 +127,7 @@ public class Sign_Activity extends AppCompatActivity {
 
     private void postData(String full_name, String phone_number, String email, String password, String diachi) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl( "https://mofshop.shop/api/auth/")
+                .baseUrl(AppConstain.BASE_URL + "auth/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiSignup = retrofit.create(ApiService.class);
@@ -147,7 +147,18 @@ public class Sign_Activity extends AppCompatActivity {
                     Intent intent = new Intent(Sign_Activity.this, LoginActivity.class);
                     startActivity(intent);
                     finishAffinity();
-                } else {
+                }
+                else if (response.code() == 409) {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(Sign_Activity.this, "Email này đã được đăng kí", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (response.code() == 408) {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(Sign_Activity.this, "Số điện thoại này đã được đăng kí", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else  {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(Sign_Activity.this, "Đăng ký không thành công", Toast.LENGTH_SHORT).show();
                 }
