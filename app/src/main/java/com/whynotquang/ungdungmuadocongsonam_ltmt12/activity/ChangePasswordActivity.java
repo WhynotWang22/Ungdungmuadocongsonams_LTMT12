@@ -98,18 +98,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             ResponseUser userAPi = response.body();
 //                          token = String.valueOf(userAPi.getUser().getTokens());
                             if (token != null) {
+                                Toast.makeText(ChangePasswordActivity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finishAffinity();
-                                Toast toast = new Toast(ChangePasswordActivity.this);
-                                LayoutInflater inflater  = getLayoutInflater();
-                                View view = inflater.inflate(R.layout.layout_custom_toast,(ViewGroup) findViewById(R.id.layout_custom_toast));
-                                TextView tv_message_toast = view.findViewById(R.id.tv_message_toast);
-                                tv_message_toast.setText("Đổi mật khẩu thành công");
-                                toast.setView(view);
-                                toast.setDuration(Toast.LENGTH_SHORT);
-                                toast.show();
-
                             }
                         } else if (response.code() == 401) {
                             Toast.makeText(ChangePasswordActivity.this, "Mật khẩu cũ sai", Toast.LENGTH_SHORT).show();
