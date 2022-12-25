@@ -156,9 +156,9 @@ public class ReviewActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                     edCmtReview.setText("");
                     Toast.makeText(ReviewActivity.this, "Comment Thành Công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finishAffinity();
+//                    Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    finishAffinity();
                 } else {
                     Toast.makeText(ReviewActivity.this, "Comment không thành công", Toast.LENGTH_SHORT).show();
                 }
