@@ -40,7 +40,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
         Glide.with(context).load(notification.getImages()).into(holder.imageView);
         holder.tv_title_noti.setMaxLines(1);
         holder.tv_title_noti.setEllipsize(TextUtils.TruncateAt.END);
-        holder.tv_desc_noti.setMaxLines(2);
+        holder.tv_desc_noti.setMaxLines(3);
         holder.tv_desc_noti.setEllipsize(TextUtils.TruncateAt.END);
     }
 

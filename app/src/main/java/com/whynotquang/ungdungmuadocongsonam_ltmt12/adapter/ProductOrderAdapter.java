@@ -71,7 +71,7 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.tv_thanhtien_product_detail_order.setText(decimalFormat.format(product.getPrice() * product.getQuantity()) + "đ");
         holder.tv_sizecolor_product_detail.setText("Size: " + product.getSize() + " | Màu: " + product.getColor());
-        holder.tv_soluong_product_detail_order.setText(String.valueOf(product.getQuantity()) + " sản phẩm");
+        holder.tv_soluong_product_detail_order.setText("Số lượng "+ String.valueOf(product.getQuantity()));
         Glide.with(context).load(product.getProductIMG()).into(holder.img_product_detail_order);
         holder.tv_danhgiasp.setVisibility(View.GONE);
         holder.layout_item_order_detail.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class ProductOrderAdapter extends RecyclerView.Adapter<ProductOrderAdapte
             }
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
-                Toast.makeText(context, "Không lấy được dữ liệu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Vui lòng kiểm tra lại kết nối internet", Toast.LENGTH_SHORT).show();
             }
         });
         holder.tv_title_product_detail_order.setMaxLines(1);

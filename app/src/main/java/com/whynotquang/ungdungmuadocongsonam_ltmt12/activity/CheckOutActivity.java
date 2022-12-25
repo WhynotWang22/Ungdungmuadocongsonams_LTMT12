@@ -79,7 +79,6 @@ public class CheckOutActivity extends AppCompatActivity {
     List<Products> productsList;
     List<Address> addressList;
     DiaChiAdapter adapter;
-    int soluong_sanpham = 0;
     int feeship = 0;
     String id, name, phoneNumber, diachi;
     String idUser = "";
@@ -235,6 +234,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     for (Products data : datas) {
                         productsList.add(data);
                     }
+                    int soluong_sanpham = 0;
                     for (int i = 0; i < productsList.size(); i++) {
                         soluong_sanpham++;
                     }
@@ -345,7 +345,6 @@ public class CheckOutActivity extends AppCompatActivity {
                             final JSONObject responseJson = parseResponse(response.body());
                             paymentIntentClientSecret = responseJson.optString("clientSecret");
                             runOnUiThread(() -> btn_thanhtoan.setEnabled(true));
-                            Log.i(TAG, "Retrieved PaymentIntent");
                         }
                     }
                 });
@@ -476,7 +475,6 @@ public class CheckOutActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         addressList.clear();
-        getData();
         getDataAddress();
     }
 }

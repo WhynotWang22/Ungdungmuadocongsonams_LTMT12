@@ -2,6 +2,7 @@ package com.whynotquang.ungdungmuadocongsonam_ltmt12.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,9 +60,11 @@ public class ProductSearchAdapter extends ArrayAdapter<Product>{
                 Intent intent = new Intent(getContext(), ChitietActivity.class);
                 intent.putExtra("id", product.get_id());
                 getContext().startActivity(intent);
-                Log.d("aaa","id_search "+product.get_id());
             }
         });
+        tvSearchName.setMaxLines(1);
+        tvSearchName.setEllipsize(TextUtils.TruncateAt.END);
+
         return convertView;
     }
     @NonNull

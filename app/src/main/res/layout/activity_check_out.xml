@@ -190,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
-                android:text="3 sản phẩm"
+                android:text=""
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"
                 android:layout_alignParentRight="true"/>
@@ -211,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
-                android:text="975.000đ"
+                android:text=""
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"
                 android:layout_alignParentRight="true"/>
@@ -232,7 +232,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intermedium"
-                android:text="15.000đ"
+                android:text=""
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"
                 android:layout_alignParentRight="true"/>
@@ -253,7 +253,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/interbold"
-                android:text="999.000đ"
+                android:text=""
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"
                 android:layout_alignParentRight="true"/>
@@ -267,7 +267,7 @@
             android:layout_marginBottom="90dp"
             android:background="@drawable/bg_button"
             android:fontFamily="@font/interbold"
-            android:text="Thanh toán"
+            android:text="Thanh toán ngay"
             android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>

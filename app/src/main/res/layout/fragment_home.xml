@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/interbold"
-            android:text="Được Đề Xuất Cho Bạn"
+            android:text="Được đề xuất cho bạn"
             android:textColor="@color/mauchu"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/rc_view_aopolo"
