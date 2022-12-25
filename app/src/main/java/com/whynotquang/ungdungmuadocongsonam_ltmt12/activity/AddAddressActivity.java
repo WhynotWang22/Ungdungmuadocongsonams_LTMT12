@@ -31,7 +31,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddAddressActivity extends AppCompatActivity {
-
     EditText ed_address_addaddress,ed_name_addaddress,ed_sdt_addaddress;
     Button btn_add_address;
     ProgressBar progressBar;

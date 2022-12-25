@@ -127,7 +127,10 @@ public class CartFragment extends Fragment {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     rc_cart.setLayoutManager(linearLayoutManager);
                     productList.addAll(response.body().getProducts());
-                    tv_soluong_cart.setText(productList.size() + " sản phẩm");
+                    int soLuong = 0;
+                    for (int i = 0; i < productList.size(); i++) {
+                        soLuong += productList.get(i).getQuantity();
+                    }
                     if (productList == null || productList.size() == 0) {
                         layout_thanhtoan.setVisibility(View.GONE);
                         layout_not_cart.setVisibility(View.VISIBLE);
@@ -135,6 +138,7 @@ public class CartFragment extends Fragment {
                         layout_thanhtoan.setVisibility(View.VISIBLE);
                         layout_not_cart.setVisibility(View.GONE);
                     }
+                    tv_soluong_cart.setText(soLuong + " sản phẩm");
                 } else {
                     Toast.makeText(getActivity(), "Thất bại", Toast.LENGTH_SHORT).show();
                 }

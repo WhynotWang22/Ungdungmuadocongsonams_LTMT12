@@ -125,7 +125,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
-        Call<Order> call = apiService.postCannelOrder(token,id);
+        Call<Order> call = apiService.postCannelOrder(token, id);
         call.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
@@ -150,6 +150,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     String phone;
+
     private void callShop() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(AppConstain.BASE_URL + "auth/")
@@ -234,9 +235,9 @@ public class OrderDetailActivity extends AppCompatActivity {
                         layout.setBackgroundColor(getResources().getColor(R.color.color_do));
                         btn_cancel_order.setVisibility(View.GONE);
                     }
-                    if (order.getStatus().equalsIgnoreCase("người dùng đã hủy đơn hàng")){
+                    if (order.getStatus().equalsIgnoreCase("người dùng đã hủy đơn hàng")) {
                         tv_trangthai_donhangchitiet.setText("Đơn hàng đã hủy");
-                    }else {
+                    } else {
                         tv_trangthai_donhangchitiet.setText(order.getStatus());
                     }
                     tv_name_orderdetail.setText(order.getName());
@@ -253,11 +254,11 @@ public class OrderDetailActivity extends AppCompatActivity {
                         productList.add(products);
                         adapter.notifyDataSetChanged();
                     }
-
+                    int Soluong = 0;
                     for (int i = 0; i < productList.size(); i++) {
-                        soluong++;
+                        Soluong += productList.get(i).quantity;
                     }
-                    tv_soluong_orderdetail.setText(String.valueOf(soluong));
+                    tv_soluong_orderdetail.setText(String.valueOf(Soluong));
 
                 } else {
                     progressBar.setVisibility(View.GONE);

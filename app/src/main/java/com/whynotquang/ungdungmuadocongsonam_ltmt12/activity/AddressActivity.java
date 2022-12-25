@@ -52,7 +52,6 @@ public class AddressActivity extends AppCompatActivity {
     ProgressBar progressBar;
     ImageButton btnback_address;
     RelativeLayout layout_check_address;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +108,7 @@ public class AddressActivity extends AppCompatActivity {
                     }
                     if (addressList.size() == 0) {
                         layout_check_address.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         layout_check_address.setVisibility(View.GONE);
                     }
                 } else {

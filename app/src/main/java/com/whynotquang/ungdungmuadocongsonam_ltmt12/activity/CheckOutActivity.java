@@ -200,9 +200,9 @@ public class CheckOutActivity extends AppCompatActivity {
                         addressList.add(data);
                         adapter.notifyDataSetChanged();
                     }
-                    if (addressList.size() ==0){
+                    if (addressList.size() == 0) {
                         layout_no_diachi.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         layout_no_diachi.setVisibility(View.GONE);
                     }
                 }
@@ -236,7 +236,7 @@ public class CheckOutActivity extends AppCompatActivity {
                     }
                     int soluong_sanpham = 0;
                     for (int i = 0; i < productsList.size(); i++) {
-                        soluong_sanpham++;
+                        soluong_sanpham += productsList.get(i).getQuantity();
                     }
                     id = response.body().get_id();
                     idUser = gioHang.getUserId();
@@ -261,6 +261,7 @@ public class CheckOutActivity extends AppCompatActivity {
         });
     }
 
+    ///thanh toan khi nhan hang
     private void postOrder() {
         progressBar.setVisibility(View.VISIBLE);
         Retrofit retrofit = new Retrofit.Builder()
@@ -367,7 +368,7 @@ public class CheckOutActivity extends AppCompatActivity {
     ) {
         if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
             showToast("Thanh toán thành công!");
-            postOrder();
+            CheckoutStripe();
         } else if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
             Log.i(TAG, "Thanh toán đã bị hủy!");
         } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
@@ -437,7 +438,6 @@ public class CheckOutActivity extends AppCompatActivity {
                                     Intent intent = new Intent(CheckOutActivity.this, ThanksOrder_Activity.class);
                                     startActivity(intent);
                                     finishAffinity();
-//                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                                 } else {
                                     progressBar.setVisibility(View.GONE);
                                     Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
@@ -447,7 +447,7 @@ public class CheckOutActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<Order> call, Throwable t) {
                                 progressBar.setVisibility(View.GONE);
-                                Toast.makeText(CheckOutActivity.this, "Lỗi api không đặt hàng được", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CheckOutActivity.this, "Vui lòng kiểm tra lại kết nối mạng", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -470,6 +470,36 @@ public class CheckOutActivity extends AppCompatActivity {
             }
         } else {
         }
+    }
+
+    private void CheckoutStripe() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(AppConstain.BASE_URL + "order/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<Order> call = apiService.postCardOrder(token, id, name, phoneNumber, diachi);
+        call.enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                if (response.isSuccessful()) {
+                    progressBar.setVisibility(View.GONE);
+                    Intent intent = new Intent(CheckOutActivity.this, ThanksOrder_Activity.class);
+                    startActivity(intent);
+                    finishAffinity();
+//                    Toast.makeText(CheckOutActivity.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(CheckOutActivity.this, "Đặt hàng không thành công", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(CheckOutActivity.this, "Vui lòng kiểm tra lại kết nối mạng", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     protected void onRestart() {

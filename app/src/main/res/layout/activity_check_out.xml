@@ -114,14 +114,6 @@
                 android:text="Phương thức thanh toán"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp"/>
-            <!--            <TextView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/intermedium"-->
-            <!--                android:text="Thêm"-->
-            <!--                android:textColor="@color/mauchu"-->
-            <!--                android:textSize="14dp"-->
-            <!--                android:layout_alignParentRight="true"/>-->
         </RelativeLayout>
         <RadioGroup
             android:layout_width="match_parent"
@@ -139,7 +131,7 @@
                 android:textColor="@drawable/radio_text_selector"
                 android:fontFamily="@font/intermedium"
                 android:id="@+id/btn_radio_nhanthanhtoan"
-                android:text="Thanh toán khi nhận hàng"
+                android:text="Khi nhận hàng"
                 />
             <RadioButton
                 android:layout_width="wrap_content"
@@ -151,7 +143,7 @@
                 android:textColor="@drawable/radio_text_selector"
                 android:fontFamily="@font/intermedium"
                 android:id="@+id/btn_radio_stripe"
-                android:text="Stripe"
+                android:text="Thẻ tín dụng"
                 />
             <RadioButton
                 android:layout_width="wrap_content"
