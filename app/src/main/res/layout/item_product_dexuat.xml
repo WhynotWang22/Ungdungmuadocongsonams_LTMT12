@@ -4,9 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/cardview_product_dexuat"
-    android:layout_gravity="center_horizontal"
     android:layout_marginTop="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginLeft="8dp"
     android:background="@color/white">
     <LinearLayout
         android:layout_width="175dp"

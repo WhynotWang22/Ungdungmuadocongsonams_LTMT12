@@ -25,7 +25,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/interbold"
             android:text="Áo Polo"
-            android:textColor="@color/white"
+            android:textColor="#9F9F9F"
             android:textSize="18dp" />
   </RelativeLayout>
 

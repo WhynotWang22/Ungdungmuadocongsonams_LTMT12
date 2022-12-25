@@ -39,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
                     getData(token);
                 }
             }
-        },1000);
+        },3000);
     }
     private void getData(String token) {
         Retrofit retrofit = new Retrofit.Builder()

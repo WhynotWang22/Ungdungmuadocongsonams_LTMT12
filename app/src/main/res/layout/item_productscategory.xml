@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="187dp"
-    android:layout_height="270dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:id="@+id/card_ItemClickDetail"
     android:layout_marginTop="10dp"
     android:background="@color/white"
-    android:layout_marginRight="6dp"
-    android:layout_marginLeft="6dp">
+    android:layout_marginLeft="8dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,8 +30,8 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/intermedium"
                 android:text="Adidas"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
                 android:textColor="@color/mauchu"
                 android:textSize="14dp" />
             <RelativeLayout
