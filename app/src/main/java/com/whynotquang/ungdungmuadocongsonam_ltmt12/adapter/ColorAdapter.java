@@ -52,6 +52,8 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorHolder> {
             holder.radio_color.setBackgroundResource(R.drawable.bg_color_pink);
         }else if (list.get(position).equalsIgnoreCase("Red")){
             holder.radio_color.setBackgroundResource(R.drawable.bg_color_red);
+        }else if (list.get(position).equalsIgnoreCase("lightblue")){
+            holder.radio_color.setBackgroundResource(R.drawable.bg_color_lightblue);
         }
         holder.radio_color.setChecked(position == selectedPosition);
         View.OnClickListener clickListener = new View.OnClickListener() {

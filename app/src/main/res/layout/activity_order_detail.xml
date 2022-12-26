@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/intermedium"
             android:paddingLeft="10dp"
-            android:text="Nguyễn Văn A"
+            android:text=""
             android:textColor="@color/mauchu2"
             android:textSize="12dp" />
 
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/intermedium"
             android:paddingLeft="10dp"
-            android:text="0123456789"
+            android:text=""
             android:textColor="@color/mauchu2"
             android:textSize="12dp" />
 
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/intermedium"
             android:paddingLeft="10dp"
-            android:text="Phường Quan Hoa, Cầu Giấy, Hà Nội"
+            android:text=""
             android:textColor="@color/mauchu2"
             android:textSize="12dp" />
     </LinearLayout>
@@ -144,7 +144,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:fontFamily="@font/intermedium"
-                android:text="JEBVIDNCSIJNS123"
+                android:text=""
                 android:textColor="#000000"
                 android:textSize="12dp" />
         </RelativeLayout>
@@ -169,7 +169,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:fontFamily="@font/intermedium"
-                android:text="11:12"
+                android:text=""
                 android:textColor="@color/mauchu2"
                 android:textSize="12dp" />
         </RelativeLayout>
