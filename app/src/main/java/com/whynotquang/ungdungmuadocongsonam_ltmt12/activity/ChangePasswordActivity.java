@@ -49,8 +49,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
         btn_change_pass = findViewById(R.id.btn_change_pass);
         btnback_changepass = findViewById(R.id.btnback_changepass);
         spin_kit_changepassword = findViewById(R.id.spin_kit_changepassword);
+        ///
         Sprite threeBounce = new ThreeBounce();
         spin_kit_changepassword.setIndeterminateDrawable(threeBounce);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.bg_xam));
         spin_kit_changepassword.setVisibility(View.GONE);
 
         btnback_changepass.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +89,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     ed_nhap_lai_pass.requestFocus();
                     return;
                 } else if (!newPassword.equals(nhaplaipassmoi)) {
-                    Toast.makeText(ChangePasswordActivity.this, "Mật khẩu  nhập lại không khớp", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangePasswordActivity.this, "Mật khẩu nhập lại không khớp", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                spin_kit_changepassword.setVisibility(View.VISIBLE);
 
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(AppConstain.BASE_URL + "auth/")
