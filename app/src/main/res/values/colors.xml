@@ -21,6 +21,7 @@
     <color name="color_Cyan">#00FFFF</color>
     <color name="color_Fuchsia">#FF00FF</color>
     <color name="color_Silver">#C0C0C0</color>
+    <color name="color_Maroon">#800000</color>
     <color name="rating">#FFC400</color>
     <color name="layout_checkout">#F5F5F5</color>
     <color name="mau_xam">#F5F5F5</color>
