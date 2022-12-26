@@ -12,11 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.ThreeBounce;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.Constain.AppConstain;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.MainActivity;
 import com.whynotquang.ungdungmuadocongsonam_ltmt12.R;
@@ -35,7 +38,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     Button btn_change_pass;
     String token = null;
     ImageButton btnback_changepass;
-
+    ProgressBar spin_kit_changepassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
         ed_nhap_lai_pass = findViewById(R.id.ed_nhap_lai_pass);
         btn_change_pass = findViewById(R.id.btn_change_pass);
         btnback_changepass = findViewById(R.id.btnback_changepass);
+        spin_kit_changepassword = findViewById(R.id.spin_kit_changepassword);
+        Sprite threeBounce = new ThreeBounce();
+        spin_kit_changepassword.setIndeterminateDrawable(threeBounce);
+        spin_kit_changepassword.setVisibility(View.GONE);
+
         btnback_changepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,12 +106,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             ResponseUser userAPi = response.body();
 //                          token = String.valueOf(userAPi.getUser().getTokens());
                             if (token != null) {
+                                spin_kit_changepassword.setVisibility(View.GONE);
                                 Toast.makeText(ChangePasswordActivity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finishAffinity();
                             }
                         } else if (response.code() == 401) {
+                            spin_kit_changepassword.setVisibility(View.GONE);
                             Toast.makeText(ChangePasswordActivity.this, "Mật khẩu cũ sai", Toast.LENGTH_SHORT).show();
                         }
                     }
